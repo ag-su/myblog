@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <title>Stock Research || 2.1 주가 데이터셋 보조지표 추가</title>
+  <meta name='description' content="2. Data Preprocessing2.1. 주가 데이터셋 보조지표  추가">
+  <link rel='canonical' href="https://ag-su.github.io/myblog/2022/07/09/add-index/">
+  <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+  <style>
+    
+    @font-face{font-family:'Cafe24Oneprettynight';src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff") format("woff");font-weight:normal;font-style:normal}/*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:0.67em 0}figcaption,figure,main{display:block}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace, monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace, monospace;font-size:1em}dfn{font-style:italic}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-0.25em}sup{top:-0.5em}audio,video{display:inline-block}audio:not([controls]){display:none;height:0}img{border-style:none}svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}button,html [type="button"],[type="reset"],[type="submit"]{-webkit-appearance:button}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner{border-style:none;padding:0}button:-moz-focusring,[type="button"]:-moz-focusring,[type="reset"]:-moz-focusring,[type="submit"]:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:0.35em 0.75em 0.625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{display:inline-block;vertical-align:baseline}textarea{overflow:auto}[type="checkbox"],[type="radio"]{box-sizing:border-box;padding:0}[type="number"]::-webkit-inner-spin-button,[type="number"]::-webkit-outer-spin-button{height:auto}[type="search"]{-webkit-appearance:textfield;outline-offset:-2px}[type="search"]::-webkit-search-cancel-button,[type="search"]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details,menu{display:block}summary{display:list-item}canvas{display:inline-block}template{display:none}[hidden]{display:none}body,h1,h2,h3,h4,h5,h6,p,blockquote,pre,dl,dd,ol,ul,fieldset,legend,figure,hr{margin:0;padding:0}li>ul,li>ol{margin-bottom:0}table{border-collapse:collapse;border-spacing:0}@-webkit-keyframes spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.icon{position:relative;display:inline-block;width:25px;height:25px;overflow:hidden;fill:currentColor}.icon__cnt{width:100%;height:100%;background:inherit;fill:inherit;pointer-events:none;transform:translateX(0);-ms-transform:translate(0.5px, -0.3px)}.icon--m{width:50px;height:50px}.icon--l{width:100px;height:100px}.icon--xl{width:150px;height:150px}.icon--xxl{width:200px;height:200px}.icon__spinner{position:absolute;top:0;left:0;width:100%;height:100%}.icon--ei-spinner .icon__spinner,.icon--ei-spinner-2 .icon__spinner{-webkit-animation:spin 1s steps(12) infinite;animation:spin 1s steps(12) infinite}.icon--ei-spinner-3 .icon__spinner{-webkit-animation:spin 1.5s linear infinite;animation:spin 1.5s linear infinite}.icon--ei-sc-facebook{fill:#3b5998}.icon--ei-sc-github{fill:#333}.icon--ei-sc-google-plus{fill:#dd4b39}.icon--ei-sc-instagram{fill:#3f729b}.icon--ei-sc-linkedin{fill:#0976b4}.icon--ei-sc-odnoklassniki{fill:#ed812b}.icon--ei-sc-skype{fill:#00aff0}.icon--ei-sc-soundcloud{fill:#f80}.icon--ei-sc-tumblr{fill:#35465c}.icon--ei-sc-twitter{fill:#55acee}.icon--ei-sc-vimeo{fill:#1ab7ea}.icon--ei-sc-vk{fill:#45668e}.icon--ei-sc-youtube{fill:#e52d27}.icon--ei-sc-pinterest{fill:#bd081c}.icon--ei-sc-telegram{fill:#0088cc}*,*::after,*::before{box-sizing:border-box}h1,h2,h3,h4,h5,h6,ul,ol,dl,blockquote,p,address,hr,table,fieldset,figure,pre{margin-bottom:15px}ul,ol,dd{margin-left:15px}@font-face{font-family:'D2 coding';src:url("http://cdn.jsdelivr.net/gh/joungkyun/font-d2coding/d2coding.css") format("text/css");font-weight:normal;font-style:normal}.highlight{background:#f0f0f082;font-family:'D2 coding'}.highlighter-rouge .highlight{background:#f0f0f082}.highlight .c{color:#998;font-style:italic}.highlight .err{color:#a61717;background-color:#e3d2d2}.highlight .k{color:#29843b;font-weight:bold}.highlight .o{color:#c917ed;font-weight:bold}.highlight .cm{color:#998;font-style:italic}.highlight .cp{color:#999;font-weight:bold}.highlight .c1{color:#416373;font-style:italic}.highlight .cs{color:#999;font-weight:bold;font-style:italic}.highlight .gd{color:#000;background-color:#fdd}.highlight .gd .x{color:#000;background-color:#faa}.highlight .ge{font-style:italic}.highlight .gr{color:#a00}.highlight .gh{color:#999}.highlight .gi{color:#000;background-color:#dfd}.highlight .gi .x{color:#000;background-color:#afa}.highlight .go{color:#888}.highlight .gp{color:#555}.highlight .gs{font-weight:bold}.highlight .gu{color:#aaa}.highlight .gt{color:#a00}.highlight .kn{color:#29843b;font-weight:bold}.highlight .kc{font-weight:bold}.highlight .kd{font-weight:bold}.highlight .kp{font-weight:bold}.highlight .kr{font-weight:bold}.highlight .kt{color:#458;font-weight:bold}.highlight .m{color:#099}.highlight .s{color:#bc0202}.highlight .n{color:#000}.highlight .na{color:#008080}.highlight .nb{color:#29843b;font-weight:bold}.highlight .nc{color:#458;font-weight:bold}.highlight .no{color:#008080}.highlight .ni{color:#800080}.highlight .ne{color:#900;font-weight:bold}.highlight .nf{color:#150dff;font-weight:500}.highlight .nn{color:#555}.highlight .nt{color:#000080}.highlight .nv{color:#008080}.highlight .ow{font-weight:bold;color:#7590b7}.highlight .w{color:#bbb}.highlight .mf{color:#099}.highlight .mh{color:#099}.highlight .mi{color:#29843b;font-weight:bold}.highlight .mo{color:#099}.highlight .sb{color:#d14}.highlight .sc{color:#d14}.highlight .sd{color:#d14}.highlight .s2{color:#d14}.highlight .se{color:#d14}.highlight .sh{color:#d14}.highlight .si{color:#bc0202}.highlight .sx{color:#d14}.highlight .sr{color:#009926}.highlight .s1{color:#d14}.highlight .ss{color:#990073}.highlight .bp{color:#999}.highlight .vc{color:#008080}.highlight .vg{color:#008080}.highlight .vi{color:#008080}.highlight .il{color:#099}.highlight .p{color:#000}body{font-family:"Cafe24Oneprettynight";font-size:19px;line-height:28px;color:#404040;background-color:#fbfbfb;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}*::selection{color:#fff;background-color:#df2252}h1,h2,h3,h4,h5,h6{font-family:"Cafe24Oneprettynight";font-weight:400;line-height:initial}h1{font-size:32px}h2{font-size:28px}h3{font-size:24px}h4{font-size:20px}h5{font-size:18px}h6{font-size:16px}img{max-width:100%;height:auto;vertical-align:middle}a{text-decoration:none;color:#3af;transition:.35s}a:hover{color:#0086e6}blockquote{padding-left:15px;border-left:3px solid #3af;font-family:'Volkhov', 'Times New Roman', Times, serif;font-style:normal;font-size:18px;background-color:rgba(220,235,245,0.2)}blockquote p{padding:10px}hr{height:1px;margin:30px 0;border:0;background-color:#f0f0f0}pre{overflow:auto;padding:25px;font-size:14px;white-space:pre-wrap;word-wrap:break-word;word-break:break-all;font-family:Courier, monospace}code{color:#928b8b;overflow:auto;white-space:pre-wrap;word-wrap:break-word;word-break:break-all;font-family:Courier, monospace;font-size:14px}p code,li code{padding:3px 5px}.o-wrapper{max-width:1440px;position:relative}.o-opacity{animation-duration:0.7s;animation-delay:0.2s;animation-fill-mode:both;animation-name:opacity}@keyframes opacity{from{opacity:0}to{opacity:1}}.c-btn{display:inline-block;white-space:nowrap;vertical-align:middle;font-family:'Volkhov', serif;font-size:12px;text-align:center;padding:8px 15px;cursor:pointer;transition:.35s}.c-btn--primary{color:#fff;background-color:#3af;background:linear-gradient(135deg, #3af 0%, #62d5ff 100%)}.c-btn--secondary{color:#fff;background-color:#cfcfdd;background:linear-gradient(135deg, #a2a2bd 0%, #cfcfdd 100%)}.c-btn--round{border-radius:30px}.c-btn--shadow{box-shadow:8px 10px 20px 0 rgba(46,61,73,0.15)}.c-btn--shadow:hover{box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2)}.c-btn--middle{display:block;width:300px;max-width:100%}.c-btn--big{display:block;width:100%}.c-btn:hover{color:#fff;transition:.35s}.c-btn:active{transform:translateY(2px)}.c-sidebar{display:flex;flex-direction:column;justify-content:space-between;position:fixed;top:0;left:0;bottom:0;width:360px;padding:40px 20px 20px;text-align:center;box-shadow:1px 1px 0 rgba(31,35,46,0.15);background-color:#fff}.c-sidebar-author .c-author__cover{width:100px;height:100px;margin:0 auto 10px;border-radius:50%;overflow:hidden;background-color:#cfcfdd}.c-sidebar-author .c-author__cover img{width:100%;height:100%;border-radius:50%;transition:.35s}.c-sidebar-author .c-author__cover img:hover{transform:scale3d(0.9, 0.9, 1)}.c-sidebar-author .c-contact-menu .c-btn{min-width:110px}.c-sidebar-author .c-contact-menu .c-btn .icon{width:18px;height:18px;vertical-align:text-bottom;fill:#fff}.c-sidebar-author .c-author__info{font-family:'Volkhov', serif}.c-sidebar-author .c-author__name{font-size:18px;font-weight:700;line-height:21px}.c-sidebar-author .c-author__job{font-size:12px;color:#a0a0a0;margin:5px 0 0}.c-sidebar-author .c-contact-menu{margin:30px 0}.c-sidebar-author .c-contact-menu .c-btn--secondary{margin-right:10px}.c-sidebar-author .c-author__about{max-width:400px;margin:0 auto 15px;font-size:13px}.c-sidebar-footer .c-social__title{position:relative;font-family:'Volkhov', serif;font-size:15px;font-weight:700;color:#444}.c-sidebar-footer .c-social__title::before{content:"";display:block;height:2px;width:calc(50% - 40px);transform:translateY(-50%);position:absolute;top:50%;left:0;background-color:#444}.c-sidebar-footer .c-social__title::after{content:"";display:block;height:2px;width:calc(50% - 40px);transform:translateY(-50%);position:absolute;top:50%;right:0;background-color:#444}.c-sidebar-footer .c-social__list{list-style-type:none;padding:0;margin:15px 0}.c-sidebar-footer .c-social__list .c-social__item{display:inline-block;width:27px;height:27px}.c-sidebar-footer .c-social__list .icon{width:27px;height:27px;fill:#444;vertical-align:middle;transition:.35s}.c-sidebar-footer .c-social__list .icon:hover{fill:#3af;transform:scale(1.2);transition:.35s}.c-sidebar-footer .c-copyright p{font-size:13px;margin:0}@media only screen and (max-width: 900px){.c-sidebar{position:relative;width:100%;padding:20px}.c-sidebar .c-contact-menu{margin:20px 0}.c-sidebar-footer .c-social .c-social__title{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px;word-wrap:normal !important}.c-sidebar-footer .c-social__list{margin:0}.c-sidebar-footer .c-copyright{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px;word-wrap:normal !important}}@media only screen and (max-width: 480px){.c-sidebar-author .c-author__cover{width:80px;height:80px}.c-sidebar-author .c-author__cover img{width:100%;height:100%}.c-sidebar-author .c-contact-menu{margin:15px 0}.c-sidebar-author .c-contact-menu .c-btn{min-width:80px;font-size:10px;padding:4px 15px;margin-right:5px}.c-sidebar-author .c-contact-menu .c-btn .icon{width:16px;height:16px}.c-sidebar-footer .c-social .c-social__title{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px;word-wrap:normal !important}.c-sidebar-footer .c-social__list{margin:0}.c-sidebar-footer .c-social__list .icon{width:25px;height:25px}.c-sidebar-footer .c-copyright{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px;word-wrap:normal !important}}.c-content{position:relative;display:flex;flex-direction:row;flex-wrap:wrap;align-items:stretch;padding:0 20px 0;margin-left:360px}@media only screen and (max-width: 900px){.c-content{position:static;padding:0 15px 0;margin-left:0}}.c-posts{width:100%;display:flex;flex-direction:row;flex-wrap:wrap}.c-post{width:100%;max-width:100%;margin-bottom:20px;display:flex;flex-direction:row;align-items:stretch;min-height:180px;border-radius:10px;overflow:hidden;transition:.35s;background-color:#fff;box-shadow:0 1px 1px 0 rgba(31,35,46,0.15)}.c-post:hover{transform:translate(0px, -2px);box-shadow:0 15px 45px -10px rgba(10,16,34,0.2)}.c-post .c-post-thumbnail{display:block;width:30%;max-width:100%;min-height:180px;border-radius:10px 0 0 10px;background-color:rgba(220,235,245,0.2);background-size:cover;background-position:50% 50%}.c-post .c-post-content{padding:15px;width:70%}.c-post .c-post-content .c-post-title{font-size:30px;font-weight:400;margin:0 0 15px}.c-post .c-post-content .c-post-title a{text-decoration:none;color:#263959}.c-post .c-post-content .c-post-date,.c-post .c-post-content .c-post-words{font-size:12px}.c-load-more{padding:20px;margin:20px auto 40px;font-size:13px;color:#fff;border:none;background-color:#d0a9ae;outline:none}.c-load-more:hover{background-color:#0086e6}@media only screen and (max-width: 1200px){.c-post{width:48%;max-width:100%;margin:0 1% 20px;flex-direction:column}.c-post .c-post-thumbnail{width:100%;border-radius:10px 10px 0 0}.c-post .c-post-content{width:100%}.c-post .c-post-content .c-post-title{font-size:21px;margin:15px 0}}@media only screen and (max-width: 480px){.c-post{width:100%;max-width:100%;margin:0 0 20px}.c-post .c-post-content{width:100%}.c-post .c-post-content .c-post-title{font-size:21px;margin:15px 0}}.c-article{width:100%;margin:20px 0}.c-wrap-content{padding:20px;background-color:#fff}.c-article__image{position:relative;background-color:rgba(220,235,245,0.2);background-position:center;background-size:cover;background-repeat:no-repeat}.c-article__image:after{content:"";display:block;padding-top:56%}.c-article__header{margin-bottom:20px;text-align:center}.c-article__header .c-article__title{margin-bottom:10px}.c-article__date span{font-size:13px;text-transform:uppercase;color:#a0a0a0}.c-article__footer{margin:30px 0 0;padding-bottom:30px;text-align:center;border-bottom:1px solid #f0f0f0}.c-article__footer .c-article__share{transition:.35s}.c-article__footer .c-article__share a .icon{vertical-align:middle;transition:.35s}.c-article__footer .c-article__share a .icon:hover{opacity:.7;transition:.35s}.c-article__footer .c-article__tag{margin-bottom:5px}.c-article__footer .c-article__tag a{display:inline-block;vertical-align:middle;padding:5px 10px;font-family:'Volkhov', 'Times New Roman', Times, serif;font-size:10px;line-height:10px;text-transform:uppercase;background-color:rgba(115,138,160,0.6);color:#fff}.c-article__footer .c-article__tag a:hover{background-color:rgba(80,100,118,0.6)}.c-article__footer .c-article__tag a:last-child{margin-right:0}.c-recent-post{padding:30px 0}.c-recent-post .c-recent__title{font-size:14px;text-align:center;text-transform:uppercase;margin-bottom:30px}.c-recent-post .c-recent__box{display:flex;flex-direction:row;flex-wrap:wrap}.c-recent-post .c-recent__item{max-width:23%;flex-basis:23%;margin:0 1% 20px;border-radius:10px;overflow:hidden;text-align:center;background-color:#fff;box-shadow:0 1px 1px 0 rgba(31,35,46,0.15);transition:.35s}.c-recent-post .c-recent__item h4{margin-bottom:5px;font-size:12px;text-transform:uppercase}.c-recent-post .c-recent__item h4 a{color:#444}.c-recent-post .c-recent__item:hover{box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2)}.c-recent-post .c-recent__footer{padding:15px}.c-recent-post .c-recent__image{display:block;width:100%;min-height:180px;background-color:rgba(220,235,245,0.2);background-size:cover;background-position:center;background-repeat:no-repeat}.c-recent-post .c-recent__date{color:#a0a0a0;font-size:12px}@media only screen and (max-width: 1200px){.c-recent-post .c-recent__item{max-width:48%;flex-basis:48%}}@media only screen and (max-width: 900px){.c-article{margin:15px 0}}@media only screen and (max-width: 480px){.c-wrap-content{padding:15px}.c-article__header{margin-bottom:5px}.c-article__header .c-article__title{font-size:24px;margin-bottom:5px}.c-recent-post .c-recent__item{max-width:100%;flex-basis:100%;margin:0 0 20px}}.c-blog-tags{width:100%;padding:20px;margin:20px 0 40px;background-color:#fff}.c-blog-tags h1{text-align:center;margin-bottom:0}.c-blog-tags h2{font-size:18px;text-transform:uppercase;margin:30px 0;color:#757575}.c-tag__list{list-style:none;padding:0 0 40px;margin:40px 0 0;border-bottom:1px solid #f0f0f0}.c-tag__list li{display:inline-block;margin-right:15px}.c-tag__list li a{color:#404040;text-transform:uppercase;font-size:12px}.c-tag__list li a:hover{color:#000}.c-tag__item{margin-bottom:15px}.c-tag__image{width:50px;height:50px;border-radius:50%;margin-right:5px}@media only screen and (max-width: 480px){.c-blog-tags{padding:15px}.c-blog-tags h1{font-size:27px}.c-blog-tags h2{font-size:16px;margin:15px 0}.c-tag__list{padding:0 0 30px;margin:30px 0 0}.c-tag__item{margin-bottom:5px}.c-tag__image{display:none}}.c-header{position:relative;width:100%;margin:20px 0}.c-header__box{position:relative;display:flex;flex-direction:row;justify-content:space-between;align-items:center}.c-header__box .icon--ei-search{position:absolute;top:7px;left:15px;fill:#ccc}.c-search{width:80%}.c-search .c-search__box{display:flex;align-items:center}.c-search .c-search__text{position:relative;width:100%;padding:10px 10px 10px 40px;border:1px solid #dce4ea;border-radius:30px;outline:none;color:#a0a0a0}.c-search .c-search__text::placeholder{color:#ccc}.c-search .c-search__text:hover{box-shadow:0 1px 0px rgba(132,135,138,0.1);transition:.35s}.c-search .c-search-results-list{position:absolute;width:100%;margin:10px 0 0;list-style-type:none;background-color:#fff;z-index:1}.c-search .c-search-results-list li{display:flex;flex-wrap:wrap;align-items:center;margin:0;padding:20px 25px 0;background-color:#fff;line-height:1.4;border-left:solid 1px #edeeee;border-right:solid 1px #edeeee}.c-search .c-search-results-list li:first-child{border-top-left-radius:5px;border-top-right-radius:5px;border-top:solid 1px #edeeee}.c-search .c-search-results-list li:last-child{border-bottom-left-radius:5px;border-bottom-right-radius:5px;padding-bottom:25px;border-bottom:solid 1px #edeeee}.c-search .c-search-results-list li a{font-size:16px}.c-nav{flex-grow:1;padding-left:20px}.c-nav .c-nav__list{display:flex;justify-content:flex-end}.c-nav .c-nav__list .c-nav__item{display:flex;align-items:center;float:left;padding:4px 10px;font-size:10px;text-transform:uppercase;white-space:nowrap;border:1px solid #dce4ea;box-shadow:0 1px 0px rgba(132,135,138,0.4);will-change:transform;transform:translateY(0px);cursor:pointer}.c-nav .c-nav__list .c-nav__item:hover{color:#222;background-color:#fff}.c-nav .c-nav__list .c-nav__item.is-active{box-shadow:0 0 0 rgba(132,135,138,0.5);transform:translateY(1px);color:#cfcfdd}.c-nav .c-nav__list .c-nav__item.is-active:hover{background-color:#fbfbfb}.c-nav .c-nav__list .c-nav__item:first-child{border-radius:10px 0 0 10px}.c-nav .c-nav__list .c-nav__item:last-child{border-radius:0 10px 10px 0}.c-nav .c-nav__list .c-nav__item .icon{width:18px;height:18px;margin-right:3px}@media only screen and (max-width: 900px){.c-header{margin:15px 0}}@media only screen and (max-width: 480px){.c-header .c-header__box{flex-direction:column}.c-header .c-search{width:100%}.c-header .c-search .c-search__text{padding:8px 8px 8px 40px}.c-header .c-nav{margin-top:15px}.c-header .c-nav .c-nav__list{justify-content:center}.c-header .c-nav .c-nav__item{padding:4px 8px}}.c-categories{width:100%}.c-categories__list{width:100%;display:flex;flex-direction:row;flex-wrap:wrap}.c-categories__item{max-width:25%;flex-basis:25%;padding:0 10px 20px}.c-categories__link{height:100%;display:flex;flex-direction:column;align-items:center;padding:20px 10px;border-radius:5px;box-shadow:5px 5px 25px rgba(46,61,73,0.15);background-color:#fff;transition:.35s}.c-categories__link:hover{box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2)}.c-categories__link:hover .c-categories__img .c-categories__more{opacity:1;transition:.35s}.c-categories__link .c-categories__container{width:100%;word-wrap:break-word}.c-categories__link .c-categories__container.c-empty-figure{display:flex;flex-direction:column;justify-content:center;flex-grow:1}.c-categories__img{position:relative;max-width:100%}.c-categories__img figure{position:relative;width:200px;max-width:100%;margin-bottom:20px;overflow:hidden;background-size:cover;background-repeat:no-repeat;background-position:center;border-radius:50%;box-shadow:inset 0 1px 3px rgba(141,165,185,0.3)}.c-categories__img figure:after{content:"";display:block;padding-top:100%}.c-categories__img figure:before{content:"";position:absolute;top:0;bottom:0;left:0;right:0;background-color:rgba(0,0,0,0.15)}.c-categories__img .c-categories__more{display:inline-block;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);font-weight:700;color:#fff;text-transform:uppercase;text-shadow:0 1px 0 rgba(104,172,191,0.3);opacity:0;transition:.35s}.c-categories__container{text-align:center}.c-categories__container .c-categories__header{font-size:13px;margin-bottom:10px;font-weight:normal;text-transform:uppercase;color:#404040}.c-categories__container .c-categories__count{font-family:'Volkhov', serif;font-size:12px;color:#404040;margin-bottom:0}.c-categories__container .c-categories__count span{display:inline-block;width:20px;height:20px;line-height:20px;vertical-align:baseline;margin-right:5px;border-radius:50%;color:#fff;background-color:#ee6c6c}@media only screen and (max-width: 1200px){.c-categories .c-categories__item{max-width:33.333%;flex-basis:33.333%}}@media only screen and (max-width: 1050px){.c-categories .c-categories__item{max-width:50%;flex-basis:50%}}@media only screen and (max-width: 480px){.c-categories .c-categories__item{max-width:100%;flex-basis:100%;padding:0 0 20px}}.c-form-box{position:absolute;top:0;width:calc(100% - 40px);min-height:100vh;padding:0 20px;background-color:#fff;z-index:1}.c-form-bnt__close{position:absolute;top:0px;left:0;width:30px;height:30px;cursor:pointer;transition:.35s}.c-form-bnt__close:hover{transform:scale(0.8);opacity:.8}.c-form{position:relative;width:750px;max-width:100%;margin:40px auto}.c-form .c-form__title{margin:0 0 40px;min-width:0;border:0;padding:0;font-family:"Cafe24Oneprettynight";text-transform:uppercase;text-align:center}.c-form a{color:#404040}.c-form__group{margin-bottom:20px}.c-form__group label{display:block;text-transform:uppercase;font-size:10px}.c-form__group input,.c-form__group textarea{width:100%;padding:10px 15px;color:#404040;border:1px solid #dce4ea;outline:none;transition:.35s}.c-form__group input:focus,.c-form__group textarea:focus{box-shadow:0 4px 25px rgba(132,135,138,0.1)}.c-form__group button{padding:20px;text-transform:uppercase;outline:none;border:none}.c-thank-you p{position:relative;padding:20px 40px;width:750px;max-width:100%;text-transform:uppercase;font-size:12px;line-height:18px;font-weight:700;margin:40px auto 0;text-align:center;color:#fff;background:linear-gradient(135deg, #55b5ad 0%, #5ec9c5 100%)}.c-thank-you p .c-form-bnt__close{width:25px;height:25px;background:transparent}.c-thank-you p a{color:#fff}@media only screen and (max-width: 900px){.c-form-box{width:100%;left:0;right:0}}@media only screen and (max-width: 480px){.c-form-bnt__close{width:25px;height:25px}}.c-newsletter{padding:30px 0 60px;margin:0 auto;border-bottom:1px solid #f0f0f0}.c-newsletter__header{text-align:center}.c-newsletter__header .c-newsletter__title{font-size:14px;text-transform:uppercase;text-align:center}.c-newsletter__header .c-newsletter__subtitle{margin-bottom:15px}.c-newsletter-form{width:100%;max-width:750px;margin:0 auto}.c-newsletter-form .c-newsletter-form__group{display:flex}.c-newsletter__email{width:70%;height:40px;padding:10px 15px;border:1px solid #ddd;border-right-color:transparent;outline:none;transition:.35s}.c-newsletter__email:focus{box-shadow:0 4px 25px rgba(132,135,138,0.1)}.c-newsletter__button{width:30%;height:40px;color:#fff;background-color:#3af;transition:.35s;border:none;outline:none;cursor:pointer}.c-newsletter__button:hover{background-color:#0086e6}@media only screen and (max-width: 480px){.c-newsletter__button{font-size:13px}}.c-comments{padding:30px 0;border-top:1px solid #f0f0f0}.c-top{position:fixed;width:40px;height:40px;bottom:20px;color:#757575;cursor:pointer;transition:.35s;right:-100px;z-index:10;opacity:.5}.c-top--active{right:15px}.c-top:hover{color:#757575;opacity:1}.u-text-left{text-align:left}.u-text-right{text-align:right}.u-text-center{text-align:center}.u-text-justify{text-align:justify}.u-block{display:block}.u-inline-block{display:inline-block}.u-inline{display:inline}.u-full-width{display:block;width:100%}.u-vertical-center{display:flex;align-items:center;justify-content:center}.u-responsive-image{max-width:100%;height:auto;vertical-align:middle}.u-show{display:block !important}.u-hide{display:none !important}.u-invisible{visibility:hidden}.u-float-left{float:left}.u-float-right{float:right}.u-no-padding-top{padding-top:0}.u-no-padding-bottom{padding-bottom:0}.u-no-padding-left{padding-left:0}.u-no-padding-right{padding-right:0}.u-no-padding{padding:0}.u-no-margin-top{margin-top:0}.u-no-margin-bottom{margin-bottom:0}.u-no-margin-left{margin-left:0}.u-no-margin-right{margin-right:0}.u-no-margin{margin:0}.u-lists-reset{list-style-type:none;margin:0;padding:0}.u-clearfix::before,.u-clearfix::after{content:"";display:table;clear:both}.u-screen-reader-text{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px;word-wrap:normal !important}
+
+  </style>
+</head>
+
+<body>
+  
+  <div class="o-wrapper">
+    <aside class="c-sidebar">
+  <div class="c-sidebar-author">
+    <div class="c-author__cover">
+      <a href="/myblog/">
+        <img src="/myblog/images/ag.jpg" alt="agsu">
+      </a>
+    </div>
+    <div class="c-author__info">
+      <div class="c-author__name">agsu</div>
+      <span class="c-author__job">Department of Data Science</span>
+    </div>
+    <div class="c-contact-menu">
+      
+      <a href="/contact" class="c-contact-btn c-btn c-btn--secondary c-btn--round c-btn--shadow"><span data-icon='ei-envelope' data-size='s'></span> Send me</a>
+      
+      
+      
+    </div>
+    <p class="c-author__about">블로그</p>
+  </div>
+
+  <div class="c-sidebar-footer">
+    <div class="c-social">
+      <div class="c-social__title">Social</div>
+      <ul class="c-social__list u-lists-reset">
+        
+        
+        
+        
+        
+          <li class="c-social__item"><a href="https://github.com/artemsheludko" target="_blank"><div data-icon='ei-sc-github' data-size='s'></div></a></li>
+        
+        
+        
+        
+          <li class="c-social__item"><a href="https://instagram.com/artemsheludko_" target="_blank"><div data-icon='ei-sc-instagram' data-size='s'></div></a></li>
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+    <div class="c-copyright">
+      <p>2022 &copy; agsu</p>
+    </div>
+  </div>
+</aside> <!-- /.c-sidebar -->
+
+<main class="c-content">
+  <article class="c-article">
+  <div class="c-article__content">
+    <header class="c-header u-hide u-no-margin-top">
+      <div class="c-header__box">
+        <div class="c-search u-full-width">
+          <div class="c-search__box">
+            <label for="js-search-input" class="u-screen-reader-text">Search for Blog</label>
+            <input type="text" id="js-search-input" class="c-search__text" autocomplete="off" placeholder="Type to search...">
+            <div data-icon='ei-search' data-size='s'></div>
+          </div>
+          <ul id="js-results-container" class="c-search-results-list"></ul>
+        </div>
+      </div>
+    </header>
+    
+    <div class="c-article__image o-opacity" style="background-image: url( /myblog/images/03.thumbnail.png )"></div>
+    
+    <div class="c-wrap-content">
+      <header class="c-article__header">
+        <h1 class="c-article__title">Stock Research || 2.1 주가 데이터셋 보조지표 추가</h1>
+        <div class="c-article__date">
+          <span>2022, Jul 09</span>
+        </div>
+      </header>
+      <h1 id="2-data-preprocessing">2. Data Preprocessing</h1>
+<h2 id="21-주가-데이터셋-보조지표--추가">2.1. 주가 데이터셋 보조지표  추가</h2>
+
+<p>이전 글 <a href="https://ag-su.github.io/myblog/2022/07/08/model-selection/">Stock Research || 1.2. 머신러닝 모델 비교</a>까지 주가 데이터셋 생성과 머신러닝 모델 비교를 통해 baseline model을 생성했다. 
+이번 글 부터는 데이터 전처리를 진행한다. 모델을 이전 글에서 선택했던 baseline 모델로 fix의 질을 높임으로써 성능을 향상시킨다. 그 첫번째로 주가데이터셋에 보조지표를 추가하여 설명변수의 크기를 늘린다.</p>
+
+<h3 id="목차">목차</h3>
+<ul>
+  <li>(1) 주식 데이터의 보조지표</li>
+  <li>(2) 보조지표 추가</li>
+  <li>(3) 모델 학습</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">FinanceDataReader</span> <span class="k">as</span> <span class="n">fdr</span>
+<span class="kn">import</span> <span class="nn">pymysql</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="p">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s">'ignore'</span><span class="p">)</span>
+    
+<span class="kn">import</span> <span class="nn">ta</span>
+
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interact_manual</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="n">go</span>
+<span class="kn">import</span> <span class="nn">plotly.offline</span> <span class="k">as</span> <span class="n">pyo</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="n">pylab</span> <span class="n">inline</span>
+<span class="n">pylab</span><span class="p">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">'figure.figsize'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%pylab is deprecated, use %matplotlib inline and import the required libraries.
+Populating the interactive namespace from numpy and matplotlib
+</code></pre></div></div>
+
+<h2 id="1-주식데이터의-보조지표">(1) 주식데이터의 보조지표</h2>
+<p>주식데이터에서 보조지표란 기술적지표라고도 불리며, 다양한 각도와 계산식, 통계 등을 바탕으로 기본적 분석 방법들과 조합하여 보다 폭 넓은 시장 예측을 가능하게 도와주는 차트 분석 도구이다.</p>
+
+<p>[참고]<br />
+-<a href="https://www.nanumtrading.com/fx-%eb%b0%b0%ec%9a%b0%ea%b8%b0/%ec%b0%a8%ed%8a%b8-%eb%b3%b4%ec%a1%b0%ec%a7%80%ed%91%9c-%ec%9d%b4%ed%95%b4/01-%eb%b3%b4%ec%a1%b0%ec%a7%80%ed%91%9c%eb%9e%80/">01 보조지표란?</a></p>
+
+<p>주식 시장에서 많이 알려져 있고, 주가 예측에 자주 사용되는 보조지표로는 이동평균선을 예로들 수 있다. 이동평균선을 캔들차트와 함께 시각화 하고, 각 종목과 날짜에 대해 어떻게 나타나는지 직접 확인해본다.</p>
+
+<ul>
+  <li><strong>데이터 불러오기</strong><br />
+시간 단축을 위해 <code class="language-plaintext highlighter-rouge">2018-01-01 ~ 2020-12-31</code> 기간 동안의 모든 데이터를 미리 저장해 놓은 주가 데이터셋을 불러 온다.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_stock</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"stock_data_2018_2020.csv"</span><span class="p">)</span>
+<span class="n">df_stock</span><span class="p">[</span><span class="s">'Code'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_stock</span><span class="p">[</span><span class="s">'Code'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="n">zfill</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">df_stock</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Code</th>
+      <th>Date</th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Volume</th>
+      <th>Change</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>050120</td>
+      <td>2018-01-02</td>
+      <td>10250</td>
+      <td>12050</td>
+      <td>10150</td>
+      <td>11800</td>
+      <td>26086769</td>
+      <td>0.145631</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>050120</td>
+      <td>2018-01-03</td>
+      <td>11950</td>
+      <td>12450</td>
+      <td>10900</td>
+      <td>11750</td>
+      <td>20460474</td>
+      <td>-0.004237</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>050120</td>
+      <td>2018-01-04</td>
+      <td>11850</td>
+      <td>14150</td>
+      <td>11600</td>
+      <td>12600</td>
+      <td>60663854</td>
+      <td>0.072340</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>050120</td>
+      <td>2018-01-05</td>
+      <td>12800</td>
+      <td>13200</td>
+      <td>12000</td>
+      <td>12200</td>
+      <td>13935258</td>
+      <td>-0.031746</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>050120</td>
+      <td>2018-01-08</td>
+      <td>12450</td>
+      <td>13400</td>
+      <td>12350</td>
+      <td>12850</td>
+      <td>16471707</td>
+      <td>0.053279</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1152013</th>
+      <td>000540</td>
+      <td>2020-12-23</td>
+      <td>2880</td>
+      <td>2945</td>
+      <td>2835</td>
+      <td>2870</td>
+      <td>87318</td>
+      <td>-0.010345</td>
+    </tr>
+    <tr>
+      <th>1152014</th>
+      <td>000540</td>
+      <td>2020-12-24</td>
+      <td>2850</td>
+      <td>2875</td>
+      <td>2845</td>
+      <td>2860</td>
+      <td>28350</td>
+      <td>-0.003484</td>
+    </tr>
+    <tr>
+      <th>1152015</th>
+      <td>000540</td>
+      <td>2020-12-28</td>
+      <td>2860</td>
+      <td>3000</td>
+      <td>2805</td>
+      <td>2820</td>
+      <td>66036</td>
+      <td>-0.013986</td>
+    </tr>
+    <tr>
+      <th>1152016</th>
+      <td>000540</td>
+      <td>2020-12-29</td>
+      <td>2820</td>
+      <td>2920</td>
+      <td>2705</td>
+      <td>2775</td>
+      <td>83187</td>
+      <td>-0.015957</td>
+    </tr>
+    <tr>
+      <th>1152017</th>
+      <td>000540</td>
+      <td>2020-12-30</td>
+      <td>2835</td>
+      <td>2835</td>
+      <td>2755</td>
+      <td>2830</td>
+      <td>33270</td>
+      <td>0.019820</td>
+    </tr>
+  </tbody>
+</table>
+<p>1152018 rows × 8 columns</p>
+</div>
+
+<ul>
+  <li><strong>이동평균선 캔들차트 시각화</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">IF</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/code_list.txt'</span><span class="p">)</span>
+<span class="n">lst_code</span> <span class="o">=</span> <span class="n">IF</span><span class="p">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">code</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lst_code</span><span class="p">):</span>
+    <span class="n">lst_code</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">code</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">interact</span>
+<span class="k">def</span> <span class="nf">show_label_dist</span><span class="p">(</span><span class="n">code</span> <span class="o">=</span> <span class="n">lst_code</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_stock</span><span class="p">[</span><span class="n">df_stock</span><span class="p">[</span><span class="s">'Code'</span><span class="p">]</span><span class="o">==</span><span class="n">code</span><span class="p">]</span>    
+    <span class="n">ma_ls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">120</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ma_ls</span><span class="p">)):</span>
+        <span class="n">sr1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'Close'</span><span class="p">].</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">ma_ls</span><span class="p">[</span><span class="n">i</span><span class="p">]).</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">df</span><span class="p">[</span><span class="s">'MA'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ma_ls</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="n">sr1</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="c1"># 캔들 차트 
+</span>    <span class="n">candle</span> <span class="o">=</span> <span class="n">go</span><span class="p">.</span><span class="n">Candlestick</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'Date'</span><span class="p">],</span>
+                <span class="nb">open</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'Open'</span><span class="p">],</span>
+                <span class="n">high</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'High'</span><span class="p">],</span>
+                <span class="n">low</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'Low'</span><span class="p">],</span>
+                <span class="n">close</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'Close'</span><span class="p">],</span> <span class="n">increasing_line_color</span><span class="o">=</span> <span class="s">'red'</span><span class="p">,</span> <span class="n">decreasing_line_color</span><span class="o">=</span> <span class="s">'blue'</span><span class="p">)</span>
+    
+    <span class="c1"># 이동평균선
+</span>    <span class="n">line_ma5</span> <span class="o">=</span> <span class="n">go</span><span class="p">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'Date'</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'MA5'</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s">'lines'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'MA5'</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">'magenta'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+    <span class="n">line_ma20</span> <span class="o">=</span> <span class="n">go</span><span class="p">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'Date'</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'MA20'</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s">'lines'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'MA20'</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">'blue'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+    <span class="n">line_ma60</span> <span class="o">=</span> <span class="n">go</span><span class="p">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'Date'</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'MA60'</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s">'lines'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'MA60'</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+    <span class="n">line_ma120</span> <span class="o">=</span> <span class="n">go</span><span class="p">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'Date'</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'MA120'</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s">'lines'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'MA120'</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+    
+    <span class="c1"># 제목 추가
+</span>    <span class="n">layout</span> <span class="o">=</span> <span class="n">go</span><span class="p">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">'{} 캔들차트'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">code</span><span class="p">),</span> <span class="n">titlefont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'black'</span><span class="p">))</span>
+    
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="p">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">candle</span><span class="p">,</span> <span class="n">line_ma5</span><span class="p">,</span> <span class="n">line_ma20</span><span class="p">,</span> <span class="n">line_ma60</span><span class="p">,</span> <span class="n">line_ma120</span><span class="p">],</span> <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+    
+    <span class="n">fig</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interactive(children=(Dropdown(description='code', options=('050120', '095340', '067290', '024120', '060720', …
+</code></pre></div></div>
+
+<p>위의 캔들차트에서 원하는 코드를 선택하여 4일, 20일, 60일, 120일 이동평균선을 확인할 수 있다.</p>
+
+<h2 id="2-보조지표-추가">(2) 보조지표 추가</h2>
+
+<p>현재 baseline 모델에서는 10일치의 시가, 고가, 저가, 종가, 거래대금을 독립변수로 하여 학습을 진행했다.</p>
+
+<p><img src="/myblog/images/03.add_index_1.png" alt="image.png" />출처-네이버 증권</p>
+
+<p>하지만 10일간의 주가 차트 예시 사진을 보면, 너무 적은 정보만을 담고 있어 주가 예측을 위한 패턴을 찾아내기란 매우 어렵다. 따라서 주식의 여러 보조지표를 사용해서 해당 주식에 대한 압축된 정보를 독립변수에 추가해준다.</p>
+
+<p>앞서 시각화 해보았던 이동평균선 말고도 다양한 주식 보조지표들이 존재한다. 보조지표들을 모두 수동으로 계산하기에는 어려움이 있으므로 TA 라이브러리를 사용하여 총 49개의 보조지표를 추가한다. (+ trading_value)</p>
+
+<p>-<a href="https://github.com/mrjbq7/ta-lib">TA library github</a></p>
+
+<ul>
+  <li>보조지표 추가 코드</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_index</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">code</span><span class="p">,</span> <span class="n">stock_df</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">df_stock</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">'Code'</span><span class="p">)):</span>
+    
+    <span class="c1"># 이평선 생성
+</span>    <span class="n">ma</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">120</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">days</span> <span class="ow">in</span> <span class="n">ma</span><span class="p">:</span>
+        <span class="n">stock_df</span><span class="p">[</span><span class="s">'ma_'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">days</span><span class="p">)]</span> <span class="o">=</span> <span class="n">stock_df</span><span class="p">[</span><span class="s">'Close'</span><span class="p">].</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span> <span class="o">=</span> <span class="n">days</span><span class="p">).</span><span class="n">mean</span><span class="p">()</span>
+    
+    <span class="c1"># 여러 보조 지표 생성
+</span>    <span class="n">H</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">stock_df</span><span class="p">[</span><span class="s">'High'</span><span class="p">],</span> <span class="n">stock_df</span><span class="p">[</span><span class="s">'Low'</span><span class="p">],</span> <span class="n">stock_df</span><span class="p">[</span><span class="s">'Close'</span><span class="p">],</span> <span class="n">stock_df</span><span class="p">[</span><span class="s">'Volume'</span><span class="p">]</span>
+    
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'trading_value'</span><span class="p">]</span> <span class="o">=</span> <span class="n">stock_df</span><span class="p">[</span><span class="s">'Close'</span><span class="p">]</span><span class="o">*</span><span class="n">stock_df</span><span class="p">[</span><span class="s">'Volume'</span><span class="p">]</span>
+    
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'MFI'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volume</span><span class="p">.</span><span class="n">money_flow_index</span><span class="p">(</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="n">V</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'ADI'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volume</span><span class="p">.</span><span class="n">acc_dist_index</span><span class="p">(</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="n">V</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'OBV'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volume</span><span class="p">.</span><span class="n">on_balance_volume</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="n">V</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'CMF'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volume</span><span class="p">.</span><span class="n">chaikin_money_flow</span><span class="p">(</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="n">V</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'FI'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volume</span><span class="p">.</span><span class="n">force_index</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="n">V</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'EOMEMV'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volume</span><span class="p">.</span><span class="n">ease_of_movement</span><span class="p">(</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="n">V</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'VPT'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volume</span><span class="p">.</span><span class="n">volume_price_trend</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="n">V</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'NVI'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volume</span><span class="p">.</span><span class="n">negative_volume_index</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="n">V</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'VMAP'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volume</span><span class="p">.</span><span class="n">volume_weighted_average_price</span><span class="p">(</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="n">V</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    
+    <span class="c1"># Volatility
+</span>    <span class="n">stock_df</span><span class="p">[</span><span class="s">'ATR'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volatility</span><span class="p">.</span><span class="n">average_true_range</span><span class="p">(</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'BHB'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volatility</span><span class="p">.</span><span class="n">bollinger_hband</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'BLB'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volatility</span><span class="p">.</span><span class="n">bollinger_lband</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'KCH'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volatility</span><span class="p">.</span><span class="n">keltner_channel_hband</span><span class="p">(</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'KCL'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volatility</span><span class="p">.</span><span class="n">keltner_channel_lband</span><span class="p">(</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'KCM'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volatility</span><span class="p">.</span><span class="n">keltner_channel_mband</span><span class="p">(</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'DCH'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volatility</span><span class="p">.</span><span class="n">donchian_channel_hband</span><span class="p">(</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'DCL'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volatility</span><span class="p">.</span><span class="n">donchian_channel_lband</span><span class="p">(</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'DCM'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volatility</span><span class="p">.</span><span class="n">donchian_channel_mband</span><span class="p">(</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'UI'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">volatility</span><span class="p">.</span><span class="n">ulcer_index</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="c1"># Trend
+</span>    <span class="n">stock_df</span><span class="p">[</span><span class="s">'SMA'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">trend</span><span class="p">.</span><span class="n">sma_indicator</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'EMA'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">trend</span><span class="p">.</span><span class="n">ema_indicator</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'WMA'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">trend</span><span class="p">.</span><span class="n">wma_indicator</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'MACD'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">trend</span><span class="p">.</span><span class="n">macd</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'ADX'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">trend</span><span class="p">.</span><span class="n">adx</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'VIneg'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">trend</span><span class="p">.</span><span class="n">vortex_indicator_neg</span><span class="p">(</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'VIpos'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">trend</span><span class="p">.</span><span class="n">vortex_indicator_pos</span><span class="p">(</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'TRIX'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">trend</span><span class="p">.</span><span class="n">trix</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'MI'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">trend</span><span class="p">.</span><span class="n">mass_index</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'CCI'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">trend</span><span class="p">.</span><span class="n">cci</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'DPO'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">trend</span><span class="p">.</span><span class="n">dpo</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'KST'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">trend</span><span class="p">.</span><span class="n">kst</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'Ichimoku'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">trend</span><span class="p">.</span><span class="n">ichimoku_a</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'ParabolicSAR'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">trend</span><span class="p">.</span><span class="n">psar_down</span><span class="p">(</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'STC'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">trend</span><span class="p">.</span><span class="n">stc</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="c1"># Momentum
+</span>    <span class="n">stock_df</span><span class="p">[</span><span class="s">'RSI'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">rsi</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'SRSI'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">stochrsi</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'TSI'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">tsi</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'UO'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">ultimate_oscillator</span><span class="p">(</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'SR'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">stoch</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'WR'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">williams_r</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'AO'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">awesome_oscillator</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'KAMA'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">kama</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'ROC'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">roc</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'PPO'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">ppo</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">stock_df</span><span class="p">[</span><span class="s">'PVO'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ta</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">pvo</span><span class="p">(</span><span class="n">volume</span><span class="o">=</span><span class="n">V</span><span class="p">,</span> <span class="n">fillna</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    
+    <span class="n">df_index</span> <span class="o">=</span> <span class="n">df_index</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">stock_df</span><span class="p">)</span> 
+
+<span class="c1"># 저장
+</span><span class="n">df_index</span><span class="p">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s">"stock_data_2018_2020_add_index.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">df_index</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100%|██████████████████████████████████████████| 1561/1561 [07:35&lt;00:00,  3.42it/s]
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Code</th>
+      <th>Date</th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Volume</th>
+      <th>Change</th>
+      <th>ma_5</th>
+      <th>ma_20</th>
+      <th>...</th>
+      <th>SRSI</th>
+      <th>TSI</th>
+      <th>UO</th>
+      <th>SR</th>
+      <th>WR</th>
+      <th>AO</th>
+      <th>KAMA</th>
+      <th>ROC</th>
+      <th>PPO</th>
+      <th>PVO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>862985</th>
+      <td>000020</td>
+      <td>2018-01-02</td>
+      <td>9750</td>
+      <td>9900</td>
+      <td>9700</td>
+      <td>9870</td>
+      <td>120676</td>
+      <td>0.012308</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>85.000000</td>
+      <td>-15.000000</td>
+      <td>0.000000</td>
+      <td>9870.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>862986</th>
+      <td>000020</td>
+      <td>2018-01-03</td>
+      <td>9900</td>
+      <td>10250</td>
+      <td>9820</td>
+      <td>10000</td>
+      <td>268220</td>
+      <td>0.013171</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>100.000000</td>
+      <td>28.571429</td>
+      <td>54.545455</td>
+      <td>-45.454545</td>
+      <td>0.000000</td>
+      <td>9925.471999</td>
+      <td>0.000000</td>
+      <td>0.104967</td>
+      <td>8.943334</td>
+    </tr>
+    <tr>
+      <th>862987</th>
+      <td>000020</td>
+      <td>2018-01-04</td>
+      <td>10050</td>
+      <td>10050</td>
+      <td>9680</td>
+      <td>9750</td>
+      <td>161342</td>
+      <td>-0.025000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>95.815900</td>
+      <td>25.000000</td>
+      <td>12.280702</td>
+      <td>-87.719298</td>
+      <td>0.000000</td>
+      <td>9854.744908</td>
+      <td>0.000000</td>
+      <td>-0.015865</td>
+      <td>9.215678</td>
+    </tr>
+    <tr>
+      <th>862988</th>
+      <td>000020</td>
+      <td>2018-01-05</td>
+      <td>9750</td>
+      <td>9980</td>
+      <td>9750</td>
+      <td>9910</td>
+      <td>116604</td>
+      <td>0.016410</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>92.627651</td>
+      <td>33.333333</td>
+      <td>40.350877</td>
+      <td>-59.649123</td>
+      <td>0.000000</td>
+      <td>9882.663078</td>
+      <td>0.000000</td>
+      <td>0.018877</td>
+      <td>6.837356</td>
+    </tr>
+    <tr>
+      <th>862989</th>
+      <td>000020</td>
+      <td>2018-01-08</td>
+      <td>10000</td>
+      <td>10150</td>
+      <td>9940</td>
+      <td>9950</td>
+      <td>158326</td>
+      <td>0.004036</td>
+      <td>9896.0</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>90.156386</td>
+      <td>30.612245</td>
+      <td>47.368421</td>
+      <td>-52.631579</td>
+      <td>0.000000</td>
+      <td>9935.876263</td>
+      <td>0.000000</td>
+      <td>0.078152</td>
+      <td>7.233628</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>43418</th>
+      <td>950130</td>
+      <td>2020-12-22</td>
+      <td>23950</td>
+      <td>23950</td>
+      <td>22800</td>
+      <td>22900</td>
+      <td>978011</td>
+      <td>-0.043841</td>
+      <td>23490.0</td>
+      <td>22212.5</td>
+      <td>...</td>
+      <td>0.601825</td>
+      <td>-1.890990</td>
+      <td>29.641945</td>
+      <td>41.379310</td>
+      <td>-58.620690</td>
+      <td>577.058824</td>
+      <td>22725.390944</td>
+      <td>17.737789</td>
+      <td>-0.505568</td>
+      <td>-12.450728</td>
+    </tr>
+    <tr>
+      <th>43419</th>
+      <td>950130</td>
+      <td>2020-12-23</td>
+      <td>23000</td>
+      <td>23300</td>
+      <td>21000</td>
+      <td>21450</td>
+      <td>1239228</td>
+      <td>-0.063319</td>
+      <td>23080.0</td>
+      <td>22310.0</td>
+      <td>...</td>
+      <td>0.353271</td>
+      <td>-3.660151</td>
+      <td>28.338277</td>
+      <td>23.963134</td>
+      <td>-76.036866</td>
+      <td>353.382353</td>
+      <td>22679.784965</td>
+      <td>-15.049505</td>
+      <td>-1.064724</td>
+      <td>-16.358507</td>
+    </tr>
+    <tr>
+      <th>43420</th>
+      <td>950130</td>
+      <td>2020-12-24</td>
+      <td>21500</td>
+      <td>21800</td>
+      <td>19600</td>
+      <td>21700</td>
+      <td>857865</td>
+      <td>0.011655</td>
+      <td>22700.0</td>
+      <td>22382.5</td>
+      <td>...</td>
+      <td>0.083197</td>
+      <td>-4.812902</td>
+      <td>38.852203</td>
+      <td>20.792079</td>
+      <td>-79.207921</td>
+      <td>-58.235294</td>
+      <td>22583.248771</td>
+      <td>-12.323232</td>
+      <td>-1.408773</td>
+      <td>-20.829146</td>
+    </tr>
+    <tr>
+      <th>43421</th>
+      <td>950130</td>
+      <td>2020-12-28</td>
+      <td>21750</td>
+      <td>21800</td>
+      <td>19500</td>
+      <td>19650</td>
+      <td>1523257</td>
+      <td>-0.094470</td>
+      <td>21930.0</td>
+      <td>22322.5</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>-7.972071</td>
+      <td>33.462925</td>
+      <td>1.470588</td>
+      <td>-98.529412</td>
+      <td>-402.647059</td>
+      <td>22055.737842</td>
+      <td>-13.245033</td>
+      <td>-2.394064</td>
+      <td>-22.448964</td>
+    </tr>
+    <tr>
+      <th>43422</th>
+      <td>950130</td>
+      <td>2020-12-29</td>
+      <td>19950</td>
+      <td>22450</td>
+      <td>19900</td>
+      <td>21500</td>
+      <td>1568505</td>
+      <td>0.094148</td>
+      <td>21440.0</td>
+      <td>22392.5</td>
+      <td>...</td>
+      <td>0.526558</td>
+      <td>-8.199398</td>
+      <td>40.132825</td>
+      <td>28.169014</td>
+      <td>-71.830986</td>
+      <td>-759.852941</td>
+      <td>22026.178902</td>
+      <td>-9.473684</td>
+      <td>-2.489633</td>
+      <td>-23.522675</td>
+    </tr>
+  </tbody>
+</table>
+<p>1149377 rows × 58 columns</p>
+</div>
+
+<p>보조지표를 추가하여 8개였던 컬럼이 58개의 컬럼이 된 것을 볼 수 있다.</p>
+
+<h2 id="3-모델-학습">(3) 모델 학습</h2>
+
+<ul>
+  <li><strong>데이터셋 생성 함수</strong></li>
+</ul>
+
+<p>시간 단축을 위해, 위에서 보조지표를 추가 했던 방법과 동일하게 미리 생성해 놓은 보조지표 추가 데이터셋을 서버 DB에서 불러온다.  baseline 모델에서 진행했던 데이터셋을 더 늘려 train 2017-2020, test 2021 기간 동안의 데이터를 사용한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">make_dataset</span><span class="p">(</span><span class="n">train</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    
+    <span class="n">IF</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/code_list.txt'</span><span class="p">)</span>
+    <span class="n">lst_code</span> <span class="o">=</span> <span class="n">IF</span><span class="p">.</span><span class="n">readlines</span><span class="p">()</span>
+
+    <span class="n">lst_X</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lst_Y</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lst_code_date</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="n">db_dsml</span> <span class="o">=</span> <span class="n">pymysql</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span> <span class="o">=</span> <span class="s">'localhost'</span><span class="p">,</span> 
+        <span class="n">port</span> <span class="o">=</span> <span class="mi">3306</span><span class="p">,</span> 
+        <span class="n">user</span> <span class="o">=</span> <span class="s">'[db username]'</span><span class="p">,</span> 
+        <span class="n">passwd</span> <span class="o">=</span> <span class="s">'[db password]'</span><span class="p">,</span> 
+        <span class="n">db</span> <span class="o">=</span> <span class="s">'[db name]'</span><span class="p">,</span> 
+        <span class="n">charset</span> <span class="o">=</span> <span class="s">'utf8'</span>
+    <span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">db_dsml</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
+    
+    
+    <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">lst_code</span><span class="p">):</span> 
+        <span class="n">code</span> <span class="o">=</span> <span class="n">code</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="n">train</span><span class="p">:</span> 
+            <span class="n">sql_query</span> <span class="o">=</span> <span class="s">'''
+                        SELECT *
+                        FROM stock_{}
+                        WHERE Date BETWEEN '2017-01-01' AND '2020-12-31'
+                        '''</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sql_query</span> <span class="o">=</span> <span class="s">'''
+                        SELECT *
+                        FROM stock_{}
+                        WHERE Date BETWEEN '2021-01-01' AND '2021-12-31'
+                        '''</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+        
+        <span class="n">stock</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">sql</span> <span class="o">=</span> <span class="n">sql_query</span><span class="p">,</span> <span class="n">con</span> <span class="o">=</span> <span class="n">db_dsml</span><span class="p">)</span>   
+
+        <span class="n">lst_stock</span> <span class="o">=</span> <span class="n">stock</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span>
+
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lst_stock</span><span class="p">):</span> 
+            <span class="n">date</span><span class="p">,</span> <span class="n">trading_value</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">date</span><span class="p">().</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%Y%m%d"</span><span class="p">),</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">*</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">trading_value</span> <span class="o">&gt;=</span> <span class="mi">100000000000</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst_stock</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># 예외 처리 
+</span>                    <span class="k">continue</span> 
+                
+                <span class="c1"># D-9 ~ D0 데이터만 담기 
+</span>                <span class="n">sub_stock</span> <span class="o">=</span> <span class="n">lst_stock</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">9</span><span class="p">:</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> 
+
+                <span class="c1"># 10일간의 데이터 
+</span>                <span class="n">lst_result</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">row2</span> <span class="ow">in</span> <span class="n">sub_stock</span><span class="p">:</span>
+                    <span class="n">lst_prices</span><span class="p">,</span> <span class="n">lst_index</span> <span class="o">=</span> <span class="n">row2</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">],</span> <span class="n">row2</span><span class="p">[</span><span class="mi">8</span><span class="p">:]</span>
+                    <span class="n">lst_result</span> <span class="o">+=</span> <span class="n">lst_prices</span> <span class="o">+</span> <span class="n">lst_index</span> <span class="o">+</span> <span class="p">[</span><span class="n">trading_value</span><span class="p">]</span>
+
+                <span class="c1"># D+1 종가 2% 상승 여부 
+</span>                <span class="n">label</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.02</span><span class="p">)</span>
+                
+                <span class="c1"># 종속변수, 독립변수, 종목코드, 날짜 리스트에 추가 
+</span>                <span class="n">lst_X</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst_result</span><span class="p">)</span>
+                <span class="n">lst_Y</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+                <span class="n">lst_code_date</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">code</span><span class="p">,</span> <span class="n">date</span><span class="p">])</span>
+            
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">lst_X</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">lst_Y</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">lst_code_date</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>train dataset 생성</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">trainX</span><span class="p">,</span> <span class="n">trainY</span><span class="p">,</span> <span class="n">lst_code_date</span> <span class="o">=</span> <span class="n">make_dataset</span><span class="p">(</span><span class="n">train</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100%|██████████████████████████████████████████| 1561/1561 [02:16&lt;00:00, 11.44it/s]
+</code></pre></div></div>
+
+<ul>
+  <li><strong>test dataset 생성</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">testX</span><span class="p">,</span> <span class="n">testY</span><span class="p">,</span> <span class="n">lst_code_date_test</span> <span class="o">=</span> <span class="n">make_dataset</span><span class="p">(</span><span class="n">train</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100%|██████████████████████████████████████████| 1561/1561 [00:40&lt;00:00, 38.37it/s]
+</code></pre></div></div>
+
+<p>pickle 저장</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#collapse-hide
+</span><span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="n">dic_result</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'train'</span><span class="p">:</span> <span class="p">[</span><span class="n">trainX</span><span class="p">,</span> <span class="n">trainY</span><span class="p">,</span> <span class="n">lst_code_date</span><span class="p">],</span>
+    <span class="s">'test'</span><span class="p">:</span> <span class="p">[</span><span class="n">testX</span><span class="p">,</span> <span class="n">testY</span><span class="p">,</span> <span class="n">lst_code_date_test</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'dataset_2020_2021.pickle'</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">dic_result</span><span class="p">,</span> <span class="n">handle</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="n">pickle</span><span class="p">.</span><span class="n">HIGHEST_PROTOCOL</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>pickle 불러오기</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#collapse-hide
+</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'dataset_2020_2021.pickle'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">pickle</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">trainX</span><span class="p">,</span> <span class="n">trainY</span><span class="p">,</span> <span class="n">lst_code_date</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s">'train'</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">dataset</span><span class="p">[</span><span class="s">'train'</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">dataset</span><span class="p">[</span><span class="s">'train'</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">testX</span><span class="p">,</span> <span class="n">testY</span><span class="p">,</span> <span class="n">lst_code_date_test</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s">'test'</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">dataset</span><span class="p">[</span><span class="s">'test'</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">dataset</span><span class="p">[</span><span class="s">'test'</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'train dataset: '</span><span class="p">,</span> <span class="n">trainX</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">trainY</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'test dataset: '</span><span class="p">,</span> <span class="n">testX</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">testY</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>train dataset:  (13870, 550) (13870,)
+test dataset:  (8341, 550) (8341,)
+</code></pre></div></div>
+
+<ul>
+  <li><strong>XGBoost 모델 학습</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
+<span class="n">xgb</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span>
+                   <span class="n">n_jobs</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+                   <span class="n">scale_pos_weight</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                   <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+                   <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                   <span class="n">n_estimators</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                   <span class="p">)</span> 
+
+<span class="n">xgb</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trainX</span><span class="p">,</span> <span class="n">trainY</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[17:26:28] WARNING: ../src/learner.cc:1115: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective 'binary:logistic' was changed from 'error' to 'logloss'. Explicitly set eval_metric if you'd like to restore the old behavior.
+
+
+
+
+
+XGBClassifier(base_score=0.5, booster='gbtree', colsample_bylevel=1,
+              colsample_bynode=1, colsample_bytree=1, enable_categorical=False,
+              gamma=0, gpu_id=-1, importance_type=None,
+              interaction_constraints='', learning_rate=0.01, max_delta_step=0,
+              max_depth=3, min_child_weight=1, missing=nan,
+              monotone_constraints='()', n_estimators=500, n_jobs=40,
+              num_parallel_tree=1, predictor='auto', random_state=0,
+              reg_alpha=0, reg_lambda=1, scale_pos_weight=4, subsample=1,
+              tree_method='exact', validate_parameters=1, verbosity=None)
+</code></pre></div></div>
+
+<ul>
+  <li><strong>모델 평가지표 시각화 함수</strong><br />
+train, test 데이터셋에 대하여 Accuracy, AUC, f1_score, precision, recall 평가지표를 구하고, 시각화 한다.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">plot_evauate</span><span class="p">(</span><span class="n">trainX</span><span class="p">,</span> <span class="n">trainY</span><span class="p">,</span> <span class="n">testX</span><span class="p">,</span> <span class="n">testY</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">precision_score</span>
+    
+    <span class="n">train_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">trainX</span><span class="p">)</span>
+    <span class="n">train_prob</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">trainX</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+    
+    <span class="n">test_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">testX</span><span class="p">)</span> 
+    <span class="n">test_prob</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">testX</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+    
+    
+    <span class="c1"># ROC Curve 시각화 
+</span>    <span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">testY</span><span class="p">,</span> <span class="n">test_prob</span><span class="p">)</span> 
+    
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'ROC'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s">'--'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'False Positive Rate'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'True Positive Rate'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">'test ROC : {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">testY</span><span class="p">,</span> <span class="n">test_prob</span><span class="p">),</span><span class="mi">3</span><span class="p">)),</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+    
+    
+    
+    <span class="c1"># 여러 평가지표 시각화 
+</span>    <span class="n">dic_name2func</span> <span class="o">=</span> <span class="p">{</span> <span class="s">'F1-score'</span><span class="p">:</span> <span class="n">f1_score</span><span class="p">,</span> 
+                     <span class="s">'Recall'</span><span class="p">:</span> <span class="n">recall_score</span><span class="p">,</span> 
+                     <span class="s">'Precision'</span><span class="p">:</span> <span class="n">precision_score</span><span class="p">,</span> 
+                     <span class="s">'Accuracy'</span><span class="p">:</span> <span class="n">accuracy_score</span><span class="p">,</span> 
+                     <span class="s">'ROCAUC'</span><span class="p">:</span> <span class="n">roc_auc_score</span> <span class="p">}</span>
+    
+    <span class="n">lst_result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">dic_name2func</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s">'ROCAUC'</span><span class="p">:</span>
+            <span class="n">train</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">trainY</span><span class="p">,</span> <span class="n">train_prob</span><span class="p">)</span>
+            <span class="n">test</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">testY</span><span class="p">,</span> <span class="n">test_prob</span><span class="p">)</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">train</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">trainY</span><span class="p">,</span> <span class="n">train_pred</span><span class="p">)</span>
+            <span class="n">test</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">testY</span><span class="p">,</span> <span class="n">test_pred</span><span class="p">)</span>
+        
+        <span class="n">lst_result</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">name</span><span class="p">,</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">])</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">lst_result</span><span class="p">,</span>
+                <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'name'</span><span class="p">,</span> <span class="s">'train'</span><span class="p">,</span> <span class="s">'test'</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="s">'name'</span><span class="p">)</span>    
+        
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">'name'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'value'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s">'variable'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># 텍스트 추가 
+</span>    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ax</span><span class="p">.</span><span class="n">patches</span><span class="p">:</span>
+        <span class="n">height</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">get_height</span><span class="p">()</span>
+        <span class="n">ax</span><span class="p">.</span><span class="n">text</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">p</span><span class="p">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span> <span class="n">height</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">ha</span> <span class="o">=</span> <span class="s">'center'</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>성능 평가</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plot_evauate</span><span class="p">(</span><span class="n">trainX</span><span class="p">,</span> <span class="n">trainY</span><span class="p">,</span> <span class="n">testX</span><span class="p">,</span> <span class="n">testY</span><span class="p">,</span> <span class="n">xgb</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/myblog/images/output_33_0.png" alt="png" /></p>
+
+<p><img src="/myblog/images/output_33_1.png" alt="png" /></p>
+
+<p>rocauc score는 0.595가 나왔다. 데이터의 기간을 늘리고, 보조지표를 추가함으로써 지난 글의 Baseline Model보다 성능이 향상되었음을 알 수 있다.    <br />
+다음 글에서는 현재 사용하고 있는 통합 종목 주가 데이터셋의 종목별 가격이 모두 다른 점을 보완하기 위해 데이터를 표준화하는 시간을 가진다.</p>
+
+      <div class="c-article__footer u-clearfix">
+        <div class="c-article__tag">
+          
+        </div>
+        <div class="c-article__share">
+          <a href="https://twitter.com/intent/tweet?text=Stock%20Research%20%7C%7C%202.1%20%EC%A3%BC%EA%B0%80%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B%20%EB%B3%B4%EC%A1%B0%EC%A7%80%ED%91%9C%20%EC%B6%94%EA%B0%80&url=https://ag-su.github.io/2022/07/09/add-index/" title="Share
+          on Twitter" rel="nofollow" target="_blank"><div data-icon='ei-sc-twitter' data-size='s'></div></a>
+          <a href="https://facebook.com/sharer.php?u=https://ag-su.github.io/2022/07/09/add-index/" title="Share on Facebook" rel="nofollow" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a>
+          <a href="https://plus.google.com/share?url=https://ag-su.github.io/2022/07/09/add-index/" title="Share on Google+" rel="nofollow" target="_blank"><div data-icon='ei-sc-google-plus' data-size='s'></div></a>
+        </div>
+      </div>
+      <div class="c-newsletter">
+  <div class="c-newsletter__header">
+    <h4 class="c-newsletter__title">Newsletter</h4>
+    <div class="c-newsletter__subtitle">Subscribe to this blog and receive notifications of new posts by email.</div>
+  </div>
+  <form class="c-newsletter-form validate" action="#" method="POST" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+    <div class="c-newsletter-form__group">
+      <label class="u-screen-reader-text" for="mce-EMAIL">Email address</label>
+      <input class="c-newsletter__email required email" id="mce-EMAIL" type="email" name="EMAIL" placeholder="Your email address" autocomplete="on">
+      <input class="c-newsletter__button" id="mc-embedded-subscribe" type="submit" name="subscribe" value="Subscribe">
+    </div>
+  </form>
+</div> <!-- /.c-newsletter -->
+      <div class="c-recent-post">
+        <h4 class="c-recent__title">You might also enjoy</h4>
+        <div class="c-recent__box">
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/08/model-selection/" style="background-image: url( /myblog/images/02.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/08/model-selection/">Stock Research || 1.2. 머신러닝 모델 비교</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-08T00:00:00+09:00">July 8, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/06/stock-dataset/" style="background-image: url( /myblog/images/01.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/06/stock-dataset/">Stock Research || 1.1. 머신러닝을 위한 주가 데이터셋 생성</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-06T00:00:00+09:00">July 6, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/04/10/greedy/" style="background-image: url( /myblog/images/01.greedy_1.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/04/10/greedy/">Algorithm || 그리디 Greedy</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-04-10T00:00:00+09:00">April 10, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        </div>
+      </div> <!-- /.c-recent-post -->
+      
+        <div class="c-comments">
+  <div id="disqus_thread" class="article-comments"></div>
+  <script>
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.src = '//mr-brown.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+</div> <!-- /.c-comments -->
+      
+    </div> <!-- /.c-wrap-content -->
+  </div> <!-- /.c-article__content -->
+</article> <!-- /.c-article-page -->
+
+</main> <!-- /.c-content -->
+  </div> <!-- /.o-wrapper -->
+  <div class="c-top" data-icon='ei-chevron-up' data-size='s' title="Scroll To Top"></div> <!-- /.c-top -->
+  <script src="/myblog/js/jquery-3.3.1.min.js"></script>
+<script src="/myblog/js/evil-icons.min.js"></script>
+<script src="/myblog/js/jquery.fitvids.js"></script>
+<script src="/myblog/js/simple-jekyll-search.min.js"></script>
+<script src="/myblog/js/main.js"></script>
+<!-- /javascripts -->
+</body>
+</html>

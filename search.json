@@ -1,0 +1,35 @@
+[
+  
+    {
+      "title"    : "Stock Research || 2.1 주가 데이터셋 보조지표 추가",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2022/07/09/add-index/",
+      "date"     : "2022-07-09 00:00:00 +0900"
+    } ,
+  
+    {
+      "title"    : "Stock Research || 1.2. 머신러닝 모델 비교",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2022/07/08/model-selection/",
+      "date"     : "2022-07-08 00:00:00 +0900"
+    } ,
+  
+    {
+      "title"    : "Stock Research || 1.1. 머신러닝을 위한 주가 데이터셋 생성",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2022/07/06/stock-dataset/",
+      "date"     : "2022-07-06 00:00:00 +0900"
+    } ,
+  
+    {
+      "title"    : "Algorithm || 그리디 Greedy",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2022/04/10/greedy/",
+      "date"     : "2022-04-10 00:00:00 +0900"
+    } 
+  
+]
