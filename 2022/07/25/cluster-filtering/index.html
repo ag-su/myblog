@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <title>Stock Research || 3.3. 클러스터링 분석을 통한 주가 상승추세 패턴 검출</title>
+  <meta name='description' content="3. 논문 연구: 주가상승 패턴 검출3.3. 클러스터 탐색을 통한 주가상승 패턴 검출지난 글 ( [Stock Research] 3.2. t-SNE를 사용한 주가데이터 2차원 시각화 ) 에서는 원본 주가데이터셋과 SHAP 표준화 데이터셋에 대한 t-SNE 2차원 산점도 시각화를 수행...">
+  <link rel='canonical' href="https://ag-su.github.io/myblog/2022/07/25/cluster-filtering/">
+  <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+  <style>
+    
+    @font-face{font-family:'Cafe24Oneprettynight';src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff") format("woff");font-weight:normal;font-style:normal}/*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:0.67em 0}figcaption,figure,main{display:block}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace, monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace, monospace;font-size:1em}dfn{font-style:italic}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-0.25em}sup{top:-0.5em}audio,video{display:inline-block}audio:not([controls]){display:none;height:0}img{border-style:none}svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}button,html [type="button"],[type="reset"],[type="submit"]{-webkit-appearance:button}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner{border-style:none;padding:0}button:-moz-focusring,[type="button"]:-moz-focusring,[type="reset"]:-moz-focusring,[type="submit"]:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:0.35em 0.75em 0.625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{display:inline-block;vertical-align:baseline}textarea{overflow:auto}[type="checkbox"],[type="radio"]{box-sizing:border-box;padding:0}[type="number"]::-webkit-inner-spin-button,[type="number"]::-webkit-outer-spin-button{height:auto}[type="search"]{-webkit-appearance:textfield;outline-offset:-2px}[type="search"]::-webkit-search-cancel-button,[type="search"]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details,menu{display:block}summary{display:list-item}canvas{display:inline-block}template{display:none}[hidden]{display:none}body,h1,h2,h3,h4,h5,h6,p,blockquote,pre,dl,dd,ol,ul,fieldset,legend,figure,hr{margin:0;padding:0}li>ul,li>ol{margin-bottom:0}table{border-collapse:collapse;border-spacing:0}@-webkit-keyframes spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.icon{position:relative;display:inline-block;width:25px;height:25px;overflow:hidden;fill:currentColor}.icon__cnt{width:100%;height:100%;background:inherit;fill:inherit;pointer-events:none;transform:translateX(0);-ms-transform:translate(0.5px, -0.3px)}.icon--m{width:50px;height:50px}.icon--l{width:100px;height:100px}.icon--xl{width:150px;height:150px}.icon--xxl{width:200px;height:200px}.icon__spinner{position:absolute;top:0;left:0;width:100%;height:100%}.icon--ei-spinner .icon__spinner,.icon--ei-spinner-2 .icon__spinner{-webkit-animation:spin 1s steps(12) infinite;animation:spin 1s steps(12) infinite}.icon--ei-spinner-3 .icon__spinner{-webkit-animation:spin 1.5s linear infinite;animation:spin 1.5s linear infinite}.icon--ei-sc-facebook{fill:#3b5998}.icon--ei-sc-github{fill:#333}.icon--ei-sc-google-plus{fill:#dd4b39}.icon--ei-sc-instagram{fill:#3f729b}.icon--ei-sc-linkedin{fill:#0976b4}.icon--ei-sc-odnoklassniki{fill:#ed812b}.icon--ei-sc-skype{fill:#00aff0}.icon--ei-sc-soundcloud{fill:#f80}.icon--ei-sc-tumblr{fill:#35465c}.icon--ei-sc-twitter{fill:#55acee}.icon--ei-sc-vimeo{fill:#1ab7ea}.icon--ei-sc-vk{fill:#45668e}.icon--ei-sc-youtube{fill:#e52d27}.icon--ei-sc-pinterest{fill:#bd081c}.icon--ei-sc-telegram{fill:#0088cc}*,*::after,*::before{box-sizing:border-box}h1,h2,h3,h4,h5,h6,ul,ol,dl,blockquote,p,address,hr,table,fieldset,figure,pre{margin-bottom:15px}ul,ol,dd{margin-left:15px}@font-face{font-family:'D2 coding';src:url("http://cdn.jsdelivr.net/gh/joungkyun/font-d2coding/d2coding.css") format("text/css");font-weight:normal;font-style:normal}.highlight{background:#f0f0f082;font-family:'D2 coding'}.highlighter-rouge .highlight{background:#f0f0f082}.highlight .c{color:#998;font-style:italic}.highlight .err{color:#a61717;background-color:#e3d2d2}.highlight .k{color:#29843b;font-weight:bold}.highlight .o{color:#c917ed;font-weight:bold}.highlight .cm{color:#998;font-style:italic}.highlight .cp{color:#999;font-weight:bold}.highlight .c1{color:#416373;font-style:italic}.highlight .cs{color:#999;font-weight:bold;font-style:italic}.highlight .gd{color:#000;background-color:#fdd}.highlight .gd .x{color:#000;background-color:#faa}.highlight .ge{font-style:italic}.highlight .gr{color:#a00}.highlight .gh{color:#999}.highlight .gi{color:#000;background-color:#dfd}.highlight .gi .x{color:#000;background-color:#afa}.highlight .go{color:#888}.highlight .gp{color:#555}.highlight .gs{font-weight:bold}.highlight .gu{color:#aaa}.highlight .gt{color:#a00}.highlight .kn{color:#29843b;font-weight:bold}.highlight .kc{font-weight:bold}.highlight .kd{font-weight:bold}.highlight .kp{font-weight:bold}.highlight .kr{font-weight:bold}.highlight .kt{color:#458;font-weight:bold}.highlight .m{color:#099}.highlight .s{color:#bc0202}.highlight .n{color:#000}.highlight .na{color:#008080}.highlight .nb{color:#29843b;font-weight:bold}.highlight .nc{color:#458;font-weight:bold}.highlight .no{color:#008080}.highlight .ni{color:#800080}.highlight .ne{color:#900;font-weight:bold}.highlight .nf{color:#150dff;font-weight:500}.highlight .nn{color:#555}.highlight .nt{color:#000080}.highlight .nv{color:#008080}.highlight .ow{font-weight:bold;color:#7590b7}.highlight .w{color:#bbb}.highlight .mf{color:#099}.highlight .mh{color:#099}.highlight .mi{color:#29843b;font-weight:bold}.highlight .mo{color:#099}.highlight .sb{color:#d14}.highlight .sc{color:#d14}.highlight .sd{color:#d14}.highlight .s2{color:#d14}.highlight .se{color:#d14}.highlight .sh{color:#d14}.highlight .si{color:#bc0202}.highlight .sx{color:#d14}.highlight .sr{color:#009926}.highlight .s1{color:#d14}.highlight .ss{color:#990073}.highlight .bp{color:#999}.highlight .vc{color:#008080}.highlight .vg{color:#008080}.highlight .vi{color:#008080}.highlight .il{color:#099}.highlight .p{color:#000}body{font-family:"Cafe24Oneprettynight";font-size:19px;line-height:28px;color:#404040;background-color:#fbfbfb;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}*::selection{color:#fff;background-color:#d86e89}h1,h2,h3,h4,h5,h6{font-family:"Cafe24Oneprettynight";font-weight:400;line-height:initial}h1{font-size:32px}h2{font-size:28px}h3{font-size:24px}h4{font-size:20px}h5{font-size:18px}h6{font-size:16px}img{max-width:100%;height:auto;vertical-align:middle}a{text-decoration:none;color:#3af;transition:.35s}a:hover{color:#0086e6}blockquote{padding-left:15px;border-left:3px solid #3af;font-family:'Volkhov', 'Times New Roman', Times, serif;font-style:normal;font-size:18px;background-color:rgba(220,235,245,0.2)}blockquote p{padding:10px}hr{height:1px;margin:30px 0;border:0;background-color:#f0f0f0}pre{overflow:auto;padding:25px;font-size:14px;white-space:pre-wrap;word-wrap:break-word;word-break:break-all;font-family:Courier, monospace}code{color:#928b8b;overflow:auto;white-space:pre-wrap;word-wrap:break-word;word-break:break-all;font-family:Courier, monospace;font-size:14px}p code,li code{padding:3px 5px}.o-wrapper{max-width:1440px;position:relative}.o-opacity{animation-duration:0.7s;animation-delay:0.2s;animation-fill-mode:both;animation-name:opacity}@keyframes opacity{from{opacity:0}to{opacity:1}}.c-btn{display:inline-block;white-space:nowrap;vertical-align:middle;font-family:'Volkhov', serif;font-size:12px;text-align:center;padding:8px 15px;cursor:pointer;transition:.35s}.c-btn--primary{color:#fff;background-color:#3af;background:linear-gradient(135deg, #3af 0%, #62d5ff 100%)}.c-btn--secondary{color:#fff;background-color:#cfcfdd;background:linear-gradient(135deg, #f1577d 0%, #cfcfdd 100%)}.c-btn--round{border-radius:30px}.c-btn--shadow{box-shadow:8px 10px 20px 0 rgba(46,61,73,0.15)}.c-btn--shadow:hover{box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2)}.c-btn--middle{display:block;width:300px;max-width:100%}.c-btn--big{display:block;width:100%}.c-btn:hover{color:#fff;transition:.35s}.c-btn:active{transform:translateY(2px)}.c-sidebar{display:flex;flex-direction:column;justify-content:space-between;position:fixed;top:0;left:0;bottom:0;width:360px;padding:40px 20px 20px;text-align:center;box-shadow:1px 1px 0 rgba(31,35,46,0.15);background-color:#fff}.c-sidebar-author .c-author__cover{width:100px;height:100px;margin:0 auto 10px;border-radius:50%;overflow:hidden;background-color:#cfcfdd}.c-sidebar-author .c-author__cover img{width:100%;height:100%;border-radius:50%;transition:.35s}.c-sidebar-author .c-author__cover img:hover{transform:scale3d(0.9, 0.9, 1)}.c-sidebar-author .c-contact-menu .c-btn{min-width:110px}.c-sidebar-author .c-contact-menu .c-btn .icon{width:18px;height:18px;vertical-align:text-bottom;fill:#fff}.c-sidebar-author .c-author__info{font-family:'Volkhov', serif}.c-sidebar-author .c-author__name{font-size:18px;font-weight:700;line-height:21px}.c-sidebar-author .c-author__job{font-size:12px;color:#a0a0a0;margin:5px 0 0}.c-sidebar-author .c-contact-menu{margin:30px 0}.c-sidebar-author .c-contact-menu .c-btn--secondary{margin-right:10px}.c-sidebar-author .c-author__about{max-width:400px;margin:0 auto 15px;font-size:13px}.c-sidebar-footer .c-social__title{position:relative;font-family:'Volkhov', serif;font-size:15px;font-weight:700;color:#444}.c-sidebar-footer .c-social__title::before{content:"";display:block;height:2px;width:calc(50% - 40px);transform:translateY(-50%);position:absolute;top:50%;left:0;background-color:#444}.c-sidebar-footer .c-social__title::after{content:"";display:block;height:2px;width:calc(50% - 40px);transform:translateY(-50%);position:absolute;top:50%;right:0;background-color:#444}.c-sidebar-footer .c-social__list{list-style-type:none;padding:0;margin:15px 0}.c-sidebar-footer .c-social__list .c-social__item{display:inline-block;width:27px;height:27px}.c-sidebar-footer .c-social__list .icon{width:27px;height:27px;fill:#444;vertical-align:middle;transition:.35s}.c-sidebar-footer .c-social__list .icon:hover{fill:#3af;transform:scale(1.2);transition:.35s}.c-sidebar-footer .c-copyright p{font-size:13px;margin:0}@media only screen and (max-width: 900px){.c-sidebar{position:relative;width:100%;padding:20px}.c-sidebar .c-contact-menu{margin:20px 0}.c-sidebar-footer .c-social .c-social__title{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px;word-wrap:normal !important}.c-sidebar-footer .c-social__list{margin:0}.c-sidebar-footer .c-copyright{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px;word-wrap:normal !important}}@media only screen and (max-width: 480px){.c-sidebar-author .c-author__cover{width:80px;height:80px}.c-sidebar-author .c-author__cover img{width:100%;height:100%}.c-sidebar-author .c-contact-menu{margin:15px 0}.c-sidebar-author .c-contact-menu .c-btn{min-width:80px;font-size:10px;padding:4px 15px;margin-right:5px}.c-sidebar-author .c-contact-menu .c-btn .icon{width:16px;height:16px}.c-sidebar-footer .c-social .c-social__title{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px;word-wrap:normal !important}.c-sidebar-footer .c-social__list{margin:0}.c-sidebar-footer .c-social__list .icon{width:25px;height:25px}.c-sidebar-footer .c-copyright{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px;word-wrap:normal !important}}.c-content{position:relative;display:flex;flex-direction:row;flex-wrap:wrap;align-items:stretch;padding:0 20px 0;margin-left:360px}@media only screen and (max-width: 900px){.c-content{position:static;padding:0 15px 0;margin-left:0}}.c-posts{width:100%;display:flex;flex-direction:row;flex-wrap:wrap}.c-post{width:100%;max-width:100%;margin-bottom:20px;display:flex;flex-direction:row;align-items:stretch;min-height:180px;border-radius:10px;overflow:hidden;transition:.35s;background-color:#fff;box-shadow:0 1px 1px 0 rgba(31,35,46,0.15)}.c-post:hover{transform:translate(0px, -2px);box-shadow:0 15px 45px -10px rgba(10,16,34,0.2)}.c-post .c-post-thumbnail{display:block;width:30%;max-width:100%;min-height:180px;border-radius:10px 0 0 10px;background-color:rgba(220,235,245,0.2);background-size:cover;background-position:50% 50%}.c-post .c-post-content{padding:15px;width:70%}.c-post .c-post-content .c-post-title{font-size:30px;font-weight:400;margin:0 0 15px}.c-post .c-post-content .c-post-title a{text-decoration:none;color:#263959}.c-post .c-post-content .c-post-date,.c-post .c-post-content .c-post-words{font-size:12px}.c-load-more{padding:20px;margin:20px auto 40px;font-size:13px;color:#fff;border:none;background-color:#d0a9ae;outline:none}.c-load-more:hover{background-color:#0086e6}@media only screen and (max-width: 1200px){.c-post{width:48%;max-width:100%;margin:0 1% 20px;flex-direction:column}.c-post .c-post-thumbnail{width:100%;border-radius:10px 10px 0 0}.c-post .c-post-content{width:100%}.c-post .c-post-content .c-post-title{font-size:21px;margin:15px 0}}@media only screen and (max-width: 480px){.c-post{width:100%;max-width:100%;margin:0 0 20px}.c-post .c-post-content{width:100%}.c-post .c-post-content .c-post-title{font-size:21px;margin:15px 0}}.c-article{width:100%;margin:20px 0}.c-wrap-content{padding:20px;background-color:#fff}.c-article__image{position:relative;background-color:rgba(220,235,245,0.2);background-position:center;background-size:cover;background-repeat:no-repeat}.c-article__image:after{content:"";display:block;padding-top:56%}.c-article__header{margin-bottom:20px;text-align:center}.c-article__header .c-article__title{margin-bottom:10px}.c-article__date span{font-size:13px;text-transform:uppercase;color:#a0a0a0}.c-article__footer{margin:30px 0 0;padding-bottom:30px;text-align:center;border-bottom:1px solid #f0f0f0}.c-article__footer .c-article__share{transition:.35s}.c-article__footer .c-article__share a .icon{vertical-align:middle;transition:.35s}.c-article__footer .c-article__share a .icon:hover{opacity:.7;transition:.35s}.c-article__footer .c-article__tag{margin-bottom:5px}.c-article__footer .c-article__tag a{display:inline-block;vertical-align:middle;padding:5px 10px;font-family:'Volkhov', 'Times New Roman', Times, serif;font-size:10px;line-height:10px;text-transform:uppercase;background-color:rgba(115,138,160,0.6);color:#fff}.c-article__footer .c-article__tag a:hover{background-color:rgba(80,100,118,0.6)}.c-article__footer .c-article__tag a:last-child{margin-right:0}.c-recent-post{padding:30px 0}.c-recent-post .c-recent__title{font-size:14px;text-align:center;text-transform:uppercase;margin-bottom:30px}.c-recent-post .c-recent__box{display:flex;flex-direction:row;flex-wrap:wrap}.c-recent-post .c-recent__item{max-width:23%;flex-basis:23%;margin:0 1% 20px;border-radius:10px;overflow:hidden;text-align:center;background-color:#fff;box-shadow:0 1px 1px 0 rgba(31,35,46,0.15);transition:.35s}.c-recent-post .c-recent__item h4{margin-bottom:5px;font-size:12px;text-transform:uppercase}.c-recent-post .c-recent__item h4 a{color:#444}.c-recent-post .c-recent__item:hover{box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2)}.c-recent-post .c-recent__footer{padding:15px}.c-recent-post .c-recent__image{display:block;width:100%;min-height:180px;background-color:rgba(220,235,245,0.2);background-size:cover;background-position:center;background-repeat:no-repeat}.c-recent-post .c-recent__date{color:#a0a0a0;font-size:12px}@media only screen and (max-width: 1200px){.c-recent-post .c-recent__item{max-width:48%;flex-basis:48%}}@media only screen and (max-width: 900px){.c-article{margin:15px 0}}@media only screen and (max-width: 480px){.c-wrap-content{padding:15px}.c-article__header{margin-bottom:5px}.c-article__header .c-article__title{font-size:24px;margin-bottom:5px}.c-recent-post .c-recent__item{max-width:100%;flex-basis:100%;margin:0 0 20px}}.c-blog-tags{width:100%;padding:20px;margin:20px 0 40px;background-color:#fff}.c-blog-tags h1{text-align:center;margin-bottom:0}.c-blog-tags h2{font-size:18px;text-transform:uppercase;margin:30px 0;color:#757575}.c-tag__list{list-style:none;padding:0 0 40px;margin:40px 0 0;border-bottom:1px solid #f0f0f0}.c-tag__list li{display:inline-block;margin-right:15px}.c-tag__list li a{color:#404040;text-transform:uppercase;font-size:12px}.c-tag__list li a:hover{color:#000}.c-tag__item{margin-bottom:15px}.c-tag__image{width:50px;height:50px;border-radius:50%;margin-right:5px}@media only screen and (max-width: 480px){.c-blog-tags{padding:15px}.c-blog-tags h1{font-size:27px}.c-blog-tags h2{font-size:16px;margin:15px 0}.c-tag__list{padding:0 0 30px;margin:30px 0 0}.c-tag__item{margin-bottom:5px}.c-tag__image{display:none}}.c-header{position:relative;width:100%;margin:20px 0}.c-header__box{position:relative;display:flex;flex-direction:row;justify-content:space-between;align-items:center}.c-header__box .icon--ei-search{position:absolute;top:7px;left:15px;fill:#ccc}.c-search{width:80%}.c-search .c-search__box{display:flex;align-items:center}.c-search .c-search__text{position:relative;width:100%;padding:10px 10px 10px 40px;border:1px solid #dce4ea;border-radius:30px;outline:none;color:#a0a0a0}.c-search .c-search__text::placeholder{color:#ccc}.c-search .c-search__text:hover{box-shadow:0 1px 0px rgba(132,135,138,0.1);transition:.35s}.c-search .c-search-results-list{position:absolute;width:100%;margin:10px 0 0;list-style-type:none;background-color:#fff;z-index:1}.c-search .c-search-results-list li{display:flex;flex-wrap:wrap;align-items:center;margin:0;padding:20px 25px 0;background-color:#fff;line-height:1.4;border-left:solid 1px #edeeee;border-right:solid 1px #edeeee}.c-search .c-search-results-list li:first-child{border-top-left-radius:5px;border-top-right-radius:5px;border-top:solid 1px #edeeee}.c-search .c-search-results-list li:last-child{border-bottom-left-radius:5px;border-bottom-right-radius:5px;padding-bottom:25px;border-bottom:solid 1px #edeeee}.c-search .c-search-results-list li a{font-size:16px}.c-nav{flex-grow:1;padding-left:20px}.c-nav .c-nav__list{display:flex;justify-content:flex-end}.c-nav .c-nav__list .c-nav__item{display:flex;align-items:center;float:left;padding:4px 10px;font-size:10px;text-transform:uppercase;white-space:nowrap;border:1px solid #dce4ea;box-shadow:0 1px 0px rgba(132,135,138,0.4);will-change:transform;transform:translateY(0px);cursor:pointer}.c-nav .c-nav__list .c-nav__item:hover{color:#222;background-color:#fff}.c-nav .c-nav__list .c-nav__item.is-active{box-shadow:0 0 0 rgba(132,135,138,0.5);transform:translateY(1px);color:#cfcfdd}.c-nav .c-nav__list .c-nav__item.is-active:hover{background-color:#fbfbfb}.c-nav .c-nav__list .c-nav__item:first-child{border-radius:10px 0 0 10px}.c-nav .c-nav__list .c-nav__item:last-child{border-radius:0 10px 10px 0}.c-nav .c-nav__list .c-nav__item .icon{width:18px;height:18px;margin-right:3px}@media only screen and (max-width: 900px){.c-header{margin:15px 0}}@media only screen and (max-width: 480px){.c-header .c-header__box{flex-direction:column}.c-header .c-search{width:100%}.c-header .c-search .c-search__text{padding:8px 8px 8px 40px}.c-header .c-nav{margin-top:15px}.c-header .c-nav .c-nav__list{justify-content:center}.c-header .c-nav .c-nav__item{padding:4px 8px}}.c-categories{width:100%}.c-categories__list{width:100%;display:flex;flex-direction:row;flex-wrap:wrap}.c-categories__item{max-width:25%;flex-basis:25%;padding:0 10px 20px}.c-categories__link{height:100%;display:flex;flex-direction:column;align-items:center;padding:20px 10px;border-radius:5px;box-shadow:5px 5px 25px rgba(46,61,73,0.15);background-color:#fff;transition:.35s}.c-categories__link:hover{box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2)}.c-categories__link:hover .c-categories__img .c-categories__more{opacity:1;transition:.35s}.c-categories__link .c-categories__container{width:100%;word-wrap:break-word}.c-categories__link .c-categories__container.c-empty-figure{display:flex;flex-direction:column;justify-content:center;flex-grow:1}.c-categories__img{position:relative;max-width:100%}.c-categories__img figure{position:relative;width:200px;max-width:100%;margin-bottom:20px;overflow:hidden;background-size:cover;background-repeat:no-repeat;background-position:center;border-radius:50%;box-shadow:inset 0 1px 3px rgba(141,165,185,0.3)}.c-categories__img figure:after{content:"";display:block;padding-top:100%}.c-categories__img figure:before{content:"";position:absolute;top:0;bottom:0;left:0;right:0;background-color:rgba(0,0,0,0.15)}.c-categories__img .c-categories__more{display:inline-block;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);font-weight:700;color:#fff;text-transform:uppercase;text-shadow:0 1px 0 rgba(104,172,191,0.3);opacity:0;transition:.35s}.c-categories__container{text-align:center}.c-categories__container .c-categories__header{font-size:13px;margin-bottom:10px;font-weight:normal;text-transform:uppercase;color:#404040}.c-categories__container .c-categories__count{font-family:'Volkhov', serif;font-size:12px;color:#404040;margin-bottom:0}.c-categories__container .c-categories__count span{display:inline-block;width:20px;height:20px;line-height:20px;vertical-align:baseline;margin-right:5px;border-radius:50%;color:#fff;background-color:#ee6c6c}@media only screen and (max-width: 1200px){.c-categories .c-categories__item{max-width:33.333%;flex-basis:33.333%}}@media only screen and (max-width: 1050px){.c-categories .c-categories__item{max-width:50%;flex-basis:50%}}@media only screen and (max-width: 480px){.c-categories .c-categories__item{max-width:100%;flex-basis:100%;padding:0 0 20px}}.c-form-box{position:absolute;top:0;width:calc(100% - 40px);min-height:100vh;padding:0 20px;background-color:#fff;z-index:1}.c-form-bnt__close{position:absolute;top:0px;left:0;width:30px;height:30px;cursor:pointer;transition:.35s}.c-form-bnt__close:hover{transform:scale(0.8);opacity:.8}.c-form{position:relative;width:750px;max-width:100%;margin:40px auto}.c-form .c-form__title{margin:0 0 40px;min-width:0;border:0;padding:0;font-family:"Cafe24Oneprettynight";text-transform:uppercase;text-align:center}.c-form a{color:#404040}.c-form__group{margin-bottom:20px}.c-form__group label{display:block;text-transform:uppercase;font-size:10px}.c-form__group input,.c-form__group textarea{width:100%;padding:10px 15px;color:#404040;border:1px solid #dce4ea;outline:none;transition:.35s}.c-form__group input:focus,.c-form__group textarea:focus{box-shadow:0 4px 25px rgba(132,135,138,0.1)}.c-form__group button{padding:20px;text-transform:uppercase;outline:none;border:none}.c-thank-you p{position:relative;padding:20px 40px;width:750px;max-width:100%;text-transform:uppercase;font-size:12px;line-height:18px;font-weight:700;margin:40px auto 0;text-align:center;color:#fff;background:linear-gradient(135deg, #55b5ad 0%, #5ec9c5 100%)}.c-thank-you p .c-form-bnt__close{width:25px;height:25px;background:transparent}.c-thank-you p a{color:#fff}@media only screen and (max-width: 900px){.c-form-box{width:100%;left:0;right:0}}@media only screen and (max-width: 480px){.c-form-bnt__close{width:25px;height:25px}}.c-newsletter{padding:30px 0 60px;margin:0 auto;border-bottom:1px solid #f0f0f0}.c-newsletter__header{text-align:center}.c-newsletter__header .c-newsletter__title{font-size:14px;text-transform:uppercase;text-align:center}.c-newsletter__header .c-newsletter__subtitle{margin-bottom:15px}.c-newsletter-form{width:100%;max-width:750px;margin:0 auto}.c-newsletter-form .c-newsletter-form__group{display:flex}.c-newsletter__email{width:70%;height:40px;padding:10px 15px;border:1px solid #ddd;border-right-color:transparent;outline:none;transition:.35s}.c-newsletter__email:focus{box-shadow:0 4px 25px rgba(132,135,138,0.1)}.c-newsletter__button{width:30%;height:40px;color:#fff;background-color:#3af;transition:.35s;border:none;outline:none;cursor:pointer}.c-newsletter__button:hover{background-color:#0086e6}@media only screen and (max-width: 480px){.c-newsletter__button{font-size:13px}}.c-comments{padding:30px 0;border-top:1px solid #f0f0f0}.c-top{position:fixed;width:40px;height:40px;bottom:20px;color:#757575;cursor:pointer;transition:.35s;right:-100px;z-index:10;opacity:.5}.c-top--active{right:15px}.c-top:hover{color:#757575;opacity:1}.u-text-left{text-align:left}.u-text-right{text-align:right}.u-text-center{text-align:center}.u-text-justify{text-align:justify}.u-block{display:block}.u-inline-block{display:inline-block}.u-inline{display:inline}.u-full-width{display:block;width:100%}.u-vertical-center{display:flex;align-items:center;justify-content:center}.u-responsive-image{max-width:100%;height:auto;vertical-align:middle}.u-show{display:block !important}.u-hide{display:none !important}.u-invisible{visibility:hidden}.u-float-left{float:left}.u-float-right{float:right}.u-no-padding-top{padding-top:0}.u-no-padding-bottom{padding-bottom:0}.u-no-padding-left{padding-left:0}.u-no-padding-right{padding-right:0}.u-no-padding{padding:0}.u-no-margin-top{margin-top:0}.u-no-margin-bottom{margin-bottom:0}.u-no-margin-left{margin-left:0}.u-no-margin-right{margin-right:0}.u-no-margin{margin:0}.u-lists-reset{list-style-type:none;margin:0;padding:0}.u-clearfix::before,.u-clearfix::after{content:"";display:table;clear:both}.u-screen-reader-text{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px;word-wrap:normal !important}
+
+  </style>
+</head>
+
+<body>
+  
+  <div class="o-wrapper">
+    <aside class="c-sidebar">
+  <div class="c-sidebar-author">
+    <div class="c-author__cover">
+      <a href="/myblog/">
+        <img src="/myblog/images/jjang.png" alt="agsu">
+      </a>
+    </div>
+    <div class="c-author__info">
+      <div class="c-author__name">agsu</div>
+      <span class="c-author__job">Department of Data Science</span>
+    </div>
+    <div class="c-contact-menu">
+      
+      <a href="/contact" class="c-contact-btn c-btn c-btn--secondary c-btn--round c-btn--shadow"><span data-icon='ei-envelope' data-size='s'></span> Send me</a>
+      
+      
+      
+    </div>
+    <p class="c-author__about">블로그</p>
+  </div>
+
+  <div class="c-sidebar-footer">
+    <div class="c-social">
+      <div class="c-social__title">Social</div>
+      <ul class="c-social__list u-lists-reset">
+        
+        
+        
+        
+        
+          <li class="c-social__item"><a href="https://github.com/artemsheludko" target="_blank"><div data-icon='ei-sc-github' data-size='s'></div></a></li>
+        
+        
+        
+        
+          <li class="c-social__item"><a href="https://instagram.com/artemsheludko_" target="_blank"><div data-icon='ei-sc-instagram' data-size='s'></div></a></li>
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+    <div class="c-copyright">
+      <p>2022 &copy; agsu</p>
+    </div>
+  </div>
+</aside> <!-- /.c-sidebar -->
+
+<main class="c-content">
+  <article class="c-article">
+  <div class="c-article__content">
+    <header class="c-header u-hide u-no-margin-top">
+      <div class="c-header__box">
+        <div class="c-search u-full-width">
+          <div class="c-search__box">
+            <label for="js-search-input" class="u-screen-reader-text">Search for Blog</label>
+            <input type="text" id="js-search-input" class="c-search__text" autocomplete="off" placeholder="Type to search...">
+            <div data-icon='ei-search' data-size='s'></div>
+          </div>
+          <ul id="js-results-container" class="c-search-results-list"></ul>
+        </div>
+      </div>
+    </header>
+    
+    <div class="c-article__image o-opacity" style="background-image: url( /myblog/images/08.thumbnail.png )"></div>
+    
+    <div class="c-wrap-content">
+      <header class="c-article__header">
+        <h1 class="c-article__title">Stock Research || 3.3. 클러스터링 분석을 통한 주가 상승추세 패턴 검출</h1>
+        <div class="c-article__date">
+          <span>2022, Jul 25</span>
+        </div>
+      </header>
+      <h1 id="3-논문-연구-주가상승-패턴-검출">3. 논문 연구: 주가상승 패턴 검출</h1>
+<h2 id="33-클러스터-탐색을-통한-주가상승-패턴-검출">3.3. 클러스터 탐색을 통한 주가상승 패턴 검출</h2>
+<p>지난 글 ( <a href="https://ag-su.github.io/blog/stock%20research/2022/07/22/tsne.html">[Stock Research] 3.2. t-SNE를 사용한 주가데이터 2차원 시각화</a> ) 에서는 원본 주가데이터셋과 SHAP 표준화 데이터셋에 대한 t-SNE 2차원 산점도 시각화를 수행하여 SHAP 표준화 데이터셋의 군집의 경계가 더 명확하게 드러남을 확인하였다. 이번 글에서는 <code class="language-plaintext highlighter-rouge">SHAP 표준화 데이터셋</code>에 <code class="language-plaintext highlighter-rouge">계층적 클러스터링</code> 알고리즘을 적용하여 명시적으로 군집을 분류해보고, label1의 비율로 군집을 필터링하여 <code class="language-plaintext highlighter-rouge">상승 추세 군집</code>을 선택한다. 선택된 상승 추세 군집에서 빈도수 상위 날짜들의 개별 종목 차트를 확인하여 <code class="language-plaintext highlighter-rouge">공통된 패턴을 검출</code>한다.</p>
+
+<h3 id="목차">목차</h3>
+<ul>
+  <li>(1) 계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
+  <li>
+    <p>(2) 정리</p>
+  </li>
+  <li>라이브러리 import</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">pymysql</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="p">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s">'ignore'</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interact_manual</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="n">go</span>
+<span class="kn">import</span> <span class="nn">plotly.offline</span> <span class="k">as</span> <span class="n">pyo</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="n">pylab</span> <span class="n">inline</span>
+<span class="n">pylab</span><span class="p">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">'figure.figsize'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">'axes.unicode_minus'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">rc</span><span class="p">(</span><span class="s">'font'</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s">'NanumGothic'</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">StockFunc</span> <span class="k">as</span> <span class="n">sf</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%pylab is deprecated, use %matplotlib inline and import the required libraries.
+Populating the interactive namespace from numpy and matplotlib
+</code></pre></div></div>
+
+<h2 id="️-1-계층적-클러스터링--상승-추세-군집-선택">✔️ (1) 계층적 클러스터링 &amp; 상승 추세 군집 선택</h2>
+<p><code class="language-plaintext highlighter-rouge">상승 추세 군집</code>이란 <strong>기준일 (D0) 대비 다음 날 (D+1) 종가 2% 이상 상승</strong>한 데이터들이 일정 비율 이상 속하는 군집들을 의미한다. 계층적 클러스터링을 통해 생성된 군집들을 label1의 비율로 필터링하여 상승 추세 군집을 선택한다.</p>
+
+<ul>
+  <li>linkage, 덴드로그램 시각화 함수</li>
+</ul>
+
+<p>계층적 클러스터링에서의 덴드로그램 시각화를 수행하여 트리의 높이를 결정할 수 있도록 한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">hierarchical_clustering_plot</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">cci_type</span><span class="p">,</span> <span class="n">dendrogram</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="s">'''
+    method: str / complete, average, ward
+    year: int / 2019, 2020, 2021
+    cci_type:int / 1, 2, 3
+    dendrogram:Boolean / True, False(default) - 시간이 오래걸리므로 선택 
+    n_clusters: int / default:5
+    min_samples: int / default:5
+    alpha: float / default: 0.3
+    size: int / default: 4
+    '''</span>
+
+    <span class="kn">import</span> <span class="nn">pickle</span> <span class="c1"># tsne 파일 불러오기 
+</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s">'np_tsne_shap_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s">_</span><span class="si">{</span><span class="n">cci_type</span><span class="si">}</span><span class="s">'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span> 
+        <span class="n">np_tsne</span> <span class="o">=</span> <span class="n">pickle</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'complete'</span><span class="p">,</span> <span class="s">'average'</span><span class="p">,</span> <span class="s">'ward'</span><span class="p">):</span> <span class="c1"># linkage method 선택 
+</span>        <span class="kn">from</span> <span class="nn">scipy.cluster.hierarchy</span> <span class="kn">import</span> <span class="n">linkage</span><span class="p">,</span> <span class="n">dendrogram</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+        <span class="n">clusters</span> <span class="o">=</span> <span class="n">linkage</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">np_tsne</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s">'euclidean'</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"linkage complete"</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">dendrogram</span><span class="p">:</span> <span class="c1"># True: 덴드로그램 시각화 
+</span>            <span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s"> dendrogram"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+            <span class="n">dendrogram</span><span class="p">(</span><span class="n">clusters</span><span class="p">,</span> <span class="n">leaf_rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">leaf_font_size</span><span class="o">=</span><span class="mi">12</span><span class="p">,)</span>
+            <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span> 
+            
+        <span class="k">return</span> <span class="n">clusters</span> 
+        
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"method를 잘못 입력하였습니다."</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>계층적 클러스터링, 상승 추세 군집 선택 시각화</li>
+</ul>
+
+<p>덴드로그램을 참고하여 <code class="language-plaintext highlighter-rouge">40 ~ 60개의 군집</code>이 형성되도록 t를 설정한다. 상승 추세 군집을 선택하기 위해 적절한 ratio(특정 집단에서의 label1의 비율)값을 지정해주는데, <code class="language-plaintext highlighter-rouge">군집의 개수는 4 ~ 10개</code>, <code class="language-plaintext highlighter-rouge">데이터의 개수는 3000 ~ 6000개</code> 사이가 되도록 설정한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fcluster_plot_and_filtering</span><span class="p">(</span><span class="n">np_clusters</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">cci_type</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="mi">70</span><span class="p">):</span>
+    <span class="s">'''
+    np_clusters: np.array
+    year: int / 2019, 2020, 2021
+    cci_type: int / 1, 2, 3 
+    t: int / default: 30 (덴드로그램 트리의 높이) 
+    ratio: float / default:0.5 (1의 비율이 지정)  
+    '''</span>
+    
+    <span class="kn">from</span> <span class="nn">scipy.cluster.hierarchy</span> <span class="kn">import</span> <span class="n">fcluster</span> <span class="c1"># 지정한 클러스터 자르기
+</span>    <span class="kn">import</span> <span class="nn">pickle</span>     
+    
+    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'all_dataset'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span> <span class="c1"># Code, Date, Label 정보가 모두 들어있는 데이터셋 불러오기
+</span>        <span class="n">dict_all_dataset</span> <span class="o">=</span> <span class="n">pickle</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
+        
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s">'np_tsne_shap_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s">_</span><span class="si">{</span><span class="n">cci_type</span><span class="si">}</span><span class="s">'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span> <span class="c1"># 연도, CCI 구간에 맞는 tsne 데이터셋 불러오기
+</span>        <span class="n">np_tsne</span> <span class="o">=</span> <span class="n">pickle</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
+    
+    <span class="n">df_shap_cci</span> <span class="o">=</span> <span class="n">dict_all_dataset</span><span class="p">[</span><span class="n">cci_type</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">df_shap_year</span> <span class="o">=</span> <span class="n">df_shap_cci</span><span class="p">[(</span><span class="n">df_shap_cci</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s">-01-01'</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_shap_cci</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s">-12-31'</span><span class="p">)].</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># 연도에 맞는 데이터 필터링
+</span>    
+    <span class="n">cut_tree</span> <span class="o">=</span> <span class="n">fcluster</span><span class="p">(</span><span class="n">np_clusters</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s">'distance'</span><span class="p">)</span> <span class="c1"># 군집화 결과 데이터 
+</span>    <span class="k">print</span><span class="p">(</span><span class="s">"군집의 개수:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cut_tree</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="n">unique</span><span class="p">()))</span> <span class="c1"># 군집의 개수 출력 
+</span>    
+    <span class="c1">##### 클러스터링 시각화 
+</span>    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        
+    <span class="n">scatter</span> <span class="o">=</span> <span class="n">ax1</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np_tsne</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">np_tsne</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">cut_tree</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'gist_rainbow'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">size</span><span class="p">)</span> <span class="c1"># 군집(cut_tree)별로 시각화 
+</span>    <span class="n">ax1</span><span class="p">.</span><span class="n">legend</span><span class="p">(</span><span class="o">*</span><span class="n">scatter</span><span class="p">.</span><span class="n">legend_elements</span><span class="p">())</span>
+    <span class="n">ax1</span><span class="p">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s"> Hierarchical Clustering"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    
+    <span class="c1">##### 라벨 1의 비율을 사용한 클러스터 필터링: 상승 추세 군집 선택
+</span>    <span class="n">df_tsne</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np_tsne</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'component1'</span><span class="p">,</span> <span class="s">'component2'</span><span class="p">])</span>
+    <span class="n">df_tsne</span><span class="p">[</span><span class="s">'Code'</span><span class="p">],</span> <span class="n">df_tsne</span><span class="p">[</span><span class="s">'Date'</span><span class="p">],</span> <span class="n">df_tsne</span><span class="p">[</span><span class="s">'Label'</span><span class="p">],</span> <span class="n">df_tsne</span><span class="p">[</span><span class="s">'Cluster'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_shap_year</span><span class="p">[</span><span class="s">'Code'</span><span class="p">],</span> <span class="n">df_shap_year</span><span class="p">[</span><span class="s">'Date'</span><span class="p">],</span> <span class="n">df_shap_year</span><span class="p">[</span><span class="s">'Label'</span><span class="p">],</span> <span class="n">cut_tree</span>
+    
+    <span class="n">gb</span> <span class="o">=</span> <span class="n">df_tsne</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">'Cluster'</span><span class="p">)[</span><span class="s">'Label'</span><span class="p">].</span><span class="n">value_counts</span><span class="p">(</span><span class="n">sort</span><span class="o">=</span><span class="bp">False</span><span class="p">).</span><span class="n">unstack</span><span class="p">()</span> <span class="c1"># 군집 별 라벨 개수
+</span>    <span class="n">idx_label_1</span> <span class="o">=</span> <span class="n">gb</span><span class="p">[</span><span class="n">gb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">gb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">gb</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">ratio</span><span class="p">].</span><span class="n">index</span> <span class="c1"># label 1의 비율이 ratio 이상인 군집 번호
+</span>    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'label 1 &gt; </span><span class="si">{</span><span class="n">ratio</span><span class="si">}</span><span class="s"> 군집 번호: '</span><span class="p">,</span> <span class="n">idx_label_1</span><span class="p">)</span>
+    <span class="n">df_tsne_1</span> <span class="o">=</span> <span class="n">df_tsne</span><span class="p">[</span><span class="n">df_tsne</span><span class="p">[</span><span class="s">'Cluster'</span><span class="p">].</span><span class="n">isin</span><span class="p">(</span><span class="n">idx_label_1</span><span class="p">)]</span> <span class="c1"># 라벨 1의 비율이 ratio 이상인 군집 추출 (상승 추세 군집)
+</span>    <span class="k">print</span><span class="p">(</span><span class="s">"데이터의 개수:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_tsne_1</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"종목의 종류:"</span><span class="p">,</span> <span class="n">df_tsne_1</span><span class="p">[</span><span class="s">'Code'</span><span class="p">].</span><span class="n">nunique</span><span class="p">(),</span> <span class="s">" | "</span><span class="p">,</span> <span class="s">"날짜의 종류: "</span><span class="p">,</span> <span class="n">df_tsne_1</span><span class="p">[</span><span class="s">'Date'</span><span class="p">].</span><span class="n">nunique</span><span class="p">())</span>
+    
+    <span class="c1">##### 상승 추세 군집 시각화 
+</span>    <span class="n">ax2</span><span class="p">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s">"label 1 &gt; </span><span class="si">{</span><span class="n">ratio</span><span class="si">}</span><span class="s">"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">scatter</span> <span class="o">=</span> <span class="n">ax2</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_tsne_1</span><span class="p">[</span><span class="s">'component1'</span><span class="p">],</span><span class="n">df_tsne_1</span><span class="p">[</span><span class="s">'component2'</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">df_tsne_1</span><span class="p">[</span><span class="s">'Cluster'</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'gist_rainbow'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="p">.</span><span class="n">legend</span><span class="p">(</span><span class="o">*</span><span class="n">scatter</span><span class="p">.</span><span class="n">legend_elements</span><span class="p">())</span>
+    <span class="n">ax2</span><span class="p">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="n">ylim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span> <span class="c1"># tsne 범위와 맞추기
+</span>    <span class="n">ax2</span><span class="p">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="n">xlim</span><span class="p">,</span> <span class="n">xlim</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">df_shap_year</span><span class="p">,</span> <span class="n">df_tsne_1</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>주 컬럼</strong> 생성 및 <strong>빈도수 상위 주</strong> 시각화 함수</li>
+</ul>
+
+<p><strong>[주 컬럼 생성 참고]</strong><br />
+-<a href="https://soooprmx.com/python-%EA%B7%B8-%EB%82%A0%EC%A7%9C%EA%B0%80-%EB%AA%87-%EC%A3%BC%EC%A7%B8%EC%9D%B8%EC%A7%80-%EA%B3%84%EC%82%B0%ED%95%98%EA%B8%B0/">(Python) 그 날짜가 몇 주째인지 계산하기</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">visualization_week</span><span class="p">(</span><span class="n">data_list</span><span class="p">,</span> <span class="n">week_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">day_num</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span> <span class="c1"># 빈도수 상위 주 시각화 
+</span>    <span class="c1">##### 주 컬럼 생성
+</span>    <span class="k">def</span> <span class="nf">get_week_no</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>  
+        <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+
+        <span class="n">firstday</span> <span class="o">=</span> <span class="n">target</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">firstday</span><span class="p">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="n">origin</span> <span class="o">=</span> <span class="n">firstday</span>
+        <span class="k">elif</span> <span class="n">firstday</span><span class="p">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">origin</span> <span class="o">=</span> <span class="n">firstday</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">firstday</span><span class="p">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">origin</span> <span class="o">=</span> <span class="n">firstday</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">6</span><span class="o">-</span><span class="n">firstday</span><span class="p">.</span><span class="n">weekday</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">target</span><span class="p">.</span><span class="n">month</span><span class="si">}</span><span class="s">월 </span><span class="si">{</span><span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">origin</span><span class="p">).</span><span class="n">days</span> <span class="o">//</span> <span class="mi">7</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s">주차'</span>
+
+    <span class="n">mpl</span><span class="p">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">'font.family'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'NanumSquare'</span>    
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">lst_year</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">2020</span><span class="p">,</span> <span class="mi">2021</span><span class="p">]</span>
+
+    <span class="c1">##### 연도 별 상위 빈도수 주, 날짜 시각화 
+</span>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_list</span><span class="p">):</span> <span class="c1"># 연도 별 데이터셋 
+</span>        <span class="n">data</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]).</span><span class="n">dt</span><span class="p">.</span><span class="n">date</span> <span class="c1"># datetime type 변경 
+</span>        <span class="n">data</span><span class="p">[</span><span class="s">'date_month_week'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'Date'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="n">get_week_no</span><span class="p">)</span> <span class="c1"># xx월 xx주차 컬럼 생성 
+</span>        <span class="n">df_week</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'date_month_week'</span><span class="p">].</span><span class="n">value_counts</span><span class="p">().</span><span class="n">head</span><span class="p">(</span><span class="n">week_num</span><span class="p">)).</span><span class="n">reset_index</span><span class="p">().</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s">'index'</span><span class="p">:</span><span class="s">'month-week'</span><span class="p">,</span> <span class="s">'date_month_week'</span><span class="p">:</span><span class="s">'count'</span><span class="p">})</span> <span class="c1"># 빈도수 상위 주차 5개 
+</span>        <span class="n">df_day</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'Date'</span><span class="p">].</span><span class="n">value_counts</span><span class="p">().</span><span class="n">head</span><span class="p">(</span><span class="n">day_num</span><span class="p">)).</span><span class="n">reset_index</span><span class="p">().</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s">'index'</span><span class="p">:</span><span class="s">'Date'</span><span class="p">,</span> <span class="s">'Date'</span><span class="p">:</span><span class="s">'count'</span><span class="p">})</span> <span class="c1"># 빈도수 상위 주차 5개 
+</span>        
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">].</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s">"&lt;</span><span class="si">{</span><span class="n">lst_year</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s">년 빈도수 상위 주&gt;"</span><span class="p">)</span>
+        <span class="n">sns</span><span class="p">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_week</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">'count'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'month-week'</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s">"Pastel1"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">height</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">].</span><span class="n">patches</span><span class="p">):</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">get_width</span><span class="p">()</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">].</span><span class="n">text</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">+</span><span class="mf">0.2</span><span class="p">,</span> <span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">get_width</span><span class="p">())</span><span class="si">}</span><span class="s">'</span><span class="p">,</span> <span class="n">ha</span> <span class="o">=</span> <span class="s">'center'</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">13</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">].</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s">"&lt;</span><span class="si">{</span><span class="n">lst_year</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s">년 빈도수 상위 날짜&gt;"</span><span class="p">)</span>
+        <span class="n">sns</span><span class="p">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_day</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">'count'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'Date'</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s">"Pastel1"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">height</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">].</span><span class="n">patches</span><span class="p">):</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">get_width</span><span class="p">()</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">].</span><span class="n">text</span><span class="p">(</span><span class="n">width</span> <span class="p">,</span> <span class="n">height</span><span class="o">+</span><span class="mf">0.2</span><span class="p">,</span> <span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">get_width</span><span class="p">())</span><span class="si">}</span><span class="s">'</span><span class="p">,</span> <span class="n">ha</span> <span class="o">=</span> <span class="s">'center'</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">13</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="p">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="1-중립구간---cci---20-20">1) 중립구간 - CCI : (-20, 20)</h3>
+
+<h4 id="i-2019">I. 2019</h4>
+
+<ul>
+  <li>덴드로그램</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">clusters_2019_1</span> <span class="o">=</span> <span class="n">hierarchical_clustering_plot</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'average'</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2019</span><span class="p">,</span> <span class="n">cci_type</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dendrogram</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_13_1.png" alt="png" /></p>
+
+<ul>
+  <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_shap_2019_1</span><span class="p">,</span> <span class="n">df_tsne_2019_1_1</span> <span class="o">=</span> <span class="n">fcluster_plot_and_filtering</span><span class="p">(</span><span class="n">clusters_2019_1</span><span class="p">,</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>군집의 개수: 53
+label 1 &gt; 0.22 군집 번호:  Int64Index([21, 23, 24, 26, 27, 36, 47, 49], dtype='int64', name='Cluster')
+데이터의 개수: 4313
+종목의 종류: 1024  |  날짜의 종류:  246
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_15_1.png" alt="png" /></p>
+
+<h4 id="ii-2020">II. 2020</h4>
+
+<ul>
+  <li>덴드로그램</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">clusters_2020_1</span> <span class="o">=</span> <span class="n">hierarchical_clustering_plot</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'average'</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span> <span class="n">cci_type</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dendrogram</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_18_1.png" alt="png" /></p>
+
+<ul>
+  <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_shap_2020_1</span><span class="p">,</span> <span class="n">df_tsne_2020_1_1</span> <span class="o">=</span> <span class="n">fcluster_plot_and_filtering</span><span class="p">(</span><span class="n">clusters_2020_1</span><span class="p">,</span> <span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="mf">0.29</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>군집의 개수: 53
+label 1 &gt; 0.29 군집 번호:  Int64Index([24, 26, 27, 30, 38, 40, 41, 42, 43], dtype='int64', name='Cluster')
+데이터의 개수: 4827
+종목의 종류: 1306  |  날짜의 종류:  247
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_20_1.png" alt="png" /></p>
+
+<h4 id="iii-2021">III. 2021</h4>
+
+<ul>
+  <li>덴드로그램</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">clusters_2021_1</span> <span class="o">=</span> <span class="n">hierarchical_clustering_plot</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'average'</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2021</span><span class="p">,</span> <span class="n">cci_type</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dendrogram</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_23_1.png" alt="png" /></p>
+
+<ul>
+  <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_shap_2021_1</span><span class="p">,</span> <span class="n">df_tsne_2021_1_1</span> <span class="o">=</span> <span class="n">fcluster_plot_and_filtering</span><span class="p">(</span><span class="n">clusters_2021_1</span><span class="p">,</span> <span class="mi">2021</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="mf">0.207</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>군집의 개수: 51
+label 1 &gt; 0.207 군집 번호:  Int64Index([3, 4, 13, 18, 21, 22, 24, 25], dtype='int64', name='Cluster')
+데이터의 개수: 4237
+종목의 종류: 1092  |  날짜의 종류:  237
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_25_1.png" alt="png" /></p>
+
+<h4 id="-중립구간-상승-추세-군집-해석">🌟 중립구간 상승 추세 군집 해석</h4>
+
+<p>1) 연도별 빈도수 상위 주 &amp; 날짜</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lst_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">df_tsne_2019_1_1</span><span class="p">,</span> <span class="n">df_tsne_2020_1_1</span><span class="p">,</span> <span class="n">df_tsne_2021_1_1</span><span class="p">]</span>
+<span class="n">visualization_week</span><span class="p">(</span><span class="n">data_list</span><span class="o">=</span><span class="n">lst_data</span><span class="p">,</span> <span class="n">week_num</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">day_num</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_28_0.png" alt="png" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">중립구간</code>에서 상승 추세 군집 데이터의 날짜 빈도수는 <strong>2019년도</strong>는 <strong>8월 3주차</strong>, <strong>2020년도</strong>는 <strong>4월 1주차</strong>, <strong>2021년도</strong>는 <strong>2월 1주차</strong>가 가장 높게 나왔다. 그 중에서도 가장 큰 날짜 빈도 차이를 보인 연도는 <strong>2020년</strong>이었다.</p>
+
+<p>2) 연도별 상위 날짜의 개별 종목 차트 확인</p>
+
+<ul>
+  <li>연도별 상위 날짜의 랜덤 종목코드 데이터프레임 생성</li>
+</ul>
+
+<p>상위 날짜들을 바꿔가며 실행하고, 랜덤으로 나오는 종목코드들의 개별 종목 차트를 확인한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#collapse-hide
+</span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="n">df_tsne_2019_1_1</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tsne_2019_1_1</span><span class="p">[</span><span class="s">'Date'</span><span class="p">].</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">df_tsne_2020_1_1</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tsne_2020_1_1</span><span class="p">[</span><span class="s">'Date'</span><span class="p">].</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">df_tsne_2021_1_1</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tsne_2021_1_1</span><span class="p">[</span><span class="s">'Date'</span><span class="p">].</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="n">df1</span> <span class="o">=</span> <span class="n">df_tsne_2019_1_1</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_tsne_2019_1_1</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'2019-08-20'</span><span class="p">,</span> <span class="p">[</span><span class="s">'Date'</span><span class="p">,</span> <span class="s">'Code'</span><span class="p">]].</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">df_tsne_2020_1_1</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_tsne_2020_1_1</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'2020-04-01'</span><span class="p">,</span> <span class="p">[</span><span class="s">'Date'</span><span class="p">,</span> <span class="s">'Code'</span><span class="p">]].</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df3</span> <span class="o">=</span> <span class="n">df_tsne_2021_1_1</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_tsne_2021_1_1</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'2021-02-01'</span><span class="p">,</span> <span class="p">[</span><span class="s">'Date'</span><span class="p">,</span> <span class="s">'Code'</span><span class="p">]].</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">df3</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Code</th>
+      <th>Date</th>
+      <th>Code</th>
+      <th>Date</th>
+      <th>Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2019-08-20</td>
+      <td>007540</td>
+      <td>2020-04-01</td>
+      <td>160980</td>
+      <td>2021-02-01</td>
+      <td>023800</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019-08-20</td>
+      <td>047400</td>
+      <td>2020-04-01</td>
+      <td>119850</td>
+      <td>2021-02-01</td>
+      <td>033240</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019-08-20</td>
+      <td>010820</td>
+      <td>2020-04-01</td>
+      <td>041190</td>
+      <td>2021-02-01</td>
+      <td>038110</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2019-08-20</td>
+      <td>020120</td>
+      <td>2020-04-01</td>
+      <td>024110</td>
+      <td>2021-02-01</td>
+      <td>039020</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019-08-20</td>
+      <td>081150</td>
+      <td>2020-04-01</td>
+      <td>002900</td>
+      <td>2021-02-01</td>
+      <td>001810</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<ul>
+  <li>차트 확인 예시</li>
+</ul>
+
+<p><strong>2019년 8월 20일</strong><br />
+<img src="/myblog/images/08.cluster_filtering_1.png" alt="image.png" title="종목코드: 082800" /></p>
+
+<p><strong>2020년 4월 1일</strong><br />
+<img src="/myblog/images/08.cluster_filtering_2.png" alt="image.png" title="종목코드: 089890" /></p>
+
+<p><strong>2021년 2월 1일</strong>  <br />
+<img src="/myblog/images/08.cluster_filtering_3.png" alt="image.png" title="종목코드: 033240" /></p>
+
+<p>여러개의 차트 확인을 해보았을 때, 가장 큰 날짜 편중을 보였던 <strong>2020년도</strong>는 <strong>차트의 패턴이 가장 일정</strong>하게 나타났으며, 2019,2021년도는 2020년도 만큼 일정한 패턴을 보이지는 않았다. 하지만 세 연도에서 공통적으로 나오는 패턴이 존재했다. 해당 패턴을 분석해보았을 때, 위의 세 사진과 같이, <code class="language-plaintext highlighter-rouge">하락 추세에서 상승 추세로 전환</code>되는 <code class="language-plaintext highlighter-rouge">V자</code> 형태였으며, 그 중에서도 <code class="language-plaintext highlighter-rouge">기준일(D0)[회색 선]이 오른쪽에 위치</code>한다는 공통점이 있었다.</p>
+
+<h3 id="2-과열구간과매수구간---cci--100---">2) 과열구간/과매수구간 - CCI : (100,  ∞ )</h3>
+
+<h4 id="i-2019-1">I. 2019</h4>
+
+<ul>
+  <li>덴드로그램</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">clusters_2019_2</span> <span class="o">=</span> <span class="n">hierarchical_clustering_plot</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'average'</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2019</span><span class="p">,</span> <span class="n">cci_type</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dendrogram</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_39_1.png" alt="png" /></p>
+
+<ul>
+  <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_shap_2019_2</span><span class="p">,</span> <span class="n">df_tsne_2019_1_2</span> <span class="o">=</span> <span class="n">fcluster_plot_and_filtering</span><span class="p">(</span><span class="n">clusters_2019_2</span><span class="p">,</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>군집의 개수: 48
+label 1 &gt; 0.25 군집 번호:  Int64Index([8, 16, 17, 21, 30], dtype='int64', name='Cluster')
+데이터의 개수: 5016
+종목의 종류: 1023  |  날짜의 종류:  246
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_41_1.png" alt="png" /></p>
+
+<h4 id="ii-2020-1">II. 2020</h4>
+
+<ul>
+  <li>덴드로그램</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">clusters_2020_2</span> <span class="o">=</span> <span class="n">hierarchical_clustering_plot</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'average'</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span> <span class="n">cci_type</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dendrogram</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_44_1.png" alt="png" /></p>
+
+<ul>
+  <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_shap_2020_2</span><span class="p">,</span> <span class="n">df_tsne_2020_1_2</span> <span class="o">=</span> <span class="n">fcluster_plot_and_filtering</span><span class="p">(</span><span class="n">clusters_2020_2</span><span class="p">,</span> <span class="mi">2020</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="mf">0.31</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="mi">65</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="mi">65</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>군집의 개수: 55
+label 1 &gt; 0.31 군집 번호:  Int64Index([1, 14, 16, 22, 36, 39], dtype='int64', name='Cluster')
+데이터의 개수: 5457
+종목의 종류: 1190  |  날짜의 종류:  247
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_46_1.png" alt="png" /></p>
+
+<h4 id="iii-2021-1">III. 2021</h4>
+
+<ul>
+  <li>덴드로그램</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">clusters_2021_2</span> <span class="o">=</span> <span class="n">hierarchical_clustering_plot</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'average'</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2021</span><span class="p">,</span> <span class="n">cci_type</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dendrogram</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_49_1.png" alt="png" /></p>
+
+<ul>
+  <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_shap_2021_2</span><span class="p">,</span> <span class="n">df_tsne_2021_1_2</span> <span class="o">=</span> <span class="n">fcluster_plot_and_filtering</span><span class="p">(</span><span class="n">clusters_2021_2</span><span class="p">,</span> <span class="mi">2021</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="mf">0.268</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>군집의 개수: 52
+label 1 &gt; 0.268 군집 번호:  Int64Index([5, 9, 14, 16, 31, 32, 43, 51], dtype='int64', name='Cluster')
+데이터의 개수: 5632
+종목의 종류: 1110  |  날짜의 종류:  237
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_51_1.png" alt="png" /></p>
+
+<h4 id="-과매수구간-상승-추세-군집-해석">🌟 과매수구간 상승 추세 군집 해석</h4>
+
+<p>1) 연도별 빈도수 상위 주 &amp; 날짜</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lst_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">df_tsne_2019_1_2</span><span class="p">,</span> <span class="n">df_tsne_2020_1_2</span><span class="p">,</span> <span class="n">df_tsne_2021_1_2</span><span class="p">]</span>
+<span class="n">visualization_week</span><span class="p">(</span><span class="n">data_list</span><span class="o">=</span><span class="n">lst_data</span><span class="p">,</span> <span class="n">week_num</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">day_num</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_54_0.png" alt="png" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">과매수구간</code>에서 빈도수가 높은 날짜는 <strong>2019년 1월 4주차</strong>, <strong>2020년 4월 3주차</strong>, <strong>2021년 1월 3주차</strong>임을 알 수 있다. 다른 CCI 구간에 비해 상위 빈도수의 크기 차이가 많지 않았다. 가장 높은 날짜 빈도 차이를 보이는 연도는 중립구간과 마찬가지로 <strong>2020년도</strong>였다.</p>
+
+<p>2) 연도별 상위 날짜의 개별 종목 차트 확인</p>
+
+<ul>
+  <li>연도별 상위 날짜의 랜덤 종목코드 데이터프레임 생성</li>
+</ul>
+
+<p>상위 날짜들을 바꿔가며 실행하고, 랜덤으로 나오는 종목코드들의 개별 종목 차트를 확인한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#collapse-hide
+</span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="n">df_tsne_2019_1_2</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tsne_2019_1_2</span><span class="p">[</span><span class="s">'Date'</span><span class="p">].</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">df_tsne_2020_1_2</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tsne_2020_1_2</span><span class="p">[</span><span class="s">'Date'</span><span class="p">].</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">df_tsne_2021_1_2</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tsne_2021_1_2</span><span class="p">[</span><span class="s">'Date'</span><span class="p">].</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="n">df1</span> <span class="o">=</span> <span class="n">df_tsne_2019_1_2</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_tsne_2019_1_2</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'2019-01-17'</span><span class="p">,</span> <span class="p">[</span><span class="s">'Date'</span><span class="p">,</span> <span class="s">'Code'</span><span class="p">]].</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">df_tsne_2020_1_2</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_tsne_2020_1_2</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'2020-04-17'</span><span class="p">,</span> <span class="p">[</span><span class="s">'Date'</span><span class="p">,</span> <span class="s">'Code'</span><span class="p">]].</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df3</span> <span class="o">=</span> <span class="n">df_tsne_2021_1_2</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_tsne_2021_1_2</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'2021-01-20'</span><span class="p">,</span> <span class="p">[</span><span class="s">'Date'</span><span class="p">,</span> <span class="s">'Code'</span><span class="p">]].</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">df3</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Code</th>
+      <th>Date</th>
+      <th>Code</th>
+      <th>Date</th>
+      <th>Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2019-01-17</td>
+      <td>042370</td>
+      <td>2020-04-17</td>
+      <td>008250</td>
+      <td>2021-01-20</td>
+      <td>095340</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019-01-17</td>
+      <td>187220</td>
+      <td>2020-04-17</td>
+      <td>017550</td>
+      <td>2021-01-20</td>
+      <td>025880</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019-01-17</td>
+      <td>024900</td>
+      <td>2020-04-17</td>
+      <td>035620</td>
+      <td>2021-01-20</td>
+      <td>011500</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2019-01-17</td>
+      <td>106240</td>
+      <td>2020-04-17</td>
+      <td>011370</td>
+      <td>2021-01-20</td>
+      <td>010690</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019-01-17</td>
+      <td>007390</td>
+      <td>2020-04-17</td>
+      <td>048430</td>
+      <td>2021-01-20</td>
+      <td>000270</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<ul>
+  <li>차트 확인 예시</li>
+</ul>
+
+<p><strong>2019년 1월 17일</strong><br />
+<img src="/myblog/images/08.cluster_filtering_4.png" alt="image.png" title="종목코드: 187220" /></p>
+
+<p><strong>2020년 4월 17일</strong><br />
+<img src="/myblog/images/08.cluster_filtering_5.png" alt="image.png" title="종목코드: 035620" /></p>
+
+<p><strong>2021년 1월 20일</strong><br />
+<img src="/myblog/images/08.cluster_filtering_6.png" alt="image.png" title="종목코드: 010690" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">과매수구간</code>은 20일 이동평균선의 위에 극단적으로 떨어져있는 데이터들이므로, 기준일(D0)[회색 선]이 상승추세에서의 중간 ~ 끝 무렵에 위치하였다. 다른 CCI 구간보다 패턴이 가장 불규칙적이었지만, <code class="language-plaintext highlighter-rouge">하락추세에서 상승추세로 전환되는 V자 형태에서 상승추세 끝무렵에 위치</code>하는 공통된 패턴을 <strong>일부 데이터</strong>에서 검출할 수 있었다.</p>
+
+<h3 id="3-침체구간과매도구간---cci------100">3) 침체구간/과매도구간 - CCI : (- ∞ ,-100)</h3>
+
+<h4 id="i-2019-2">I. 2019</h4>
+
+<ul>
+  <li>덴드로그램</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">clusters_2019_3</span> <span class="o">=</span> <span class="n">hierarchical_clustering_plot</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'average'</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2019</span><span class="p">,</span> <span class="n">cci_type</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">dendrogram</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_65_1.png" alt="png" /></p>
+
+<ul>
+  <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_shap_2019_3</span><span class="p">,</span> <span class="n">df_tsne_2019_1_3</span> <span class="o">=</span> <span class="n">fcluster_plot_and_filtering</span><span class="p">(</span><span class="n">clusters_2019_3</span><span class="p">,</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="mf">0.365</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>군집의 개수: 58
+label 1 &gt; 0.365 군집 번호:  Int64Index([1, 2, 25, 26, 50], dtype='int64', name='Cluster')
+데이터의 개수: 3959
+종목의 종류: 994  |  날짜의 종류:  222
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_67_1.png" alt="png" /></p>
+
+<h4 id="ii-2020-2">II. 2020</h4>
+
+<ul>
+  <li>덴드로그램</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">clusters_2020_3</span> <span class="o">=</span> <span class="n">hierarchical_clustering_plot</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'average'</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span> <span class="n">cci_type</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">dendrogram</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_70_1.png" alt="png" /></p>
+
+<ul>
+  <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_shap_2020_3</span><span class="p">,</span> <span class="n">df_tsne_2020_1_3</span> <span class="o">=</span> <span class="n">fcluster_plot_and_filtering</span><span class="p">(</span><span class="n">clusters_2020_3</span><span class="p">,</span> <span class="mi">2020</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>군집의 개수: 47
+label 1 &gt; 0.5 군집 번호:  Int64Index([2, 3, 15, 28, 37], dtype='int64', name='Cluster')
+데이터의 개수: 3874
+종목의 종류: 1356  |  날짜의 종류:  78
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/_72_1.png" alt="png" /></p>
+
+<h4 id="iii-2021-2">III. 2021</h4>
+
+<ul>
+  <li>덴드로그램</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">clusters_2021_3</span> <span class="o">=</span> <span class="n">hierarchical_clustering_plot</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'average'</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2021</span><span class="p">,</span> <span class="n">cci_type</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">dendrogram</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_75_1.png" alt="png" /></p>
+
+<ul>
+  <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_shap_2021_3</span><span class="p">,</span> <span class="n">df_tsne_2021_1_3</span> <span class="o">=</span> <span class="n">fcluster_plot_and_filtering</span><span class="p">(</span><span class="n">clusters_2021_3</span><span class="p">,</span> <span class="mi">2021</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="mf">0.35</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>군집의 개수: 53
+label 1 &gt; 0.35 군집 번호:  Int64Index([5, 7, 10, 15], dtype='int64', name='Cluster')
+데이터의 개수: 4174
+종목의 종류: 1163  |  날짜의 종류:  230
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_77_1.png" alt="png" /></p>
+
+<h4 id="-과매도구간-상승-추세-군집-해석">🌟 과매도구간 상승 추세 군집 해석</h4>
+
+<p>1) 연도별 빈도수 상위 주 &amp; 날짜</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lst_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">df_tsne_2019_1_3</span><span class="p">,</span> <span class="n">df_tsne_2020_1_3</span><span class="p">,</span> <span class="n">df_tsne_2021_1_3</span><span class="p">]</span>
+<span class="n">visualization_week</span><span class="p">(</span><span class="n">data_list</span><span class="o">=</span><span class="n">lst_data</span><span class="p">,</span> <span class="n">week_num</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">day_num</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/myblog/images/cluster_filtering/output_80_0.png" alt="png" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">과매도구간</code>의 빈도수 상위 날짜는 <strong>2019년 8월 1주차</strong>, <strong>2020년 3월 4주차</strong>, <strong>2021년 10월 1주차</strong>였다. CCI 구간 중 유일하게 모든 연도에서 높은 날짜 빈도 차이를 보였다.</p>
+
+<p>2) 연도별 상위 날짜의 개별 종목 차트 확인</p>
+
+<ul>
+  <li>연도별 상위 날짜의 랜덤 종목코드 데이터프레임 생성</li>
+</ul>
+
+<p>상위 날짜들을 바꿔가며 실행하고, 랜덤으로 나오는 종목코드들의 개별 종목 차트를 확인한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#collapse-hide
+</span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="n">df_tsne_2019_1_3</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tsne_2019_1_3</span><span class="p">[</span><span class="s">'Date'</span><span class="p">].</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">df_tsne_2020_1_3</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tsne_2020_1_3</span><span class="p">[</span><span class="s">'Date'</span><span class="p">].</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">df_tsne_2021_1_3</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tsne_2021_1_3</span><span class="p">[</span><span class="s">'Date'</span><span class="p">].</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="n">df1</span> <span class="o">=</span> <span class="n">df_tsne_2019_1_3</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_tsne_2019_1_3</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'2019-08-06'</span><span class="p">,</span> <span class="p">[</span><span class="s">'Date'</span><span class="p">,</span> <span class="s">'Code'</span><span class="p">]].</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">df_tsne_2020_1_3</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_tsne_2020_1_3</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'2020-03-19'</span><span class="p">,</span> <span class="p">[</span><span class="s">'Date'</span><span class="p">,</span> <span class="s">'Code'</span><span class="p">]].</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df3</span> <span class="o">=</span> <span class="n">df_tsne_2021_1_3</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_tsne_2021_1_3</span><span class="p">[</span><span class="s">'Date'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'2021-10-07'</span><span class="p">,</span> <span class="p">[</span><span class="s">'Date'</span><span class="p">,</span> <span class="s">'Code'</span><span class="p">]].</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">df3</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Code</th>
+      <th>Date</th>
+      <th>Code</th>
+      <th>Date</th>
+      <th>Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2019-08-06</td>
+      <td>033100</td>
+      <td>2020-03-19</td>
+      <td>126880</td>
+      <td>2021-10-07</td>
+      <td>028300</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019-08-06</td>
+      <td>060480</td>
+      <td>2020-03-19</td>
+      <td>000850</td>
+      <td>2021-10-07</td>
+      <td>088130</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019-08-06</td>
+      <td>014190</td>
+      <td>2020-03-19</td>
+      <td>170920</td>
+      <td>2021-10-07</td>
+      <td>042110</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2019-08-06</td>
+      <td>123860</td>
+      <td>2020-03-19</td>
+      <td>189860</td>
+      <td>2021-10-07</td>
+      <td>081000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019-08-06</td>
+      <td>067990</td>
+      <td>2020-03-19</td>
+      <td>079160</td>
+      <td>2021-10-07</td>
+      <td>002690</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<ul>
+  <li>차트 확인 예시</li>
+</ul>
+
+<p><strong>2019년 8월 6일</strong> <br />
+<img src="/myblog/images/08.cluster_filtering_7.png" alt="image.png" title="종목코드: 033100" /></p>
+
+<p><strong>2020년 3월 19일</strong> <br />
+<img src="/myblog/images/08.cluster_filtering_8.png" alt="image.png" title="종목코드: 126880" /></p>
+
+<p><strong>2021년 10월 17일</strong>  <br />
+<img src="/myblog/images/08.cluster_filtering_9.png" alt="image.png" title="종목코드: 088130" /></p>
+
+<p>위의 사진과 같이, 모든 연도에서 비슷한 패턴을 보였다. <code class="language-plaintext highlighter-rouge">하락추세에서 상승추세로 전환되는 V자 형태</code>의 공통된 패턴에서, <code class="language-plaintext highlighter-rouge">기준일(D0)[회색 선]이 꼭지점 근처에 위치</code>하였다.</p>
+
+<h2 id="️-2-정리">✔️ (2) 정리</h2>
+
+<p>지금까지 <code class="language-plaintext highlighter-rouge">분류 머신러닝 모델학습</code>, <code class="language-plaintext highlighter-rouge">SHAP 표준화</code>, <code class="language-plaintext highlighter-rouge">클러스터링 분석</code>의 과정을 거쳐 <code class="language-plaintext highlighter-rouge">10일 간의 주가 시계열 데이터로</code>부터 주가 <code class="language-plaintext highlighter-rouge">상승 추세 패턴</code>을 검출하였다.</p>
+
+<p>CCI 구간 별, 연도 별로 나누어 연구를 진행하였는데,</p>
+
+<p>1) <strong>CCI 구간</strong> 별 공통적으로 나타나는 패턴은 <strong>하락추세에서 상승추세로 전환되는 V자 상승반전형 패턴</strong>이었으며, 기준일(D0)의 위치가 CCI 구간에 따라 다르게 나타났다. 특히나 <code class="language-plaintext highlighter-rouge">과매도구간</code>에서의 패턴이 다른 구간에 비해 가장 정확하고 유사한 것을 확인할 수 있었다.</p>
+
+<p>2) 모든 CCI 구간을 통틀어 <strong>2019, 2020, 2021년도</strong> 중 높은 빈도로 나타나는 날짜의 편중이 가장 큰 연도는 <strong>2020년</strong>이었으며, 2020년도에서 패턴의 모양 또한 가장 유사하게 나타났다.</p>
+
+      <div class="c-article__footer u-clearfix">
+        <div class="c-article__tag">
+          
+        </div>
+        <div class="c-article__share">
+          <a href="https://twitter.com/intent/tweet?text=Stock%20Research%20%7C%7C%203.3.%20%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B6%84%EC%84%9D%EC%9D%84%20%ED%86%B5%ED%95%9C%20%EC%A3%BC%EA%B0%80%20%EC%83%81%EC%8A%B9%EC%B6%94%EC%84%B8%20%ED%8C%A8%ED%84%B4%20%EA%B2%80%EC%B6%9C&url=https://ag-su.github.io/2022/07/25/cluster-filtering/" title="Share
+          on Twitter" rel="nofollow" target="_blank"><div data-icon='ei-sc-twitter' data-size='s'></div></a>
+          <a href="https://facebook.com/sharer.php?u=https://ag-su.github.io/2022/07/25/cluster-filtering/" title="Share on Facebook" rel="nofollow" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a>
+          <a href="https://plus.google.com/share?url=https://ag-su.github.io/2022/07/25/cluster-filtering/" title="Share on Google+" rel="nofollow" target="_blank"><div data-icon='ei-sc-google-plus' data-size='s'></div></a>
+        </div>
+      </div>
+      <div class="c-newsletter">
+  <div class="c-newsletter__header">
+    <h4 class="c-newsletter__title">Newsletter</h4>
+    <div class="c-newsletter__subtitle">Subscribe to this blog and receive notifications of new posts by email.</div>
+  </div>
+  <form class="c-newsletter-form validate" action="#" method="POST" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+    <div class="c-newsletter-form__group">
+      <label class="u-screen-reader-text" for="mce-EMAIL">Email address</label>
+      <input class="c-newsletter__email required email" id="mce-EMAIL" type="email" name="EMAIL" placeholder="Your email address" autocomplete="on">
+      <input class="c-newsletter__button" id="mc-embedded-subscribe" type="submit" name="subscribe" value="Subscribe">
+    </div>
+  </form>
+</div> <!-- /.c-newsletter -->
+      <div class="c-recent-post">
+        <h4 class="c-recent__title">You might also enjoy</h4>
+        <div class="c-recent__box">
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /myblog/images/01.credit_thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/10/19/credit-card-fraud-detection/">Transcription || [Kaggle] Credit card Fraud Detection</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-10-19T00:00:00+09:00">October 19, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/22/tsne/" style="background-image: url( /myblog/images/07.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/22/tsne/">Stock Research || 3.2. t-SNE를 사용한 주가데이터 2차원 시각화</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-22T00:00:00+09:00">July 22, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/18/shap-value/" style="background-image: url( /myblog/images/06.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/18/shap-value/">Stock Research || 3.1. 설명가능 AI (XAI), SHAP value</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-18T00:00:00+09:00">July 18, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/15/filtering/" style="background-image: url( /myblog/images/05.filtering_1.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/15/filtering/">Stock Research || 2.3. CCI를 이용한 주가 데이터 필터링</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-15T00:00:00+09:00">July 15, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        </div>
+      </div> <!-- /.c-recent-post -->
+      
+        <div class="c-comments">
+  <div id="disqus_thread" class="article-comments"></div>
+  <script>
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.src = '//mr-brown.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+</div> <!-- /.c-comments -->
+      
+    </div> <!-- /.c-wrap-content -->
+  </div> <!-- /.c-article__content -->
+</article> <!-- /.c-article-page -->
+
+</main> <!-- /.c-content -->
+  </div> <!-- /.o-wrapper -->
+  <div class="c-top" data-icon='ei-chevron-up' data-size='s' title="Scroll To Top"></div> <!-- /.c-top -->
+  <script src="/myblog/js/jquery-3.3.1.min.js"></script>
+<script src="/myblog/js/evil-icons.min.js"></script>
+<script src="/myblog/js/jquery.fitvids.js"></script>
+<script src="/myblog/js/simple-jekyll-search.min.js"></script>
+<script src="/myblog/js/main.js"></script>
+<!-- /javascripts -->
+</body>
+</html>
