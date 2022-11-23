@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <title>Stock Research || 2.2. 주가 데이터 스케일링</title>
+  <meta name='description' content="2. Data Preprocessing2.2. 주가 데이터 스케일링현재 사용하고 있는 통합 종목 주가 데이터는 종목마다 가격이 다르다는 문제점이 존재하여 성능을 저하시기는 원인이 될 수 있다. 따라서 주가 데이터셋의 전처리 파트에서 스케일링은 매우 중요한 요소라고할 수 있다. mi...">
+  <link rel='canonical' href="https://ag-su.github.io/myblog/2022/07/11/scaling/">
+  <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+  <style>
+    
+    @font-face{font-family:'Cafe24Oneprettynight';src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff") format("woff");font-weight:normal;font-style:normal}/*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:0.67em 0}figcaption,figure,main{display:block}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace, monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace, monospace;font-size:1em}dfn{font-style:italic}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-0.25em}sup{top:-0.5em}audio,video{display:inline-block}audio:not([controls]){display:none;height:0}img{border-style:none}svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}button,html [type="button"],[type="reset"],[type="submit"]{-webkit-appearance:button}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner{border-style:none;padding:0}button:-moz-focusring,[type="button"]:-moz-focusring,[type="reset"]:-moz-focusring,[type="submit"]:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:0.35em 0.75em 0.625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{display:inline-block;vertical-align:baseline}textarea{overflow:auto}[type="checkbox"],[type="radio"]{box-sizing:border-box;padding:0}[type="number"]::-webkit-inner-spin-button,[type="number"]::-webkit-outer-spin-button{height:auto}[type="search"]{-webkit-appearance:textfield;outline-offset:-2px}[type="search"]::-webkit-search-cancel-button,[type="search"]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details,menu{display:block}summary{display:list-item}canvas{display:inline-block}template{display:none}[hidden]{display:none}body,h1,h2,h3,h4,h5,h6,p,blockquote,pre,dl,dd,ol,ul,fieldset,legend,figure,hr{margin:0;padding:0}li>ul,li>ol{margin-bottom:0}table{border-collapse:collapse;border-spacing:0}@-webkit-keyframes spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.icon{position:relative;display:inline-block;width:25px;height:25px;overflow:hidden;fill:currentColor}.icon__cnt{width:100%;height:100%;background:inherit;fill:inherit;pointer-events:none;transform:translateX(0);-ms-transform:translate(0.5px, -0.3px)}.icon--m{width:50px;height:50px}.icon--l{width:100px;height:100px}.icon--xl{width:150px;height:150px}.icon--xxl{width:200px;height:200px}.icon__spinner{position:absolute;top:0;left:0;width:100%;height:100%}.icon--ei-spinner .icon__spinner,.icon--ei-spinner-2 .icon__spinner{-webkit-animation:spin 1s steps(12) infinite;animation:spin 1s steps(12) infinite}.icon--ei-spinner-3 .icon__spinner{-webkit-animation:spin 1.5s linear infinite;animation:spin 1.5s linear infinite}.icon--ei-sc-facebook{fill:#3b5998}.icon--ei-sc-github{fill:#333}.icon--ei-sc-google-plus{fill:#dd4b39}.icon--ei-sc-instagram{fill:#3f729b}.icon--ei-sc-linkedin{fill:#0976b4}.icon--ei-sc-odnoklassniki{fill:#ed812b}.icon--ei-sc-skype{fill:#00aff0}.icon--ei-sc-soundcloud{fill:#f80}.icon--ei-sc-tumblr{fill:#35465c}.icon--ei-sc-twitter{fill:#55acee}.icon--ei-sc-vimeo{fill:#1ab7ea}.icon--ei-sc-vk{fill:#45668e}.icon--ei-sc-youtube{fill:#e52d27}.icon--ei-sc-pinterest{fill:#bd081c}.icon--ei-sc-telegram{fill:#0088cc}*,*::after,*::before{box-sizing:border-box}h1,h2,h3,h4,h5,h6,ul,ol,dl,blockquote,p,address,hr,table,fieldset,figure,pre{margin-bottom:15px}ul,ol,dd{margin-left:15px}@font-face{font-family:'D2 coding';src:url("http://cdn.jsdelivr.net/gh/joungkyun/font-d2coding/d2coding.css") format("text/css");font-weight:normal;font-style:normal}.highlight{background:#f0f0f082;font-family:'D2 coding'}.highlighter-rouge .highlight{background:#f0f0f082}.highlight .c{color:#998;font-style:italic}.highlight .err{color:#a61717;background-color:#e3d2d2}.highlight .k{color:#29843b;font-weight:bold}.highlight .o{color:#c917ed;font-weight:bold}.highlight .cm{color:#998;font-style:italic}.highlight .cp{color:#999;font-weight:bold}.highlight .c1{color:#416373;font-style:italic}.highlight .cs{color:#999;font-weight:bold;font-style:italic}.highlight .gd{color:#000;background-color:#fdd}.highlight .gd .x{color:#000;background-color:#faa}.highlight .ge{font-style:italic}.highlight .gr{color:#a00}.highlight .gh{color:#999}.highlight .gi{color:#000;background-color:#dfd}.highlight .gi .x{color:#000;background-color:#afa}.highlight .go{color:#888}.highlight .gp{color:#555}.highlight .gs{font-weight:bold}.highlight .gu{color:#aaa}.highlight .gt{color:#a00}.highlight .kn{color:#29843b;font-weight:bold}.highlight .kc{font-weight:bold}.highlight .kd{font-weight:bold}.highlight .kp{font-weight:bold}.highlight .kr{font-weight:bold}.highlight .kt{color:#458;font-weight:bold}.highlight .m{color:#099}.highlight .s{color:#bc0202}.highlight .n{color:#000}.highlight .na{color:#008080}.highlight .nb{color:#29843b;font-weight:bold}.highlight .nc{color:#458;font-weight:bold}.highlight .no{color:#008080}.highlight .ni{color:#800080}.highlight .ne{color:#900;font-weight:bold}.highlight .nf{color:#150dff;font-weight:500}.highlight .nn{color:#555}.highlight .nt{color:#000080}.highlight .nv{color:#008080}.highlight .ow{font-weight:bold;color:#7590b7}.highlight .w{color:#bbb}.highlight .mf{color:#099}.highlight .mh{color:#099}.highlight .mi{color:#29843b;font-weight:bold}.highlight .mo{color:#099}.highlight .sb{color:#d14}.highlight .sc{color:#d14}.highlight .sd{color:#d14}.highlight .s2{color:#d14}.highlight .se{color:#d14}.highlight .sh{color:#d14}.highlight .si{color:#bc0202}.highlight .sx{color:#d14}.highlight .sr{color:#009926}.highlight .s1{color:#d14}.highlight .ss{color:#990073}.highlight .bp{color:#999}.highlight .vc{color:#008080}.highlight .vg{color:#008080}.highlight .vi{color:#008080}.highlight .il{color:#099}.highlight .p{color:#000}body{font-family:"Cafe24Oneprettynight";font-size:19px;line-height:28px;color:#404040;background-color:#fbfbfb;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}*::selection{color:#fff;background-color:#d86e89}h1,h2,h3,h4,h5,h6{font-family:"Cafe24Oneprettynight";font-weight:400;line-height:initial}h1{font-size:32px}h2{font-size:28px}h3{font-size:24px}h4{font-size:20px}h5{font-size:18px}h6{font-size:16px}img{max-width:100%;height:auto;vertical-align:middle}a{text-decoration:none;color:#3af;transition:.35s}a:hover{color:#0086e6}blockquote{padding-left:15px;border-left:3px solid #3af;font-family:'Volkhov', 'Times New Roman', Times, serif;font-style:normal;font-size:18px;background-color:rgba(220,235,245,0.2)}blockquote p{padding:10px}hr{height:1px;margin:30px 0;border:0;background-color:#f0f0f0}pre{overflow:auto;padding:25px;font-size:14px;white-space:pre-wrap;word-wrap:break-word;word-break:break-all;font-family:Courier, monospace}code{color:#928b8b;overflow:auto;white-space:pre-wrap;word-wrap:break-word;word-break:break-all;font-family:Courier, monospace;font-size:14px}p code,li code{padding:3px 5px}.o-wrapper{max-width:1440px;position:relative}.o-opacity{animation-duration:0.7s;animation-delay:0.2s;animation-fill-mode:both;animation-name:opacity}@keyframes opacity{from{opacity:0}to{opacity:1}}.c-btn{display:inline-block;white-space:nowrap;vertical-align:middle;font-family:'Volkhov', serif;font-size:12px;text-align:center;padding:8px 15px;cursor:pointer;transition:.35s}.c-btn--primary{color:#fff;background-color:#3af;background:linear-gradient(135deg, #3af 0%, #62d5ff 100%)}.c-btn--secondary{color:#fff;background-color:#cfcfdd;background:linear-gradient(135deg, #f1577d 0%, #cfcfdd 100%)}.c-btn--round{border-radius:30px}.c-btn--shadow{box-shadow:8px 10px 20px 0 rgba(46,61,73,0.15)}.c-btn--shadow:hover{box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2)}.c-btn--middle{display:block;width:300px;max-width:100%}.c-btn--big{display:block;width:100%}.c-btn:hover{color:#fff;transition:.35s}.c-btn:active{transform:translateY(2px)}.c-sidebar{display:flex;flex-direction:column;justify-content:space-between;position:fixed;top:0;left:0;bottom:0;width:360px;padding:40px 20px 20px;text-align:center;box-shadow:1px 1px 0 rgba(31,35,46,0.15);background-color:#fff}.c-sidebar-author .c-author__cover{width:100px;height:100px;margin:0 auto 10px;border-radius:50%;overflow:hidden;background-color:#cfcfdd}.c-sidebar-author .c-author__cover img{width:100%;height:100%;border-radius:50%;transition:.35s}.c-sidebar-author .c-author__cover img:hover{transform:scale3d(0.9, 0.9, 1)}.c-sidebar-author .c-contact-menu .c-btn{min-width:110px}.c-sidebar-author .c-contact-menu .c-btn .icon{width:18px;height:18px;vertical-align:text-bottom;fill:#fff}.c-sidebar-author .c-author__info{font-family:'Volkhov', serif}.c-sidebar-author .c-author__name{font-size:18px;font-weight:700;line-height:21px}.c-sidebar-author .c-author__job{font-size:12px;color:#a0a0a0;margin:5px 0 0}.c-sidebar-author .c-contact-menu{margin:30px 0}.c-sidebar-author .c-contact-menu .c-btn--secondary{margin-right:10px}.c-sidebar-author .c-author__about{max-width:400px;margin:0 auto 15px;font-size:13px}.c-sidebar-footer .c-social__title{position:relative;font-family:'Volkhov', serif;font-size:15px;font-weight:700;color:#444}.c-sidebar-footer .c-social__title::before{content:"";display:block;height:2px;width:calc(50% - 40px);transform:translateY(-50%);position:absolute;top:50%;left:0;background-color:#444}.c-sidebar-footer .c-social__title::after{content:"";display:block;height:2px;width:calc(50% - 40px);transform:translateY(-50%);position:absolute;top:50%;right:0;background-color:#444}.c-sidebar-footer .c-social__list{list-style-type:none;padding:0;margin:15px 0}.c-sidebar-footer .c-social__list .c-social__item{display:inline-block;width:27px;height:27px}.c-sidebar-footer .c-social__list .icon{width:27px;height:27px;fill:#444;vertical-align:middle;transition:.35s}.c-sidebar-footer .c-social__list .icon:hover{fill:#3af;transform:scale(1.2);transition:.35s}.c-sidebar-footer .c-copyright p{font-size:13px;margin:0}@media only screen and (max-width: 900px){.c-sidebar{position:relative;width:100%;padding:20px}.c-sidebar .c-contact-menu{margin:20px 0}.c-sidebar-footer .c-social .c-social__title{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px;word-wrap:normal !important}.c-sidebar-footer .c-social__list{margin:0}.c-sidebar-footer .c-copyright{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px;word-wrap:normal !important}}@media only screen and (max-width: 480px){.c-sidebar-author .c-author__cover{width:80px;height:80px}.c-sidebar-author .c-author__cover img{width:100%;height:100%}.c-sidebar-author .c-contact-menu{margin:15px 0}.c-sidebar-author .c-contact-menu .c-btn{min-width:80px;font-size:10px;padding:4px 15px;margin-right:5px}.c-sidebar-author .c-contact-menu .c-btn .icon{width:16px;height:16px}.c-sidebar-footer .c-social .c-social__title{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px;word-wrap:normal !important}.c-sidebar-footer .c-social__list{margin:0}.c-sidebar-footer .c-social__list .icon{width:25px;height:25px}.c-sidebar-footer .c-copyright{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px;word-wrap:normal !important}}.c-content{position:relative;display:flex;flex-direction:row;flex-wrap:wrap;align-items:stretch;padding:0 20px 0;margin-left:360px}@media only screen and (max-width: 900px){.c-content{position:static;padding:0 15px 0;margin-left:0}}.c-posts{width:100%;display:flex;flex-direction:row;flex-wrap:wrap}.c-post{width:100%;max-width:100%;margin-bottom:20px;display:flex;flex-direction:row;align-items:stretch;min-height:180px;border-radius:10px;overflow:hidden;transition:.35s;background-color:#fff;box-shadow:0 1px 1px 0 rgba(31,35,46,0.15)}.c-post:hover{transform:translate(0px, -2px);box-shadow:0 15px 45px -10px rgba(10,16,34,0.2)}.c-post .c-post-thumbnail{display:block;width:30%;max-width:100%;min-height:180px;border-radius:10px 0 0 10px;background-color:rgba(220,235,245,0.2);background-size:cover;background-position:50% 50%}.c-post .c-post-content{padding:15px;width:70%}.c-post .c-post-content .c-post-title{font-size:30px;font-weight:400;margin:0 0 15px}.c-post .c-post-content .c-post-title a{text-decoration:none;color:#263959}.c-post .c-post-content .c-post-date,.c-post .c-post-content .c-post-words{font-size:12px}.c-load-more{padding:20px;margin:20px auto 40px;font-size:13px;color:#fff;border:none;background-color:#d0a9ae;outline:none}.c-load-more:hover{background-color:#0086e6}@media only screen and (max-width: 1200px){.c-post{width:48%;max-width:100%;margin:0 1% 20px;flex-direction:column}.c-post .c-post-thumbnail{width:100%;border-radius:10px 10px 0 0}.c-post .c-post-content{width:100%}.c-post .c-post-content .c-post-title{font-size:21px;margin:15px 0}}@media only screen and (max-width: 480px){.c-post{width:100%;max-width:100%;margin:0 0 20px}.c-post .c-post-content{width:100%}.c-post .c-post-content .c-post-title{font-size:21px;margin:15px 0}}.c-article{width:100%;margin:20px 0}.c-wrap-content{padding:20px;background-color:#fff}.c-article__image{position:relative;background-color:rgba(220,235,245,0.2);background-position:center;background-size:cover;background-repeat:no-repeat}.c-article__image:after{content:"";display:block;padding-top:56%}.c-article__header{margin-bottom:20px;text-align:center}.c-article__header .c-article__title{margin-bottom:10px}.c-article__date span{font-size:13px;text-transform:uppercase;color:#a0a0a0}.c-article__footer{margin:30px 0 0;padding-bottom:30px;text-align:center;border-bottom:1px solid #f0f0f0}.c-article__footer .c-article__share{transition:.35s}.c-article__footer .c-article__share a .icon{vertical-align:middle;transition:.35s}.c-article__footer .c-article__share a .icon:hover{opacity:.7;transition:.35s}.c-article__footer .c-article__tag{margin-bottom:5px}.c-article__footer .c-article__tag a{display:inline-block;vertical-align:middle;padding:5px 10px;font-family:'Volkhov', 'Times New Roman', Times, serif;font-size:10px;line-height:10px;text-transform:uppercase;background-color:rgba(115,138,160,0.6);color:#fff}.c-article__footer .c-article__tag a:hover{background-color:rgba(80,100,118,0.6)}.c-article__footer .c-article__tag a:last-child{margin-right:0}.c-recent-post{padding:30px 0}.c-recent-post .c-recent__title{font-size:14px;text-align:center;text-transform:uppercase;margin-bottom:30px}.c-recent-post .c-recent__box{display:flex;flex-direction:row;flex-wrap:wrap}.c-recent-post .c-recent__item{max-width:23%;flex-basis:23%;margin:0 1% 20px;border-radius:10px;overflow:hidden;text-align:center;background-color:#fff;box-shadow:0 1px 1px 0 rgba(31,35,46,0.15);transition:.35s}.c-recent-post .c-recent__item h4{margin-bottom:5px;font-size:12px;text-transform:uppercase}.c-recent-post .c-recent__item h4 a{color:#444}.c-recent-post .c-recent__item:hover{box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2)}.c-recent-post .c-recent__footer{padding:15px}.c-recent-post .c-recent__image{display:block;width:100%;min-height:180px;background-color:rgba(220,235,245,0.2);background-size:cover;background-position:center;background-repeat:no-repeat}.c-recent-post .c-recent__date{color:#a0a0a0;font-size:12px}@media only screen and (max-width: 1200px){.c-recent-post .c-recent__item{max-width:48%;flex-basis:48%}}@media only screen and (max-width: 900px){.c-article{margin:15px 0}}@media only screen and (max-width: 480px){.c-wrap-content{padding:15px}.c-article__header{margin-bottom:5px}.c-article__header .c-article__title{font-size:24px;margin-bottom:5px}.c-recent-post .c-recent__item{max-width:100%;flex-basis:100%;margin:0 0 20px}}.c-blog-tags{width:100%;padding:20px;margin:20px 0 40px;background-color:#fff}.c-blog-tags h1{text-align:center;margin-bottom:0}.c-blog-tags h2{font-size:18px;text-transform:uppercase;margin:30px 0;color:#757575}.c-tag__list{list-style:none;padding:0 0 40px;margin:40px 0 0;border-bottom:1px solid #f0f0f0}.c-tag__list li{display:inline-block;margin-right:15px}.c-tag__list li a{color:#404040;text-transform:uppercase;font-size:12px}.c-tag__list li a:hover{color:#000}.c-tag__item{margin-bottom:15px}.c-tag__image{width:50px;height:50px;border-radius:50%;margin-right:5px}@media only screen and (max-width: 480px){.c-blog-tags{padding:15px}.c-blog-tags h1{font-size:27px}.c-blog-tags h2{font-size:16px;margin:15px 0}.c-tag__list{padding:0 0 30px;margin:30px 0 0}.c-tag__item{margin-bottom:5px}.c-tag__image{display:none}}.c-header{position:relative;width:100%;margin:20px 0}.c-header__box{position:relative;display:flex;flex-direction:row;justify-content:space-between;align-items:center}.c-header__box .icon--ei-search{position:absolute;top:7px;left:15px;fill:#ccc}.c-search{width:80%}.c-search .c-search__box{display:flex;align-items:center}.c-search .c-search__text{position:relative;width:100%;padding:10px 10px 10px 40px;border:1px solid #dce4ea;border-radius:30px;outline:none;color:#a0a0a0}.c-search .c-search__text::placeholder{color:#ccc}.c-search .c-search__text:hover{box-shadow:0 1px 0px rgba(132,135,138,0.1);transition:.35s}.c-search .c-search-results-list{position:absolute;width:100%;margin:10px 0 0;list-style-type:none;background-color:#fff;z-index:1}.c-search .c-search-results-list li{display:flex;flex-wrap:wrap;align-items:center;margin:0;padding:20px 25px 0;background-color:#fff;line-height:1.4;border-left:solid 1px #edeeee;border-right:solid 1px #edeeee}.c-search .c-search-results-list li:first-child{border-top-left-radius:5px;border-top-right-radius:5px;border-top:solid 1px #edeeee}.c-search .c-search-results-list li:last-child{border-bottom-left-radius:5px;border-bottom-right-radius:5px;padding-bottom:25px;border-bottom:solid 1px #edeeee}.c-search .c-search-results-list li a{font-size:16px}.c-nav{flex-grow:1;padding-left:20px}.c-nav .c-nav__list{display:flex;justify-content:flex-end}.c-nav .c-nav__list .c-nav__item{display:flex;align-items:center;float:left;padding:4px 10px;font-size:10px;text-transform:uppercase;white-space:nowrap;border:1px solid #dce4ea;box-shadow:0 1px 0px rgba(132,135,138,0.4);will-change:transform;transform:translateY(0px);cursor:pointer}.c-nav .c-nav__list .c-nav__item:hover{color:#222;background-color:#fff}.c-nav .c-nav__list .c-nav__item.is-active{box-shadow:0 0 0 rgba(132,135,138,0.5);transform:translateY(1px);color:#cfcfdd}.c-nav .c-nav__list .c-nav__item.is-active:hover{background-color:#fbfbfb}.c-nav .c-nav__list .c-nav__item:first-child{border-radius:10px 0 0 10px}.c-nav .c-nav__list .c-nav__item:last-child{border-radius:0 10px 10px 0}.c-nav .c-nav__list .c-nav__item .icon{width:18px;height:18px;margin-right:3px}@media only screen and (max-width: 900px){.c-header{margin:15px 0}}@media only screen and (max-width: 480px){.c-header .c-header__box{flex-direction:column}.c-header .c-search{width:100%}.c-header .c-search .c-search__text{padding:8px 8px 8px 40px}.c-header .c-nav{margin-top:15px}.c-header .c-nav .c-nav__list{justify-content:center}.c-header .c-nav .c-nav__item{padding:4px 8px}}.c-categories{width:100%}.c-categories__list{width:100%;display:flex;flex-direction:row;flex-wrap:wrap}.c-categories__item{max-width:25%;flex-basis:25%;padding:0 10px 20px}.c-categories__link{height:100%;display:flex;flex-direction:column;align-items:center;padding:20px 10px;border-radius:5px;box-shadow:5px 5px 25px rgba(46,61,73,0.15);background-color:#fff;transition:.35s}.c-categories__link:hover{box-shadow:2px 4px 8px 0px rgba(46,61,73,0.2)}.c-categories__link:hover .c-categories__img .c-categories__more{opacity:1;transition:.35s}.c-categories__link .c-categories__container{width:100%;word-wrap:break-word}.c-categories__link .c-categories__container.c-empty-figure{display:flex;flex-direction:column;justify-content:center;flex-grow:1}.c-categories__img{position:relative;max-width:100%}.c-categories__img figure{position:relative;width:200px;max-width:100%;margin-bottom:20px;overflow:hidden;background-size:cover;background-repeat:no-repeat;background-position:center;border-radius:50%;box-shadow:inset 0 1px 3px rgba(141,165,185,0.3)}.c-categories__img figure:after{content:"";display:block;padding-top:100%}.c-categories__img figure:before{content:"";position:absolute;top:0;bottom:0;left:0;right:0;background-color:rgba(0,0,0,0.15)}.c-categories__img .c-categories__more{display:inline-block;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);font-weight:700;color:#fff;text-transform:uppercase;text-shadow:0 1px 0 rgba(104,172,191,0.3);opacity:0;transition:.35s}.c-categories__container{text-align:center}.c-categories__container .c-categories__header{font-size:13px;margin-bottom:10px;font-weight:normal;text-transform:uppercase;color:#404040}.c-categories__container .c-categories__count{font-family:'Volkhov', serif;font-size:12px;color:#404040;margin-bottom:0}.c-categories__container .c-categories__count span{display:inline-block;width:20px;height:20px;line-height:20px;vertical-align:baseline;margin-right:5px;border-radius:50%;color:#fff;background-color:#ee6c6c}@media only screen and (max-width: 1200px){.c-categories .c-categories__item{max-width:33.333%;flex-basis:33.333%}}@media only screen and (max-width: 1050px){.c-categories .c-categories__item{max-width:50%;flex-basis:50%}}@media only screen and (max-width: 480px){.c-categories .c-categories__item{max-width:100%;flex-basis:100%;padding:0 0 20px}}.c-form-box{position:absolute;top:0;width:calc(100% - 40px);min-height:100vh;padding:0 20px;background-color:#fff;z-index:1}.c-form-bnt__close{position:absolute;top:0px;left:0;width:30px;height:30px;cursor:pointer;transition:.35s}.c-form-bnt__close:hover{transform:scale(0.8);opacity:.8}.c-form{position:relative;width:750px;max-width:100%;margin:40px auto}.c-form .c-form__title{margin:0 0 40px;min-width:0;border:0;padding:0;font-family:"Cafe24Oneprettynight";text-transform:uppercase;text-align:center}.c-form a{color:#404040}.c-form__group{margin-bottom:20px}.c-form__group label{display:block;text-transform:uppercase;font-size:10px}.c-form__group input,.c-form__group textarea{width:100%;padding:10px 15px;color:#404040;border:1px solid #dce4ea;outline:none;transition:.35s}.c-form__group input:focus,.c-form__group textarea:focus{box-shadow:0 4px 25px rgba(132,135,138,0.1)}.c-form__group button{padding:20px;text-transform:uppercase;outline:none;border:none}.c-thank-you p{position:relative;padding:20px 40px;width:750px;max-width:100%;text-transform:uppercase;font-size:12px;line-height:18px;font-weight:700;margin:40px auto 0;text-align:center;color:#fff;background:linear-gradient(135deg, #55b5ad 0%, #5ec9c5 100%)}.c-thank-you p .c-form-bnt__close{width:25px;height:25px;background:transparent}.c-thank-you p a{color:#fff}@media only screen and (max-width: 900px){.c-form-box{width:100%;left:0;right:0}}@media only screen and (max-width: 480px){.c-form-bnt__close{width:25px;height:25px}}.c-newsletter{padding:30px 0 60px;margin:0 auto;border-bottom:1px solid #f0f0f0}.c-newsletter__header{text-align:center}.c-newsletter__header .c-newsletter__title{font-size:14px;text-transform:uppercase;text-align:center}.c-newsletter__header .c-newsletter__subtitle{margin-bottom:15px}.c-newsletter-form{width:100%;max-width:750px;margin:0 auto}.c-newsletter-form .c-newsletter-form__group{display:flex}.c-newsletter__email{width:70%;height:40px;padding:10px 15px;border:1px solid #ddd;border-right-color:transparent;outline:none;transition:.35s}.c-newsletter__email:focus{box-shadow:0 4px 25px rgba(132,135,138,0.1)}.c-newsletter__button{width:30%;height:40px;color:#fff;background-color:#3af;transition:.35s;border:none;outline:none;cursor:pointer}.c-newsletter__button:hover{background-color:#0086e6}@media only screen and (max-width: 480px){.c-newsletter__button{font-size:13px}}.c-comments{padding:30px 0;border-top:1px solid #f0f0f0}.c-top{position:fixed;width:40px;height:40px;bottom:20px;color:#757575;cursor:pointer;transition:.35s;right:-100px;z-index:10;opacity:.5}.c-top--active{right:15px}.c-top:hover{color:#757575;opacity:1}.u-text-left{text-align:left}.u-text-right{text-align:right}.u-text-center{text-align:center}.u-text-justify{text-align:justify}.u-block{display:block}.u-inline-block{display:inline-block}.u-inline{display:inline}.u-full-width{display:block;width:100%}.u-vertical-center{display:flex;align-items:center;justify-content:center}.u-responsive-image{max-width:100%;height:auto;vertical-align:middle}.u-show{display:block !important}.u-hide{display:none !important}.u-invisible{visibility:hidden}.u-float-left{float:left}.u-float-right{float:right}.u-no-padding-top{padding-top:0}.u-no-padding-bottom{padding-bottom:0}.u-no-padding-left{padding-left:0}.u-no-padding-right{padding-right:0}.u-no-padding{padding:0}.u-no-margin-top{margin-top:0}.u-no-margin-bottom{margin-bottom:0}.u-no-margin-left{margin-left:0}.u-no-margin-right{margin-right:0}.u-no-margin{margin:0}.u-lists-reset{list-style-type:none;margin:0;padding:0}.u-clearfix::before,.u-clearfix::after{content:"";display:table;clear:both}.u-screen-reader-text{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px;word-wrap:normal !important}
+
+  </style>
+</head>
+
+<body>
+  
+  <div class="o-wrapper">
+    <aside class="c-sidebar">
+  <div class="c-sidebar-author">
+    <div class="c-author__cover">
+      <a href="/myblog/">
+        <img src="/myblog/images/jjang.png" alt="agsu">
+      </a>
+    </div>
+    <div class="c-author__info">
+      <div class="c-author__name">agsu</div>
+      <span class="c-author__job">Department of Data Science</span>
+    </div>
+    <div class="c-contact-menu">
+      
+      <a href="/contact" class="c-contact-btn c-btn c-btn--secondary c-btn--round c-btn--shadow"><span data-icon='ei-envelope' data-size='s'></span> Send me</a>
+      
+      
+      
+    </div>
+    <p class="c-author__about">블로그</p>
+  </div>
+
+  <div class="c-sidebar-footer">
+    <div class="c-social">
+      <div class="c-social__title">Social</div>
+      <ul class="c-social__list u-lists-reset">
+        
+        
+        
+        
+        
+          <li class="c-social__item"><a href="https://github.com/artemsheludko" target="_blank"><div data-icon='ei-sc-github' data-size='s'></div></a></li>
+        
+        
+        
+        
+          <li class="c-social__item"><a href="https://instagram.com/artemsheludko_" target="_blank"><div data-icon='ei-sc-instagram' data-size='s'></div></a></li>
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+    <div class="c-copyright">
+      <p>2022 &copy; agsu</p>
+    </div>
+  </div>
+</aside> <!-- /.c-sidebar -->
+
+<main class="c-content">
+  <article class="c-article">
+  <div class="c-article__content">
+    <header class="c-header u-hide u-no-margin-top">
+      <div class="c-header__box">
+        <div class="c-search u-full-width">
+          <div class="c-search__box">
+            <label for="js-search-input" class="u-screen-reader-text">Search for Blog</label>
+            <input type="text" id="js-search-input" class="c-search__text" autocomplete="off" placeholder="Type to search...">
+            <div data-icon='ei-search' data-size='s'></div>
+          </div>
+          <ul id="js-results-container" class="c-search-results-list"></ul>
+        </div>
+      </div>
+    </header>
+    
+    <div class="c-article__image o-opacity" style="background-image: url( /myblog/images/04.thumbnail.png )"></div>
+    
+    <div class="c-wrap-content">
+      <header class="c-article__header">
+        <h1 class="c-article__title">Stock Research || 2.2. 주가 데이터 스케일링</h1>
+        <div class="c-article__date">
+          <span>2022, Jul 11</span>
+        </div>
+      </header>
+      <h1 id="2-data-preprocessing">2. Data Preprocessing</h1>
+<h2 id="22-주가-데이터-스케일링">2.2. 주가 데이터 스케일링</h2>
+<p>현재 사용하고 있는 통합 종목 주가 데이터는 종목마다 가격이 다르다는 문제점이 존재하여 성능을 저하시기는 원인이 될 수 있다. 따라서 주가 데이터셋의 전처리 파트에서 스케일링은 매우 중요한 요소라고할 수 있다. <code class="language-plaintext highlighter-rouge">min-max scaling</code>을 여러 방법으로 시도하고, 전 날 종가로 나누는 <code class="language-plaintext highlighter-rouge">div-close</code> 방법을 사용하여 총 4가지 스케일링 성능을 비교해본다.</p>
+
+<h3 id="목차">목차</h3>
+<ul>
+  <li>(1) 스케일러 비교</li>
+  <li>(2) 스케일러 선택</li>
+</ul>
+
+<h3 id="필요-라이브러리-import">필요 라이브러리 import</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">FinanceDataReader</span> <span class="k">as</span> <span class="n">fdr</span>
+<span class="kn">import</span> <span class="nn">pymysql</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="p">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s">'ignore'</span><span class="p">)</span>
+    
+<span class="kn">import</span> <span class="nn">ta</span>
+
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interact_manual</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="n">go</span>
+<span class="kn">import</span> <span class="nn">plotly.offline</span> <span class="k">as</span> <span class="n">pyo</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="n">pylab</span> <span class="n">inline</span>
+<span class="n">pylab</span><span class="p">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">'figure.figsize'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+
+
+<span class="c1"># 자주쓰는 함수들은 모듈화 함 
+</span><span class="kn">import</span> <span class="nn">StockFunc</span> <span class="k">as</span> <span class="n">sf</span> 
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Populating the interactive namespace from numpy and matplotlib
+</code></pre></div></div>
+
+<h2 id="️-1-스케일러-비교">✔️ (1) 스케일러 비교</h2>
+
+<h3 id="1-min-max-scaler-전체-컬럼--전체-데이터">1) min-max scaler (전체 컬럼 + 전체 데이터)</h3>
+<p>모든 컬럼을 <strong>독립적</strong>으로 종목 별 <strong>전체데이터</strong>에 대해 <code class="language-plaintext highlighter-rouge">min-max scaling</code> 한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">make_dataset_minmax</span><span class="p">(</span><span class="n">trading</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+    <span class="c1"># 종목코드 불러오기 
+</span>    <span class="n">IF</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/code_list.txt'</span><span class="p">)</span>
+    <span class="n">lst_code</span> <span class="o">=</span> <span class="n">IF</span><span class="p">.</span><span class="n">readlines</span><span class="p">()</span>
+
+    <span class="n">lst_X</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lst_Y</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lst_code_date</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="n">db_dsml</span> <span class="o">=</span> <span class="n">pymysql</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span> <span class="o">=</span> <span class="s">'localhost'</span><span class="p">,</span> 
+        <span class="n">port</span> <span class="o">=</span> <span class="mi">3306</span><span class="p">,</span> 
+        <span class="n">user</span> <span class="o">=</span> <span class="s">'[db username]'</span><span class="p">,</span> 
+        <span class="n">passwd</span> <span class="o">=</span> <span class="s">'[db password]'</span><span class="p">,</span> 
+        <span class="n">db</span> <span class="o">=</span> <span class="s">'[db name]'</span><span class="p">,</span> 
+        <span class="n">charset</span> <span class="o">=</span> <span class="s">'utf8'</span>
+    <span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">db_dsml</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
+    
+    
+    <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">lst_code</span><span class="p">):</span> 
+        <span class="n">code</span> <span class="o">=</span> <span class="n">code</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span>
+        
+        <span class="n">sql_query</span> <span class="o">=</span> <span class="s">'''
+                    SELECT *
+                    FROM stock_{0}
+                    WHERE Date BETWEEN '2017-01-01' AND '2021-12-31'
+                    '''</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+
+        
+        <span class="n">stock</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">sql</span> <span class="o">=</span> <span class="n">sql_query</span><span class="p">,</span> <span class="n">con</span> <span class="o">=</span> <span class="n">db_dsml</span><span class="p">)</span> 
+        <span class="n">stock</span><span class="p">[</span><span class="s">'trading_value'</span><span class="p">]</span> <span class="o">=</span> <span class="n">stock</span><span class="p">[</span><span class="s">'Close'</span><span class="p">]</span> <span class="o">*</span> <span class="n">stock</span><span class="p">[</span><span class="s">'Volume'</span><span class="p">]</span>
+        
+        <span class="n">lst_stock</span> <span class="o">=</span> <span class="n">stock</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        
+        <span class="c1"># 🌟 scaling 
+</span>        <span class="n">df_temp</span> <span class="o">=</span> <span class="n">stock</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Date'</span><span class="p">,</span> <span class="s">'Change'</span><span class="p">,</span> <span class="s">'Next Change'</span><span class="p">])</span>
+        <span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+        <span class="n">scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_temp</span><span class="p">)</span>
+        
+        <span class="n">lst_stock_scaled</span> <span class="o">=</span> <span class="n">scaled</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span>
+         
+        
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lst_stock</span><span class="p">):</span> 
+            <span class="n">date</span><span class="p">,</span> <span class="n">trading_value</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">date</span><span class="p">().</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%Y-%m-%d"</span><span class="p">),</span> <span class="n">row</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">trading_value</span> <span class="o">&gt;=</span> <span class="n">trading</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst_stock</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># 예외 처리 
+</span>                    <span class="k">continue</span> 
+                
+                <span class="c1"># D-9 ~ D0 데이터만 담기 
+</span>                <span class="n">sub_stock</span> <span class="o">=</span> <span class="n">lst_stock_scaled</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">9</span><span class="p">:</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> 
+
+                <span class="c1"># 10일간의 데이터 
+</span>                <span class="n">lst_result</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">row2</span> <span class="ow">in</span> <span class="n">sub_stock</span><span class="p">:</span>
+                    <span class="n">lst_result</span> <span class="o">+=</span> <span class="n">row2</span>
+
+                <span class="c1"># D+1 종가 2% 상승 여부 
+</span>                <span class="n">label</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.02</span><span class="p">)</span>
+                
+                <span class="c1"># 종속변수, 독립변수, 종목코드, 날짜 리스트에 추가 
+</span>                <span class="n">lst_X</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst_result</span><span class="p">)</span>
+                <span class="n">lst_Y</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+                <span class="n">lst_code_date</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">code</span><span class="p">,</span> <span class="n">date</span><span class="p">])</span>
+            
+    <span class="k">return</span> <span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lst_code_date</span><span class="p">),</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lst_X</span><span class="p">),</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lst_Y</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_dataset</span> <span class="o">=</span> <span class="n">make_dataset_minmax</span><span class="p">(</span><span class="n">trading</span><span class="o">=</span><span class="mi">1000000000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100%|██████████████████████████████████████████| 1561/1561 [03:37&lt;00:00,  7.18it/s]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">trainX_1</span><span class="p">,</span> <span class="n">trainY_1</span><span class="p">,</span> <span class="n">testX_1</span><span class="p">,</span> <span class="n">testY_1</span><span class="p">,</span> <span class="n">lst_code_date</span><span class="p">,</span> <span class="n">lst_code_date_test</span> <span class="o">=</span> <span class="n">sf</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="n">df_dataset</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'train dataset: '</span><span class="p">,</span> <span class="n">trainX_1</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">trainY_1</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'test dataset: '</span><span class="p">,</span> <span class="n">testX_1</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">testY_1</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>train dataset:  (659095, 550) (659095,)
+test dataset:  (239818, 550) (239818,)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
+<span class="n">xgb_1</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span>
+                   <span class="n">n_jobs</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+                   <span class="n">scale_pos_weight</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                   <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+                   <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                   <span class="n">n_estimators</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                   <span class="p">)</span> 
+
+<span class="n">xgb_1</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trainX_1</span><span class="p">,</span> <span class="n">trainY_1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[15:05:37] WARNING: ../src/learner.cc:1115: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective 'binary:logistic' was changed from 'error' to 'logloss'. Explicitly set eval_metric if you'd like to restore the old behavior.
+
+
+
+
+
+XGBClassifier(base_score=0.5, booster='gbtree', colsample_bylevel=1,
+              colsample_bynode=1, colsample_bytree=1, enable_categorical=False,
+              gamma=0, gpu_id=-1, importance_type=None,
+              interaction_constraints='', learning_rate=0.01, max_delta_step=0,
+              max_depth=3, min_child_weight=1, missing=nan,
+              monotone_constraints='()', n_estimators=500, n_jobs=40,
+              num_parallel_tree=1, predictor='auto', random_state=0,
+              reg_alpha=0, reg_lambda=1, scale_pos_weight=4, subsample=1,
+              tree_method='exact', validate_parameters=1, verbosity=None)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sf</span><span class="p">.</span><span class="n">plot_evauate</span><span class="p">(</span><span class="n">trainX_1</span><span class="p">,</span> <span class="n">trainY_1</span><span class="p">,</span> <span class="n">testX_1</span><span class="p">,</span> <span class="n">testY_1</span><span class="p">,</span> <span class="n">xgb_1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="output_9_0.png" alt="png" /></p>
+
+<p><img src="output_9_1.png" alt="png" /></p>
+
+<h3 id="2-min-max-scaler-전체-컬럼---window-size">2) min-max scaler (전체 컬럼 +  window size)</h3>
+<p>모든 컬럼을 <strong>독립적</strong>으로 종목 별 <strong>10일치</strong>에 대해 <code class="language-plaintext highlighter-rouge">min-max scaling</code> 한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">make_dataset_minmax_window</span><span class="p">(</span><span class="n">trading</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+    <span class="c1"># 종목코드 불러오기 
+</span>    <span class="n">IF</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/code_list.txt'</span><span class="p">)</span>
+    <span class="n">lst_code</span> <span class="o">=</span> <span class="n">IF</span><span class="p">.</span><span class="n">readlines</span><span class="p">()</span>
+
+    <span class="n">lst_X</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lst_Y</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lst_code_date</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="n">db_dsml</span> <span class="o">=</span> <span class="n">pymysql</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span> <span class="o">=</span> <span class="s">'localhost'</span><span class="p">,</span> 
+        <span class="n">port</span> <span class="o">=</span> <span class="mi">3306</span><span class="p">,</span> 
+        <span class="n">user</span> <span class="o">=</span> <span class="s">'[db username]'</span><span class="p">,</span> 
+        <span class="n">passwd</span> <span class="o">=</span> <span class="s">'[db password]'</span><span class="p">,</span> 
+        <span class="n">db</span> <span class="o">=</span> <span class="s">'[db name]'</span><span class="p">,</span> 
+        <span class="n">charset</span> <span class="o">=</span> <span class="s">'utf8'</span>
+    <span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">db_dsml</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
+    
+    
+    <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">lst_code</span><span class="p">):</span> 
+        <span class="n">code</span> <span class="o">=</span> <span class="n">code</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span>
+        
+        <span class="n">sql_query</span> <span class="o">=</span> <span class="s">'''
+                    SELECT *
+                    FROM stock_{0}
+                    WHERE Date BETWEEN '2017-01-01' AND '2021-12-31'
+                    '''</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+
+        
+        <span class="n">stock</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">sql</span> <span class="o">=</span> <span class="n">sql_query</span><span class="p">,</span> <span class="n">con</span> <span class="o">=</span> <span class="n">db_dsml</span><span class="p">)</span> 
+        <span class="n">stock</span><span class="p">[</span><span class="s">'trading_value'</span><span class="p">]</span> <span class="o">=</span> <span class="n">stock</span><span class="p">[</span><span class="s">'Close'</span><span class="p">]</span> <span class="o">*</span> <span class="n">stock</span><span class="p">[</span><span class="s">'Volume'</span><span class="p">]</span>
+        
+        <span class="n">lst_stock</span> <span class="o">=</span> <span class="n">stock</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lst_stock</span><span class="p">):</span> 
+            <span class="n">date</span><span class="p">,</span> <span class="n">trading_value</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">date</span><span class="p">().</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%Y-%m-%d"</span><span class="p">),</span> <span class="n">row</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">trading_value</span> <span class="o">&gt;=</span> <span class="n">trading</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst_stock</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># 예외 처리 
+</span>                    <span class="k">continue</span> 
+                
+                <span class="c1"># D-9 ~ D0 데이터만 담기 
+</span>                <span class="n">arr_sub_stock</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">lst_stock</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">9</span><span class="p">:</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+
+                <span class="c1"># 🌟 scaling 
+</span>                <span class="n">arr_temp</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">arr_sub_stock</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">],</span> <span class="n">arr_sub_stock</span><span class="p">[:,</span> <span class="mi">8</span><span class="p">:]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+                <span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+                <span class="n">scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr_temp</span><span class="p">))</span>
+
+                <span class="n">lst_sub_stock_scaled</span> <span class="o">=</span> <span class="n">scaled</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span>
+                
+                <span class="c1"># 10일간의 데이터 
+</span>                <span class="n">lst_result</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">row2</span> <span class="ow">in</span> <span class="n">lst_sub_stock_scaled</span><span class="p">:</span>
+                    <span class="n">lst_result</span> <span class="o">+=</span> <span class="n">row2</span>
+
+                <span class="c1"># D+1 종가 2% 상승 여부 
+</span>                <span class="n">label</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.02</span><span class="p">)</span>
+                
+                <span class="c1"># 종속변수, 독립변수, 종목코드, 날짜 리스트에 추가 
+</span>                <span class="n">lst_X</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst_result</span><span class="p">)</span>
+                <span class="n">lst_Y</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+                <span class="n">lst_code_date</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">code</span><span class="p">,</span> <span class="n">date</span><span class="p">])</span>
+            
+    <span class="k">return</span> <span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lst_code_date</span><span class="p">),</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lst_X</span><span class="p">),</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lst_Y</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_dataset</span> <span class="o">=</span> <span class="n">make_dataset_minmax_window</span><span class="p">(</span><span class="n">trading</span><span class="o">=</span><span class="mi">1000000000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100%|██████████████████████████████████████████| 1561/1561 [05:53&lt;00:00,  4.41it/s]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">trainX_2</span><span class="p">,</span> <span class="n">trainY_2</span><span class="p">,</span> <span class="n">testX_2</span><span class="p">,</span> <span class="n">testY_2</span><span class="p">,</span> <span class="n">lst_code_date</span><span class="p">,</span> <span class="n">lst_code_date_test</span> <span class="o">=</span> <span class="n">sf</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="n">df_dataset</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'train dataset: '</span><span class="p">,</span> <span class="n">trainX_2</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">trainY_2</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'test dataset: '</span><span class="p">,</span> <span class="n">testX_2</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">testY_2</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>train dataset:  (659095, 550) (659095,)
+test dataset:  (239818, 550) (239818,)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
+<span class="n">xgb_2</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span>
+                   <span class="n">n_jobs</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+                   <span class="n">scale_pos_weight</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                   <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+                   <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                   <span class="n">n_estimators</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                   <span class="p">)</span> 
+
+<span class="n">xgb_2</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trainX_2</span><span class="p">,</span> <span class="n">trainY_2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[16:05:07] WARNING: ../src/learner.cc:1115: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective 'binary:logistic' was changed from 'error' to 'logloss'. Explicitly set eval_metric if you'd like to restore the old behavior.
+
+
+
+
+
+XGBClassifier(base_score=0.5, booster='gbtree', colsample_bylevel=1,
+              colsample_bynode=1, colsample_bytree=1, enable_categorical=False,
+              gamma=0, gpu_id=-1, importance_type=None,
+              interaction_constraints='', learning_rate=0.01, max_delta_step=0,
+              max_depth=3, min_child_weight=1, missing=nan,
+              monotone_constraints='()', n_estimators=500, n_jobs=40,
+              num_parallel_tree=1, predictor='auto', random_state=0,
+              reg_alpha=0, reg_lambda=1, scale_pos_weight=4, subsample=1,
+              tree_method='exact', validate_parameters=1, verbosity=None)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sf</span><span class="p">.</span><span class="n">plot_evauate</span><span class="p">(</span><span class="n">trainX_2</span><span class="p">,</span> <span class="n">trainY_2</span><span class="p">,</span> <span class="n">testX_2</span><span class="p">,</span> <span class="n">testY_2</span><span class="p">,</span> <span class="n">xgb_2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="output_15_0.png" alt="png" /></p>
+
+<p><img src="output_15_1.png" alt="png" /></p>
+
+<h3 id="3-min-max-scaler-가격-관련-컬럼--전체-데이터">3) min-max scaler (가격 관련 컬럼 + 전체 데이터)</h3>
+<ul>
+  <li><strong>가격 관련 컬럼:</strong> 캔들차트의 최솟값, 최댓값으로 min-max scaling</li>
+  <li><strong>나머지 컬럼:</strong> scaling 하지 않음</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">make_dataset_minmax_price</span><span class="p">(</span><span class="n">trading</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+    
+    <span class="n">col_price</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Open'</span><span class="p">,</span> <span class="s">'High'</span><span class="p">,</span> <span class="s">'Low'</span><span class="p">,</span> <span class="s">'Close'</span><span class="p">,</span> <span class="s">'MA5'</span><span class="p">,</span> <span class="s">'MA20'</span><span class="p">,</span> <span class="s">'MA60'</span><span class="p">,</span> <span class="s">'MA120'</span><span class="p">,</span> 
+               <span class="s">'VMAP'</span><span class="p">,</span> <span class="s">'BHB'</span><span class="p">,</span> <span class="s">'BLB'</span><span class="p">,</span> <span class="s">'KCH'</span><span class="p">,</span> <span class="s">'KCL'</span><span class="p">,</span> <span class="s">'KCM'</span><span class="p">,</span> <span class="s">'DCH'</span><span class="p">,</span> <span class="s">'DCL'</span><span class="p">,</span> <span class="s">'DCM'</span><span class="p">,</span>
+               <span class="s">'SMA'</span><span class="p">,</span> <span class="s">'EMA'</span><span class="p">,</span> <span class="s">'WMA'</span><span class="p">,</span> <span class="s">'Ichimoku'</span><span class="p">,</span> <span class="s">'Parabolic SAR'</span><span class="p">,</span> <span class="s">'KAMA'</span><span class="p">,</span><span class="s">'MACD'</span><span class="p">]</span>   
+
+    <span class="n">col_etc</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Volume'</span><span class="p">,</span> <span class="s">'MFI'</span><span class="p">,</span> <span class="s">'ADI'</span><span class="p">,</span> <span class="s">'OBV'</span><span class="p">,</span>
+           <span class="s">'CMF'</span><span class="p">,</span> <span class="s">'FI'</span><span class="p">,</span> <span class="s">'EOM, EMV'</span><span class="p">,</span> <span class="s">'VPT'</span><span class="p">,</span> <span class="s">'NVI'</span><span class="p">,</span> <span class="s">'ATR'</span><span class="p">,</span> <span class="s">'UI'</span><span class="p">,</span>
+           <span class="s">'ADX'</span><span class="p">,</span> <span class="s">'-VI'</span><span class="p">,</span> <span class="s">'+VI'</span><span class="p">,</span> <span class="s">'TRIX'</span><span class="p">,</span> <span class="s">'MI'</span><span class="p">,</span> <span class="s">'CCI'</span><span class="p">,</span> <span class="s">'DPO'</span><span class="p">,</span> <span class="s">'KST'</span><span class="p">,</span>
+           <span class="s">'STC'</span><span class="p">,</span> <span class="s">'RSI'</span><span class="p">,</span> <span class="s">'SRSI'</span><span class="p">,</span> <span class="s">'TSI'</span><span class="p">,</span> <span class="s">'UO'</span><span class="p">,</span> <span class="s">'SR'</span><span class="p">,</span>
+           <span class="s">'WR'</span><span class="p">,</span> <span class="s">'AO'</span><span class="p">,</span> <span class="s">'ROC'</span><span class="p">,</span> <span class="s">'PPO'</span><span class="p">,</span> <span class="s">'PVO'</span><span class="p">,</span> <span class="s">'trading_value'</span><span class="p">]</span>
+    
+    <span class="c1"># 종목코드 불러오기 
+</span>    <span class="n">IF</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/code_list.txt'</span><span class="p">)</span>
+    <span class="n">lst_code</span> <span class="o">=</span> <span class="n">IF</span><span class="p">.</span><span class="n">readlines</span><span class="p">()</span>
+
+    <span class="n">lst_X</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lst_Y</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lst_code_date</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="n">db_dsml</span> <span class="o">=</span> <span class="n">pymysql</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span> <span class="o">=</span> <span class="s">'localhost'</span><span class="p">,</span> 
+        <span class="n">port</span> <span class="o">=</span> <span class="mi">3306</span><span class="p">,</span> 
+        <span class="n">user</span> <span class="o">=</span> <span class="s">'[db username]'</span><span class="p">,</span> 
+        <span class="n">passwd</span> <span class="o">=</span> <span class="s">'[db password]'</span><span class="p">,</span> 
+        <span class="n">db</span> <span class="o">=</span> <span class="s">'[db name]'</span><span class="p">,</span> 
+        <span class="n">charset</span> <span class="o">=</span> <span class="s">'utf8'</span>
+    <span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">db_dsml</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
+    
+    
+    <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">lst_code</span><span class="p">):</span> 
+        <span class="n">code</span> <span class="o">=</span> <span class="n">code</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span>
+        
+        <span class="n">sql_query</span> <span class="o">=</span> <span class="s">'''
+                    SELECT *
+                    FROM stock_{0}
+                    WHERE Date BETWEEN '2017-01-01' AND '2021-12-31'
+                    '''</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+
+        
+        <span class="n">stock</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">sql</span> <span class="o">=</span> <span class="n">sql_query</span><span class="p">,</span> <span class="n">con</span> <span class="o">=</span> <span class="n">db_dsml</span><span class="p">)</span> 
+        <span class="n">stock</span><span class="p">[</span><span class="s">'trading_value'</span><span class="p">]</span> <span class="o">=</span> <span class="n">stock</span><span class="p">[</span><span class="s">'Close'</span><span class="p">]</span> <span class="o">*</span> <span class="n">stock</span><span class="p">[</span><span class="s">'Volume'</span><span class="p">]</span>
+        
+        <span class="n">lst_stock</span> <span class="o">=</span> <span class="n">stock</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        
+        <span class="c1"># 🌟 scaling
+</span>        <span class="c1"># 1) 가격 관련 컬럼 
+</span>        <span class="n">df_price</span> <span class="o">=</span> <span class="n">stock</span><span class="p">[</span><span class="n">col_price</span><span class="p">]</span>
+        <span class="n">minimum</span> <span class="o">=</span> <span class="n">df_price</span><span class="p">[</span><span class="s">'Low'</span><span class="p">].</span><span class="nb">min</span><span class="p">()</span>
+        <span class="n">maximum</span> <span class="o">=</span> <span class="n">df_price</span><span class="p">[</span><span class="s">'High'</span><span class="p">].</span><span class="nb">max</span><span class="p">()</span>
+        <span class="n">df_price_scaled</span> <span class="o">=</span> <span class="n">df_price</span><span class="p">.</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">minimum</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">maximum</span><span class="o">-</span><span class="n">minimum</span><span class="p">))</span>
+        
+        <span class="c1"># 2) 나머지 컬럼 
+</span>        <span class="n">df_etc</span> <span class="o">=</span> <span class="n">stock</span><span class="p">[</span><span class="n">col_etc</span><span class="p">]</span>
+        
+        <span class="n">df_scaled</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_price_scaled</span><span class="p">,</span> <span class="n">df_etc_scaled</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="n">lst_stock_scaled</span> <span class="o">=</span> <span class="n">df_scaled</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span>
+         
+            
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lst_stock</span><span class="p">):</span> 
+            <span class="n">date</span><span class="p">,</span> <span class="n">trading_value</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">date</span><span class="p">().</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%Y-%m-%d"</span><span class="p">),</span> <span class="n">row</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">trading_value</span> <span class="o">&gt;=</span> <span class="n">trading</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst_stock</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># 예외 처리 
+</span>                    <span class="k">continue</span> 
+                
+                <span class="c1"># D-9 ~ D0 데이터만 담기 
+</span>                <span class="n">sub_stock</span> <span class="o">=</span> <span class="n">lst_stock_scaled</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">9</span><span class="p">:</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> 
+
+                <span class="c1"># 10일간의 데이터 
+</span>                <span class="n">lst_result</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">row2</span> <span class="ow">in</span> <span class="n">sub_stock</span><span class="p">:</span>
+                    <span class="n">lst_result</span> <span class="o">+=</span> <span class="n">row2</span>
+
+                <span class="c1"># D+1 종가 2% 상승 여부 
+</span>                <span class="n">label</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.02</span><span class="p">)</span>
+                
+                <span class="c1"># 종속변수, 독립변수, 종목코드, 날짜 리스트에 추가 
+</span>                <span class="n">lst_X</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst_result</span><span class="p">)</span>
+                <span class="n">lst_Y</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+                <span class="n">lst_code_date</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">code</span><span class="p">,</span> <span class="n">date</span><span class="p">])</span>
+            
+    <span class="k">return</span> <span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lst_code_date</span><span class="p">),</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lst_X</span><span class="p">),</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lst_Y</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_dataset</span> <span class="o">=</span> <span class="n">make_dataset_minmax_price</span><span class="p">(</span><span class="n">trading</span><span class="o">=</span><span class="mi">1000000000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100%|██████████████████████████████████████████| 1561/1561 [03:53&lt;00:00,  6.68it/s]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">trainX_3</span><span class="p">,</span> <span class="n">trainY_3</span><span class="p">,</span> <span class="n">testX_3</span><span class="p">,</span> <span class="n">testY_3</span><span class="p">,</span> <span class="n">lst_code_date</span><span class="p">,</span> <span class="n">lst_code_date_test</span> <span class="o">=</span> <span class="n">sf</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="n">df_dataset</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'train dataset: '</span><span class="p">,</span> <span class="n">trainX_3</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">trainY_3</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'test dataset: '</span><span class="p">,</span> <span class="n">testX_3</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">testY_3</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>train dataset:  (659095, 550) (659095,)
+test dataset:  (239818, 550) (239818,)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
+<span class="n">xgb_3</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span>
+                   <span class="n">n_jobs</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+                   <span class="n">scale_pos_weight</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                   <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+                   <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                   <span class="n">n_estimators</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                   <span class="p">)</span> 
+
+<span class="n">xgb_3</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trainX_3</span><span class="p">,</span> <span class="n">trainY_3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[16:15:14] WARNING: ../src/learner.cc:1115: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective 'binary:logistic' was changed from 'error' to 'logloss'. Explicitly set eval_metric if you'd like to restore the old behavior.
+
+
+
+
+
+XGBClassifier(base_score=0.5, booster='gbtree', colsample_bylevel=1,
+              colsample_bynode=1, colsample_bytree=1, enable_categorical=False,
+              gamma=0, gpu_id=-1, importance_type=None,
+              interaction_constraints='', learning_rate=0.01, max_delta_step=0,
+              max_depth=3, min_child_weight=1, missing=nan,
+              monotone_constraints='()', n_estimators=500, n_jobs=40,
+              num_parallel_tree=1, predictor='auto', random_state=0,
+              reg_alpha=0, reg_lambda=1, scale_pos_weight=4, subsample=1,
+              tree_method='exact', validate_parameters=1, verbosity=None)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sf</span><span class="p">.</span><span class="n">plot_evauate</span><span class="p">(</span><span class="n">trainX_3</span><span class="p">,</span> <span class="n">trainY_3</span><span class="p">,</span> <span class="n">testX_3</span><span class="p">,</span> <span class="n">testY_3</span><span class="p">,</span> <span class="n">xgb_3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="output_21_0.png" alt="png" /></p>
+
+<p><img src="output_21_1.png" alt="png" /></p>
+
+<h3 id="4-div-previous_close-가격-관련-컬럼--전체-데이터">4) div-previous_close (가격 관련 컬럼 + 전체 데이터)</h3>
+<ul>
+  <li><strong>가격 관련 컬럼:</strong> 전날 종가로 나누어 스케일링</li>
+  <li><strong>나머지 컬럼:</strong> 스케일링 하지 않는다.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">make_dataset_div_previous_close</span><span class="p">(</span><span class="n">trading</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+    
+    <span class="n">col_price</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Open'</span><span class="p">,</span> <span class="s">'High'</span><span class="p">,</span> <span class="s">'Low'</span><span class="p">,</span> <span class="s">'Close'</span><span class="p">,</span> <span class="s">'MA5'</span><span class="p">,</span> <span class="s">'MA20'</span><span class="p">,</span> <span class="s">'MA60'</span><span class="p">,</span> <span class="s">'MA120'</span><span class="p">,</span> 
+               <span class="s">'VMAP'</span><span class="p">,</span> <span class="s">'BHB'</span><span class="p">,</span> <span class="s">'BLB'</span><span class="p">,</span> <span class="s">'KCH'</span><span class="p">,</span> <span class="s">'KCL'</span><span class="p">,</span> <span class="s">'KCM'</span><span class="p">,</span> <span class="s">'DCH'</span><span class="p">,</span> <span class="s">'DCL'</span><span class="p">,</span> <span class="s">'DCM'</span><span class="p">,</span>
+               <span class="s">'SMA'</span><span class="p">,</span> <span class="s">'EMA'</span><span class="p">,</span> <span class="s">'WMA'</span><span class="p">,</span> <span class="s">'Ichimoku'</span><span class="p">,</span> <span class="s">'Parabolic SAR'</span><span class="p">,</span> <span class="s">'KAMA'</span><span class="p">,</span><span class="s">'MACD'</span><span class="p">]</span>   
+
+    <span class="n">col_etc</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Volume'</span><span class="p">,</span> <span class="s">'MFI'</span><span class="p">,</span> <span class="s">'ADI'</span><span class="p">,</span> <span class="s">'OBV'</span><span class="p">,</span>
+           <span class="s">'CMF'</span><span class="p">,</span> <span class="s">'FI'</span><span class="p">,</span> <span class="s">'EOM, EMV'</span><span class="p">,</span> <span class="s">'VPT'</span><span class="p">,</span> <span class="s">'NVI'</span><span class="p">,</span> <span class="s">'ATR'</span><span class="p">,</span> <span class="s">'UI'</span><span class="p">,</span>
+           <span class="s">'ADX'</span><span class="p">,</span> <span class="s">'-VI'</span><span class="p">,</span> <span class="s">'+VI'</span><span class="p">,</span> <span class="s">'TRIX'</span><span class="p">,</span> <span class="s">'MI'</span><span class="p">,</span> <span class="s">'CCI'</span><span class="p">,</span> <span class="s">'DPO'</span><span class="p">,</span> <span class="s">'KST'</span><span class="p">,</span>
+           <span class="s">'STC'</span><span class="p">,</span> <span class="s">'RSI'</span><span class="p">,</span> <span class="s">'SRSI'</span><span class="p">,</span> <span class="s">'TSI'</span><span class="p">,</span> <span class="s">'UO'</span><span class="p">,</span> <span class="s">'SR'</span><span class="p">,</span>
+           <span class="s">'WR'</span><span class="p">,</span> <span class="s">'AO'</span><span class="p">,</span> <span class="s">'ROC'</span><span class="p">,</span> <span class="s">'PPO'</span><span class="p">,</span> <span class="s">'PVO'</span><span class="p">,</span> <span class="s">'trading_value'</span><span class="p">]</span>
+    
+    <span class="c1"># 종목코드 불러오기 
+</span>    <span class="n">IF</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'../data/code_list.txt'</span><span class="p">)</span>
+    <span class="n">lst_code</span> <span class="o">=</span> <span class="n">IF</span><span class="p">.</span><span class="n">readlines</span><span class="p">()</span>
+
+    <span class="n">lst_X</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lst_Y</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lst_code_date</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="n">db_dsml</span> <span class="o">=</span> <span class="n">pymysql</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span> <span class="o">=</span> <span class="s">'localhost'</span><span class="p">,</span> 
+        <span class="n">port</span> <span class="o">=</span> <span class="mi">3306</span><span class="p">,</span> 
+        <span class="n">user</span> <span class="o">=</span> <span class="s">'[db username]'</span><span class="p">,</span> 
+        <span class="n">passwd</span> <span class="o">=</span> <span class="s">'[db password]'</span><span class="p">,</span> 
+        <span class="n">db</span> <span class="o">=</span> <span class="s">'[db name]'</span><span class="p">,</span> 
+        <span class="n">charset</span> <span class="o">=</span> <span class="s">'utf8'</span>
+    <span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">db_dsml</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
+    
+    
+    <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">lst_code</span><span class="p">):</span> 
+        <span class="n">code</span> <span class="o">=</span> <span class="n">code</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span>
+        
+        <span class="n">sql_query</span> <span class="o">=</span> <span class="s">'''
+                    SELECT *
+                    FROM stock_{0}
+                    WHERE Date BETWEEN '2017-01-01' AND '2021-12-31'
+                    '''</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+
+        
+        <span class="n">stock</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">sql</span> <span class="o">=</span> <span class="n">sql_query</span><span class="p">,</span> <span class="n">con</span> <span class="o">=</span> <span class="n">db_dsml</span><span class="p">)</span> 
+        <span class="n">stock</span><span class="p">[</span><span class="s">'PrevClose'</span><span class="p">]</span> <span class="o">=</span> <span class="n">stock</span><span class="p">[</span><span class="s">'Close'</span><span class="p">].</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 전 날 종가 컬럼 추가
+</span>        <span class="n">stock</span><span class="p">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">stock</span> <span class="o">=</span> <span class="n">stock</span><span class="p">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">stock</span><span class="p">[</span><span class="s">'trading_value'</span><span class="p">]</span> <span class="o">=</span> <span class="n">stock</span><span class="p">[</span><span class="s">'Close'</span><span class="p">]</span> <span class="o">*</span> <span class="n">stock</span><span class="p">[</span><span class="s">'Volume'</span><span class="p">]</span>
+        <span class="n">lst_stock</span> <span class="o">=</span> <span class="n">stock</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        
+        <span class="c1"># 🌟 scaling
+</span>        <span class="c1"># 1) 가격 관련 컬럼 
+</span>        <span class="n">df_price</span> <span class="o">=</span> <span class="n">stock</span><span class="p">[</span><span class="n">col_price</span><span class="p">]</span>
+        <span class="n">df_price_scaled</span> <span class="o">=</span> <span class="n">df_price</span><span class="p">.</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">stock</span><span class="p">[</span><span class="s">'PrevClose'</span><span class="p">])</span>
+        
+        <span class="c1"># 2) 나머지 컬럼 
+</span>        <span class="n">df_etc</span> <span class="o">=</span> <span class="n">stock</span><span class="p">[</span><span class="n">col_etc</span><span class="p">]</span>
+        
+        <span class="n">df_scaled</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_price_scaled</span><span class="p">,</span> <span class="n">df_etc_scaled</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">lst_stock_scaled</span> <span class="o">=</span> <span class="n">df_scaled</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lst_stock</span><span class="p">):</span> 
+            <span class="n">date</span><span class="p">,</span> <span class="n">trading_value</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">date</span><span class="p">().</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%Y-%m-%d"</span><span class="p">),</span> <span class="n">row</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">trading_value</span> <span class="o">&gt;=</span> <span class="n">trading</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst_stock</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># 예외 처리 
+</span>                    <span class="k">continue</span> 
+                
+                <span class="c1"># D-9 ~ D0 데이터만 담기 
+</span>                <span class="n">sub_stock</span> <span class="o">=</span> <span class="n">lst_stock_scaled</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">9</span><span class="p">:</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> 
+
+                <span class="c1"># 10일간의 데이터 
+</span>                <span class="n">lst_result</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">row2</span> <span class="ow">in</span> <span class="n">sub_stock</span><span class="p">:</span>               
+                    <span class="n">lst_result</span> <span class="o">+=</span> <span class="n">row2</span>
+
+                <span class="c1"># D+1 종가 2% 상승 여부 
+</span>                <span class="n">label</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.02</span><span class="p">)</span>
+                
+                <span class="c1"># 종속변수, 독립변수, 종목코드, 날짜 리스트에 추가 
+</span>                <span class="n">lst_X</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst_result</span><span class="p">)</span>
+                <span class="n">lst_Y</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+                <span class="n">lst_code_date</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">code</span><span class="p">,</span> <span class="n">date</span><span class="p">])</span>
+            
+    <span class="k">return</span> <span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lst_code_date</span><span class="p">),</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lst_X</span><span class="p">),</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lst_Y</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_dataset</span> <span class="o">=</span> <span class="n">make_dataset_div_previous_close</span><span class="p">(</span><span class="n">trading</span><span class="o">=</span><span class="mi">1000000000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100%|██████████████████████████████████████████| 1561/1561 [03:53&lt;00:00,  6.70it/s]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">trainX_4</span><span class="p">,</span> <span class="n">trainY_4</span><span class="p">,</span> <span class="n">testX_4</span><span class="p">,</span> <span class="n">testY_4</span><span class="p">,</span> <span class="n">lst_code_date</span><span class="p">,</span> <span class="n">lst_code_date_test</span> <span class="o">=</span> <span class="n">sf</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="n">df_dataset</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'train dataset: '</span><span class="p">,</span> <span class="n">trainX_4</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">trainY_4</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'test dataset: '</span><span class="p">,</span> <span class="n">testX_4</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">testY_4</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>train dataset:  (658364, 550) (658364,)
+test dataset:  (239817, 550) (239817,)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
+<span class="n">xgb_4</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span>
+                   <span class="n">n_jobs</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+                   <span class="n">scale_pos_weight</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                   <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+                   <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                   <span class="n">n_estimators</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                   <span class="p">)</span> 
+
+<span class="n">xgb_4</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trainX_4</span><span class="p">,</span> <span class="n">trainY_4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[16:26:12] WARNING: ../src/learner.cc:1115: Starting in XGBoost 1.3.0, the default evaluation metric used with the objective 'binary:logistic' was changed from 'error' to 'logloss'. Explicitly set eval_metric if you'd like to restore the old behavior.
+
+
+
+
+
+XGBClassifier(base_score=0.5, booster='gbtree', colsample_bylevel=1,
+              colsample_bynode=1, colsample_bytree=1, enable_categorical=False,
+              gamma=0, gpu_id=-1, importance_type=None,
+              interaction_constraints='', learning_rate=0.01, max_delta_step=0,
+              max_depth=3, min_child_weight=1, missing=nan,
+              monotone_constraints='()', n_estimators=500, n_jobs=40,
+              num_parallel_tree=1, predictor='auto', random_state=0,
+              reg_alpha=0, reg_lambda=1, scale_pos_weight=4, subsample=1,
+              tree_method='exact', validate_parameters=1, verbosity=None)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sf</span><span class="p">.</span><span class="n">plot_evauate</span><span class="p">(</span><span class="n">trainX_4</span><span class="p">,</span> <span class="n">trainY_4</span><span class="p">,</span> <span class="n">testX_4</span><span class="p">,</span> <span class="n">testY_4</span><span class="p">,</span> <span class="n">xgb_4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="output_27_0.png" alt="png" /></p>
+
+<p><img src="output_27_1.png" alt="png" /></p>
+
+<h2 id="️-2-스케일러-선택">✔️ (2) 스케일러 선택</h2>
+
+<p>스케일링을 통해 이전보다 크게 성능 향상이 된 것을 볼 수 있었다. 서로 다른 종목 별 가격의 범위를 조정해 주는 작업은 중요하다는 것을 알 수 있었다. 수익률 시뮬레이션까지 해보고, 네 가지 방법 중 지속적으로 사용할 스케일러를 선택하도록 한다.</p>
+
+<h3 id="수익률-비교">수익률 비교</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sf</span><span class="p">.</span><span class="n">compute_earnings_rate</span><span class="p">(</span><span class="n">lst_code_date_test</span><span class="p">,</span> <span class="n">xgb_1</span><span class="p">,</span> <span class="n">testX_1</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100%|████████████████████████████████████████████| 202/202 [00:04&lt;00:00, 42.12it/s]
+
+Final earning rate : 462.37913 %
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sf</span><span class="p">.</span><span class="n">compute_earnings_rate</span><span class="p">(</span><span class="n">lst_code_date_test</span><span class="p">,</span> <span class="n">xgb_2</span><span class="p">,</span> <span class="n">testX_2</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0it [00:00, ?it/s]
+
+Final earning rate : 0.0 %
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sf</span><span class="p">.</span><span class="n">compute_earnings_rate</span><span class="p">(</span><span class="n">lst_code_date_test</span><span class="p">,</span> <span class="n">xgb_3</span><span class="p">,</span> <span class="n">testX_3</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100%|████████████████████████████████████████████| 222/222 [00:05&lt;00:00, 43.23it/s]
+
+Final earning rate : 124.50311 %
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sf</span><span class="p">.</span><span class="n">compute_earnings_rate</span><span class="p">(</span><span class="n">lst_code_date_test</span><span class="p">,</span> <span class="n">xgb_4</span><span class="p">,</span> <span class="n">testX_4</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100%|████████████████████████████████████████████| 260/260 [00:06&lt;00:00, 42.78it/s]
+
+Final earning rate : 1487.42557 %
+</code></pre></div></div>
+
+<p>예측확률 임계값을 0.75로 설정하였는데, <code class="language-plaintext highlighter-rouge">4) 전 날 종가로 나누기</code> 방법의 스케일링이 가장 매매 개수가 많았다. 1년 동안 130번의 매수가 일어났음을 알 수 있다. 그와 동시에 수익률 시뮬레이션에서 수익률이 가장 높게 나온 전 날 종가로 나누는 스케일링 방법을 최종적으로 선택한다.</p>
+
+      <div class="c-article__footer u-clearfix">
+        <div class="c-article__tag">
+          
+        </div>
+        <div class="c-article__share">
+          <a href="https://twitter.com/intent/tweet?text=Stock%20Research%20%7C%7C%202.2.%20%EC%A3%BC%EA%B0%80%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%8A%A4%EC%BC%80%EC%9D%BC%EB%A7%81&url=https://ag-su.github.io/2022/07/11/scaling/" title="Share
+          on Twitter" rel="nofollow" target="_blank"><div data-icon='ei-sc-twitter' data-size='s'></div></a>
+          <a href="https://facebook.com/sharer.php?u=https://ag-su.github.io/2022/07/11/scaling/" title="Share on Facebook" rel="nofollow" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a>
+          <a href="https://plus.google.com/share?url=https://ag-su.github.io/2022/07/11/scaling/" title="Share on Google+" rel="nofollow" target="_blank"><div data-icon='ei-sc-google-plus' data-size='s'></div></a>
+        </div>
+      </div>
+      <div class="c-newsletter">
+  <div class="c-newsletter__header">
+    <h4 class="c-newsletter__title">Newsletter</h4>
+    <div class="c-newsletter__subtitle">Subscribe to this blog and receive notifications of new posts by email.</div>
+  </div>
+  <form class="c-newsletter-form validate" action="#" method="POST" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+    <div class="c-newsletter-form__group">
+      <label class="u-screen-reader-text" for="mce-EMAIL">Email address</label>
+      <input class="c-newsletter__email required email" id="mce-EMAIL" type="email" name="EMAIL" placeholder="Your email address" autocomplete="on">
+      <input class="c-newsletter__button" id="mc-embedded-subscribe" type="submit" name="subscribe" value="Subscribe">
+    </div>
+  </form>
+</div> <!-- /.c-newsletter -->
+      <div class="c-recent-post">
+        <h4 class="c-recent__title">You might also enjoy</h4>
+        <div class="c-recent__box">
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /myblog/images/01.credit_thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/10/19/credit-card-fraud-detection/">Transcription || [Kaggle] Credit card Fraud Detection</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-10-19T00:00:00+09:00">October 19, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/25/cluster-filtering/" style="background-image: url( /myblog/images/08.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/25/cluster-filtering/">Stock Research || 3.3. 클러스터링 분석을 통한 주가 상승추세 패턴 검출</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-25T00:00:00+09:00">July 25, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/22/tsne/" style="background-image: url( /myblog/images/07.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/22/tsne/">Stock Research || 3.2. t-SNE를 사용한 주가데이터 2차원 시각화</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-22T00:00:00+09:00">July 22, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/18/shap-value/" style="background-image: url( /myblog/images/06.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/18/shap-value/">Stock Research || 3.1. 설명가능 AI (XAI), SHAP value</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-18T00:00:00+09:00">July 18, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        </div>
+      </div> <!-- /.c-recent-post -->
+      
+        <div class="c-comments">
+  <div id="disqus_thread" class="article-comments"></div>
+  <script>
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.src = '//mr-brown.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+</div> <!-- /.c-comments -->
+      
+    </div> <!-- /.c-wrap-content -->
+  </div> <!-- /.c-article__content -->
+</article> <!-- /.c-article-page -->
+
+</main> <!-- /.c-content -->
+  </div> <!-- /.o-wrapper -->
+  <div class="c-top" data-icon='ei-chevron-up' data-size='s' title="Scroll To Top"></div> <!-- /.c-top -->
+  <script src="/myblog/js/jquery-3.3.1.min.js"></script>
+<script src="/myblog/js/evil-icons.min.js"></script>
+<script src="/myblog/js/jquery.fitvids.js"></script>
+<script src="/myblog/js/simple-jekyll-search.min.js"></script>
+<script src="/myblog/js/main.js"></script>
+<!-- /javascripts -->
+</body>
+</html>
