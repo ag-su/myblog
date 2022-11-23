@@ -1,4 +1,4 @@
- {% include header.html %}
+--- layout: home --- {% include header.html %}
 <div class="c-posts o-opacity">
     {% for post in site.categories[page.title] %}
     <article class="c-post">
@@ -12,7 +12,7 @@
             <p>{{ post.content | strip_html | truncatewords: 15 }}</p>
             <span class="c-post-date">{{post.date | date: '%Y, %b %d'}}&nbsp;&nbsp;&nbsp;—&nbsp;</span>
             <span class="c-post-words">{% capture words %}{{ post.content | number_of_words }}{% endcapture %}{% unless words contains "-" %}{{ words | plus:
-        250 | divided_by: 250 | append: " minutse read" }}{% endunless %}</span>
+        250 | divided_by: 250 | append: " minute read" }}{% endunless %}</span>
         </div>
     </article>
     {% endfor %}
