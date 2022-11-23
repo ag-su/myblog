@@ -1,6 +1,6 @@
 ---  
 layout: post  
-title: 1.1. 머신러닝을 위한 주가 데이터셋 생성  
+title: Stock Research || 1.1. 머신러닝을 위한 주가 데이터셋 생성  
 image: 01.thumbnail.png  
 tags:  
 categories: stock-research
