@@ -3,16 +3,16 @@
 =============== */
 
 code {
-  overflow: auto;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  word-break: break-all;
-  font-family: Courier, monospace;
-  font-size: 14px;
-  background-color: #f7f7f7;
+    color: #928b8b;
+    overflow: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+    font-family: Courier, monospace;
+    font-size: 14px;
 }
 
 p code,
 li code {
-  padding: 3px 5px;
+    padding: 3px 5px;
 }
