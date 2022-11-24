@@ -159,7 +159,8 @@
         color: #bbb
     } // Text.Whitespace
     .mf {
-        color: #099
+        color: #29843b;
+        font-weight: bold;
     } // Literal.Number.Float
     .mh {
         color: #099
@@ -171,6 +172,9 @@
     .mo {
         color: #099
     } // Literal.Number.Oct
+    .sa {
+        color: #bc0202;
+    }
     .sb {
         color: #d14
     } // Literal.String.Backtick
@@ -205,7 +209,8 @@
         color: #990073
     } // Literal.String.Symbol
     .bp {
-        color: #999
+        color: #29843b;
+        font-weight: bold;
     } // Name.Builtin.Pseudo
     .vc {
         color: #008080

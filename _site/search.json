@@ -86,6 +86,22 @@
       "tags"     : "",
       "url"      : "/myblog/2022/04/10/greedy/",
       "date"     : "2022-04-10 00:00:00 +0900"
+    } ,
+  
+    {
+      "title"    : "python 기초 || 2.1 datatype - 숫자형과 문자열",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2021/07/01/datatype-numeric-string/",
+      "date"     : "2021-07-01 00:00:00 +0900"
+    } ,
+  
+    {
+      "title"    : "python 기초 || 1. print 함수",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2021/06/30/print/",
+      "date"     : "2021-06-30 00:00:00 +0900"
     } 
   
 ]

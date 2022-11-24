@@ -5,9 +5,9 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-  <title>Tags</title>
-  <meta name='description' content="Data Science">
-  <link rel='canonical' href="https://ag-su.github.io/myblog/tags/">
+  <title>python 기초 || 1. print 함수</title>
+  <meta name='description' content="1. print 함수">
+  <link rel='canonical' href="https://ag-su.github.io/myblog/2021/06/30/print/">
   <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
@@ -75,28 +75,257 @@
 </aside> <!-- /.c-sidebar -->
 
 <main class="c-content">
-  
-
-
-<header class="c-header u-hide u-no-margin-bottom">
-  <div class="c-header__box">
-    <div class="c-search u-full-width">
-      <div class="c-search__box">
-        <label for="js-search-input" class="u-screen-reader-text">Search for Blog</label>
-        <input type="text" id="js-search-input" class="c-search__text" autocomplete="off" placeholder="Type to search...">
-        <div data-icon='ei-search' data-size='s'></div>
+  <article class="c-article">
+  <div class="c-article__content">
+    <header class="c-header u-hide u-no-margin-top">
+      <div class="c-header__box">
+        <div class="c-search u-full-width">
+          <div class="c-search__box">
+            <label for="js-search-input" class="u-screen-reader-text">Search for Blog</label>
+            <input type="text" id="js-search-input" class="c-search__text" autocomplete="off" placeholder="Type to search...">
+            <div data-icon='ei-search' data-size='s'></div>
+          </div>
+          <ul id="js-results-container" class="c-search-results-list"></ul>
+        </div>
       </div>
-      <ul id="js-results-container" class="c-search-results-list"></ul>
-    </div>
+    </header>
+    
+    
+    <div class="c-wrap-content">
+      <header class="c-article__header">
+        <h1 class="c-article__title">python 기초 || 1. print 함수</h1>
+        <div class="c-article__date">
+          <span>2021, Jun 30</span>
+        </div>
+      </header>
+      <h1 id="1-print-함수">1. print 함수</h1>
+
+<h3 id="1-기본-출력">(1) 기본 출력</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'Hello Python!'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Hello Python!"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"""Hello Python!"""</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'''Hello Python!'''</span><span class="p">)</span>  
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello Python!
+Hello Python!
+Hello Python!
+Hello Python!
+</code></pre></div></div>
+
+<p>기본적으로 문자열을 출력할 때는 작은따옴표, 큰따옴표를 사용하고, 1개 혹은 3개로 감싸준다.</p>
+
+<h3 id="2-seperator">(2) seperator</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'T'</span><span class="p">,</span> <span class="s">'E'</span><span class="p">,</span> <span class="s">'S'</span><span class="p">,</span> <span class="s">'T'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'2019'</span><span class="p">,</span> <span class="s">'02'</span><span class="p">,</span> <span class="s">'19'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">'-'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'niceman'</span><span class="p">,</span> <span class="s">'google.com'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">"@"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TEST
+2019-02-19
+niceman@google.com
+</code></pre></div></div>
+
+<p>print함수의 인자에 sep 옵션을 넣어주면 sep에 들어가는 문자가 중간에 들어가 문자열을 이어준다.</p>
+
+<h3 id="3-end">(3) end</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'Welcom To'</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'my house'</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'with apple'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Welcom To my house with apple
+</code></pre></div></div>
+
+<p>end옵션은 defalut가 \n으로 들어 가 있어 사용하지 않으면 자동으로 줄바꿈이 됐었다. end=’ ‘ 를 사용하면 위와 같이 그 다음 줄이 호출될 때 띄어 쓰기 한 번 후 출력이 된다.</p>
+
+<h3 id="4-format">(4) format</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'{} and {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="s">'apple'</span><span class="p">,</span> <span class="s">'banana'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"{0} and {1} and {0}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="s">'apple'</span><span class="p">,</span> <span class="s">'banana'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'{a} and {b}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s">'apple'</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s">'banana'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apple and banana
+apple and banana and apple
+apple and banana
+</code></pre></div></div>
+
+<p>format 함수로 문자열에 값을 넣어줄 수 있다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">"%s favorite number is %d"</span> <span class="o">%</span> <span class="p">(</span><span class="s">'Silver'</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Test1: %5d, Price: %4.2f"</span> <span class="o">%</span> <span class="p">(</span><span class="mi">777</span><span class="p">,</span> <span class="mf">1234.567</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Silver favorite number is 7
+Test1:   777, Price: 1234.57
+</code></pre></div></div>
+
+<ul>
+  <li>%s : 문자, %d : 정수, %f : 실수</li>
+</ul>
+
+<p>%를 사용하여 글자수나, type에 대해 명시적으로 기입해 놓을 수 있다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">"Test1: {0: 5d}, Price: {1: 4.2f}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="mi">777</span><span class="p">,</span> <span class="mf">1234.567</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Test1: {a: 5d}, Price: {b: 4.2f}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">777</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">1234.567</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Test1:   777, Price:  1234.57
+Test1:   777, Price:  1234.57
+</code></pre></div></div>
+
+<p>위와 같이 format을 사용하여 글자수와 type을 지정해줄 수도 있다.</p>
+
+<h3 id="5-이스케이프-문자">(5) 이스케이프 문자</h3>
+
+<p>\n : 개행</p>
+
+<p>\t : 탭</p>
+
+<p>\ : 문자</p>
+
+<p>' : 문자</p>
+
+<p>" : 문자</p>
+
+<p>\r : 캐리지 리턴</p>
+
+<p>\f : 폼 피드</p>
+
+<p>\a : 벨 소리</p>
+
+<p>\b : 백 스페이스</p>
+
+<p>\000 : 널 문자</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">"'you'"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\'</span><span class="s">you</span><span class="se">\'</span><span class="s">'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'"you"'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"""'you'"""</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\\</span><span class="s">you</span><span class="se">\\\n\n</span><span class="s">'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\t\t\t</span><span class="s">test'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'you'
+'you'
+"you"
+'you'
+\you\
+
+
+			test
+</code></pre></div></div>
+
+<p><br />
+<br />
+<br />
+<br /></p>
+<ul>
+  <li>본 글은 fastcampus 수업을 정리한 내용입니다.</li>
+</ul>
+
+      <div class="c-article__footer u-clearfix">
+        <div class="c-article__tag">
+          
+        </div>
+        <div class="c-article__share">
+          <a href="https://twitter.com/intent/tweet?text=python%20%EA%B8%B0%EC%B4%88%20%7C%7C%201.%20print%20%ED%95%A8%EC%88%98&url=https://ag-su.github.io/2021/06/30/print/" title="Share
+          on Twitter" rel="nofollow" target="_blank"><div data-icon='ei-sc-twitter' data-size='s'></div></a>
+          <a href="https://facebook.com/sharer.php?u=https://ag-su.github.io/2021/06/30/print/" title="Share on Facebook" rel="nofollow" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a>
+          <a href="https://plus.google.com/share?url=https://ag-su.github.io/2021/06/30/print/" title="Share on Google+" rel="nofollow" target="_blank"><div data-icon='ei-sc-google-plus' data-size='s'></div></a>
+        </div>
+      </div>
+      <div class="c-newsletter">
+  <div class="c-newsletter__header">
+    <h4 class="c-newsletter__title">Newsletter</h4>
+    <div class="c-newsletter__subtitle">Subscribe to this blog and receive notifications of new posts by email.</div>
   </div>
-</header>
-<section class="c-blog-tags o-opacity">
-  <h1>Tags in Blog</h1>
-  <ul class="c-tag__list">
-  
-  </ul>
-  
-</section>
+  <form class="c-newsletter-form validate" action="#" method="POST" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+    <div class="c-newsletter-form__group">
+      <label class="u-screen-reader-text" for="mce-EMAIL">Email address</label>
+      <input class="c-newsletter__email required email" id="mce-EMAIL" type="email" name="EMAIL" placeholder="Your email address" autocomplete="on">
+      <input class="c-newsletter__button" id="mc-embedded-subscribe" type="submit" name="subscribe" value="Subscribe">
+    </div>
+  </form>
+</div> <!-- /.c-newsletter -->
+      <div class="c-recent-post">
+        <h4 class="c-recent__title">You might also enjoy</h4>
+        <div class="c-recent__box">
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /myblog/images/01.credit_thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/10/19/credit-card-fraud-detection/">Transcription || [Kaggle] Credit card Fraud Detection</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-10-19T00:00:00+09:00">October 19, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/25/cluster-filtering/" style="background-image: url( /myblog/images/08.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/25/cluster-filtering/">Stock Research || 3.3. 클러스터링 분석을 통한 주가 상승추세 패턴 검출</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-25T00:00:00+09:00">July 25, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/22/tsne/" style="background-image: url( /myblog/images/07.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/22/tsne/">Stock Research || 3.2. t-SNE를 사용한 주가데이터 2차원 시각화</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-22T00:00:00+09:00">July 22, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/18/shap-value/" style="background-image: url( /myblog/images/06.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/18/shap-value/">Stock Research || 3.1. 설명가능 AI (XAI), SHAP value</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-18T00:00:00+09:00">July 18, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        </div>
+      </div> <!-- /.c-recent-post -->
+      
+        <div class="c-comments">
+  <div id="disqus_thread" class="article-comments"></div>
+  <script>
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.src = '//mr-brown.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+</div> <!-- /.c-comments -->
+      
+    </div> <!-- /.c-wrap-content -->
+  </div> <!-- /.c-article__content -->
+</article> <!-- /.c-article-page -->
+
 </main> <!-- /.c-content -->
   </div> <!-- /.o-wrapper -->
   <div class="c-top" data-icon='ei-chevron-up' data-size='s' title="Scroll To Top"></div> <!-- /.c-top -->
