@@ -89,10 +89,50 @@
     } ,
   
     {
+      "title"    : "python 기초 || 5. 클래스",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2021/07/08/class/",
+      "date"     : "2021-07-08 00:00:00 +0900"
+    } ,
+  
+    {
+      "title"    : "python 기초 || 4. 함수와 람다",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2021/07/06/definition-lambda/",
+      "date"     : "2021-07-06 00:00:00 +0900"
+    } ,
+  
+    {
+      "title"    : "python 기초 || 3.2 흐름제어 - 반복문 for, while",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2021/07/03/flow-control2-for-while/",
+      "date"     : "2021-07-03 00:00:00 +0900"
+    } ,
+  
+    {
+      "title"    : "python 기초 || 3.1 흐름제어 - 조건문 if",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2021/07/03/flow-control1-if/",
+      "date"     : "2021-07-03 00:00:00 +0900"
+    } ,
+  
+    {
+      "title"    : "python 기초 || 2.2 datatype - 리스트, 튜플, 딕셔너리, 집합",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2021/07/01/datatype2-list-tuple-dictionary-set/",
+      "date"     : "2021-07-01 00:00:00 +0900"
+    } ,
+  
+    {
       "title"    : "python 기초 || 2.1 datatype - 숫자형과 문자열",
       "category" : "",
       "tags"     : "",
-      "url"      : "/myblog/2021/07/01/datatype-numeric-string/",
+      "url"      : "/myblog/2021/07/01/datatype1-numeric-string/",
       "date"     : "2021-07-01 00:00:00 +0900"
     } ,
   

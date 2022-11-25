@@ -5,9 +5,9 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-  <title>agsu BLOG</title>
-  <meta name='description' content="Data Science">
-  <link rel='canonical' href="https://ag-su.github.io/myblog/">
+  <title>python 기초 || 3.1 흐름제어 - 조건문 if</title>
+  <meta name='description' content="3-1. 흐름제어: 조건문 if">
+  <link rel='canonical' href="https://ag-su.github.io/myblog/2021/07/03/flow-control1-if/">
   <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
@@ -75,328 +75,299 @@
 </aside> <!-- /.c-sidebar -->
 
 <main class="c-content">
-  
-
-<header class="c-header">
-  <div class="c-header__box">
-    <div class="c-search">
-      <div class="c-search__box">
-        <label for="js-search-input" class="u-screen-reader-text">Search for Blog</label>
-        <input type="text" id="js-search-input" class="c-search__text" autocomplete="off" placeholder="Type to search...">
-        <div data-icon='ei-search' data-size='s'></div>
+  <article class="c-article">
+  <div class="c-article__content">
+    <header class="c-header u-hide u-no-margin-top">
+      <div class="c-header__box">
+        <div class="c-search u-full-width">
+          <div class="c-search__box">
+            <label for="js-search-input" class="u-screen-reader-text">Search for Blog</label>
+            <input type="text" id="js-search-input" class="c-search__text" autocomplete="off" placeholder="Type to search...">
+            <div data-icon='ei-search' data-size='s'></div>
+          </div>
+          <ul id="js-results-container" class="c-search-results-list"></ul>
+        </div>
       </div>
-      <ul id="js-results-container" class="c-search-results-list"></ul>
-    </div>
-    <div class="c-nav">
-      <ul class="c-nav__list u-lists-reset">
-        <li class="c-nav__item is-active">
-          <div data-icon='ei-pencil' data-size='s'></div> Posts</li>
-        <li class="c-nav__item">
-          <div data-icon='ei-star' data-size='s'></div> Categories</li>
-      </ul>
-    </div>
-  </div>
-</header> <!-- /.c-header -->
-<div class="c-posts o-opacity" data-page="1" data-totalPages="2">
-  
-  <article class="c-post">
+    </header>
     
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/01.credit_thumbnail.png)"
-        href="/myblog/2022/10/19/credit-card-fraud-detection/"></a>
     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/10/19/credit-card-fraud-detection/">Transcription || [Kaggle] Credit card Fraud Detection</a>
-      </h2>
-      <p>[필사 코드 링크] -Credit Fraud || Dealing with Imbalanced Datasets [데이터셋 링크] -Credit Card Fraud...</p>
-      <span class="c-post-date">2022, Oct 19&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">67 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/08.thumbnail.png)"
-        href="/myblog/2022/07/25/cluster-filtering/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/07/25/cluster-filtering/">Stock Research || 3.3. 클러스터링 분석을 통한 주가 상승추세 패턴 검출</a>
-      </h2>
-      <p>3. 논문 연구: 주가상승 패턴 검출 3.3. 클러스터 탐색을 통한 주가상승 패턴 검출 지난 글...</p>
-      <span class="c-post-date">2022, Jul 25&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">20 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/07.thumbnail.png)"
-        href="/myblog/2022/07/22/tsne/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/07/22/tsne/">Stock Research || 3.2. t-SNE를 사용한 주가데이터 2차원 시각화</a>
-      </h2>
-      <p>3. 논문 연구: 주가 상승추세 패턴 검출 3.2. t-SNE를 사용한 주가데이터 2차원 시각화 이전 글...</p>
-      <span class="c-post-date">2022, Jul 22&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">115 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/06.thumbnail.png)"
-        href="/myblog/2022/07/18/shap-value/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/07/18/shap-value/">Stock Research || 3.1. 설명가능 AI (XAI), SHAP value</a>
-      </h2>
-      <p>3. 주가 상승 추세 패턴 검출 3.1. 설명가능 AI (XAI), SHAP value 이전 글 (...</p>
-      <span class="c-post-date">2022, Jul 18&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">108 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/05.filtering_1.png)"
-        href="/myblog/2022/07/15/filtering/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/07/15/filtering/">Stock Research || 2.3. CCI를 이용한 주가 데이터 필터링</a>
-      </h2>
-      <p>2. Data Preprocessing 2.3. CCI를 이용한 주가 데이터 필터링 이전글 [Stock Research] 2.2. 주가 데이터...</p>
-      <span class="c-post-date">2022, Jul 15&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">10 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/04.thumbnail.png)"
-        href="/myblog/2022/07/11/scaling/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/07/11/scaling/">Stock Research || 2.2. 주가 데이터 스케일링</a>
-      </h2>
-      <p>2. Data Preprocessing 2.2. 주가 데이터 스케일링 현재 사용하고 있는 통합 종목 주가 데이터는 종목마다...</p>
-      <span class="c-post-date">2022, Jul 11&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">17 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/03.thumbnail.png)"
-        href="/myblog/2022/07/09/add-index/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/07/09/add-index/">Stock Research || 2.1 주가 데이터셋 보조지표 추가</a>
-      </h2>
-      <p>2. Data Preprocessing 2.1. 주가 데이터셋 보조지표 추가 이전 글 Stock Research || 1.2. 머신러닝...</p>
-      <span class="c-post-date">2022, Jul 09&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">19 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/02.thumbnail.png)"
-        href="/myblog/2022/07/08/model-selection/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/07/08/model-selection/">Stock Research || 1.2. 머신러닝 모델 비교</a>
-      </h2>
-      <p>1. baseline model 1.2 머신러닝 모델 비교 이전 글 (1.1. 머신러닝을 위한 주가 데이터셋 생성)...</p>
-      <span class="c-post-date">2022, Jul 08&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">14 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/01.thumbnail.png)"
-        href="/myblog/2022/07/06/stock-dataset/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/07/06/stock-dataset/">Stock Research || 1.1. 머신러닝을 위한 주가 데이터셋 생성</a>
-      </h2>
-      <p>1. baseline model 1.1. 머신러닝을 위한 주가 데이터셋 생성 주가 데이터셋 생성 절차는 df2list -...</p>
-      <span class="c-post-date">2022, Jul 06&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">25 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/02.implementation_1.png)"
-        href="/myblog/2022/04/12/implementation/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/04/12/implementation/">Algorithm || 구현 Implementation</a>
-      </h2>
-      <p>구현 Implementation - 참고 교재: 이것이 코딩테스트다 구현 유형의 문제는 ‘풀이를 떠올리는 것은 쉽지만 소스코드로...</p>
-      <span class="c-post-date">2022, Apr 12&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">6 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/01.greedy_1.png)"
-        href="/myblog/2022/04/10/greedy/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/04/10/greedy/">Algorithm || 그리디 Greedy</a>
-      </h2>
-      <p>그리디 Greedy -참고 교재: 이것이 코딩테스트다 그리디 알고리즘은 현재 상황에서 지금 당장 좋은 것만 고르는...</p>
-      <span class="c-post-date">2022, Apr 10&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">5 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/08/class/">python 기초 || 5. 클래스</a>
-      </h2>
-      <p>5. 클래스, 상속, 다중상속 다룰 내용 클래스 변수 &amp; 인스턴스 변수 차이 (중요) 클래스 변수:...</p>
-      <span class="c-post-date">2021, Jul 08&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">8 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/06/definition-lambda/">python 기초 || 4. 함수와 람다</a>
-      </h2>
-      <p>4. 함수와 람다 함수 정의방법 def 함수명(parameter): … code (1) 출력 (print) def hello(world): print("Hello",...</p>
-      <span class="c-post-date">2021, Jul 06&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">6 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/03/flow-control2-for-while/">python 기초 || 3.2 흐름제어 - 반복문 for, while</a>
-      </h2>
-      <p>3-2 흐름제어: 반복문 for, while (1) While 문 예제1 v1 = 1 while v1 &lt;...</p>
-      <span class="c-post-date">2021, Jul 03&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">6 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/03/flow-control1-if/">python 기초 || 3.1 흐름제어 - 조건문 if</a>
-      </h2>
-      <p>3-1. 흐름제어: 조건문 if - cf) 참(True), 거짓(False) 종류 참: “내용”, [내용], (내용), {내용}, 1,...</p>
-      <span class="c-post-date">2021, Jul 03&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">4 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-</div> <!-- /.c-posts -->
-
-
-
-
-  <button class="c-load-more c-btn c-btn--middle">Load more posts</button>
-
-<div class="c-categories" style="display: none;">
-  <ul class="c-categories__list u-lists-reset">
-      
-    <li class="c-categories__item">
-      
-      <a class="c-categories__link" href="/myblog/category/algorithm/">
-        
-        
-        
-        <div class="c-categories__img">
-          <figure style="background-image: url('/myblog/images/02.implementation_1.png');"></figure>
-          <span class="c-categories__more">View all</span>
+    <div class="c-wrap-content">
+      <header class="c-article__header">
+        <h1 class="c-article__title">python 기초 || 3.1 흐름제어 - 조건문 if</h1>
+        <div class="c-article__date">
+          <span>2021, Jul 03</span>
         </div>
-        
-        
-        <div class="c-categories__container ">
-          <h2 class="c-categories__header">algorithm</h2>
-          <p class="c-categories__count"><span>2</span> Posts</p>
-        </div>
-      </a>
-    </li>
+      </header>
+      <h1 id="3-1-흐름제어-조건문-if">3-1. 흐름제어: 조건문 if</h1>
+
+<h3 id="--cf-참true-거짓false-종류">- cf) 참(True), 거짓(False) 종류</h3>
+
+<ul>
+  <li><strong>참: “내용”, [내용], (내용), {내용}, 1, True</strong></li>
+  <li><strong>거짓: “”, [], (), {}, 0, False</strong></li>
+</ul>
+
+<p>기본적으로 여러 데이터 타입에서 내용이 채워져 있으면 참, 비어 있으면 거짓이다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 예 1 
+</span><span class="k">if</span> <span class="bp">True</span><span class="p">:</span> 
+    <span class="k">print</span><span class="p">(</span><span class="s">"Yes"</span><span class="p">)</span>
     
-    <li class="c-categories__item">
-      
-      <a class="c-categories__link" href="/myblog/category/python/">
-        
-        
-        
+<span class="c1"># 예 2 
+</span><span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'No'</span><span class="p">)</span>
+    
+<span class="c1"># 예 3 
+</span><span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'No'</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Yes'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Yes
+Yes
+</code></pre></div></div>
+
+<p>이처럼 <strong>if문</strong>은 <strong>True</strong>일 때 실행되고, <strong>False</strong>일 때 실행되지 않는다. 이를 이용하여 위에서 배운 <strong>참</strong>과 <strong>거짓</strong>을 사용하여 <strong>if문</strong>을 활용한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">city</span> <span class="o">=</span> <span class="s">""</span>
+
+<span class="k">if</span> <span class="n">city</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"&gt;&gt;&gt;&gt;&gt;True"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"&gt;&gt;&gt;&gt;&gt;False"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;&gt;&gt;&gt;&gt;False
+</code></pre></div></div>
+
+<p>이처럼 <strong>비어있는 문자열</strong>일 경우 <strong>False</strong>로 인식하여 <strong>else</strong>로 넘어가 <strong>else</strong>의 부분이 실행 되는 것이다.</p>
+
+<h3 id="--관계연산자">- 관계연산자</h3>
+<ul>
+  <li><strong>&gt;, &gt;=, &lt;, &lt;=, ==, !=</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span> 
+<span class="n">b</span> <span class="o">=</span> <span class="mi">0</span> 
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">!=</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">&gt;=</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+True
+True
+True
+False
+False
+</code></pre></div></div>
+
+<h3 id="--논리연산자">- 논리연산자</h3>
+<ul>
+  <li><strong>and, or, not</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">60</span> 
+<span class="n">c</span> <span class="o">=</span> <span class="mi">15</span> 
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'and: '</span><span class="p">,</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="n">c</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'or: '</span><span class="p">,</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="ow">or</span> <span class="n">c</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'not: '</span><span class="p">,</span> <span class="ow">not</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="ow">not</span> <span class="bp">True</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="ow">not</span> <span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>and:  True
+or:  True
+not:  False
+False
+True
+</code></pre></div></div>
+
+<h3 id="--산술-관계-논리-연산자-적용-순서">- 산술, 관계, 논리 연산자 적용 순서</h3>
+<ul>
+  <li><strong>산술 &gt; 관계 &gt; 논리</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="mi">7</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<h2 id="1-if문-기본-사용">(1) if문 기본 사용</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">score1</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">score2</span> <span class="o">=</span> <span class="s">'A'</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">score1</span> <span class="o">&gt;=</span> <span class="mi">90</span> <span class="ow">and</span> <span class="n">score2</span> <span class="o">==</span> <span class="s">"A"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'합격하셨습니다.'</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span> 
+    <span class="k">print</span><span class="p">(</span><span class="s">"불합격입니다. "</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>합격하셨습니다.
+</code></pre></div></div>
+
+<p>score1이 90이상이면서 score2가 A이므로 (True &amp; True = True) if문이 실행된다.</p>
+
+<h2 id="2-다중-조건문">(2) 다중 조건문</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">num</span> <span class="o">=</span> <span class="mi">82</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">num</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"등급 A | 점수: "</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">num</span> <span class="o">&gt;=</span> <span class="mi">80</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"등급 B | 점수: "</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">num</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span> 
+    <span class="k">print</span><span class="p">(</span><span class="s">"등급 C | 점수: "</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"꽝"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>등급 B | 점수:  82
+</code></pre></div></div>
+
+<p>num 이 82 이므로 등급 B가 출력된다. elif는 else if 의 줄임말이다. if가 실행되지 않으면 elif로 가게 된다. 만약 위의 경우에서 elif 대신 if를 쓴다면 ,</p>
+
+<p><br /></p>
+
+<p>num 등급 B 82 <br />
+num 등급 C 82 <br />
+<br /></p>
+
+<p>위와 같은 결과가 나올 것이다. 윗줄의 if문이 실행이 되든 안되든 모든 if문을 검사하기 때문이다. 이것이 elif가 필요한 이유다.</p>
+
+<h2 id="3-중첩-조건문">(3) 중첩 조건문</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">age</span> <span class="o">=</span> <span class="mi">27</span>
+<span class="n">height</span> <span class="o">=</span> <span class="mi">175</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">height</span> <span class="o">&gt;=</span> <span class="mi">170</span><span class="p">:</span> 
+        <span class="k">print</span><span class="p">(</span><span class="s">"A 지망 지원 가능 "</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">height</span> <span class="o">&gt;=</span> <span class="mi">160</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"B 지망 지원 가능"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="k">print</span><span class="p">(</span><span class="s">" 지원 불가"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span> 
+    <span class="k">print</span><span class="p">(</span><span class="s">"20세 이상 지원 가능 "</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A 지망 지원 가능 
+</code></pre></div></div>
+
+<p>이처럼 if문 안에 if문을 사용할 수 있다. age가 20 이상일 때 , height 를 검사하는 <strong>중첩 조건문</strong>이다.</p>
+
+      <div class="c-article__footer u-clearfix">
+        <div class="c-article__tag">
           
-        
-        
-        <div class="c-categories__container c-empty-figure">
-          <h2 class="c-categories__header">python</h2>
-          <p class="c-categories__count"><span>7</span> Posts</p>
         </div>
-      </a>
-    </li>
-    
-    <li class="c-categories__item">
+        <div class="c-article__share">
+          <a href="https://twitter.com/intent/tweet?text=python%20%EA%B8%B0%EC%B4%88%20%7C%7C%203.1%20%ED%9D%90%EB%A6%84%EC%A0%9C%EC%96%B4%20-%20%EC%A1%B0%EA%B1%B4%EB%AC%B8%20if&url=https://ag-su.github.io/2021/07/03/flow-control1-if/" title="Share
+          on Twitter" rel="nofollow" target="_blank"><div data-icon='ei-sc-twitter' data-size='s'></div></a>
+          <a href="https://facebook.com/sharer.php?u=https://ag-su.github.io/2021/07/03/flow-control1-if/" title="Share on Facebook" rel="nofollow" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a>
+          <a href="https://plus.google.com/share?url=https://ag-su.github.io/2021/07/03/flow-control1-if/" title="Share on Google+" rel="nofollow" target="_blank"><div data-icon='ei-sc-google-plus' data-size='s'></div></a>
+        </div>
+      </div>
+      <div class="c-newsletter">
+  <div class="c-newsletter__header">
+    <h4 class="c-newsletter__title">Newsletter</h4>
+    <div class="c-newsletter__subtitle">Subscribe to this blog and receive notifications of new posts by email.</div>
+  </div>
+  <form class="c-newsletter-form validate" action="#" method="POST" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+    <div class="c-newsletter-form__group">
+      <label class="u-screen-reader-text" for="mce-EMAIL">Email address</label>
+      <input class="c-newsletter__email required email" id="mce-EMAIL" type="email" name="EMAIL" placeholder="Your email address" autocomplete="on">
+      <input class="c-newsletter__button" id="mc-embedded-subscribe" type="submit" name="subscribe" value="Subscribe">
+    </div>
+  </form>
+</div> <!-- /.c-newsletter -->
+      <div class="c-recent-post">
+        <h4 class="c-recent__title">You might also enjoy</h4>
+        <div class="c-recent__box">
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /myblog/images/01.credit_thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/10/19/credit-card-fraud-detection/">Transcription || [Kaggle] Credit card Fraud Detection</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-10-19T00:00:00+09:00">October 19, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/25/cluster-filtering/" style="background-image: url( /myblog/images/08.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/25/cluster-filtering/">Stock Research || 3.3. 클러스터링 분석을 통한 주가 상승추세 패턴 검출</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-25T00:00:00+09:00">July 25, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/22/tsne/" style="background-image: url( /myblog/images/07.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/22/tsne/">Stock Research || 3.2. t-SNE를 사용한 주가데이터 2차원 시각화</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-22T00:00:00+09:00">July 22, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/18/shap-value/" style="background-image: url( /myblog/images/06.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/18/shap-value/">Stock Research || 3.1. 설명가능 AI (XAI), SHAP value</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-18T00:00:00+09:00">July 18, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        </div>
+      </div> <!-- /.c-recent-post -->
       
-      <a class="c-categories__link" href="/myblog/category/stock-research/">
-        
-        
-        
-        <div class="c-categories__img">
-          <figure style="background-image: url('/myblog/images/08.thumbnail.png');"></figure>
-          <span class="c-categories__more">View all</span>
-        </div>
-        
-        
-        <div class="c-categories__container ">
-          <h2 class="c-categories__header">stock-research</h2>
-          <p class="c-categories__count"><span>8</span> Posts</p>
-        </div>
-      </a>
-    </li>
-    
-    <li class="c-categories__item">
+        <div class="c-comments">
+  <div id="disqus_thread" class="article-comments"></div>
+  <script>
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.src = '//mr-brown.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+</div> <!-- /.c-comments -->
       
-      <a class="c-categories__link" href="/myblog/category/transcription/">
-        
-        
-        
-        <div class="c-categories__img">
-          <figure style="background-image: url('/myblog/images/01.credit_thumbnail.png');"></figure>
-          <span class="c-categories__more">View all</span>
-        </div>
-        
-        
-        <div class="c-categories__container ">
-          <h2 class="c-categories__header">transcription</h2>
-          <p class="c-categories__count"><span>1</span> Posts</p>
-        </div>
-      </a>
-    </li>
-    
-  </ul>
-</div> <!-- ./c-categories -->
+    </div> <!-- /.c-wrap-content -->
+  </div> <!-- /.c-article__content -->
+</article> <!-- /.c-article-page -->
+
 </main> <!-- /.c-content -->
   </div> <!-- /.o-wrapper -->
   <div class="c-top" data-icon='ei-chevron-up' data-size='s' title="Scroll To Top"></div> <!-- /.c-top -->
