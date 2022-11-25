@@ -5,9 +5,9 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-  <title>agsu BLOG</title>
-  <meta name='description' content="Data Science">
-  <link rel='canonical' href="https://ag-su.github.io/myblog/">
+  <title>python 기초 || 3.2 흐름제어 - 반복문 for, while</title>
+  <meta name='description' content="3-2 흐름제어: 반복문 for, while">
+  <link rel='canonical' href="https://ag-su.github.io/myblog/2021/07/03/flow-control2-for-while/">
   <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
@@ -75,328 +75,479 @@
 </aside> <!-- /.c-sidebar -->
 
 <main class="c-content">
-  
-
-<header class="c-header">
-  <div class="c-header__box">
-    <div class="c-search">
-      <div class="c-search__box">
-        <label for="js-search-input" class="u-screen-reader-text">Search for Blog</label>
-        <input type="text" id="js-search-input" class="c-search__text" autocomplete="off" placeholder="Type to search...">
-        <div data-icon='ei-search' data-size='s'></div>
+  <article class="c-article">
+  <div class="c-article__content">
+    <header class="c-header u-hide u-no-margin-top">
+      <div class="c-header__box">
+        <div class="c-search u-full-width">
+          <div class="c-search__box">
+            <label for="js-search-input" class="u-screen-reader-text">Search for Blog</label>
+            <input type="text" id="js-search-input" class="c-search__text" autocomplete="off" placeholder="Type to search...">
+            <div data-icon='ei-search' data-size='s'></div>
+          </div>
+          <ul id="js-results-container" class="c-search-results-list"></ul>
+        </div>
       </div>
-      <ul id="js-results-container" class="c-search-results-list"></ul>
-    </div>
-    <div class="c-nav">
-      <ul class="c-nav__list u-lists-reset">
-        <li class="c-nav__item is-active">
-          <div data-icon='ei-pencil' data-size='s'></div> Posts</li>
-        <li class="c-nav__item">
-          <div data-icon='ei-star' data-size='s'></div> Categories</li>
-      </ul>
-    </div>
-  </div>
-</header> <!-- /.c-header -->
-<div class="c-posts o-opacity" data-page="1" data-totalPages="2">
-  
-  <article class="c-post">
+    </header>
     
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/01.credit_thumbnail.png)"
-        href="/myblog/2022/10/19/credit-card-fraud-detection/"></a>
     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/10/19/credit-card-fraud-detection/">Transcription || [Kaggle] Credit card Fraud Detection</a>
-      </h2>
-      <p>[필사 코드 링크] -Credit Fraud || Dealing with Imbalanced Datasets [데이터셋 링크] -Credit Card Fraud...</p>
-      <span class="c-post-date">2022, Oct 19&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">67 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/08.thumbnail.png)"
-        href="/myblog/2022/07/25/cluster-filtering/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/07/25/cluster-filtering/">Stock Research || 3.3. 클러스터링 분석을 통한 주가 상승추세 패턴 검출</a>
-      </h2>
-      <p>3. 논문 연구: 주가상승 패턴 검출 3.3. 클러스터 탐색을 통한 주가상승 패턴 검출 지난 글...</p>
-      <span class="c-post-date">2022, Jul 25&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">20 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/07.thumbnail.png)"
-        href="/myblog/2022/07/22/tsne/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/07/22/tsne/">Stock Research || 3.2. t-SNE를 사용한 주가데이터 2차원 시각화</a>
-      </h2>
-      <p>3. 논문 연구: 주가 상승추세 패턴 검출 3.2. t-SNE를 사용한 주가데이터 2차원 시각화 이전 글...</p>
-      <span class="c-post-date">2022, Jul 22&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">115 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/06.thumbnail.png)"
-        href="/myblog/2022/07/18/shap-value/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/07/18/shap-value/">Stock Research || 3.1. 설명가능 AI (XAI), SHAP value</a>
-      </h2>
-      <p>3. 주가 상승 추세 패턴 검출 3.1. 설명가능 AI (XAI), SHAP value 이전 글 (...</p>
-      <span class="c-post-date">2022, Jul 18&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">108 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/05.filtering_1.png)"
-        href="/myblog/2022/07/15/filtering/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/07/15/filtering/">Stock Research || 2.3. CCI를 이용한 주가 데이터 필터링</a>
-      </h2>
-      <p>2. Data Preprocessing 2.3. CCI를 이용한 주가 데이터 필터링 이전글 [Stock Research] 2.2. 주가 데이터...</p>
-      <span class="c-post-date">2022, Jul 15&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">10 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/04.thumbnail.png)"
-        href="/myblog/2022/07/11/scaling/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/07/11/scaling/">Stock Research || 2.2. 주가 데이터 스케일링</a>
-      </h2>
-      <p>2. Data Preprocessing 2.2. 주가 데이터 스케일링 현재 사용하고 있는 통합 종목 주가 데이터는 종목마다...</p>
-      <span class="c-post-date">2022, Jul 11&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">17 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/03.thumbnail.png)"
-        href="/myblog/2022/07/09/add-index/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/07/09/add-index/">Stock Research || 2.1 주가 데이터셋 보조지표 추가</a>
-      </h2>
-      <p>2. Data Preprocessing 2.1. 주가 데이터셋 보조지표 추가 이전 글 Stock Research || 1.2. 머신러닝...</p>
-      <span class="c-post-date">2022, Jul 09&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">19 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/02.thumbnail.png)"
-        href="/myblog/2022/07/08/model-selection/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/07/08/model-selection/">Stock Research || 1.2. 머신러닝 모델 비교</a>
-      </h2>
-      <p>1. baseline model 1.2 머신러닝 모델 비교 이전 글 (1.1. 머신러닝을 위한 주가 데이터셋 생성)...</p>
-      <span class="c-post-date">2022, Jul 08&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">14 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/01.thumbnail.png)"
-        href="/myblog/2022/07/06/stock-dataset/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/07/06/stock-dataset/">Stock Research || 1.1. 머신러닝을 위한 주가 데이터셋 생성</a>
-      </h2>
-      <p>1. baseline model 1.1. 머신러닝을 위한 주가 데이터셋 생성 주가 데이터셋 생성 절차는 df2list -...</p>
-      <span class="c-post-date">2022, Jul 06&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">25 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/02.implementation_1.png)"
-        href="/myblog/2022/04/12/implementation/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/04/12/implementation/">Algorithm || 구현 Implementation</a>
-      </h2>
-      <p>구현 Implementation - 참고 교재: 이것이 코딩테스트다 구현 유형의 문제는 ‘풀이를 떠올리는 것은 쉽지만 소스코드로...</p>
-      <span class="c-post-date">2022, Apr 12&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">6 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-    
-    <a class="c-post-thumbnail o-opacity" style="background-image: url(/myblog/images/01.greedy_1.png)"
-        href="/myblog/2022/04/10/greedy/"></a>
-    
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2022/04/10/greedy/">Algorithm || 그리디 Greedy</a>
-      </h2>
-      <p>그리디 Greedy -참고 교재: 이것이 코딩테스트다 그리디 알고리즘은 현재 상황에서 지금 당장 좋은 것만 고르는...</p>
-      <span class="c-post-date">2022, Apr 10&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">5 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/08/class/">python 기초 || 5. 클래스</a>
-      </h2>
-      <p>5. 클래스, 상속, 다중상속 다룰 내용 클래스 변수 &amp; 인스턴스 변수 차이 (중요) 클래스 변수:...</p>
-      <span class="c-post-date">2021, Jul 08&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">8 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/06/definition-lambda/">python 기초 || 4. 함수와 람다</a>
-      </h2>
-      <p>4. 함수와 람다 함수 정의방법 def 함수명(parameter): … code (1) 출력 (print) def hello(world): print("Hello",...</p>
-      <span class="c-post-date">2021, Jul 06&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">6 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/03/flow-control2-for-while/">python 기초 || 3.2 흐름제어 - 반복문 for, while</a>
-      </h2>
-      <p>3-2 흐름제어: 반복문 for, while (1) While 문 예제1 v1 = 1 while v1 &lt;...</p>
-      <span class="c-post-date">2021, Jul 03&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">6 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/03/flow-control1-if/">python 기초 || 3.1 흐름제어 - 조건문 if</a>
-      </h2>
-      <p>3-1. 흐름제어: 조건문 if - cf) 참(True), 거짓(False) 종류 참: “내용”, [내용], (내용), {내용}, 1,...</p>
-      <span class="c-post-date">2021, Jul 03&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">4 minute read</span>
-    </div>
-  </article> <!-- /.c-post -->
-  
-</div> <!-- /.c-posts -->
-
-
-
-
-  <button class="c-load-more c-btn c-btn--middle">Load more posts</button>
-
-<div class="c-categories" style="display: none;">
-  <ul class="c-categories__list u-lists-reset">
-      
-    <li class="c-categories__item">
-      
-      <a class="c-categories__link" href="/myblog/category/algorithm/">
-        
-        
-        
-        <div class="c-categories__img">
-          <figure style="background-image: url('/myblog/images/02.implementation_1.png');"></figure>
-          <span class="c-categories__more">View all</span>
+    <div class="c-wrap-content">
+      <header class="c-article__header">
+        <h1 class="c-article__title">python 기초 || 3.2 흐름제어 - 반복문 for, while</h1>
+        <div class="c-article__date">
+          <span>2021, Jul 03</span>
         </div>
-        
-        
-        <div class="c-categories__container ">
-          <h2 class="c-categories__header">algorithm</h2>
-          <p class="c-categories__count"><span>2</span> Posts</p>
-        </div>
-      </a>
-    </li>
-    
-    <li class="c-categories__item">
-      
-      <a class="c-categories__link" href="/myblog/category/python/">
-        
-        
-        
+      </header>
+      <h1 id="3-2-흐름제어-반복문-for-while">3-2 흐름제어: 반복문 for, while</h1>
+
+<h1 id="1-while-문">(1) While 문</h1>
+
+<ul>
+  <li><strong>예제1</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">v1</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">v1</span> <span class="o">&lt;</span> <span class="mi">11</span><span class="p">:</span> 
+    <span class="k">print</span><span class="p">(</span><span class="s">"v1 is: "</span><span class="p">,</span> <span class="n">v1</span><span class="p">)</span>
+    <span class="n">v1</span> <span class="o">+=</span> <span class="mi">1</span> 
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>v1 is:  1
+v1 is:  2
+v1 is:  3
+v1 is:  4
+v1 is:  5
+v1 is:  6
+v1 is:  7
+v1 is:  8
+v1 is:  9
+v1 is:  10
+</code></pre></div></div>
+
+<p><strong>while문</strong>은 <strong>조건이 참일 동안</strong> 계속 <strong>반복</strong>한다. 이 예제에서는 11보다 작을 때, 즉 10까지 반복한다.</p>
+
+<ul>
+  <li><strong>예제2</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sum1</span> <span class="o">=</span> <span class="mi">0</span> 
+<span class="n">cnt1</span> <span class="o">=</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="n">cnt1</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span> 
+    <span class="n">sum1</span> <span class="o">+=</span> <span class="n">cnt1</span>
+    <span class="n">cnt1</span> <span class="o">+=</span> <span class="mi">1</span> 
+<span class="k">print</span><span class="p">(</span><span class="n">sum1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5050
+</code></pre></div></div>
+
+<p><strong>cnt1</strong>이 <strong>100 이하</strong>일 동안 반복문을 실행하게 된다. <strong>sum1</strong>에 <strong>1</strong>씩 증가하는 <strong>cnt1</strong>을 계속 더해줌으로써 <strong>1부터 100까지의 합</strong>을 구하는 코드이다.</p>
+
+<ul>
+  <li><strong>참고: 같은 결과를 낼 수 있는 sum</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5050
+2500
+</code></pre></div></div>
+
+<p>더 간단한 방법으로 합을 구해줄 수 있다. 1부터 100까지 홀수의 합만을 구하려면 <strong>range(1, 101, 2)</strong> 를 사용하면 된다.</p>
+
+<h1 id="2-for-문">(2) for 문</h1>
+
+<ul>
+  <li>
+    <p>시퀀스 (순서가 있는) 자료형 반복 : 문자열, 리스트, 튜플, 집합, 사전</p>
+  </li>
+  <li>
+    <p>iterable 리턴 함수 : range. reversed, enumerate, filter, map, zip</p>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<ul>
+  <li><strong>예제 1 - range()</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">v3</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'v3 is: '</span><span class="p">,</span> <span class="n">v3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>v3 is:  1
+v3 is:  2
+v3 is:  3
+v3 is:  4
+v3 is:  5
+v3 is:  6
+v3 is:  7
+v3 is:  8
+v3 is:  9
+v3 is:  10
+</code></pre></div></div>
+
+<p>시퀀스 자료형을 반복한다. 위와 같은 경우에서는 1부터 10까지 차례대로 v3에 들어가는 것을 반복하며 출력해 준다.</p>
+
+<ul>
+  <li><strong>예제 2 - 리스트</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">'kim'</span><span class="p">,</span> <span class="s">'park'</span><span class="p">,</span> <span class="s">'cho'</span><span class="p">,</span> <span class="s">'choi'</span><span class="p">,</span> <span class="s">'yoo'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Your name is '</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Your name is  kim
+Your name is  park
+Your name is  cho
+Your name is  choi
+Your name is  yoo
+</code></pre></div></div>
+
+<p><strong>리스트 자료형</strong>을 넣어주어도 반복이 가능하다.</p>
+
+<ul>
+  <li><strong>예제 3 - 문자열</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">word</span> <span class="o">=</span> <span class="s">'dreams'</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span> 
+    <span class="k">print</span><span class="p">(</span><span class="s">"Word: "</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Word:  d
+Word:  r
+Word:  e
+Word:  a
+Word:  m
+Word:  s
+</code></pre></div></div>
+
+<p>문자열도 반복이 가능하다.</p>
+
+<ul>
+  <li><strong>예제 4 - 딕셔너리</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_info</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'name'</span><span class="p">:</span> <span class="s">'Silver'</span><span class="p">,</span>
+    <span class="s">'age'</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+    <span class="s">'city'</span><span class="p">:</span> <span class="s">'Seoul'</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>기본: key</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">my_info</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name
+age
+city
+</code></pre></div></div>
+
+<p>딕셔너리 자체를 반복문에 넣으면 기본적으로 키가 반복된다.</p>
+
+<ul>
+  <li>values</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">my_info</span><span class="p">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Silver
+33
+Seoul
+</code></pre></div></div>
+
+<ul>
+  <li>keys</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">my_info</span><span class="p">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name
+age
+city
+</code></pre></div></div>
+
+<ul>
+  <li>items</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">my_info</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s">'|'</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name | Silver
+age | 33
+city | Seoul
+</code></pre></div></div>
+
+<ul>
+  <li><strong>예제 5 - 반복문 + 조건문</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">name</span> <span class="o">=</span> <span class="s">'KennRY'</span>
+<span class="n">name2</span> <span class="o">=</span> <span class="s">""</span>
+</code></pre></div></div>
+
+<p>KennRY 에서 대문자는 소문자로, 소문자는 대문자로 바꾸고, 최종적으로 name2에 바뀐 문자열을 저장하는 코드를 생성한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">n</span><span class="p">.</span><span class="n">isupper</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="n">name2</span> <span class="o">+=</span> <span class="n">n</span><span class="p">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="k">print</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">upper</span><span class="p">())</span>
+        <span class="n">name2</span> <span class="o">+=</span> <span class="n">n</span><span class="p">.</span><span class="n">upper</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>k
+E
+N
+N
+r
+y
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">name2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kENNry
+</code></pre></div></div>
+
+<p>문자열을 반복하여, 글자가 대문자면 소문자로 바꾸고 name2에 글자를 더해준다. 그 반대의 경우도 동일하게 해준다. 원하는 결과가 나오는 것을 볼 수 있다.</p>
+
+<ul>
+  <li><strong>예제 6 - break</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">38</span><span class="p">]</span>
+<span class="n">numbers2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">38</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span> 
+    <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">33</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"found 33 !!!"</span><span class="p">)</span>
+        <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"not found 33 !!!"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>not found 33 !!!
+not found 33 !!!
+not found 33 !!!
+not found 33 !!!
+not found 33 !!!
+not found 33 !!!
+not found 33 !!!
+not found 33 !!!
+found 33 !!!
+</code></pre></div></div>
+
+<p>33을 발견하면 <strong>break</strong>를 사용하여 <strong>반복문을 탈출</strong>하는 코드이다. 실제로 33 차례가 왔을 때, found : 33 ! 이 출력되고, 그 이후로는 아무것도 출력되지 않는 것을 볼 수 있다.</p>
+
+<ul>
+  <li><strong>예제 7 - for-else 구문</strong></li>
+  <li>모든값 정상 순회 -&gt; else 블럭 수행</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers2</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">33</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'found 33 !!!'</span><span class="p">)</span>
+        <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'not found 33 !!!'</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Not found 33........."</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>not found 33 !!!
+not found 33 !!!
+not found 33 !!!
+not found 33 !!!
+not found 33 !!!
+not found 33 !!!
+not found 33 !!!
+not found 33 !!!
+not found 33 !!!
+not found 33 !!!
+not found 33 !!!
+not found 33 !!!
+Not found 33.........
+</code></pre></div></div>
+
+<p><strong>break</strong>문 등으로 인하여 <strong>반복문이 정상적으로 모든 값을 순회하지 못할 경우 else블럭은 수행되지 않는다.</strong> 예제7과 같은 경우에는 33이 리스트에 존재하지 않기 때문에 <strong>정상적으로 모든 값을 순회하여 else블럭이 수행</strong>되었다.</p>
+
+<ul>
+  <li><strong>예제 8 - continue</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">l1</span> <span class="o">=</span> <span class="p">[</span><span class="s">'1'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">,</span> <span class="nb">complex</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l1</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"type: "</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type:  &lt;class 'str'&gt;
+type:  &lt;class 'int'&gt;
+type:  &lt;class 'int'&gt;
+type:  &lt;class 'bool'&gt;
+type:  &lt;class 'complex'&gt;
+</code></pre></div></div>
+
+<p><strong>continue</strong>를 만나면 그 다음 코드를 실행하지 않고 곧바로 for문의 첫번째로 되돌아 가 반복을 그대로 수행한다. 예제8에서는 float타입이면 continue를 실행한다. float 타입인 4.3을 중간에 넣어놓았더니 그 후의 print문은 실행되지 않고 complex타입은 정상적으로 출력된 것을 볼 수 있다.</p>
+
+<ul>
+  <li><strong>예제 9 - reversed 함수</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">name</span> <span class="o">=</span> <span class="s">'Niceman'</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">name</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">name</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;reversed object at 0x000001F1A745AF60&gt;
+['n', 'a', 'm', 'e', 'c', 'i', 'N']
+('n', 'a', 'm', 'e', 'c', 'i', 'N')
+</code></pre></div></div>
+
+<p><strong>reversed</strong> 함수는 그대로 출력해서 보기 위해 <strong>list</strong>나 <strong>tuple객체</strong>로 변환해주어야 한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">name</span><span class="p">):</span> 
+    <span class="k">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>n
+a
+m
+e
+c
+i
+N
+</code></pre></div></div>
+
+<p>하지만 <strong>iterable</strong>을 반환해주는 함수이기 때문에 for문에서는 곧바로 사용할 수 있다.</p>
+
+      <div class="c-article__footer u-clearfix">
+        <div class="c-article__tag">
           
-        
-        
-        <div class="c-categories__container c-empty-figure">
-          <h2 class="c-categories__header">python</h2>
-          <p class="c-categories__count"><span>7</span> Posts</p>
         </div>
-      </a>
-    </li>
-    
-    <li class="c-categories__item">
+        <div class="c-article__share">
+          <a href="https://twitter.com/intent/tweet?text=python%20%EA%B8%B0%EC%B4%88%20%7C%7C%203.2%20%ED%9D%90%EB%A6%84%EC%A0%9C%EC%96%B4%20-%20%EB%B0%98%EB%B3%B5%EB%AC%B8%20for,%20while&url=https://ag-su.github.io/2021/07/03/flow-control2-for-while/" title="Share
+          on Twitter" rel="nofollow" target="_blank"><div data-icon='ei-sc-twitter' data-size='s'></div></a>
+          <a href="https://facebook.com/sharer.php?u=https://ag-su.github.io/2021/07/03/flow-control2-for-while/" title="Share on Facebook" rel="nofollow" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a>
+          <a href="https://plus.google.com/share?url=https://ag-su.github.io/2021/07/03/flow-control2-for-while/" title="Share on Google+" rel="nofollow" target="_blank"><div data-icon='ei-sc-google-plus' data-size='s'></div></a>
+        </div>
+      </div>
+      <div class="c-newsletter">
+  <div class="c-newsletter__header">
+    <h4 class="c-newsletter__title">Newsletter</h4>
+    <div class="c-newsletter__subtitle">Subscribe to this blog and receive notifications of new posts by email.</div>
+  </div>
+  <form class="c-newsletter-form validate" action="#" method="POST" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+    <div class="c-newsletter-form__group">
+      <label class="u-screen-reader-text" for="mce-EMAIL">Email address</label>
+      <input class="c-newsletter__email required email" id="mce-EMAIL" type="email" name="EMAIL" placeholder="Your email address" autocomplete="on">
+      <input class="c-newsletter__button" id="mc-embedded-subscribe" type="submit" name="subscribe" value="Subscribe">
+    </div>
+  </form>
+</div> <!-- /.c-newsletter -->
+      <div class="c-recent-post">
+        <h4 class="c-recent__title">You might also enjoy</h4>
+        <div class="c-recent__box">
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /myblog/images/01.credit_thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/10/19/credit-card-fraud-detection/">Transcription || [Kaggle] Credit card Fraud Detection</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-10-19T00:00:00+09:00">October 19, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/25/cluster-filtering/" style="background-image: url( /myblog/images/08.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/25/cluster-filtering/">Stock Research || 3.3. 클러스터링 분석을 통한 주가 상승추세 패턴 검출</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-25T00:00:00+09:00">July 25, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/22/tsne/" style="background-image: url( /myblog/images/07.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/22/tsne/">Stock Research || 3.2. t-SNE를 사용한 주가데이터 2차원 시각화</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-22T00:00:00+09:00">July 22, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/18/shap-value/" style="background-image: url( /myblog/images/06.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/18/shap-value/">Stock Research || 3.1. 설명가능 AI (XAI), SHAP value</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-18T00:00:00+09:00">July 18, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        </div>
+      </div> <!-- /.c-recent-post -->
       
-      <a class="c-categories__link" href="/myblog/category/stock-research/">
-        
-        
-        
-        <div class="c-categories__img">
-          <figure style="background-image: url('/myblog/images/08.thumbnail.png');"></figure>
-          <span class="c-categories__more">View all</span>
-        </div>
-        
-        
-        <div class="c-categories__container ">
-          <h2 class="c-categories__header">stock-research</h2>
-          <p class="c-categories__count"><span>8</span> Posts</p>
-        </div>
-      </a>
-    </li>
-    
-    <li class="c-categories__item">
+        <div class="c-comments">
+  <div id="disqus_thread" class="article-comments"></div>
+  <script>
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.src = '//mr-brown.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+</div> <!-- /.c-comments -->
       
-      <a class="c-categories__link" href="/myblog/category/transcription/">
-        
-        
-        
-        <div class="c-categories__img">
-          <figure style="background-image: url('/myblog/images/01.credit_thumbnail.png');"></figure>
-          <span class="c-categories__more">View all</span>
-        </div>
-        
-        
-        <div class="c-categories__container ">
-          <h2 class="c-categories__header">transcription</h2>
-          <p class="c-categories__count"><span>1</span> Posts</p>
-        </div>
-      </a>
-    </li>
-    
-  </ul>
-</div> <!-- ./c-categories -->
+    </div> <!-- /.c-wrap-content -->
+  </div> <!-- /.c-article__content -->
+</article> <!-- /.c-article-page -->
+
 </main> <!-- /.c-content -->
   </div> <!-- /.o-wrapper -->
   <div class="c-top" data-icon='ei-chevron-up' data-size='s' title="Scroll To Top"></div> <!-- /.c-top -->
