@@ -5,9 +5,9 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-  <title>python</title>
-  <meta name='description' content="Data Science">
-  <link rel='canonical' href="https://ag-su.github.io/myblog/category/python/">
+  <title>python 기초 || 10.1 sqlite 테이블 생성, 삽입, 삭제</title>
+  <meta name='description' content="10. Sqlite 데이터베이스 연동_1테이블 생성, 데이터 삽입과 삭제">
+  <link rel='canonical' href="https://ag-su.github.io/myblog/2021/07/15/database-sqlite-1/">
   <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
@@ -75,275 +75,326 @@
 </aside> <!-- /.c-sidebar -->
 
 <main class="c-content">
-  <header class="c-header">
-  <div class="c-header__box">
-    <div class="c-search">
-      <div class="c-search__box">
-        <label for="js-search-input" class="u-screen-reader-text">Search for Blog</label>
-        <input type="text" id="js-search-input" class="c-search__text" autocomplete="off" placeholder="Type to search...">
-        <div data-icon='ei-search' data-size='s'></div>
+  <article class="c-article">
+  <div class="c-article__content">
+    <header class="c-header u-hide u-no-margin-top">
+      <div class="c-header__box">
+        <div class="c-search u-full-width">
+          <div class="c-search__box">
+            <label for="js-search-input" class="u-screen-reader-text">Search for Blog</label>
+            <input type="text" id="js-search-input" class="c-search__text" autocomplete="off" placeholder="Type to search...">
+            <div data-icon='ei-search' data-size='s'></div>
+          </div>
+          <ul id="js-results-container" class="c-search-results-list"></ul>
+        </div>
       </div>
-      <ul id="js-results-container" class="c-search-results-list"></ul>
-    </div>
-    <div class="c-nav">
-      <ul class="c-nav__list u-lists-reset">
-        <li class="c-nav__item is-active">
-          <div data-icon='ei-pencil' data-size='s'></div> Posts</li>
-        <li class="c-nav__item">
-          <div data-icon='ei-star' data-size='s'></div> Categories</li>
-      </ul>
-    </div>
-  </div>
-</header> <!-- /.c-header -->
-<div class="c-posts o-opacity">
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/15/database-sqlite-3/">python 기초 || 10.3 sqlite 테이블 수정 및 삭제</a>
-      </h2>
-      <p>10. Sqlite 데이터베이스 연동_3 테이블 데이터 수정 및 삭제 - settings import sqlite3 # sqlite...</p>
-      <span class="c-post-date">2021, Jul 15&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">3 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/15/database-sqlite-2/">python 기초 || 10.2 sqlite 테이블 조회</a>
-      </h2>
-      <p>10. Sqlite 데이터베이스 연동_2 테이블 조회 - Setting # sqlite import sqlite3 # DB 파일...</p>
-      <span class="c-post-date">2021, Jul 15&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">5 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/15/database-sqlite-1/">python 기초 || 10.1 sqlite 테이블 생성, 삽입, 삭제</a>
-      </h2>
-      <p>10. Sqlite 데이터베이스 연동_1 테이블 생성, 데이터 삽입과 삭제 - setting library import import sqlite3...</p>
-      <span class="c-post-date">2021, Jul 15&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">4 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/12/excel-csv/">python 기초 || 9. 외부 파일 처리 (csv, excel)</a>
-      </h2>
-      <p>9. 외부 파일 처리 import csv 먼저 csv 모듈을 import 한다. (1) 예제 1 with...</p>
-      <span class="c-post-date">2021, Jul 12&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">6 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/11/exception/">python 기초 || 8. 예외 종류와 예외 처리</a>
-      </h2>
-      <p>8. 예외 종류와 예외 처리 * 문법적으로 에러가 없지만, 코드 실행 (런타임) 프로세스에서 발생하는 예외...</p>
-      <span class="c-post-date">2021, Jul 11&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">7 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/09/file-read-write/">python 기초 || 7. 파일 읽기 & 쓰기</a>
-      </h2>
-      <p>(7) 파일 읽기 &amp; 쓰기 - 읽기모드: r, 쓰기모드(기존 파일 삭제): w, 추가모드(파일 생성 또는...</p>
-      <span class="c-post-date">2021, Jul 09&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">8 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/08/module-package/">python 기초 || 6. 모듈과 패키지 module & package</a>
-      </h2>
-      <p>6. 모듈과 패키지 module &amp; package 폴더: 패키지, 파일: 모듈 이라고 할 수 있음 패키지:...</p>
-      <span class="c-post-date">2021, Jul 08&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">5 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/08/class/">python 기초 || 5. 클래스</a>
-      </h2>
-      <p>5. 클래스, 상속, 다중상속 다룰 내용 클래스 변수 &amp; 인스턴스 변수 차이 (중요) 클래스 변수:...</p>
-      <span class="c-post-date">2021, Jul 08&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">8 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/06/definition-lambda/">python 기초 || 4. 함수와 람다</a>
-      </h2>
-      <p>4. 함수와 람다 함수 정의방법 def 함수명(parameter): … code (1) 출력 (print) def hello(world): print("Hello",...</p>
-      <span class="c-post-date">2021, Jul 06&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">6 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/03/flow-control2-for-while/">python 기초 || 3.2 흐름제어 - 반복문 for, while</a>
-      </h2>
-      <p>3-2 흐름제어: 반복문 for, while (1) While 문 예제1 v1 = 1 while v1 &lt;...</p>
-      <span class="c-post-date">2021, Jul 03&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">6 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/03/flow-control1-if/">python 기초 || 3.1 흐름제어 - 조건문 if</a>
-      </h2>
-      <p>3-1. 흐름제어: 조건문 if - cf) 참(True), 거짓(False) 종류 참: “내용”, [내용], (내용), {내용}, 1,...</p>
-      <span class="c-post-date">2021, Jul 03&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">4 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/01/datatype2-list-tuple-dictionary-set/">python 기초 || 2.2 datatype - 리스트, 튜플, 딕셔너리, 집합</a>
-      </h2>
-      <p>2-2 Data Type : 리스트, 튜플, 딕셔너리, 집합 (1) 리스트 (list) 순서 O, 중복 O,...</p>
-      <span class="c-post-date">2021, Jul 01&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">10 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/01/datatype1-numeric-string/">python 기초 || 2.1 datatype - 숫자형과 문자열</a>
-      </h2>
-      <p>2. Data Type : 숫자형, 문자열 데이터 타입 한눈에 보기 v_str = "Niceman" v_bool =...</p>
-      <span class="c-post-date">2021, Jul 01&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">5 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/06/30/print/">python 기초 || 1. print 함수</a>
-      </h2>
-      <p>1. print 함수 (1) 기본 출력 print('Hello Python!') print("Hello Python!") print("""Hello Python!""") print('''Hello Python!''') Hello...</p>
-      <span class="c-post-date">2021, Jun 30&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">3 minute read</span>
-    </div>
-  </article>
-  
-</div> <!-- /.c-posts -->
-<div class="c-categories" style="display: none;">
-  <ul class="c-categories__list u-lists-reset">
-      
-    <li class="c-categories__item">
-      
-      <a class="c-categories__link" href="/myblog/category/algorithm/">
-        
-        
-        
-        <div class="c-categories__img">
-          <figure style="background-image: url('/myblog/images/02.implementation_1.png');"></figure>
-          <span class="c-categories__more">View all</span>
-        </div>
-        
-        
-        <div class="c-categories__container ">
-          <h2 class="c-categories__header">algorithm</h2>
-          <p class="c-categories__count"><span>2</span> Posts</p>
-        </div>
-      </a>
-    </li>
+    </header>
     
-    <li class="c-categories__item">
-      
-      <a class="c-categories__link" href="/myblog/category/python/">
-        
-        
-        
+    
+    <div class="c-wrap-content">
+      <header class="c-article__header">
+        <h1 class="c-article__title">python 기초 || 10.1 sqlite 테이블 생성, 삽입, 삭제</h1>
+        <div class="c-article__date">
+          <span>2021, Jul 15</span>
+        </div>
+      </header>
+      <h1 id="10-sqlite-데이터베이스-연동_1">10. Sqlite 데이터베이스 연동_1</h1>
+<h1 id="테이블-생성-데이터-삽입과-삭제">테이블 생성, 데이터 삽입과 삭제</h1>
+
+<h3 id="--setting">- setting</h3>
+<ul>
+  <li><strong>library import</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>SQliteDatabaseBrowserPortable.exe</strong> 설치하기</li>
+</ul>
+
+<p>: 직관적인 데이터베이스 관리 가능</p>
+
+<p><img src="/myblog/images/sqlite/sqlite1.png" alt="image.png" /></p>
+
+<ul>
+  <li><strong>삽입날짜 변수 생성</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"now: "</span><span class="p">,</span> <span class="n">now</span><span class="p">)</span>
+
+<span class="n">nowDateTime</span> <span class="o">=</span> <span class="n">now</span><span class="p">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">'%Y-%m-%d %H:%M:%S'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'nowDateTime: '</span><span class="p">,</span> <span class="n">nowDateTime</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>now:  2021-09-20 17:36:58.730291
+nowDateTime:  2021-09-20 17:36:58
+</code></pre></div></div>
+
+<p>데이터베이스에 넣어줄 변수를 사전 생성한다.</p>
+
+<ul>
+  <li><strong>sqlite 살펴보기</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'sqlite3.version: '</span><span class="p">,</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">version</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'sqlite3.sqlite_version'</span><span class="p">,</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">sqlite_version</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlite3.version:  2.6.0
+sqlite3.sqlite_version 3.33.0
+</code></pre></div></div>
+
+<h2 id="1-테이블-생성">(1) 테이블 생성</h2>
+
+<h3 id="--db-생성--auto-commitrollback-설정">- DB 생성 &amp; Auto Commit(Rollback) 설정</h3>
+<ul>
+  <li>isolation_level=None: AutoCommit</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">'./resource/database.db'</span><span class="p">,</span> <span class="n">isolation_level</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/myblog/images/sqlite/sqlite2.png" alt="image.png" /></p>
+
+<p><strong>DB</strong>를 생성하고 연결해 준다. <strong>DB</strong>에 명령할 때 <strong>커밋(commit)</strong>을 꼭 해주어야 하는데 , <strong>isolation_level=None</strong>으로 설정하면 <strong>AutoCommit</strong>이 된다.</p>
+
+<p>그리고 아까 다운받았던 <strong>SQliteDatabaseBrowserPortable.exe</strong> 에서 <strong>[ 데이터베이스 열기 - database.db ]</strong> 를 실행한다.</p>
+
+<h3 id="--cursor">- Cursor</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Cursor Type: '</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cursor Type:  &lt;class 'sqlite3.Cursor'&gt;
+</code></pre></div></div>
+
+<p><strong>cursor</strong> 연결을 해준다. 이 커서로 데이터베이스에 명령을 할 수 있다.</p>
+
+<h3 id="--테이블-생성-create-table">- 테이블 생성 CREATE TABLE</h3>
+<ul>
+  <li><strong>data type: TEXT, NUMERIC, INTEGER, REAL BLOB … )</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">'CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY, username TEXT, email TEXT, phone TEXT, website TEXT, regdate TEXT)'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x193695339d0&gt;
+</code></pre></div></div>
+
+<p>테이블을 생성하기 위해서 CREATE TABLE 명령어를 사용한다. 그다음 <strong>테이블이름(속성 타입)</strong> 이러한 형태로 넣어준다. <strong>id 속성</strong>을 <strong>PRIMARY KEY</strong>로 설정해 주었다.</p>
+
+<p><img src="/myblog/images/sqlite/sqlite3.png" alt="image.png" /></p>
+
+<p>이렇게 <strong>users</strong> 테이블이 생성되었다.</p>
+
+<h3 id="--데이터-삽입-insert-into">- 데이터 삽입 INSERT INTO</h3>
+
+<ul>
+  <li>방법 1</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"INSERT INTO users VALUES(1, 'KIM', 'silver@naver.com', '010-0000-0000', 'kim.com', ?)"</span><span class="p">,</span> <span class="p">(</span><span class="n">nowDateTime</span><span class="p">,))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x193695339d0&gt;
+</code></pre></div></div>
+
+<ul>
+  <li>방법 2</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"INSERT INTO users(id, username, email, phone, website, regdate) VALUES(?, ?, ?, ?, ?, ?)"</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">'Park'</span><span class="p">,</span> <span class="s">'Park@gmail.com'</span><span class="p">,</span> <span class="s">'010-1111-1111'</span><span class="p">,</span> <span class="s">'park.com'</span><span class="p">,</span> <span class="n">nowDateTime</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x193695339d0&gt;
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>INSERT INTO 테이블이름 VALUES()</p>
+  </li>
+  <li>
+    <p>INSERT INTO 테이블이름() VALUES()</p>
+  </li>
+</ul>
+
+<p>방법 1은 바로 VALUES안에 값을 넣고, 변수를 넣을 경우 ?로 작성한 후 execute의 인자에서 튜플안에 변수를 넣어준다.  방법 2는 테이블이름() 안에 속성 이름을 명시적으로 나열하고 , VALUES() 안에 모두 ? 로 작성해 주고, execute의 인자에서 튜플 안에 값 또는 변수를 넣어준다.</p>
+
+<p><img src="/myblog/images/sqlite/sqlite4.png" alt="image.png" /></p>
+
+<p>새로고침 하면 위 화면과 같이 값이 추가된 것을 볼 수 있다.</p>
+
+<h3 id="--many-삽입-튜플-리스트-executemany">- Many 삽입 (튜플, 리스트): executemany</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">userList</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">'Lee'</span><span class="p">,</span> <span class="s">'Lee@naver.com'</span><span class="p">,</span> <span class="s">'010-2222-2222'</span><span class="p">,</span> <span class="s">'Lee.com'</span><span class="p">,</span> <span class="n">nowDateTime</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">'Jung'</span><span class="p">,</span> <span class="s">'jung@gmail.com'</span><span class="p">,</span> <span class="s">'010-3333-3333'</span><span class="p">,</span> <span class="s">'jung.com'</span><span class="p">,</span> <span class="n">nowDateTime</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s">'Yoo'</span><span class="p">,</span> <span class="s">'yoo@daum.net'</span><span class="p">,</span> <span class="s">'010-4444-4444'</span><span class="p">,</span> <span class="s">'yoo.net'</span><span class="p">,</span> <span class="n">nowDateTime</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">c</span><span class="p">.</span><span class="n">executemany</span><span class="p">(</span><span class="s">"INSERT INTO users(id, username, email, phone, website, regdate) VALUES(?, ?, ?, ?, ?, ?)"</span><span class="p">,</span> <span class="n">userList</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x193695339d0&gt;
+</code></pre></div></div>
+
+<p><img src="/myblog/images/sqlite/sqlite5.png" alt="image.png" /></p>
+
+<p><strong>excutemany</strong>의 두번째 인자에 튜플이나 리스트를 넣어주면 한꺼번에 데이터 삽입이 가능하다.</p>
+
+<h3 id="--테이블-데이터-삭제-delete-from">- 테이블 데이터 삭제: DELETE FROM</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">'DELETE FROM users'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x193695339d0&gt;
+</code></pre></div></div>
+
+<p>이렇게 작성하면 users 테이블의 모든 데이터가 삭제된다.</p>
+
+<ul>
+  <li><strong>지워진 개수 반환하고 삭제하기</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">userList</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">'Lee'</span><span class="p">,</span> <span class="s">'Lee@naver.com'</span><span class="p">,</span> <span class="s">'010-2222-2222'</span><span class="p">,</span> <span class="s">'Lee.com'</span><span class="p">,</span> <span class="n">nowDateTime</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">'Jung'</span><span class="p">,</span> <span class="s">'jung@gmail.com'</span><span class="p">,</span> <span class="s">'010-3333-3333'</span><span class="p">,</span> <span class="s">'jung.com'</span><span class="p">,</span> <span class="n">nowDateTime</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s">'Yoo'</span><span class="p">,</span> <span class="s">'yoo@daum.net'</span><span class="p">,</span> <span class="s">'010-4444-4444'</span><span class="p">,</span> <span class="s">'yoo.net'</span><span class="p">,</span> <span class="n">nowDateTime</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">c</span><span class="p">.</span><span class="n">executemany</span><span class="p">(</span><span class="s">"INSERT INTO users(id, username, email, phone, website, regdate) VALUES(?, ?, ?, ?, ?, ?)"</span><span class="p">,</span> <span class="n">userList</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"users db delete: "</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">'DELETE FROM users'</span><span class="p">).</span><span class="n">rowcount</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>users db delete:  3
+</code></pre></div></div>
+
+<p><strong>rowcount</strong>를 사용하여 개수를 반환해줄 수 있다.</p>
+
+<h3 id="--커밋--롤백">- 커밋 &amp; 롤백</h3>
+<ul>
+  <li>isolation_level=None: Autocommit</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># conn.commit()
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># conn.rollback()
+</span></code></pre></div></div>
+
+<p>본 포스팅에서는 오토커밋으로 설정 해놨으므로 주석처리 한다.</p>
+
+<h3 id="--접속-해제">- 접속 해제</h3>
+<ul>
+  <li>마무리할 때 꼭 접속해제를 해야한다.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">conn</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+      <div class="c-article__footer u-clearfix">
+        <div class="c-article__tag">
           
-        
-        
-        <div class="c-categories__container c-empty-figure">
-          <h2 class="c-categories__header">python</h2>
-          <p class="c-categories__count"><span>14</span> Posts</p>
         </div>
-      </a>
-    </li>
-    
-    <li class="c-categories__item">
+        <div class="c-article__share">
+          <a href="https://twitter.com/intent/tweet?text=python%20%EA%B8%B0%EC%B4%88%20%7C%7C%2010.1%20sqlite%20%ED%85%8C%EC%9D%B4%EB%B8%94%20%EC%83%9D%EC%84%B1,%20%EC%82%BD%EC%9E%85,%20%EC%82%AD%EC%A0%9C&url=https://ag-su.github.io/2021/07/15/database-sqlite-1/" title="Share
+          on Twitter" rel="nofollow" target="_blank"><div data-icon='ei-sc-twitter' data-size='s'></div></a>
+          <a href="https://facebook.com/sharer.php?u=https://ag-su.github.io/2021/07/15/database-sqlite-1/" title="Share on Facebook" rel="nofollow" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a>
+          <a href="https://plus.google.com/share?url=https://ag-su.github.io/2021/07/15/database-sqlite-1/" title="Share on Google+" rel="nofollow" target="_blank"><div data-icon='ei-sc-google-plus' data-size='s'></div></a>
+        </div>
+      </div>
+      <div class="c-newsletter">
+  <div class="c-newsletter__header">
+    <h4 class="c-newsletter__title">Newsletter</h4>
+    <div class="c-newsletter__subtitle">Subscribe to this blog and receive notifications of new posts by email.</div>
+  </div>
+  <form class="c-newsletter-form validate" action="#" method="POST" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+    <div class="c-newsletter-form__group">
+      <label class="u-screen-reader-text" for="mce-EMAIL">Email address</label>
+      <input class="c-newsletter__email required email" id="mce-EMAIL" type="email" name="EMAIL" placeholder="Your email address" autocomplete="on">
+      <input class="c-newsletter__button" id="mc-embedded-subscribe" type="submit" name="subscribe" value="Subscribe">
+    </div>
+  </form>
+</div> <!-- /.c-newsletter -->
+      <div class="c-recent-post">
+        <h4 class="c-recent__title">You might also enjoy</h4>
+        <div class="c-recent__box">
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /myblog/images/01.credit_thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/10/19/credit-card-fraud-detection/">Transcription || [Kaggle] Credit card Fraud Detection</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-10-19T00:00:00+09:00">October 19, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/25/cluster-filtering/" style="background-image: url( /myblog/images/08.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/25/cluster-filtering/">Stock Research || 3.3. 클러스터링 분석을 통한 주가 상승추세 패턴 검출</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-25T00:00:00+09:00">July 25, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/22/tsne/" style="background-image: url( /myblog/images/07.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/22/tsne/">Stock Research || 3.2. t-SNE를 사용한 주가데이터 2차원 시각화</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-22T00:00:00+09:00">July 22, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/18/shap-value/" style="background-image: url( /myblog/images/06.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/18/shap-value/">Stock Research || 3.1. 설명가능 AI (XAI), SHAP value</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-18T00:00:00+09:00">July 18, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        </div>
+      </div> <!-- /.c-recent-post -->
       
-      <a class="c-categories__link" href="/myblog/category/stock-research/">
-        
-        
-        
-        <div class="c-categories__img">
-          <figure style="background-image: url('/myblog/images/08.thumbnail.png');"></figure>
-          <span class="c-categories__more">View all</span>
-        </div>
-        
-        
-        <div class="c-categories__container ">
-          <h2 class="c-categories__header">stock-research</h2>
-          <p class="c-categories__count"><span>8</span> Posts</p>
-        </div>
-      </a>
-    </li>
-    
-    <li class="c-categories__item">
+        <div class="c-comments">
+  <div id="disqus_thread" class="article-comments"></div>
+  <script>
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.src = '//mr-brown.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+</div> <!-- /.c-comments -->
       
-      <a class="c-categories__link" href="/myblog/category/transcription/">
-        
-        
-        
-        <div class="c-categories__img">
-          <figure style="background-image: url('/myblog/images/01.credit_thumbnail.png');"></figure>
-          <span class="c-categories__more">View all</span>
-        </div>
-        
-        
-        <div class="c-categories__container ">
-          <h2 class="c-categories__header">transcription</h2>
-          <p class="c-categories__count"><span>1</span> Posts</p>
-        </div>
-      </a>
-    </li>
-    
-  </ul>
-</div> <!-- ./c-categories -->
+    </div> <!-- /.c-wrap-content -->
+  </div> <!-- /.c-article__content -->
+</article> <!-- /.c-article-page -->
+
 </main> <!-- /.c-content -->
   </div> <!-- /.o-wrapper -->
   <div class="c-top" data-icon='ei-chevron-up' data-size='s' title="Scroll To Top"></div> <!-- /.c-top -->

@@ -89,6 +89,62 @@
     } ,
   
     {
+      "title"    : "python 기초 || 10.3 sqlite 테이블 수정 및 삭제",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2021/07/15/database-sqlite-3/",
+      "date"     : "2021-07-15 00:00:00 +0900"
+    } ,
+  
+    {
+      "title"    : "python 기초 || 10.2 sqlite 테이블 조회",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2021/07/15/database-sqlite-2/",
+      "date"     : "2021-07-15 00:00:00 +0900"
+    } ,
+  
+    {
+      "title"    : "python 기초 || 10.1 sqlite 테이블 생성, 삽입, 삭제",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2021/07/15/database-sqlite-1/",
+      "date"     : "2021-07-15 00:00:00 +0900"
+    } ,
+  
+    {
+      "title"    : "python 기초 || 9. 외부 파일 처리 (csv, excel)",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2021/07/12/excel-csv/",
+      "date"     : "2021-07-12 00:00:00 +0900"
+    } ,
+  
+    {
+      "title"    : "python 기초 || 8. 예외 종류와 예외 처리",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2021/07/11/exception/",
+      "date"     : "2021-07-11 00:00:00 +0900"
+    } ,
+  
+    {
+      "title"    : "python 기초 || 7. 파일 읽기 &amp; 쓰기",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2021/07/09/file-read-write/",
+      "date"     : "2021-07-09 00:00:00 +0900"
+    } ,
+  
+    {
+      "title"    : "python 기초 || 6. 모듈과 패키지 module &amp; package",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2021/07/08/module-package/",
+      "date"     : "2021-07-08 00:00:00 +0900"
+    } ,
+  
+    {
       "title"    : "python 기초 || 5. 클래스",
       "category" : "",
       "tags"     : "",
