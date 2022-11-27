@@ -5,9 +5,9 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-  <title>python</title>
-  <meta name='description' content="Data Science">
-  <link rel='canonical' href="https://ag-su.github.io/myblog/category/python/">
+  <title>python 기초 || 9. 외부 파일 처리 (csv, excel)</title>
+  <meta name='description' content="9. 외부 파일 처리">
+  <link rel='canonical' href="https://ag-su.github.io/myblog/2021/07/12/excel-csv/">
   <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
@@ -75,275 +75,400 @@
 </aside> <!-- /.c-sidebar -->
 
 <main class="c-content">
-  <header class="c-header">
-  <div class="c-header__box">
-    <div class="c-search">
-      <div class="c-search__box">
-        <label for="js-search-input" class="u-screen-reader-text">Search for Blog</label>
-        <input type="text" id="js-search-input" class="c-search__text" autocomplete="off" placeholder="Type to search...">
-        <div data-icon='ei-search' data-size='s'></div>
+  <article class="c-article">
+  <div class="c-article__content">
+    <header class="c-header u-hide u-no-margin-top">
+      <div class="c-header__box">
+        <div class="c-search u-full-width">
+          <div class="c-search__box">
+            <label for="js-search-input" class="u-screen-reader-text">Search for Blog</label>
+            <input type="text" id="js-search-input" class="c-search__text" autocomplete="off" placeholder="Type to search...">
+            <div data-icon='ei-search' data-size='s'></div>
+          </div>
+          <ul id="js-results-container" class="c-search-results-list"></ul>
+        </div>
       </div>
-      <ul id="js-results-container" class="c-search-results-list"></ul>
-    </div>
-    <div class="c-nav">
-      <ul class="c-nav__list u-lists-reset">
-        <li class="c-nav__item is-active">
-          <div data-icon='ei-pencil' data-size='s'></div> Posts</li>
-        <li class="c-nav__item">
-          <div data-icon='ei-star' data-size='s'></div> Categories</li>
-      </ul>
-    </div>
-  </div>
-</header> <!-- /.c-header -->
-<div class="c-posts o-opacity">
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/15/database-sqlite-3/">python 기초 || 10.3 sqlite 테이블 수정 및 삭제</a>
-      </h2>
-      <p>10. Sqlite 데이터베이스 연동_3 테이블 데이터 수정 및 삭제 - settings import sqlite3 # sqlite...</p>
-      <span class="c-post-date">2021, Jul 15&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">3 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/15/database-sqlite-2/">python 기초 || 10.2 sqlite 테이블 조회</a>
-      </h2>
-      <p>10. Sqlite 데이터베이스 연동_2 테이블 조회 - Setting # sqlite import sqlite3 # DB 파일...</p>
-      <span class="c-post-date">2021, Jul 15&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">5 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/15/database-sqlite-1/">python 기초 || 10.1 sqlite 테이블 생성, 삽입, 삭제</a>
-      </h2>
-      <p>10. Sqlite 데이터베이스 연동_1 테이블 생성, 데이터 삽입과 삭제 - setting library import import sqlite3...</p>
-      <span class="c-post-date">2021, Jul 15&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">4 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/12/excel-csv/">python 기초 || 9. 외부 파일 처리 (csv, excel)</a>
-      </h2>
-      <p>9. 외부 파일 처리 import csv 먼저 csv 모듈을 import 한다. (1) 예제 1 with...</p>
-      <span class="c-post-date">2021, Jul 12&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">6 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/11/exception/">python 기초 || 8. 예외 종류와 예외 처리</a>
-      </h2>
-      <p>8. 예외 종류와 예외 처리 * 문법적으로 에러가 없지만, 코드 실행 (런타임) 프로세스에서 발생하는 예외...</p>
-      <span class="c-post-date">2021, Jul 11&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">7 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/09/file-read-write/">python 기초 || 7. 파일 읽기 & 쓰기</a>
-      </h2>
-      <p>(7) 파일 읽기 &amp; 쓰기 - 읽기모드: r, 쓰기모드(기존 파일 삭제): w, 추가모드(파일 생성 또는...</p>
-      <span class="c-post-date">2021, Jul 09&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">8 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/08/module-package/">python 기초 || 6. 모듈과 패키지 module & package</a>
-      </h2>
-      <p>6. 모듈과 패키지 module &amp; package 폴더: 패키지, 파일: 모듈 이라고 할 수 있음 패키지:...</p>
-      <span class="c-post-date">2021, Jul 08&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">5 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/08/class/">python 기초 || 5. 클래스</a>
-      </h2>
-      <p>5. 클래스, 상속, 다중상속 다룰 내용 클래스 변수 &amp; 인스턴스 변수 차이 (중요) 클래스 변수:...</p>
-      <span class="c-post-date">2021, Jul 08&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">8 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/06/definition-lambda/">python 기초 || 4. 함수와 람다</a>
-      </h2>
-      <p>4. 함수와 람다 함수 정의방법 def 함수명(parameter): … code (1) 출력 (print) def hello(world): print("Hello",...</p>
-      <span class="c-post-date">2021, Jul 06&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">6 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/03/flow-control2-for-while/">python 기초 || 3.2 흐름제어 - 반복문 for, while</a>
-      </h2>
-      <p>3-2 흐름제어: 반복문 for, while (1) While 문 예제1 v1 = 1 while v1 &lt;...</p>
-      <span class="c-post-date">2021, Jul 03&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">6 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/03/flow-control1-if/">python 기초 || 3.1 흐름제어 - 조건문 if</a>
-      </h2>
-      <p>3-1. 흐름제어: 조건문 if - cf) 참(True), 거짓(False) 종류 참: “내용”, [내용], (내용), {내용}, 1,...</p>
-      <span class="c-post-date">2021, Jul 03&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">4 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/01/datatype2-list-tuple-dictionary-set/">python 기초 || 2.2 datatype - 리스트, 튜플, 딕셔너리, 집합</a>
-      </h2>
-      <p>2-2 Data Type : 리스트, 튜플, 딕셔너리, 집합 (1) 리스트 (list) 순서 O, 중복 O,...</p>
-      <span class="c-post-date">2021, Jul 01&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">10 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/07/01/datatype1-numeric-string/">python 기초 || 2.1 datatype - 숫자형과 문자열</a>
-      </h2>
-      <p>2. Data Type : 숫자형, 문자열 데이터 타입 한눈에 보기 v_str = "Niceman" v_bool =...</p>
-      <span class="c-post-date">2021, Jul 01&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">5 minute read</span>
-    </div>
-  </article>
-  
-  <article class="c-post">
-     
-    <div class="c-post-content">
-      <h2 class="c-post-title">
-        <a href="/myblog/2021/06/30/print/">python 기초 || 1. print 함수</a>
-      </h2>
-      <p>1. print 함수 (1) 기본 출력 print('Hello Python!') print("Hello Python!") print("""Hello Python!""") print('''Hello Python!''') Hello...</p>
-      <span class="c-post-date">2021, Jun 30&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-      <span class="c-post-words">3 minute read</span>
-    </div>
-  </article>
-  
-</div> <!-- /.c-posts -->
-<div class="c-categories" style="display: none;">
-  <ul class="c-categories__list u-lists-reset">
-      
-    <li class="c-categories__item">
-      
-      <a class="c-categories__link" href="/myblog/category/algorithm/">
-        
-        
-        
-        <div class="c-categories__img">
-          <figure style="background-image: url('/myblog/images/02.implementation_1.png');"></figure>
-          <span class="c-categories__more">View all</span>
-        </div>
-        
-        
-        <div class="c-categories__container ">
-          <h2 class="c-categories__header">algorithm</h2>
-          <p class="c-categories__count"><span>2</span> Posts</p>
-        </div>
-      </a>
-    </li>
+    </header>
     
-    <li class="c-categories__item">
-      
-      <a class="c-categories__link" href="/myblog/category/python/">
-        
-        
-        
+    
+    <div class="c-wrap-content">
+      <header class="c-article__header">
+        <h1 class="c-article__title">python 기초 || 9. 외부 파일 처리 (csv, excel)</h1>
+        <div class="c-article__date">
+          <span>2021, Jul 12</span>
+        </div>
+      </header>
+      <h1 id="9-외부-파일-처리">9. 외부 파일 처리</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
+</code></pre></div></div>
+
+<p>먼저 csv 모듈을 import 한다.</p>
+
+<h2 id="1-예제-1">(1) 예제 1</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'./resource/sample1.csv'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="c1">#     next(reader) # 헤더 스킵 
+</span>    
+    <span class="c1"># 확인 
+</span>    <span class="k">print</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">reader</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">reader</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1"># 하나의 row가 리스트 형식으로 나온다. 
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;_csv.reader object at 0x000002487E1CF320&gt;
+&lt;class '_csv.reader'&gt;
+['__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__lt__', '__ne__', '__new__', '__next__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'dialect', 'line_num']
+
+['번호', '이름', '가입일시', '나이']
+['1', '김정수', '2017-01-19 11:30:00', '25']
+['2', '박민구', '2017-02-07 10:22:00', '35']
+['3', '정순미', '2017-01-22 09:10:00', '33']
+['4', '김정현', '2017-02-22 14:09:00', '45']
+['5', '홍미진', '2017-04-01 18:00:00', '17']
+['6', '김순철', '2017-05-14 22:33:07', '22']
+['7', '이동철', '2017-03-01 23:44:45', '27']
+['8', '박지숙', '2017-01-11 06:04:18', '30']
+['9', '김은미', '2017-02-08 07:44:33', '51']
+['10', '장혁철', '2017-12-01 13:01:11', '16']
+</code></pre></div></div>
+
+<p>여기서 header를 제거하고 싶으면 위의 주석으로 작성되어 있는 next(reader)를 사용하면 된다.</p>
+
+<h2 id="예제-2-구분-문자-지정delimiter">예제 2: 구분 문자 지정(delimiter)</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"./resource/sample2.csv"</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>  <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">'|'</span><span class="p">)</span>
+    
+    <span class="k">print</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">reader</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">reader</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;_csv.reader object at 0x000002487E1CF4C0&gt;
+&lt;class '_csv.reader'&gt;
+['__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__lt__', '__ne__', '__new__', '__next__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'dialect', 'line_num']
+
+['번호', '이름', '가입일시', '나이']
+['1', '김정수', '2017-01-19 11:30:00', '25']
+['2', '박민구', '2017-02-07 10:22:00', '35']
+['3', '정순미', '2017-01-22 09:10:00', '33']
+['4', '김정현', '2017-02-22 14:09:00', '45']
+['5', '홍미진', '2017-04-01 18:00:00', '17']
+['6', '김순철', '2017-05-14 22:33:07', '22']
+['7', '이동철', '2017-03-01 23:44:45', '27']
+['8', '박지숙', '2017-01-11 06:04:18', '30']
+['9', '김은미', '2017-02-08 07:44:33', '51']
+['10', '장혁철', '2017-12-01 13:01:11', '16']
+</code></pre></div></div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>로 구분되어 있는 csv파일이기 때문에 구분자를 , 에서</td>
+      <td>로 바꾸어주어야 한다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="예제-3">예제 3</h2>
+<ul>
+  <li><strong>dictionary로 읽어오기: DictReader</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'./resource/sample1.csv'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> 
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OrderedDict([('번호', '1'), ('이름', '김정수'), ('가입일시', '2017-01-19 11:30:00'), ('나이', '25')])
+OrderedDict([('번호', '2'), ('이름', '박민구'), ('가입일시', '2017-02-07 10:22:00'), ('나이', '35')])
+OrderedDict([('번호', '3'), ('이름', '정순미'), ('가입일시', '2017-01-22 09:10:00'), ('나이', '33')])
+OrderedDict([('번호', '4'), ('이름', '김정현'), ('가입일시', '2017-02-22 14:09:00'), ('나이', '45')])
+OrderedDict([('번호', '5'), ('이름', '홍미진'), ('가입일시', '2017-04-01 18:00:00'), ('나이', '17')])
+OrderedDict([('번호', '6'), ('이름', '김순철'), ('가입일시', '2017-05-14 22:33:07'), ('나이', '22')])
+OrderedDict([('번호', '7'), ('이름', '이동철'), ('가입일시', '2017-03-01 23:44:45'), ('나이', '27')])
+OrderedDict([('번호', '8'), ('이름', '박지숙'), ('가입일시', '2017-01-11 06:04:18'), ('나이', '30')])
+OrderedDict([('번호', '9'), ('이름', '김은미'), ('가입일시', '2017-02-08 07:44:33'), ('나이', '51')])
+OrderedDict([('번호', '10'), ('이름', '장혁철'), ('가입일시', '2017-12-01 13:01:11'), ('나이', '16')])
+</code></pre></div></div>
+
+<p>하나의 <strong>row</strong>마다 <strong>orderdict</strong>가 생성된다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'./resource/sample1.csv'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> 
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+<span class="c1">#         print(c)
+</span>        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">c</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'----------------------------------'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>번호 1
+이름 김정수
+가입일시 2017-01-19 11:30:00
+나이 25
+----------------------------------
+번호 2
+이름 박민구
+가입일시 2017-02-07 10:22:00
+나이 35
+----------------------------------
+번호 3
+이름 정순미
+가입일시 2017-01-22 09:10:00
+나이 33
+----------------------------------
+번호 4
+이름 김정현
+가입일시 2017-02-22 14:09:00
+나이 45
+----------------------------------
+번호 5
+이름 홍미진
+가입일시 2017-04-01 18:00:00
+나이 17
+----------------------------------
+번호 6
+이름 김순철
+가입일시 2017-05-14 22:33:07
+나이 22
+----------------------------------
+번호 7
+이름 이동철
+가입일시 2017-03-01 23:44:45
+나이 27
+----------------------------------
+번호 8
+이름 박지숙
+가입일시 2017-01-11 06:04:18
+나이 30
+----------------------------------
+번호 9
+이름 김은미
+가입일시 2017-02-08 07:44:33
+나이 51
+----------------------------------
+번호 10
+이름 장혁철
+가입일시 2017-12-01 13:01:11
+나이 16
+----------------------------------
+</code></pre></div></div>
+
+<p>띠리서 위와 같이 <strong>key, value</strong>를 뽑아 출력해주는 코드를 작성할 수 있다.</p>
+
+<h2 id="예제-4-writerow">예제 4: writerow</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">w</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">]]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'./resource/sample3.csv'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s">''</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> 
+    <span class="n">wt</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">w</span><span class="p">:</span> 
+        <span class="n">wt</span><span class="p">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="c1"># 하나하나 검수해서 쓸 때 (if 같은 조건이 들어갈 때)
+</span></code></pre></div></div>
+
+<p><img src="/myblog/images/file/sample3.png" alt="image.png" /></p>
+
+<p><strong>writerow</strong>로 한줄씩 검수해가며 작성할 수 있다.</p>
+
+<h2 id="예제-5-writerows">예제 5: writerows</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"./resource/sample4.csv"</span><span class="p">,</span> <span class="s">'w'</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s">''</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">wt</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">wt</span><span class="p">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>  <span class="c1"># 아예 한번에 쓰는 것 
+</span></code></pre></div></div>
+
+<p><img src="/myblog/images/file/sample4.png" alt="image.png" /></p>
+
+<p>한번에 쓰는 <strong>writerows</strong>함수도 존재한다. for문을 사용할 필요가 없다.</p>
+
+<h2 id="예제-6-excel">예제 6: excel</h2>
+
+<h3 id="--xsl-xlsx">- xsl, xlsx</h3>
+<dl>
+  <dt>: openpyxl, xlswriter, xlrd, xlwt, xlutils</dt>
+  <dd>pandas를 주로 사용 (openpyxl, xlrd)</dd>
+</dl>
+
+<h3 id="--설치-pandas-openpyxl-xlrd">- 설치 (pandas, openpyxl, xlrd)</h3>
+<ul>
+  <li>pip install xlrd</li>
+  <li>pip install openpyxl</li>
+  <li>pip install pandas</li>
+</ul>
+
+<h3 id="--불러오기">- 불러오기</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span> 
+<span class="n">xlsx</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">'./resource/sample.xlsx'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>pandas</strong>를 <strong>import</strong>하고, <strong>read_excel</strong>을 이용하여 엑셀 파일을 불러와 준다.</p>
+
+<h3 id="--상위-데이터-확인">- 상위 데이터 확인</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">xlsx</span><span class="p">.</span><span class="n">head</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Sap Co.      대리점 영업사원       전월       금월  TEAM  총 판매수량
+0  KI1316  경기수원대리점  이기정  1720000  2952000     1     123
+1  KI1451  충청홍성대리점  정미진  4080000  2706000     2     220
+2  KI1534  경기화성대리점  경인선   600000  2214000     1     320
+3  KI1636  강원속초대리점  이동권  3720000  2870000     3     110
+4  KI1735  경기안양대리점  강준석  4800000  2296000     1     134
+</code></pre></div></div>
+
+<p>가장 위의 5개 데이터가 나온다.</p>
+
+<h3 id="--하위-데이터-확인">- 하위 데이터 확인</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">xlsx</span><span class="p">.</span><span class="n">tail</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   Sap Co.       대리점 영업사원       전월       금월  TEAM  총 판매수량
+15  KI2870  경기구리시대리점  박진형  6000000  3400000     2     143
+16  KI2910   강원춘천대리점  김은향  4800000  4896000     1     176
+17  KI3030   강원영동대리점  전수창  4560000  3128000     2      98
+18  KI3131   경기하남대리점  김민정  2750000  7268000     3     293
+19  KI3252   강원포천대리점  서가은  2420000  4740000     4     240
+</code></pre></div></div>
+
+<p>하위 5개의 데이터를 보여준다.</p>
+
+<h3 id="--데이터의-구조">- 데이터의 구조</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">xlsx</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(20, 7)
+</code></pre></div></div>
+
+<p>shape를 이용하여 행과 열의 크기가 얼마나 되는지 확인해 볼 수 있다.</p>
+
+<h3 id="--엑셀-or-csv-다시-쓰기">- 엑셀 or CSV 다시 쓰기</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">xlsx</span><span class="p">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s">"./resource/result.xlsx"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">xlsx</span><span class="p">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s">"./resource/result.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/myblog/images/file/result_excel.png" alt="image.png" /></p>
+
+<p><img src="/myblog/images/file/result_csv.png" alt="image.png" /></p>
+
+<p>이렇게 to_excel과 to_csv를 이용하여 파일을 생성할 수도 있다.</p>
+
+      <div class="c-article__footer u-clearfix">
+        <div class="c-article__tag">
           
-        
-        
-        <div class="c-categories__container c-empty-figure">
-          <h2 class="c-categories__header">python</h2>
-          <p class="c-categories__count"><span>14</span> Posts</p>
         </div>
-      </a>
-    </li>
-    
-    <li class="c-categories__item">
+        <div class="c-article__share">
+          <a href="https://twitter.com/intent/tweet?text=python%20%EA%B8%B0%EC%B4%88%20%7C%7C%209.%20%EC%99%B8%EB%B6%80%20%ED%8C%8C%EC%9D%BC%20%EC%B2%98%EB%A6%AC%20(csv,%20excel)&url=https://ag-su.github.io/2021/07/12/excel-csv/" title="Share
+          on Twitter" rel="nofollow" target="_blank"><div data-icon='ei-sc-twitter' data-size='s'></div></a>
+          <a href="https://facebook.com/sharer.php?u=https://ag-su.github.io/2021/07/12/excel-csv/" title="Share on Facebook" rel="nofollow" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a>
+          <a href="https://plus.google.com/share?url=https://ag-su.github.io/2021/07/12/excel-csv/" title="Share on Google+" rel="nofollow" target="_blank"><div data-icon='ei-sc-google-plus' data-size='s'></div></a>
+        </div>
+      </div>
+      <div class="c-newsletter">
+  <div class="c-newsletter__header">
+    <h4 class="c-newsletter__title">Newsletter</h4>
+    <div class="c-newsletter__subtitle">Subscribe to this blog and receive notifications of new posts by email.</div>
+  </div>
+  <form class="c-newsletter-form validate" action="#" method="POST" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+    <div class="c-newsletter-form__group">
+      <label class="u-screen-reader-text" for="mce-EMAIL">Email address</label>
+      <input class="c-newsletter__email required email" id="mce-EMAIL" type="email" name="EMAIL" placeholder="Your email address" autocomplete="on">
+      <input class="c-newsletter__button" id="mc-embedded-subscribe" type="submit" name="subscribe" value="Subscribe">
+    </div>
+  </form>
+</div> <!-- /.c-newsletter -->
+      <div class="c-recent-post">
+        <h4 class="c-recent__title">You might also enjoy</h4>
+        <div class="c-recent__box">
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /myblog/images/01.credit_thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/10/19/credit-card-fraud-detection/">Transcription || [Kaggle] Credit card Fraud Detection</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-10-19T00:00:00+09:00">October 19, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/25/cluster-filtering/" style="background-image: url( /myblog/images/08.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/25/cluster-filtering/">Stock Research || 3.3. 클러스터링 분석을 통한 주가 상승추세 패턴 검출</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-25T00:00:00+09:00">July 25, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/22/tsne/" style="background-image: url( /myblog/images/07.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/22/tsne/">Stock Research || 3.2. t-SNE를 사용한 주가데이터 2차원 시각화</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-22T00:00:00+09:00">July 22, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/18/shap-value/" style="background-image: url( /myblog/images/06.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/18/shap-value/">Stock Research || 3.1. 설명가능 AI (XAI), SHAP value</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-18T00:00:00+09:00">July 18, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        </div>
+      </div> <!-- /.c-recent-post -->
       
-      <a class="c-categories__link" href="/myblog/category/stock-research/">
-        
-        
-        
-        <div class="c-categories__img">
-          <figure style="background-image: url('/myblog/images/08.thumbnail.png');"></figure>
-          <span class="c-categories__more">View all</span>
-        </div>
-        
-        
-        <div class="c-categories__container ">
-          <h2 class="c-categories__header">stock-research</h2>
-          <p class="c-categories__count"><span>8</span> Posts</p>
-        </div>
-      </a>
-    </li>
-    
-    <li class="c-categories__item">
+        <div class="c-comments">
+  <div id="disqus_thread" class="article-comments"></div>
+  <script>
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.src = '//mr-brown.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+</div> <!-- /.c-comments -->
       
-      <a class="c-categories__link" href="/myblog/category/transcription/">
-        
-        
-        
-        <div class="c-categories__img">
-          <figure style="background-image: url('/myblog/images/01.credit_thumbnail.png');"></figure>
-          <span class="c-categories__more">View all</span>
-        </div>
-        
-        
-        <div class="c-categories__container ">
-          <h2 class="c-categories__header">transcription</h2>
-          <p class="c-categories__count"><span>1</span> Posts</p>
-        </div>
-      </a>
-    </li>
-    
-  </ul>
-</div> <!-- ./c-categories -->
+    </div> <!-- /.c-wrap-content -->
+  </div> <!-- /.c-article__content -->
+</article> <!-- /.c-article-page -->
+
 </main> <!-- /.c-content -->
   </div> <!-- /.o-wrapper -->
   <div class="c-top" data-icon='ei-chevron-up' data-size='s' title="Scroll To Top"></div> <!-- /.c-top -->
