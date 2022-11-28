@@ -5,9 +5,9 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-  <title>python 기초 || 4. 함수와 람다</title>
-  <meta name='description' content="4. 함수와 람다">
-  <link rel='canonical' href="https://ag-su.github.io/myblog/2021/07/06/definition-lambda/">
+  <title>elice</title>
+  <meta name='description' content="Data Science">
+  <link rel='canonical' href="https://ag-su.github.io/myblog/category/elice/">
   <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
@@ -75,393 +75,141 @@
 </aside> <!-- /.c-sidebar -->
 
 <main class="c-content">
-  <article class="c-article">
-  <div class="c-article__content">
-    <header class="c-header u-hide u-no-margin-top">
-      <div class="c-header__box">
-        <div class="c-search u-full-width">
-          <div class="c-search__box">
-            <label for="js-search-input" class="u-screen-reader-text">Search for Blog</label>
-            <input type="text" id="js-search-input" class="c-search__text" autocomplete="off" placeholder="Type to search...">
-            <div data-icon='ei-search' data-size='s'></div>
-          </div>
-          <ul id="js-results-container" class="c-search-results-list"></ul>
-        </div>
+  <header class="c-header">
+  <div class="c-header__box">
+    <div class="c-search">
+      <div class="c-search__box">
+        <label for="js-search-input" class="u-screen-reader-text">Search for Blog</label>
+        <input type="text" id="js-search-input" class="c-search__text" autocomplete="off" placeholder="Type to search...">
+        <div data-icon='ei-search' data-size='s'></div>
       </div>
-    </header>
-    
-    
-    <div class="c-wrap-content">
-      <header class="c-article__header">
-        <h1 class="c-article__title">python 기초 || 4. 함수와 람다</h1>
-        <div class="c-article__date">
-          <span>2021, Jul 06</span>
-        </div>
-      </header>
-      <h1 id="4-함수와-람다">4. 함수와 람다</h1>
-
-<h3 id="함수-정의방법">함수 정의방법</h3>
-<ul>
-  <li>
-    <p>def 함수명(parameter):</p>
-
-    <p>… code</p>
-  </li>
-</ul>
-
-<h2 id="1-출력-print">(1) 출력 (print)</h2>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">world</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">,</span> <span class="n">world</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hello</span><span class="p">(</span><span class="s">'Silver !'</span><span class="p">)</span>
-<span class="n">hello</span><span class="p">(</span><span class="mi">777777</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello Silver !
-Hello 777777
-</code></pre></div></div>
-
-<p><strong>함수명(parameter)</strong> 의 형태로 함수를 호출할 수 있다.</p>
-
-<h2 id="2-리턴-return">(2) 리턴 (return)</h2>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">hello_return</span><span class="p">(</span><span class="n">world</span><span class="p">):</span>
-    <span class="n">val</span> <span class="o">=</span> <span class="s">'Hello'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">world</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">val</span> 
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">str</span> <span class="o">=</span> <span class="n">hello_return</span><span class="p">(</span><span class="s">'Silver!!'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HelloSilver!!
-</code></pre></div></div>
-
-<p>함수 안에서 <strong>return</strong>하여 <strong>변수</strong>로 <strong>리턴값</strong>을 받아줄 수도 있다.</p>
-
-<h2 id="3-여러-값-리턴">(3) 여러 값 리턴</h2>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">func_mul</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="n">y1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">100</span>
-    <span class="n">y2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">200</span>
-    <span class="n">y3</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">300</span> 
-    <span class="k">return</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y3</span> 
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">val1</span><span class="p">,</span> <span class="n">val2</span><span class="p">,</span> <span class="n">val3</span> <span class="o">=</span> <span class="n">func_mul</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">val1</span><span class="p">),</span> <span class="n">val1</span><span class="p">,</span> <span class="n">val2</span><span class="p">,</span> <span class="n">val3</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'int'&gt; 10000 20000 30000
-</code></pre></div></div>
-
-<p>여러 값을 리턴하여 각각의 변수에 값을 받아줄 수 있다.</p>
-
-<h2 id="4-리스트-리턴">(4) 리스트 리턴</h2>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">func_mul2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="n">y1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">100</span>
-    <span class="n">y2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">200</span>
-    <span class="n">y3</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">300</span> 
-    <span class="k">return</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y3</span><span class="p">]</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">l1</span> <span class="o">=</span> <span class="n">func_mul2</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">l1</span><span class="p">))</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[10000, 20000, 30000] &lt;class 'list'&gt;
-</code></pre></div></div>
-
-<h2 id="5-가변-인자-받기-args-kwargs">(5) 가변 인자 받기 (*args, **kwargs)</h2>
-
-<h3 id="--args">- *args</h3>
-<p>: 튜플 형태로 받음 (가변 튜플)</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">args_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">args_func2</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">args_func3</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">args_func</span><span class="p">(</span><span class="s">'apple'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">"-------------------------"</span><span class="p">)</span>
-<span class="n">args_func</span><span class="p">(</span><span class="s">'apple'</span><span class="p">,</span> <span class="s">'banana'</span><span class="p">)</span> 
-<span class="k">print</span><span class="p">(</span><span class="s">"-------------------------"</span><span class="p">)</span>
-<span class="n">args_func2</span><span class="p">(</span><span class="s">'apple'</span><span class="p">,</span> <span class="s">'banana'</span><span class="p">,</span> <span class="s">'orange'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">"-------------------------"</span><span class="p">)</span>
-<span class="n">args_func3</span><span class="p">(</span><span class="s">'apple'</span><span class="p">,</span> <span class="s">'banana'</span><span class="p">,</span> <span class="s">'orange'</span><span class="p">,</span> <span class="s">'peach'</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('apple',)
--------------------------
-('apple', 'banana')
--------------------------
-apple
-banana
-orange
--------------------------
-0 apple
-1 banana
-2 orange
-3 peach
-</code></pre></div></div>
-
-<h3 id="--kwargs">- **kwargs</h3>
-<p>: dictionary로 받음 (가변 딕셔너리)</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">kwargs_func</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">kwargs_func2</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kwargs_func</span><span class="p">(</span><span class="n">f1</span> <span class="o">=</span><span class="s">'apple'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">"----------------------------------------------------------------"</span><span class="p">)</span>
-<span class="n">kwargs_func</span><span class="p">(</span><span class="n">f1</span><span class="o">=</span><span class="s">'apple'</span><span class="p">,</span> <span class="n">f2</span><span class="o">=</span><span class="s">'banana'</span><span class="p">,</span> <span class="n">f3</span><span class="o">=</span><span class="s">'orange'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">"----------------------------------------------------------------"</span><span class="p">)</span>
-<span class="n">kwargs_func2</span><span class="p">(</span><span class="n">f1</span><span class="o">=</span><span class="s">'apple'</span><span class="p">,</span> <span class="n">f2</span><span class="o">=</span><span class="s">'banana'</span><span class="p">,</span> <span class="n">f3</span><span class="o">=</span><span class="s">'orange'</span><span class="p">,</span> <span class="n">f4</span><span class="o">=</span><span class="s">'peach'</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'f1': 'apple'}
-----------------------------------------------------------------
-{'f1': 'apple', 'f2': 'banana', 'f3': 'orange'}
-----------------------------------------------------------------
-f1 apple
-f2 banana
-f3 orange
-f4 peach
-</code></pre></div></div>
-
-<p>인자에 key = value 형태로 넣어주면 그 개수 대로 딕셔너리 값이 생성되는 것을 볼 수 있다.</p>
-
-<h3 id="--전체-혼합">- 전체 혼합</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">example_mul</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>일반, 가변 튜플, 가변 딕셔너리를 모두 받는 함수를 선언한다.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">example_mul</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="n">example_mul</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s">'apple'</span><span class="p">,</span> <span class="s">'banana'</span><span class="p">)</span>
-<span class="n">example_mul</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s">'apple'</span><span class="p">,</span> <span class="s">'banana'</span><span class="p">,</span> <span class="s">'orange'</span><span class="p">,</span> <span class="n">num1</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">num2</span><span class="o">=</span><span class="mi">77</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10 20 () {}
-10 20 (30, 'apple', 'banana') {}
-10 20 (30, 'apple', 'banana', 'orange') {'num1': 7, 'num2': 77}
-</code></pre></div></div>
-
-<h2 id="6-중첩함수-클로저">(6) 중첩함수 (클로저)</h2>
-<ul>
-  <li><strong>효율적인 메모리 관리 가능</strong></li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">nested_func</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">func_in_func</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">'&gt;&gt;&gt;'</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'in func'</span><span class="p">)</span>
-    <span class="n">func_in_func</span><span class="p">(</span><span class="n">num</span> <span class="o">+</span> <span class="mi">10000</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nested_func</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>in func
-&gt;&gt;&gt; 20000
-</code></pre></div></div>
-
-<p>nested_fun(10000)으로 함수를 호출하면 print문이 실행되고, func_in_func(10000 + 10000)이 호출이 되어 func_in_func안의 print문이 실행되는 것이다.</p>
-
-<h2 id="7-hint">(7) hint</h2>
-<ul>
-  <li><strong>인자 타입과 리턴 타입 명시해주기</strong></li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">func_mul3</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span> 
-    <span class="n">y1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">100</span> 
-    <span class="n">y2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">200</span>
-    <span class="n">y3</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">300</span> 
-    <span class="k">return</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y3</span><span class="p">]</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func_mul3</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[300, 600, 900]
-</code></pre></div></div>
-
-<p>인자 x는 int, 리턴타입은 list라고 기입해주어 명확히 사용할 수 있다.</p>
-
-<h2 id="8-람다-lambda">(8) 람다 lambda</h2>
-<ul>
-  <li><strong>람다식: 메모리 절약, 가독성 향상, 코드 간결</strong></li>
-  <li><strong>함수: 객체생성 -&gt; 리소스(메모리) 할당 vs 람다: 즉시 실행(Heap초기화) -&gt; 메모리 초기화</strong></li>
-</ul>
-
-<h3 id="--일반-함수-변수-할당">- 일반 함수: 변수 할당</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">mul_10</span><span class="p">(</span><span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">num</span> <span class="o">*</span> <span class="mi">10</span> 
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">val_func</span> <span class="o">=</span> <span class="n">mul_10</span>  <span class="c1"># 객체 생성, 메모리 할당 
-</span><span class="k">print</span><span class="p">(</span><span class="n">mul_10</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">val_func</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">val_func</span><span class="p">))</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">val_func</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;function mul_10 at 0x0000023A2BA02EA0&gt;
-&lt;function mul_10 at 0x0000023A2BA02EA0&gt;
-&lt;class 'function'&gt;
-100
-</code></pre></div></div>
-
-<h3 id="--람다식">- 람다식</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lambda_mul_10</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">num</span><span class="p">:</span> <span class="n">num</span> <span class="o">*</span> <span class="mi">10</span> 
-<span class="k">print</span><span class="p">(</span><span class="s">'&gt;&gt;&gt;'</span><span class="p">,</span> <span class="n">lambda_mul_10</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;&gt;&gt; 100
-</code></pre></div></div>
-
-<h3 id="--함수의-인자에-함수-넣기-람다-사용">- 함수의 인자에 함수 넣기 (람다 사용)</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">func_final</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="n">func</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-</code></pre></div></div>
-
-<p>인자에 함수를 넣는 함수를 선언한다.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func_final</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">lambda_mul_10</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10000
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func_final</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">100000</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100000000
-</code></pre></div></div>
-
-<p>이렇게 바로 <strong>lambda</strong> 함수를 사용해주어도 된다.</p>
-
-      <div class="c-article__footer u-clearfix">
-        <div class="c-article__tag">
-          
-        </div>
-        <div class="c-article__share">
-          <a href="https://twitter.com/intent/tweet?text=python%20%EA%B8%B0%EC%B4%88%20%7C%7C%204.%20%ED%95%A8%EC%88%98%EC%99%80%20%EB%9E%8C%EB%8B%A4&url=https://ag-su.github.io/2021/07/06/definition-lambda/" title="Share
-          on Twitter" rel="nofollow" target="_blank"><div data-icon='ei-sc-twitter' data-size='s'></div></a>
-          <a href="https://facebook.com/sharer.php?u=https://ag-su.github.io/2021/07/06/definition-lambda/" title="Share on Facebook" rel="nofollow" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a>
-          <a href="https://plus.google.com/share?url=https://ag-su.github.io/2021/07/06/definition-lambda/" title="Share on Google+" rel="nofollow" target="_blank"><div data-icon='ei-sc-google-plus' data-size='s'></div></a>
-        </div>
-      </div>
-      <div class="c-newsletter">
-  <div class="c-newsletter__header">
-    <h4 class="c-newsletter__title">Newsletter</h4>
-    <div class="c-newsletter__subtitle">Subscribe to this blog and receive notifications of new posts by email.</div>
-  </div>
-  <form class="c-newsletter-form validate" action="#" method="POST" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
-    <div class="c-newsletter-form__group">
-      <label class="u-screen-reader-text" for="mce-EMAIL">Email address</label>
-      <input class="c-newsletter__email required email" id="mce-EMAIL" type="email" name="EMAIL" placeholder="Your email address" autocomplete="on">
-      <input class="c-newsletter__button" id="mc-embedded-subscribe" type="submit" name="subscribe" value="Subscribe">
+      <ul id="js-results-container" class="c-search-results-list"></ul>
     </div>
-  </form>
-</div> <!-- /.c-newsletter -->
-      <div class="c-recent-post">
-        <h4 class="c-recent__title">You might also enjoy</h4>
-        <div class="c-recent__box">
-        
-        
-          <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/11/28/html-01/" style="background-image: url( /myblog/images/221128/221128_1.png)"></a>
-            <div class="c-recent__footer">
-              <h4><a href="/2022/11/28/html-01/">Elice || 01. HTML 기초</a></h4>
-              <div class="c-recent__date">
-                <time datetime="2022-11-28T00:00:00+09:00">November 28, 2022</time>
-              </div>
-            </div>
-          </div>
-        
-        
-        
-          <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /myblog/images/01.credit_thumbnail.png)"></a>
-            <div class="c-recent__footer">
-              <h4><a href="/2022/10/19/credit-card-fraud-detection/">Transcription || [Kaggle] Credit card Fraud Detection</a></h4>
-              <div class="c-recent__date">
-                <time datetime="2022-10-19T00:00:00+09:00">October 19, 2022</time>
-              </div>
-            </div>
-          </div>
-        
-        
-        
-          <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/07/25/cluster-filtering/" style="background-image: url( /myblog/images/08.thumbnail.png)"></a>
-            <div class="c-recent__footer">
-              <h4><a href="/2022/07/25/cluster-filtering/">Stock Research || 3.3. 클러스터링 분석을 통한 주가 상승추세 패턴 검출</a></h4>
-              <div class="c-recent__date">
-                <time datetime="2022-07-25T00:00:00+09:00">July 25, 2022</time>
-              </div>
-            </div>
-          </div>
+    <div class="c-nav">
+      <ul class="c-nav__list u-lists-reset">
+        <li class="c-nav__item is-active">
+          <div data-icon='ei-pencil' data-size='s'></div> Posts</li>
+        <li class="c-nav__item">
+          <div data-icon='ei-star' data-size='s'></div> Categories</li>
+      </ul>
+    </div>
+  </div>
+</header> <!-- /.c-header -->
+<div class="c-posts o-opacity">
+  
+  <article class="c-post">
+    
+    <a class="c-post-thumbnail" style="background-image: url(/myblog/images/221128/221128_1.png)"
+      href="/myblog/2022/11/28/html-01/"></a>
+    
+    <div class="c-post-content">
+      <h2 class="c-post-title">
+        <a href="/myblog/2022/11/28/html-01/">Elice || 01. HTML 기초</a>
+      </h2>
+      <p>Elice 2022.11.28 1. HTML의 기본 문법 [html을 구성하는 요소들] 태그 tag 컨텐트 content (설명) 속성...</p>
+      <span class="c-post-date">2022, Nov 28&nbsp;&nbsp;&nbsp;—&nbsp;</span>
+      <span class="c-post-words">4 minute read</span>
+    </div>
+  </article>
+  
+</div> <!-- /.c-posts -->
+<div class="c-categories" style="display: none;">
+  <ul class="c-categories__list u-lists-reset">
+      
+    <li class="c-categories__item">
+      
+      <a class="c-categories__link" href="/myblog/category/algorithm/">
         
         
         
-          <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/07/22/tsne/" style="background-image: url( /myblog/images/07.thumbnail.png)"></a>
-            <div class="c-recent__footer">
-              <h4><a href="/2022/07/22/tsne/">Stock Research || 3.2. t-SNE를 사용한 주가데이터 2차원 시각화</a></h4>
-              <div class="c-recent__date">
-                <time datetime="2022-07-22T00:00:00+09:00">July 22, 2022</time>
-              </div>
-            </div>
-          </div>
-        
-        
+        <div class="c-categories__img">
+          <figure style="background-image: url('/myblog/images/02.implementation_1.png');"></figure>
+          <span class="c-categories__more">View all</span>
         </div>
-      </div> <!-- /.c-recent-post -->
+        
+        
+        <div class="c-categories__container ">
+          <h2 class="c-categories__header">algorithm</h2>
+          <p class="c-categories__count"><span>2</span> Posts</p>
+        </div>
+      </a>
+    </li>
+    
+    <li class="c-categories__item">
       
-        <div class="c-comments">
-  <div id="disqus_thread" class="article-comments"></div>
-  <script>
-    (function () {
-      var d = document, s = d.createElement('script');
-      s.src = '//mr-brown.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-  </noscript>
-</div> <!-- /.c-comments -->
+      <a class="c-categories__link" href="/myblog/category/elice/">
+        
+        
+        
+        <div class="c-categories__img">
+          <figure style="background-image: url('/myblog/images/221128/221128_1.png');"></figure>
+          <span class="c-categories__more">View all</span>
+        </div>
+        
+        
+        <div class="c-categories__container ">
+          <h2 class="c-categories__header">elice</h2>
+          <p class="c-categories__count"><span>1</span> Posts</p>
+        </div>
+      </a>
+    </li>
+    
+    <li class="c-categories__item">
       
-    </div> <!-- /.c-wrap-content -->
-  </div> <!-- /.c-article__content -->
-</article> <!-- /.c-article-page -->
-
+      <a class="c-categories__link" href="/myblog/category/python/">
+        
+        
+        
+          
+        
+        
+        <div class="c-categories__container c-empty-figure">
+          <h2 class="c-categories__header">python</h2>
+          <p class="c-categories__count"><span>14</span> Posts</p>
+        </div>
+      </a>
+    </li>
+    
+    <li class="c-categories__item">
+      
+      <a class="c-categories__link" href="/myblog/category/stock-research/">
+        
+        
+        
+        <div class="c-categories__img">
+          <figure style="background-image: url('/myblog/images/08.thumbnail.png');"></figure>
+          <span class="c-categories__more">View all</span>
+        </div>
+        
+        
+        <div class="c-categories__container ">
+          <h2 class="c-categories__header">stock-research</h2>
+          <p class="c-categories__count"><span>8</span> Posts</p>
+        </div>
+      </a>
+    </li>
+    
+    <li class="c-categories__item">
+      
+      <a class="c-categories__link" href="/myblog/category/transcription/">
+        
+        
+        
+        <div class="c-categories__img">
+          <figure style="background-image: url('/myblog/images/01.credit_thumbnail.png');"></figure>
+          <span class="c-categories__more">View all</span>
+        </div>
+        
+        
+        <div class="c-categories__container ">
+          <h2 class="c-categories__header">transcription</h2>
+          <p class="c-categories__count"><span>1</span> Posts</p>
+        </div>
+      </a>
+    </li>
+    
+  </ul>
+</div> <!-- ./c-categories -->
 </main> <!-- /.c-content -->
   </div> <!-- /.o-wrapper -->
   <div class="c-top" data-icon='ei-chevron-up' data-size='s' title="Scroll To Top"></div> <!-- /.c-top -->
