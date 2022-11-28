@@ -5,9 +5,9 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-  <title>python 기초 || 4. 함수와 람다</title>
-  <meta name='description' content="4. 함수와 람다">
-  <link rel='canonical' href="https://ag-su.github.io/myblog/2021/07/06/definition-lambda/">
+  <title>Elice || 01. HTML 기초</title>
+  <meta name='description' content="Elice 2022.11.28">
+  <link rel='canonical' href="https://ag-su.github.io/myblog/2022/11/28/html-01/">
   <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
@@ -90,289 +90,321 @@
       </div>
     </header>
     
+    <div class="c-article__image o-opacity" style="background-image: url( /myblog/images/221128/221128_1.png )"></div>
     
     <div class="c-wrap-content">
       <header class="c-article__header">
-        <h1 class="c-article__title">python 기초 || 4. 함수와 람다</h1>
+        <h1 class="c-article__title">Elice || 01. HTML 기초</h1>
         <div class="c-article__date">
-          <span>2021, Jul 06</span>
+          <span>2022, Nov 28</span>
         </div>
       </header>
-      <h1 id="4-함수와-람다">4. 함수와 람다</h1>
+      <h1 id="elice-20221128">Elice 2022.11.28</h1>
 
-<h3 id="함수-정의방법">함수 정의방법</h3>
+<hr />
+
+<h2 id="1-html의-기본-문법">1. HTML의 기본 문법</h2>
+<p><strong>[html을 구성하는 요소들]</strong></p>
 <ul>
-  <li>
-    <p>def 함수명(parameter):</p>
+  <li>태그 tag</li>
+  <li>컨텐트 content (설명)</li>
+  <li>속성 attribute 
+<br />
+<br /></li>
+</ul>
 
-    <p>… code</p>
+<p><strong>[태그 종류]</strong><br />
+<a href="https://opentutorials.org/course/3084/18452">생활코딩 | 통계에 기반한 학습</a>에서 아래와 같은 인기에 따른 태그 종류를 볼 수 있다. 
+<img src="221128/221128_2.png" alt="image.png" /></p>
+
+<p>그 중에서도 오늘 배운 기본적인 태그들을 정리한다.</p>
+
+<h3 id="1-strongstrong-태그-uu-태그">1) &lt;strong&gt;&lt;/strong&gt; 태그, &lt;u&gt;&lt;/u&gt; 태그</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="n">World</span> <span class="n">Wide</span> <span class="o">&lt;</span><span class="n">u</span><span class="o">&gt;</span><span class="n">WEB</span><span class="o">&lt;/</span><span class="n">u</span><span class="o">&gt;&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p><strong>World Wide <u>WEB</u></strong></p>
+
+<p><br />
+<br /></p>
+
+<h3 id="2-img-태그">2) &lt;img&gt; 태그</h3>
+<p>img는 이미지 자체가 컨텐트임 그래서 태그를 닫지 않음.</p>
+
+<p>* 이미지는 <a href="https://unsplash.com/">unsplash</a>라는 사이트에서 무료로 가져올 수 있다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s">"https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1335&amp;q=80"</span> <span class="n">width</span><span class="o">=</span><span class="s">"200"</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p><img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1335&amp;q=80" width="200" /></p>
+
+<p><br />
+<br /></p>
+
+<h3 id="3-br-태그">3) &lt;br&gt; 태그</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">안녕하세요</span>
+
+<span class="n">안녕</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;&lt;</span><span class="n">br</span><span class="o">&gt;</span><span class="n">하세요</span>
+</code></pre></div></div>
+
+<p>안녕하세요</p>
+
+<p>안녕<br /><br />하세요</p>
+
+<p><br />
+<br /></p>
+
+<h3 id="4-aa-태그">4) &lt;a&gt;&lt;/a&gt; 태그</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">"http://info.cern.ch"</span><span class="o">&gt;</span><span class="n">WWW</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p><a href="http://info.cern.ch">WWW</a></p>
+
+<p><br />
+<br /></p>
+
+<h3 id="5-ulul-태그-lili-태그">5) &lt;ul&gt;&lt;/ul&gt; 태그, &lt;li&gt;&lt;/li&gt; 태그</h3>
+
+<p>ul =&gt; unordered list</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="n">html</span><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="n">css</span><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="n">js</span><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<ul>
+    <li>html</li>
+    <li>css</li>
+    <li>js</li>
+</ul>
+
+<p><br />
+<br /></p>
+
+<h3 id="6-olol-태그-lili-태그">6) &lt;ol&gt;&lt;/ol&gt; 태그, &lt;li&gt;&lt;/li&gt; 태그</h3>
+<p>ol =&gt; ordered list</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 숫자 
+</span><span class="o">&lt;</span><span class="n">ol</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="n">html</span><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="n">css</span><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="n">js</span><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">ol</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<ol>
+    <li>html</li>
+    <li>css</li>
+    <li>js</li>
+</ol>
+
+<p><br />
+<br /></p>
+
+<h3 id="7-htmlhtml-태그-headhead-태그-bodybody-태그-meta-태그">7) &lt;html&gt;&lt;/html&gt; 태그, &lt;head&gt;&lt;/head&gt; 태그, &lt;body&gt;&lt;/body&gt; 태그, &lt;meta&gt; 태그</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">html</span><span class="o">&gt;</span>
+
+
+    <span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;</span>
+    
+        <span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="n">WEB</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">meta</span> <span class="n">charset</span><span class="o">=</span><span class="s">"utf-8"</span><span class="o">&gt;</span>
+        
+    <span class="o">&lt;/</span><span class="n">head</span><span class="o">&gt;</span>
+
+
+    <span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span>
+
+        <span class="n">본문</span> <span class="n">내용</span> 
+
+    <span class="o">&lt;/</span><span class="n">body</span><span class="o">&gt;</span>
+
+<span class="o">&lt;/</span><span class="n">html</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<p><br />
+<br /></p>
+
+<h2 id="2-html-웹에-띄우기">2. HTML 웹에 띄우기</h2>
+
+<ul>
+  <li>전체 코드</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="mi">1</span><span class="n">번</span> <span class="n">그룹</span> <span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="n">본문을</span> <span class="n">설명</span> <span class="o">--&gt;</span>
+
+<span class="o">&lt;</span><span class="err">!</span><span class="n">doctype</span> <span class="n">html</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">html</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="n">WEB</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">meta</span> <span class="n">charset</span><span class="o">=</span><span class="s">"utf-8"</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">head</span><span class="o">&gt;</span>
+
+
+
+<span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="mi">2</span><span class="n">번</span> <span class="n">그룹</span> <span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="n">본문</span> <span class="o">--&gt;</span>
+
+<span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">"index.html"</span><span class="o">&gt;</span><span class="n">WEB</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+
+
+    <span class="o">&lt;</span><span class="n">ol</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">"1.html"</span><span class="o">&gt;</span><span class="n">html</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">"2.html"</span><span class="o">&gt;</span><span class="n">css</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">"3.html"</span><span class="o">&gt;</span><span class="n">js</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">ol</span><span class="o">&gt;</span>
+
+
+
+    <span class="o">&lt;</span><span class="n">h2</span><span class="o">&gt;</span><span class="n">Welcome</span><span class="o">&lt;/</span><span class="n">h2</span><span class="o">&gt;</span>
+
+
+ <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">"http://info.cern.ch"</span><span class="o">&gt;</span><span class="n">WWW</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>    <span class="ow">is</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="n">World</span> <span class="n">Wide</span> <span class="o">&lt;</span><span class="n">u</span><span class="o">&gt;</span><span class="n">WEB</span><span class="o">&lt;/</span><span class="n">u</span><span class="o">&gt;&lt;/</span><span class="n">strong</span><span class="o">&gt;</span><span class="err">!</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+
+
+    <span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s">"https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1335&amp;q=80"</span> <span class="n">width</span><span class="o">=</span><span class="s">"200"</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">body</span><span class="o">&gt;</span>
+
+<span class="o">&lt;/</span><span class="n">html</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p><br />
+<br /></p>
+
+<h3 id="1-html을-chrome-web-browser-에서-바로-실행">1) html을 chrome (web browser) 에서 바로 실행</h3>
+
+<p><strong>[VS code]</strong><br />
+html 파일 생성 (ex, index.html)</p>
+
+<p><strong>[Chrome]</strong><br />
+1) drag and drop <br />
+2) ctrl + o -&gt; 파일 선택</p>
+
+<p><img src="/myblog/images/221128/221128_3.png" alt="image.png" /></p>
+
+<p><br />
+<br /></p>
+
+<h3 id="2-web-server-for-chrome">2) Web server for Chrome</h3>
+<p>Web server for Chrome 확장 프로그램을 다운받은 후에 127.0.0.1 주소에서 웹을 확인할 수 있다.</p>
+
+<ul>
+  <li>127.0.0.1 -&gt; 내 컴퓨터를 나타내는 특수한 주소</li>
+  <li>0~255.0~255.0~255.0~255 (42억개 정도의 주소)</li>
+</ul>
+
+<p><img src="/myblog/images/221128/221128_4.png" alt="image.png" /></p>
+
+<p>위와 같이 wer server를 켜주고, index.html이 있는 폴더를 선택해주면 된다.</p>
+
+<p><img src="/myblog/images/221128/221128_5.png" alt="image.png" /></p>
+
+<p><br />
+<br /></p>
+
+<h3 id="3-netlify-무료-배포">3) netlify 무료 배포</h3>
+<p><a href="https://app.netlify.com/">netlify</a>에서 무료로 웹을 배포할 수 있다. Deploys에서 작성한 html 파일이 있는 폴더를 선택한다. 그러명 도메인이 생기는 것을 볼 수 있다.</p>
+
+<p><img src="/myblog/images/221128/221128_6.png" alt="image.png" /></p>
+
+<p>오늘 배운 내용으로 배포한 앱 링크이다. <br />
+https://delicate-beijinho-d57897.netlify.app</p>
+
+<hr />
+
+<p><br />
+<br /></p>
+
+<h2 id="3-기타-배운-것들">3. 기타 배운 것들</h2>
+
+<h3 id="1-세계-최초의-웹페이지">1) 세계 최초의 웹페이지</h3>
+<ul>
+  <li>http://info.cern.ch/</li>
+</ul>
+
+<p><br />
+<br /></p>
+
+<h3 id="2-vscode-환경에서-html-개발할-때-꿀팁">2) VScode 환경에서 HTML 개발할 때 꿀팁</h3>
+<ul>
+  <li>자동 줄바꿈: 파일-기본설정-설정-word wrap-on</li>
+  <li>태그 쉽게 작성하기: ol&gt;li*3&gt;{item$}</li>
+  <li>외부 태그 쉽게 작성하기: ctrl+shift+p (명령팔레트) -&gt; Emmet: Wrap with Abbreviation -&gt; 단축키 설정 가능 (필자는 <strong>ctrl+window+ALT+,</strong> 로 설정하였다.)</li>
+</ul>
+
+<p><br />
+<br /></p>
+
+<h3 id="3-웹의-역사-클라이언트---서버-통신">3) 웹의 역사, 클라이언트 &lt;-&gt; 서버 통신</h3>
+
+<ul>
+  <li>internet과 web은 다르다. internet 안에 web이 포함되어있다. internet(web, email, ftp, ssh)</li>
+  <li>1960년 인터넷 —– 1990년 웹 (고향: swiss - cern - LHC - 팀 버너스리)</li>
+  <li>1990년 10월 편집기 / 11월 www / 12월24일 server</li>
+  <li>팀 버너스리는 두 개의 컴퓨터가 있었다. (ip address, domain name은 임의로 작성한 것임.)
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>컴퓨터 1: web browser   (ip address</td>
+              <td>1.1.1.1)</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>컴퓨터 2: web server    (ip address</td>
+              <td>1.1.1.2) - (domain name</td>
+              <td>info.cern.ch) - index.html</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
   </li>
+  <li>반드시 컴퓨터 마다 ip address가 있어야 한다.</li>
+  <li>domain: 사람을 위하여. 컴퓨터는 실제로는 ip address 로 통신한다.</li>
 </ul>
 
-<h2 id="1-출력-print">(1) 출력 (print)</h2>
+<p><img src="/myblog/images/221128/221128_1.png" alt="image.png" /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">world</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">,</span> <span class="n">world</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hello</span><span class="p">(</span><span class="s">'Silver !'</span><span class="p">)</span>
-<span class="n">hello</span><span class="p">(</span><span class="mi">777777</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello Silver !
-Hello 777777
-</code></pre></div></div>
-
-<p><strong>함수명(parameter)</strong> 의 형태로 함수를 호출할 수 있다.</p>
-
-<h2 id="2-리턴-return">(2) 리턴 (return)</h2>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">hello_return</span><span class="p">(</span><span class="n">world</span><span class="p">):</span>
-    <span class="n">val</span> <span class="o">=</span> <span class="s">'Hello'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">world</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">val</span> 
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">str</span> <span class="o">=</span> <span class="n">hello_return</span><span class="p">(</span><span class="s">'Silver!!'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HelloSilver!!
-</code></pre></div></div>
-
-<p>함수 안에서 <strong>return</strong>하여 <strong>변수</strong>로 <strong>리턴값</strong>을 받아줄 수도 있다.</p>
-
-<h2 id="3-여러-값-리턴">(3) 여러 값 리턴</h2>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">func_mul</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="n">y1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">100</span>
-    <span class="n">y2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">200</span>
-    <span class="n">y3</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">300</span> 
-    <span class="k">return</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y3</span> 
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">val1</span><span class="p">,</span> <span class="n">val2</span><span class="p">,</span> <span class="n">val3</span> <span class="o">=</span> <span class="n">func_mul</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">val1</span><span class="p">),</span> <span class="n">val1</span><span class="p">,</span> <span class="n">val2</span><span class="p">,</span> <span class="n">val3</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'int'&gt; 10000 20000 30000
-</code></pre></div></div>
-
-<p>여러 값을 리턴하여 각각의 변수에 값을 받아줄 수 있다.</p>
-
-<h2 id="4-리스트-리턴">(4) 리스트 리턴</h2>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">func_mul2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="n">y1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">100</span>
-    <span class="n">y2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">200</span>
-    <span class="n">y3</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">300</span> 
-    <span class="k">return</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y3</span><span class="p">]</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">l1</span> <span class="o">=</span> <span class="n">func_mul2</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">l1</span><span class="p">))</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[10000, 20000, 30000] &lt;class 'list'&gt;
-</code></pre></div></div>
-
-<h2 id="5-가변-인자-받기-args-kwargs">(5) 가변 인자 받기 (*args, **kwargs)</h2>
-
-<h3 id="--args">- *args</h3>
-<p>: 튜플 형태로 받음 (가변 튜플)</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">args_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">args_func2</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">args_func3</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">args_func</span><span class="p">(</span><span class="s">'apple'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">"-------------------------"</span><span class="p">)</span>
-<span class="n">args_func</span><span class="p">(</span><span class="s">'apple'</span><span class="p">,</span> <span class="s">'banana'</span><span class="p">)</span> 
-<span class="k">print</span><span class="p">(</span><span class="s">"-------------------------"</span><span class="p">)</span>
-<span class="n">args_func2</span><span class="p">(</span><span class="s">'apple'</span><span class="p">,</span> <span class="s">'banana'</span><span class="p">,</span> <span class="s">'orange'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">"-------------------------"</span><span class="p">)</span>
-<span class="n">args_func3</span><span class="p">(</span><span class="s">'apple'</span><span class="p">,</span> <span class="s">'banana'</span><span class="p">,</span> <span class="s">'orange'</span><span class="p">,</span> <span class="s">'peach'</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('apple',)
--------------------------
-('apple', 'banana')
--------------------------
-apple
-banana
-orange
--------------------------
-0 apple
-1 banana
-2 orange
-3 peach
-</code></pre></div></div>
-
-<h3 id="--kwargs">- **kwargs</h3>
-<p>: dictionary로 받음 (가변 딕셔너리)</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">kwargs_func</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">kwargs_func2</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kwargs_func</span><span class="p">(</span><span class="n">f1</span> <span class="o">=</span><span class="s">'apple'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">"----------------------------------------------------------------"</span><span class="p">)</span>
-<span class="n">kwargs_func</span><span class="p">(</span><span class="n">f1</span><span class="o">=</span><span class="s">'apple'</span><span class="p">,</span> <span class="n">f2</span><span class="o">=</span><span class="s">'banana'</span><span class="p">,</span> <span class="n">f3</span><span class="o">=</span><span class="s">'orange'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">"----------------------------------------------------------------"</span><span class="p">)</span>
-<span class="n">kwargs_func2</span><span class="p">(</span><span class="n">f1</span><span class="o">=</span><span class="s">'apple'</span><span class="p">,</span> <span class="n">f2</span><span class="o">=</span><span class="s">'banana'</span><span class="p">,</span> <span class="n">f3</span><span class="o">=</span><span class="s">'orange'</span><span class="p">,</span> <span class="n">f4</span><span class="o">=</span><span class="s">'peach'</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'f1': 'apple'}
-----------------------------------------------------------------
-{'f1': 'apple', 'f2': 'banana', 'f3': 'orange'}
-----------------------------------------------------------------
-f1 apple
-f2 banana
-f3 orange
-f4 peach
-</code></pre></div></div>
-
-<p>인자에 key = value 형태로 넣어주면 그 개수 대로 딕셔너리 값이 생성되는 것을 볼 수 있다.</p>
-
-<h3 id="--전체-혼합">- 전체 혼합</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">example_mul</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>일반, 가변 튜플, 가변 딕셔너리를 모두 받는 함수를 선언한다.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">example_mul</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="n">example_mul</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s">'apple'</span><span class="p">,</span> <span class="s">'banana'</span><span class="p">)</span>
-<span class="n">example_mul</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s">'apple'</span><span class="p">,</span> <span class="s">'banana'</span><span class="p">,</span> <span class="s">'orange'</span><span class="p">,</span> <span class="n">num1</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">num2</span><span class="o">=</span><span class="mi">77</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10 20 () {}
-10 20 (30, 'apple', 'banana') {}
-10 20 (30, 'apple', 'banana', 'orange') {'num1': 7, 'num2': 77}
-</code></pre></div></div>
-
-<h2 id="6-중첩함수-클로저">(6) 중첩함수 (클로저)</h2>
-<ul>
-  <li><strong>효율적인 메모리 관리 가능</strong></li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">nested_func</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">func_in_func</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">'&gt;&gt;&gt;'</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'in func'</span><span class="p">)</span>
-    <span class="n">func_in_func</span><span class="p">(</span><span class="n">num</span> <span class="o">+</span> <span class="mi">10000</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nested_func</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>in func
-&gt;&gt;&gt; 20000
-</code></pre></div></div>
-
-<p>nested_fun(10000)으로 함수를 호출하면 print문이 실행되고, func_in_func(10000 + 10000)이 호출이 되어 func_in_func안의 print문이 실행되는 것이다.</p>
-
-<h2 id="7-hint">(7) hint</h2>
-<ul>
-  <li><strong>인자 타입과 리턴 타입 명시해주기</strong></li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">func_mul3</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span> 
-    <span class="n">y1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">100</span> 
-    <span class="n">y2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">200</span>
-    <span class="n">y3</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">300</span> 
-    <span class="k">return</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y3</span><span class="p">]</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func_mul3</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[300, 600, 900]
-</code></pre></div></div>
-
-<p>인자 x는 int, 리턴타입은 list라고 기입해주어 명확히 사용할 수 있다.</p>
-
-<h2 id="8-람다-lambda">(8) 람다 lambda</h2>
-<ul>
-  <li><strong>람다식: 메모리 절약, 가독성 향상, 코드 간결</strong></li>
-  <li><strong>함수: 객체생성 -&gt; 리소스(메모리) 할당 vs 람다: 즉시 실행(Heap초기화) -&gt; 메모리 초기화</strong></li>
-</ul>
-
-<h3 id="--일반-함수-변수-할당">- 일반 함수: 변수 할당</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">mul_10</span><span class="p">(</span><span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">num</span> <span class="o">*</span> <span class="mi">10</span> 
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">val_func</span> <span class="o">=</span> <span class="n">mul_10</span>  <span class="c1"># 객체 생성, 메모리 할당 
-</span><span class="k">print</span><span class="p">(</span><span class="n">mul_10</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">val_func</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">val_func</span><span class="p">))</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">val_func</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;function mul_10 at 0x0000023A2BA02EA0&gt;
-&lt;function mul_10 at 0x0000023A2BA02EA0&gt;
-&lt;class 'function'&gt;
-100
-</code></pre></div></div>
-
-<h3 id="--람다식">- 람다식</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lambda_mul_10</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">num</span><span class="p">:</span> <span class="n">num</span> <span class="o">*</span> <span class="mi">10</span> 
-<span class="k">print</span><span class="p">(</span><span class="s">'&gt;&gt;&gt;'</span><span class="p">,</span> <span class="n">lambda_mul_10</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;&gt;&gt; 100
-</code></pre></div></div>
-
-<h3 id="--함수의-인자에-함수-넣기-람다-사용">- 함수의 인자에 함수 넣기 (람다 사용)</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">func_final</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="n">func</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-</code></pre></div></div>
-
-<p>인자에 함수를 넣는 함수를 선언한다.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func_final</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">lambda_mul_10</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10000
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">func_final</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">100000</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100000000
-</code></pre></div></div>
-
-<p>이렇게 바로 <strong>lambda</strong> 함수를 사용해주어도 된다.</p>
+<ol>
+  <li>사용자가 주소창에 http://info.cern.ch/index.html 이라고 친다. (WB-&gt;WS, request, 요청, client)
+    <ul>
+      <li>http: hyper text transfer protocol</li>
+      <li>info.cern.ch (WS 컴퓨터)</li>
+      <li>index.html 요구</li>
+    </ul>
+  </li>
+  <li>WS는 web folder에서 index.html 찾아서 WB에 응답 (WS-&gt;WB, response, 응답, server)</li>
+  <li>WB는 사용에게 화면에 보여준다.</li>
+</ol>
 
       <div class="c-article__footer u-clearfix">
         <div class="c-article__tag">
           
         </div>
         <div class="c-article__share">
-          <a href="https://twitter.com/intent/tweet?text=python%20%EA%B8%B0%EC%B4%88%20%7C%7C%204.%20%ED%95%A8%EC%88%98%EC%99%80%20%EB%9E%8C%EB%8B%A4&url=https://ag-su.github.io/2021/07/06/definition-lambda/" title="Share
+          <a href="https://twitter.com/intent/tweet?text=Elice%20%7C%7C%2001.%20HTML%20%EA%B8%B0%EC%B4%88&url=https://ag-su.github.io/2022/11/28/html-01/" title="Share
           on Twitter" rel="nofollow" target="_blank"><div data-icon='ei-sc-twitter' data-size='s'></div></a>
-          <a href="https://facebook.com/sharer.php?u=https://ag-su.github.io/2021/07/06/definition-lambda/" title="Share on Facebook" rel="nofollow" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a>
-          <a href="https://plus.google.com/share?url=https://ag-su.github.io/2021/07/06/definition-lambda/" title="Share on Google+" rel="nofollow" target="_blank"><div data-icon='ei-sc-google-plus' data-size='s'></div></a>
+          <a href="https://facebook.com/sharer.php?u=https://ag-su.github.io/2022/11/28/html-01/" title="Share on Facebook" rel="nofollow" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a>
+          <a href="https://plus.google.com/share?url=https://ag-su.github.io/2022/11/28/html-01/" title="Share on Google+" rel="nofollow" target="_blank"><div data-icon='ei-sc-google-plus' data-size='s'></div></a>
         </div>
       </div>
       <div class="c-newsletter">
@@ -391,18 +423,6 @@ f4 peach
       <div class="c-recent-post">
         <h4 class="c-recent__title">You might also enjoy</h4>
         <div class="c-recent__box">
-        
-        
-          <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/11/28/html-01/" style="background-image: url( /myblog/images/221128/221128_1.png)"></a>
-            <div class="c-recent__footer">
-              <h4><a href="/2022/11/28/html-01/">Elice || 01. HTML 기초</a></h4>
-              <div class="c-recent__date">
-                <time datetime="2022-11-28T00:00:00+09:00">November 28, 2022</time>
-              </div>
-            </div>
-          </div>
-        
         
         
           <div class="c-recent__item">
@@ -435,6 +455,18 @@ f4 peach
               <h4><a href="/2022/07/22/tsne/">Stock Research || 3.2. t-SNE를 사용한 주가데이터 2차원 시각화</a></h4>
               <div class="c-recent__date">
                 <time datetime="2022-07-22T00:00:00+09:00">July 22, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/18/shap-value/" style="background-image: url( /myblog/images/06.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/18/shap-value/">Stock Research || 3.1. 설명가능 AI (XAI), SHAP value</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-18T00:00:00+09:00">July 18, 2022</time>
               </div>
             </div>
           </div>
