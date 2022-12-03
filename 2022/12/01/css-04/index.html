@@ -5,9 +5,9 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-  <title>python 기초 || 10.3 sqlite 테이블 수정 및 삭제</title>
-  <meta name='description' content="10. Sqlite 데이터베이스 연동_3테이블 데이터 수정 및 삭제">
-  <link rel='canonical' href="https://ag-su.github.io/myblog/2021/07/15/database-sqlite-3/">
+  <title>CSS || 03. 애니메이션과 반응형 웹사이트</title>
+  <meta name='description' content="Elice AI트랙 2022.12.01 개념 정리CSS || 03. 애니메이션과 반응형 웹사이트">
+  <link rel='canonical' href="https://ag-su.github.io/myblog/2022/12/01/css-04/">
   <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
@@ -93,170 +93,315 @@
     
     <div class="c-wrap-content">
       <header class="c-article__header">
-        <h1 class="c-article__title">python 기초 || 10.3 sqlite 테이블 수정 및 삭제</h1>
+        <h1 class="c-article__title">CSS || 03. 애니메이션과 반응형 웹사이트</h1>
         <div class="c-article__date">
-          <span>2021, Jul 15</span>
+          <span>2022, Dec 01</span>
         </div>
       </header>
-      <h1 id="10-sqlite-데이터베이스-연동_3">10. Sqlite 데이터베이스 연동_3</h1>
-<h1 id="테이블-데이터-수정-및-삭제">테이블 데이터 수정 및 삭제</h1>
+      <h4 id="elice-ai트랙-20221201-개념-정리">Elice AI트랙 2022.12.01 개념 정리</h4>
+<h1 id="css--03-애니메이션과-반응형-웹사이트">CSS || 03. 애니메이션과 반응형 웹사이트</h1>
 
-<h3 id="--settings">- settings</h3>
+<hr />
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlite3</span>  <span class="c1"># sqlite 모듈 import 
-</span></code></pre></div></div>
+<h1 id="01-움직이는-웹사이트">01. 움직이는 웹사이트</h1>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">'./resource/database.db'</span><span class="p">)</span>  <span class="c1"># DB 연결 (생성)/(파일)
-</span></code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>  <span class="c1"># Cursor 연결 
-</span></code></pre></div></div>
-
-<p>이번에는 <strong>Autocommit</strong> 설정을 하지 않았기 때문에 코드 뒤에 <strong>conn.commit()</strong> 를 항상 선언해야 한다. (글에서는 생략)</p>
-
-<h2 id="3-테이블-데이터-수정-및-삭제">(3) 테이블 데이터 수정 및 삭제</h2>
-
-<h3 id="--데이터-수정-update">- 데이터 수정: UPDATE</h3>
+<h2 id="1-transform">1) transform</h2>
 
 <ul>
-  <li><strong>1) 방법1:</strong> 튜플</li>
+  <li><strong>rotate:</strong> 입력한 각도만큼 회전한다. 음수도 입력이 가능하다.</li>
+  <li><strong>scale:</strong> 숫자는 비율을 의미하며, scale(2, 3)은 width를 2배, height를 3배 확대하라는 뜻이다.</li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"UPDATE users SET username = ? WHERE id = ?"</span><span class="p">,</span> <span class="p">(</span><span class="s">'niceman'</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># style.css 
+</span><span class="p">.</span><span class="n">transform</span> <span class="p">{</span>
+    <span class="n">transform</span><span class="p">:</span> <span class="n">rotate</span><span class="p">(</span><span class="mi">45</span><span class="n">deg</span><span class="p">);</span>  
+    <span class="n">transform</span><span class="p">:</span> <span class="n">scale</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x24b8bf44c00&gt;
-</code></pre></div></div>
-
-<p><img src="/myblog/images/sqlite/sqlite6.png" alt="image.png" /></p>
-
-<p>id = 2 인 username을 niceman으로 변경하는 코드이다.</p>
+<p><br /></p>
 
 <ul>
-  <li><strong>2) 방법2:</strong> 딕셔너리</li>
+  <li><strong>skew:</strong> x, y축을 기준으로 입력한 각도만큼 비튼다.</li>
+  <li><strong>translate:</strong> 선택한 오브젝트의 좌표를 변경한다.</li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"UPDATE users SET username=:name WHERE id=:ID"</span><span class="p">,</span> <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'goodgirl'</span><span class="p">,</span> <span class="s">'ID'</span><span class="p">:</span> <span class="mi">5</span><span class="p">})</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transition</span> <span class="p">{</span>
+    <span class="n">transform</span><span class="p">:</span> <span class="n">skew</span><span class="p">(</span><span class="mi">10</span><span class="n">deg</span><span class="p">,</span> <span class="mi">20</span><span class="n">deg</span><span class="p">);</span>
+    <span class="n">transform</span><span class="p">:</span> <span class="n">translate</span><span class="p">(</span><span class="mi">100</span><span class="n">px</span><span class="p">,</span> <span class="mi">200</span><span class="n">px</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x24b8bf44c00&gt;
-</code></pre></div></div>
-
-<p><img src="/myblog/images/sqlite/sqlite7.png" alt="image.png" /></p>
-
-<p>딕셔너리로 key를 연결하여 수정할 수도 있다.</p>
+<p><br /></p>
 
 <ul>
-  <li><strong>2) 방법3:</strong> format</li>
+  <li><strong>prefix:</strong> 다른 버전의 브라우저에서의 실행을 원할 경우 사용한다.</li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"UPDATE users SET username='%s' WHERE id='%s'"</span> <span class="o">%</span> <span class="p">(</span><span class="s">'badboy'</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># style.css 
+</span><span class="p">.</span><span class="n">transition</span> <span class="p">{</span>
+    <span class="o">--</span><span class="n">webkit</span><span class="o">-</span><span class="n">transform</span><span class="p">:</span> <span class="n">translate</span><span class="p">(</span><span class="mi">100</span><span class="n">px</span><span class="p">,</span> <span class="mi">200</span><span class="n">px</span><span class="p">);</span> <span class="c1"># 크롬, 사파리  
+</span>    <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">transform</span><span class="p">:</span> <span class="n">translate</span><span class="p">(</span><span class="mi">100</span><span class="n">px</span><span class="p">,</span> <span class="mi">200</span><span class="n">px</span><span class="p">);</span>  <span class="c1"># 파이어폭스
+</span>    <span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">transform</span><span class="p">:</span> <span class="n">translate</span><span class="p">(</span><span class="mi">100</span><span class="n">px</span><span class="p">,</span> <span class="mi">200</span><span class="n">px</span><span class="p">);</span> <span class="c1"># 익스플로러 9.0
+</span>    <span class="o">-</span><span class="n">o</span><span class="o">-</span><span class="n">transform</span><span class="p">:</span> <span class="n">translate</span><span class="p">(</span><span class="mi">100</span><span class="n">px</span><span class="p">,</span> <span class="mi">200</span><span class="n">px</span><span class="p">);</span> <span class="c1"># 오페라 
+</span><span class="p">}</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x24b8bf44c00&gt;
-</code></pre></div></div>
+<p><br /></p>
 
-<p><img src="/myblog/images/sqlite/sqlite8.png" alt="image.png" /></p>
+<p><br /></p>
 
-<p>% 를 이용하여 연결해 줄 수도 있다.</p>
+<h2 id="2-transition">2) Transition</h2>
+<p>변화하는 과정을 주는 속성이다.</p>
 
 <ul>
-  <li>중간 데이터 확인 1</li>
+  <li><strong>property:</strong> 효과를 적용하고자 하는 css 속성</li>
+  <li><strong>duration:</strong> 효과가 나타나는데 걸리는 시간</li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT * FROM users"</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># style.css 
+</span>
+<span class="n">transition</span> <span class="p">{</span>
+    <span class="n">transition</span><span class="o">-</span><span class="nb">property</span><span class="p">:</span> <span class="n">width</span><span class="p">;</span>
+    <span class="n">transition</span><span class="o">-</span><span class="n">duration</span><span class="p">:</span> <span class="mi">2</span><span class="n">s</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(1, 'KIM', 'silver@naver.com', '010-0000-0000', 'kim.com', '2021-09-21 10:49:23')
-(2, 'niceman', 'Park@gmail.com', '010-1111-1111', 'park.com', '2021-09-21 10:49:23')
-(3, 'badboy', 'Lee@naver.com', '010-2222-2222', 'Lee.com', '2021-09-21 10:49:23')
-(4, 'Jung', 'jung@gmail.com', '010-3333-3333', 'jung.com', '2021-09-21 10:49:23')
-(5, 'goodgirl', 'yoo@daum.net', '010-4444-4444', 'yoo.net', '2021-09-21 10:49:23')
-</code></pre></div></div>
-
-<p>이렇게 데이터 순회를 통해 바뀐 데이터들을 파이썬에서 직접 확인 할 수 있다.</p>
-
-<h3 id="--데이터-삭제">- 데이터 삭제</h3>
+<p><br /></p>
 
 <ul>
-  <li><strong>1)</strong> Row Delete</li>
+  <li><strong>timing-function:</strong> 효과의 속도이다. <strong>linear</strong>는 <strong>일정하게</strong> 라는 의미이다.</li>
+  <li><strong>delay:</strong> 특정 조건 하에서 효과가 발동한다. 1s는 ‘1초 후’ 라는 의미이다.</li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 방법 1 
-</span><span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"DELETE FROM users WHERE id=?"</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># style.css 
+</span><span class="p">.</span><span class="n">transition</span> <span class="p">{</span>
+    <span class="n">transition</span><span class="o">-</span><span class="n">timing</span><span class="o">-</span><span class="n">function</span><span class="p">:</span> <span class="n">linear</span><span class="p">;</span>
+    <span class="n">transitin</span><span class="o">-</span><span class="n">delay</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span><span class="p">;</span>  
+<span class="p">}</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x24b8bf44c00&gt;
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 방법 2 
-</span><span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"DELETE FROM users WHERE id=:ID"</span><span class="p">,</span> <span class="p">{</span><span class="s">'ID'</span><span class="p">:</span> <span class="mi">5</span><span class="p">})</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x24b8bf44c00&gt;
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 방법 3
-</span><span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"DELETE FROM users WHERE id='%s'"</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x24b8bf44c00&gt;
-</code></pre></div></div>
-
-<p><img src="/myblog/images/sqlite/sqlite9.png" alt="image.png" /></p>
-
-<p>삭제도 같은 3가지의 방법으로 원하는 행을 선택하여 삭제할 수 있다.</p>
+<p><br /></p>
 
 <ul>
-  <li>중간 데이터 확인 1</li>
+  <li><strong>가상선택자 :hover:</strong> css에서 미리 만들어 놓은 클래스이다. <strong>마우스를 올렸을 때</strong> 라는 조건이다.</li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT * FROM users"</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">.</span><span class="n">transition</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">500</span><span class="n">px</span><span class="p">;</span> 
+<span class="p">}</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(1, 'KIM', 'silver@naver.com', '010-0000-0000', 'kim.com', '2021-09-21 10:49:23')
-(3, 'badboy', 'Lee@naver.com', '010-2222-2222', 'Lee.com', '2021-09-21 10:49:23')
+<p><br /></p>
+
+<ul>
+  <li><strong>Transition 종합</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># style.css 
+</span><span class="p">.</span><span class="n">transition</span> <span class="p">{</span>
+    <span class="n">transition</span><span class="p">:</span> <span class="n">width</span> <span class="mi">2</span><span class="n">s</span> <span class="n">linear</span> <span class="mi">1</span><span class="n">s</span><span class="p">;</span> 
+<span class="p">}</span>
+
+<span class="p">.</span><span class="n">transition</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">300</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위와 같이 작성하면, 마우스를 올리면 <strong>1초 후에</strong> width 값이 <strong>300px</strong>로, <strong>2초 동안</strong>, <strong>속도 일정</strong>하게 변하는 애니메이션 효과가 발동한다.</p>
+
+<p><br /></p>
+
+<p><br /></p>
+
+<h2 id="3-animation">3) Animation</h2>
+
+<ul>
+  <li><strong>animation-name:</strong> 임의로 작성 가능하다.</li>
+  <li><strong>iteration-count:</strong> 애니메이션 반복 횟수</li>
+  <li><strong>direction:</strong> 애니메이션 진행 방향
+    <ul>
+      <li>alternate: from -&gt; to -&gt; from</li>
+      <li>normal: from -&gt; to, from -&gt; to</li>
+      <li>reverse: to -&gt; from, to -&gt; from</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">.</span><span class="n">animation</span> <span class="p">{</span>
+    <span class="n">animation</span><span class="o">-</span><span class="n">name</span><span class="p">:</span> <span class="n">changeWidth</span><span class="p">;</span> 
+    <span class="n">animation</span><span class="o">-</span><span class="n">duration</span><span class="p">:</span> <span class="mi">3</span><span class="n">s</span><span class="p">;</span> 
+    <span class="n">animation</span><span class="o">-</span><span class="n">timing</span><span class="o">-</span><span class="n">fungtion</span><span class="p">:</span> <span class="n">linear</span><span class="p">;</span> 
+    <span class="n">animation</span><span class="o">-</span><span class="n">delay</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span><span class="p">;</span>
+    <span class="n">animation</span><span class="o">-</span><span class="n">iteration</span><span class="o">-</span><span class="n">count</span><span class="p">:</span> <span class="mi">6</span><span class="p">;</span>
+    <span class="n">animation</span><span class="o">-</span><span class="n">direction</span><span class="p">:</span> <span class="n">alternate</span><span class="p">;</span> 
+<span class="p">}</span>
+
+<span class="o">@</span><span class="n">keyframes</span> <span class="n">changeWidth</span> <span class="p">{</span>
+    <span class="k">from</span> <span class="p">{</span> <span class="n">width</span><span class="p">:</span> <span class="mi">300</span><span class="n">px</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">to</span> <span class="p">{</span> <span class="n">width</span><span class="p">:</span> <span class="mi">600</span><span class="n">px</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><br /></p>
+
+<h2 id="4-transform--animation">4) Transform &amp; Animation</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">.</span><span class="n">box1</span> <span class="p">{</span>
+    <span class="n">animation</span><span class="p">:</span> <span class="n">rotation</span> <span class="mi">1500</span><span class="n">ms</span> <span class="n">linear</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span> 
+<span class="p">}</span>
+
+<span class="o">@</span><span class="n">keyframes</span> <span class="n">rotation</span> <span class="p">{</span>
+    <span class="k">from</span> <span class="p">{</span> <span class="n">transform</span><span class="p">:</span> <span class="n">rotete</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="n">deg</span><span class="p">);</span> <span class="p">}</span>
+    <span class="n">to</span> <span class="p">{</span> <span class="n">transform</span><span class="p">:</span> <span class="n">rotate</span><span class="p">(</span><span class="mi">10</span><span class="n">deg</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>transition과 같이, animation 또한 한 줄로 한 번에 작성할 수 있다. transform과 함께 결합하여 사용하는 경우가 많다.</p>
+
+<p><br /></p>
+
+<ul>
+  <li><strong>animation</strong>에서 <strong>prefix</strong> 사용</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">.</span><span class="n">box2</span> <span class="p">{</span>
+    <span class="n">animation</span><span class="p">:</span> <span class="n">rotation</span> <span class="mi">3</span><span class="n">s</span> <span class="n">linear</span> <span class="mi">1</span><span class="n">s</span> <span class="mi">6</span> <span class="n">alternate</span><span class="p">;</span> 
+<span class="p">}</span>
+
+<span class="o">@-</span><span class="n">webkit</span><span class="o">-</span><span class="n">keyframes</span> <span class="n">rotation</span> <span class="p">{</span>
+    <span class="k">from</span> <span class="p">{</span><span class="o">-</span><span class="n">webkit</span><span class="o">-</span> <span class="n">transform</span><span class="p">:</span> <span class="n">rotete</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="n">deg</span><span class="p">);</span> <span class="p">}</span>
+    <span class="n">to</span> <span class="p">{</span><span class="o">-</span><span class="n">webkit</span><span class="o">-</span> <span class="n">transform</span><span class="p">:</span> <span class="n">rotate</span><span class="p">(</span><span class="mi">10</span><span class="n">deg</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><br /></p>
+
+<h2 id="5-애니메이션-예시">5) 애니메이션 예시</h2>
+
+<ul>
+  <li><strong>메뉴 영역 애니메이션</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># style.css 
+</span>
+<span class="p">.</span><span class="n">intro</span> <span class="n">nav</span> <span class="n">ul</span> <span class="n">li</span> <span class="n">a</span> <span class="p">{</span>
+    <span class="n">transition</span><span class="p">:</span> <span class="n">color</span> <span class="mi">1</span><span class="n">s</span><span class="p">;</span> 
+<span class="p">}</span>
+
+<span class="p">.</span><span class="n">intro</span> <span class="n">nav</span> <span class="n">ul</span> <span class="n">li</span> <span class="n">a</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">color</span><span class="p">:</span> <span class="c1">#918f8f;
+</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>마우스를 갖다 대면 1초 동안 색이 변하게 되는 애니메이션이다.</p>
+
+<p><br /></p>
+
+<ul>
+  <li><strong>본문 영역 애니메이션</strong></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">.</span><span class="n">main</span> <span class="n">article</span><span class="p">.</span><span class="n">one</span> <span class="p">{</span>
+    <span class="n">transition</span><span class="p">:</span> <span class="n">background</span><span class="o">-</span><span class="n">color</span> <span class="mi">1</span><span class="n">s</span><span class="p">;</span> 
+<span class="p">}</span>
+
+<span class="p">.</span><span class="n">main</span> <span class="n">article</span><span class="p">.</span><span class="n">one</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="c1">#86868; 
+</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>마우스를 갖다 대면 배경색이 변경되는 효과를 가진다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">.</span><span class="n">main</span> <span class="n">article</span> <span class="n">img</span> <span class="p">{</span>
+    <span class="n">transition</span><span class="p">:</span> <span class="nb">all</span> <span class="mi">1</span><span class="n">s</span><span class="p">;</span> 
+<span class="p">}</span>
+
+<span class="p">.</span><span class="n">main</span> <span class="n">article</span> <span class="n">img</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">transform</span><span class="p">:</span> <span class="n">scale</span><span class="p">(</span><span class="mf">1.1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>마우스를 갖다 대면 이미지 크기가 1.1배 커지는 확대 효과를 갖는다.</p>
+
+<p><br /></p>
+
+<p><br /></p>
+
+<p><br /></p>
+
+<h1 id="02-반응형-웹사이트-제작">02. 반응형 웹사이트 제작</h1>
+
+<h2 id="1-미디어쿼리">1) 미디어쿼리</h2>
+
+<ul>
+  <li>미디어쿼리는 PC 뿐만 아니라 모바일, 태블릿에서도 대응되는 웹사이트를 만들기 위해 사용된다.</li>
+  <li>모바일에 대응되는 반응형 혹은 적응형 웹사이트를 만들 때 사용되는 CSS 구문이다.</li>
+</ul>
+
+<h3 id="미디어쿼리-media">미디어쿼리 media</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># style.css 
+</span>
+<span class="o">@</span><span class="n">media</span> <span class="p">(</span><span class="nb">min</span><span class="o">-</span><span class="n">width</span><span class="p">:</span> <span class="mi">320</span><span class="n">px</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">max</span><span class="o">-</span><span class="n">width</span><span class="p">:</span><span class="mi">800</span><span class="n">px</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">300</span><span class="n">px</span><span class="p">;</span> 
+    <span class="n">height</span><span class="p">:</span> <span class="mi">300</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">yellow</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>브라우저의 가로폭을 설정한다. () and () 의 조건일 때 중괄호 안의 css 속성으로 대체하겠다는 의미이다. min-width, max-width 조건 설정시에는 세미콜론을 적으면 안된다는 주의점이 있다.</p>
+
+<p><br /></p>
+
+<p><br /></p>
+
+<h2 id="2-미디어쿼리-사용시-주의사항">2) 미디어쿼리 사용시 주의사항</h2>
+
+<h3 id="viewport">viewport</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">meta</span> <span class="n">name</span><span class="o">=</span><span class="s">"viewport"</span> <span class="n">content</span><span class="o">=</span><span class="s">"width=device-width, initial-scale=1.0"</span>
 </code></pre></div></div>
 
 <ul>
-  <li><strong>2)</strong> 테이블 전체 데이터 삭제</li>
+  <li>미디어쿼리가 제대로 작동하지 않는 문제가 발생할 수 있기 때문에 사용한다. viewport로 너비와 배율을 설정해주어야 모바일 디바이스에서 의도한 화면을 볼 수 있다.</li>
+  <li>다양한 디지털 기기가 있는데, <strong>viewport</strong>는 <strong>화면 상에 표시되는 영역</strong>을 의미한다. <strong>너비와 배율을 설정</strong>할 때 사용하는 메타 태그의 속성 중 하나이다.</li>
+  <li><strong>width=device-width:</strong> viewport의 가로폭 =  디바이스의 가로폭</li>
+  <li><strong>initial-scale=1.0:</strong> 비율은 항상 1.0</li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">"users db deleted: "</span><span class="p">,</span> <span class="n">conn</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"DELETE FROM users"</span><span class="p">).</span><span class="n">rowcount</span><span class="p">,</span> <span class="s">'rows'</span><span class="p">)</span>
+<p><br /></p>
+
+<h3 id="css-속성-상속">CSS 속성 상속</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">.</span><span class="n">media</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">500</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">500</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">pink</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">@</span><span class="n">media</span> <span class="p">(</span><span class="nb">min</span><span class="o">-</span><span class="n">width</span><span class="p">:</span> <span class="mi">320</span><span class="n">px</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">max</span><span class="o">-</span><span class="n">width</span><span class="p">:</span><span class="mi">800</span><span class="n">px</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">300</span><span class="n">px</span><span class="p">;</span> 
+    <span class="n">height</span><span class="p">:</span> <span class="mi">300</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">none</span><span class="p">;</span> 
+<span class="p">}</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>users db deleted:  2 rows
-</code></pre></div></div>
-
-<p><img src="/myblog/images/sqlite/sqlite10.png" alt="image.png" /></p>
-
-<p>모두 삭제되었다.</p>
-
-<ul>
-  <li><strong>커밋:</strong> 변경사항을 적용할 때마다 선언해야 한다.</li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">conn</span><span class="p">.</span><span class="n">commit</span><span class="p">()</span>
-</code></pre></div></div>
-
-<ul>
-  <li><strong>접속 해제:</strong> with문을 사용하지 않으면 접속 해제를 꼭 해주어야 한다.</li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">conn</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
-</code></pre></div></div>
+<p>미디어쿼리 외부 영역에 있는 CSS 속성을 자동으로 <strong>상속</strong> 받기 때문에, <strong>상속을 받지 않으려면</strong> 속성값으로 <strong>none</strong>을 입력해주어야 한다.</p>
 
       <div class="c-article__footer u-clearfix">
         <div class="c-article__tag">
           
         </div>
         <div class="c-article__share">
-          <a href="https://twitter.com/intent/tweet?text=python%20%EA%B8%B0%EC%B4%88%20%7C%7C%2010.3%20sqlite%20%ED%85%8C%EC%9D%B4%EB%B8%94%20%EC%88%98%EC%A0%95%20%EB%B0%8F%20%EC%82%AD%EC%A0%9C&url=https://ag-su.github.io/2021/07/15/database-sqlite-3/" title="Share
+          <a href="https://twitter.com/intent/tweet?text=CSS%20%7C%7C%2003.%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98%EA%B3%BC%20%EB%B0%98%EC%9D%91%ED%98%95%20%EC%9B%B9%EC%82%AC%EC%9D%B4%ED%8A%B8&url=https://ag-su.github.io/2022/12/01/css-04/" title="Share
           on Twitter" rel="nofollow" target="_blank"><div data-icon='ei-sc-twitter' data-size='s'></div></a>
-          <a href="https://facebook.com/sharer.php?u=https://ag-su.github.io/2021/07/15/database-sqlite-3/" title="Share on Facebook" rel="nofollow" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a>
-          <a href="https://plus.google.com/share?url=https://ag-su.github.io/2021/07/15/database-sqlite-3/" title="Share on Google+" rel="nofollow" target="_blank"><div data-icon='ei-sc-google-plus' data-size='s'></div></a>
+          <a href="https://facebook.com/sharer.php?u=https://ag-su.github.io/2022/12/01/css-04/" title="Share on Facebook" rel="nofollow" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a>
+          <a href="https://plus.google.com/share?url=https://ag-su.github.io/2022/12/01/css-04/" title="Share on Google+" rel="nofollow" target="_blank"><div data-icon='ei-sc-google-plus' data-size='s'></div></a>
         </div>
       </div>
       <div class="c-newsletter">
@@ -275,9 +420,6 @@
       <div class="c-recent-post">
         <h4 class="c-recent__title">You might also enjoy</h4>
         <div class="c-recent__box">
-        
-        
-        
         
         
           <div class="c-recent__item">
@@ -310,6 +452,18 @@
               <h4><a href="/2022/10/19/credit-card-fraud-detection/">Transcription || [Kaggle] Credit card Fraud Detection</a></h4>
               <div class="c-recent__date">
                 <time datetime="2022-10-19T00:00:00+09:00">October 19, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/07/25/cluster-filtering/" style="background-image: url( /myblog/images/08.thumbnail.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/07/25/cluster-filtering/">Stock Research || 3.3. 클러스터링 분석을 통한 주가 상승추세 패턴 검출</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-07-25T00:00:00+09:00">July 25, 2022</time>
               </div>
             </div>
           </div>

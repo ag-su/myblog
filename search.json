@@ -1,7 +1,15 @@
 [
   
     {
-      "title"    : "Elice || 02. HTML, CSS 기초",
+      "title"    : "CSS || 03. 애니메이션과 반응형 웹사이트",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/myblog/2022/12/01/css-04/",
+      "date"     : "2022-12-01 00:00:00 +0900"
+    } ,
+  
+    {
+      "title"    : "HTML,CSS || 02. 웹사이트 디자인의 기초",
       "category" : "",
       "tags"     : "",
       "url"      : "/myblog/2022/11/29/html-css-02/",
@@ -9,7 +17,7 @@
     } ,
   
     {
-      "title"    : "Elice || 01. HTML 기초",
+      "title"    : "HTML || 01. HTML 기초",
       "category" : "",
       "tags"     : "",
       "url"      : "/myblog/2022/11/28/html-01/",
