@@ -7,8 +7,8 @@
 
   <title>python 기초 || 10.1 sqlite 테이블 생성, 삽입, 삭제</title>
   <meta name='description' content="10. Sqlite 데이터베이스 연동_1테이블 생성, 데이터 삽입과 삭제">
-  <link rel='canonical' href="https://ag-su.github.io/myblog/2021/07/15/database-sqlite-1/">
-  <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
+  <link rel='canonical' href="https://ag-su.github.io/gitblog/2021/07/15/database-sqlite-1/">
+  <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/gitblog/feed.xml">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
@@ -26,13 +26,13 @@
     <aside class="c-sidebar">
   <div class="c-sidebar-author">
     <div class="c-author__cover">
-      <a href="/myblog/">
-        <img src="/myblog/images/toetoe.jpg" alt="agsu">
+      <a href="/gitblog/">
+        <img src="/gitblog/images/toetoe.jpg" alt="agsu">
       </a>
     </div>
     <div class="c-author__info">
       <div class="c-author__name">agsu</div>
-      <span class="c-author__job">Devision of Data Science</span>
+      <span class="c-author__job">Division of Data Science</span>
     </div>
     <div class="c-contact-menu">
       
@@ -116,7 +116,7 @@
 
 <p>: 직관적인 데이터베이스 관리 가능</p>
 
-<p><img src="/myblog/images/sqlite/sqlite1.png" alt="image.png" /></p>
+<p><img src="/gitblog/images/sqlite/sqlite1.png" alt="image.png" /></p>
 
 <ul>
   <li><strong>삽입날짜 변수 생성</strong></li>
@@ -157,7 +157,7 @@ sqlite3.sqlite_version 3.33.0
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">'./resource/database.db'</span><span class="p">,</span> <span class="n">isolation_level</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="/myblog/images/sqlite/sqlite2.png" alt="image.png" /></p>
+<p><img src="/gitblog/images/sqlite/sqlite2.png" alt="image.png" /></p>
 
 <p><strong>DB</strong>를 생성하고 연결해 준다. <strong>DB</strong>에 명령할 때 <strong>커밋(commit)</strong>을 꼭 해주어야 하는데 , <strong>isolation_level=None</strong>으로 설정하면 <strong>AutoCommit</strong>이 된다.</p>
 
@@ -187,7 +187,7 @@ sqlite3.sqlite_version 3.33.0
 
 <p>테이블을 생성하기 위해서 CREATE TABLE 명령어를 사용한다. 그다음 <strong>테이블이름(속성 타입)</strong> 이러한 형태로 넣어준다. <strong>id 속성</strong>을 <strong>PRIMARY KEY</strong>로 설정해 주었다.</p>
 
-<p><img src="/myblog/images/sqlite/sqlite3.png" alt="image.png" /></p>
+<p><img src="/gitblog/images/sqlite/sqlite3.png" alt="image.png" /></p>
 
 <p>이렇게 <strong>users</strong> 테이블이 생성되었다.</p>
 
@@ -224,7 +224,7 @@ sqlite3.sqlite_version 3.33.0
 
 <p>방법 1은 바로 VALUES안에 값을 넣고, 변수를 넣을 경우 ?로 작성한 후 execute의 인자에서 튜플안에 변수를 넣어준다.  방법 2는 테이블이름() 안에 속성 이름을 명시적으로 나열하고 , VALUES() 안에 모두 ? 로 작성해 주고, execute의 인자에서 튜플 안에 값 또는 변수를 넣어준다.</p>
 
-<p><img src="/myblog/images/sqlite/sqlite4.png" alt="image.png" /></p>
+<p><img src="/gitblog/images/sqlite/sqlite4.png" alt="image.png" /></p>
 
 <p>새로고침 하면 위 화면과 같이 값이 추가된 것을 볼 수 있다.</p>
 
@@ -242,7 +242,7 @@ sqlite3.sqlite_version 3.33.0
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x193695339d0&gt;
 </code></pre></div></div>
 
-<p><img src="/myblog/images/sqlite/sqlite5.png" alt="image.png" /></p>
+<p><img src="/gitblog/images/sqlite/sqlite5.png" alt="image.png" /></p>
 
 <p><strong>excutemany</strong>의 두번째 인자에 튜플이나 리스트를 넣어주면 한꺼번에 데이터 삽입이 가능하다.</p>
 
@@ -330,7 +330,7 @@ sqlite3.sqlite_version 3.33.0
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/11/29/html-css-02/" style="background-image: url( /myblog/images/221129_1.png)"></a>
+            <a class="c-recent__image" href="/2022/11/29/html-css-02/" style="background-image: url( /gitblog/images/221129_1.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/11/29/html-css-02/">HTML,CSS || 02. 웹사이트 디자인의 기초</a></h4>
               <div class="c-recent__date">
@@ -342,7 +342,7 @@ sqlite3.sqlite_version 3.33.0
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/11/28/html-01/" style="background-image: url( /myblog/images/221128/221128_1.png)"></a>
+            <a class="c-recent__image" href="/2022/11/28/html-01/" style="background-image: url( /gitblog/images/221128/221128_1.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/11/28/html-01/">HTML || 01. HTML 기초</a></h4>
               <div class="c-recent__date">
@@ -354,7 +354,7 @@ sqlite3.sqlite_version 3.33.0
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /myblog/images/01.credit_thumbnail.png)"></a>
+            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /gitblog/images/01.credit_thumbnail.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/10/19/credit-card-fraud-detection/">Transcription || [Kaggle] Credit card Fraud Detection</a></h4>
               <div class="c-recent__date">
@@ -389,11 +389,11 @@ sqlite3.sqlite_version 3.33.0
 </main> <!-- /.c-content -->
   </div> <!-- /.o-wrapper -->
   <div class="c-top" data-icon='ei-chevron-up' data-size='s' title="Scroll To Top"></div> <!-- /.c-top -->
-  <script src="/myblog/js/jquery-3.3.1.min.js"></script>
-<script src="/myblog/js/evil-icons.min.js"></script>
-<script src="/myblog/js/jquery.fitvids.js"></script>
-<script src="/myblog/js/simple-jekyll-search.min.js"></script>
-<script src="/myblog/js/main.js"></script>
+  <script src="/gitblog/js/jquery-3.3.1.min.js"></script>
+<script src="/gitblog/js/evil-icons.min.js"></script>
+<script src="/gitblog/js/jquery.fitvids.js"></script>
+<script src="/gitblog/js/simple-jekyll-search.min.js"></script>
+<script src="/gitblog/js/main.js"></script>
 <!-- /javascripts -->
 </body>
 </html>
