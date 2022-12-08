@@ -1,12 +1,12 @@
 title: agsu BLOG
 description: Data Science
-baseurl: "/myblog" # the subpath of your site, e.g. /blog
+baseurl: "/gitblog" # the subpath of your site, e.g. /blog
 url: "https://ag-su.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Author
 author-name:    agsu
 author-image:   toetoe.jpg
-author-job:     Devision of Data Science
+author-job:     Division of Data Science
 author-email:   eunsugim815@gmail.com # Add your email for contant form.
 # author-twitter: artemsheludko_ # Add your twitter account
 about-author:   블로그 

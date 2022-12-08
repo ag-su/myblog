@@ -7,8 +7,8 @@
 
   <title>Stock Research || 3.3. 클러스터링 분석을 통한 주가 상승추세 패턴 검출</title>
   <meta name='description' content="3. 논문 연구: 주가상승 패턴 검출3.3. 클러스터 탐색을 통한 주가상승 패턴 검출지난 글 ( [Stock Research] 3.2. t-SNE를 사용한 주가데이터 2차원 시각화 ) 에서는 원본 주가데이터셋과 SHAP 표준화 데이터셋에 대한 t-SNE 2차원 산점도 시각화를 수행...">
-  <link rel='canonical' href="https://ag-su.github.io/myblog/2022/07/25/cluster-filtering/">
-  <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
+  <link rel='canonical' href="https://ag-su.github.io/gitblog/2022/07/25/cluster-filtering/">
+  <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/gitblog/feed.xml">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
@@ -26,13 +26,13 @@
     <aside class="c-sidebar">
   <div class="c-sidebar-author">
     <div class="c-author__cover">
-      <a href="/myblog/">
-        <img src="/myblog/images/toetoe.jpg" alt="agsu">
+      <a href="/gitblog/">
+        <img src="/gitblog/images/toetoe.jpg" alt="agsu">
       </a>
     </div>
     <div class="c-author__info">
       <div class="c-author__name">agsu</div>
-      <span class="c-author__job">Devision of Data Science</span>
+      <span class="c-author__job">Division of Data Science</span>
     </div>
     <div class="c-contact-menu">
       
@@ -90,7 +90,7 @@
       </div>
     </header>
     
-    <div class="c-article__image o-opacity" style="background-image: url( /myblog/images/08.thumbnail.png )"></div>
+    <div class="c-article__image o-opacity" style="background-image: url( /gitblog/images/08.thumbnail.png )"></div>
     
     <div class="c-wrap-content">
       <header class="c-article__header">
@@ -310,7 +310,7 @@ Populating the interactive namespace from numpy and matplotlib
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_13_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_13_1.png" alt="png" /></p>
 
 <ul>
   <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
@@ -325,7 +325,7 @@ label 1 &gt; 0.22 군집 번호:  Int64Index([21, 23, 24, 26, 27, 36, 47, 49], d
 종목의 종류: 1024  |  날짜의 종류:  246
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_15_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_15_1.png" alt="png" /></p>
 
 <h4 id="ii-2020">II. 2020</h4>
 
@@ -339,7 +339,7 @@ label 1 &gt; 0.22 군집 번호:  Int64Index([21, 23, 24, 26, 27, 36, 47, 49], d
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_18_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_18_1.png" alt="png" /></p>
 
 <ul>
   <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
@@ -354,7 +354,7 @@ label 1 &gt; 0.29 군집 번호:  Int64Index([24, 26, 27, 30, 38, 40, 41, 42, 43
 종목의 종류: 1306  |  날짜의 종류:  247
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_20_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_20_1.png" alt="png" /></p>
 
 <h4 id="iii-2021">III. 2021</h4>
 
@@ -368,7 +368,7 @@ label 1 &gt; 0.29 군집 번호:  Int64Index([24, 26, 27, 30, 38, 40, 41, 42, 43
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_23_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_23_1.png" alt="png" /></p>
 
 <ul>
   <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
@@ -383,7 +383,7 @@ label 1 &gt; 0.207 군집 번호:  Int64Index([3, 4, 13, 18, 21, 22, 24, 25], dt
 종목의 종류: 1092  |  날짜의 종류:  237
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_25_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_25_1.png" alt="png" /></p>
 
 <h4 id="-중립구간-상승-추세-군집-해석">🌟 중립구간 상승 추세 군집 해석</h4>
 
@@ -393,7 +393,7 @@ label 1 &gt; 0.207 군집 번호:  Int64Index([3, 4, 13, 18, 21, 22, 24, 25], dt
 <span class="n">visualization_week</span><span class="p">(</span><span class="n">data_list</span><span class="o">=</span><span class="n">lst_data</span><span class="p">,</span> <span class="n">week_num</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">day_num</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_28_0.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_28_0.png" alt="png" /></p>
 
 <p><code class="language-plaintext highlighter-rouge">중립구간</code>에서 상승 추세 군집 데이터의 날짜 빈도수는 <strong>2019년도</strong>는 <strong>8월 3주차</strong>, <strong>2020년도</strong>는 <strong>4월 1주차</strong>, <strong>2021년도</strong>는 <strong>2월 1주차</strong>가 가장 높게 나왔다. 그 중에서도 가장 큰 날짜 빈도 차이를 보인 연도는 <strong>2020년</strong>이었다.</p>
 
@@ -499,13 +499,13 @@ label 1 &gt; 0.207 군집 번호:  Int64Index([3, 4, 13, 18, 21, 22, 24, 25], dt
 </ul>
 
 <p><strong>2019년 8월 20일</strong><br />
-<img src="/myblog/images/08.cluster_filtering_1.png" alt="image.png" title="종목코드: 082800" /></p>
+<img src="/gitblog/images/08.cluster_filtering_1.png" alt="image.png" title="종목코드: 082800" /></p>
 
 <p><strong>2020년 4월 1일</strong><br />
-<img src="/myblog/images/08.cluster_filtering_2.png" alt="image.png" title="종목코드: 089890" /></p>
+<img src="/gitblog/images/08.cluster_filtering_2.png" alt="image.png" title="종목코드: 089890" /></p>
 
 <p><strong>2021년 2월 1일</strong>  <br />
-<img src="/myblog/images/08.cluster_filtering_3.png" alt="image.png" title="종목코드: 033240" /></p>
+<img src="/gitblog/images/08.cluster_filtering_3.png" alt="image.png" title="종목코드: 033240" /></p>
 
 <p>여러개의 차트 확인을 해보았을 때, 가장 큰 날짜 편중을 보였던 <strong>2020년도</strong>는 <strong>차트의 패턴이 가장 일정</strong>하게 나타났으며, 2019,2021년도는 2020년도 만큼 일정한 패턴을 보이지는 않았다. 하지만 세 연도에서 공통적으로 나오는 패턴이 존재했다. 해당 패턴을 분석해보았을 때, 위의 세 사진과 같이, <code class="language-plaintext highlighter-rouge">하락 추세에서 상승 추세로 전환</code>되는 <code class="language-plaintext highlighter-rouge">V자</code> 형태였으며, 그 중에서도 <code class="language-plaintext highlighter-rouge">기준일(D0)[회색 선]이 오른쪽에 위치</code>한다는 공통점이 있었다.</p>
 
@@ -523,7 +523,7 @@ label 1 &gt; 0.207 군집 번호:  Int64Index([3, 4, 13, 18, 21, 22, 24, 25], dt
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_39_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_39_1.png" alt="png" /></p>
 
 <ul>
   <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
@@ -538,7 +538,7 @@ label 1 &gt; 0.25 군집 번호:  Int64Index([8, 16, 17, 21, 30], dtype='int64',
 종목의 종류: 1023  |  날짜의 종류:  246
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_41_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_41_1.png" alt="png" /></p>
 
 <h4 id="ii-2020-1">II. 2020</h4>
 
@@ -552,7 +552,7 @@ label 1 &gt; 0.25 군집 번호:  Int64Index([8, 16, 17, 21, 30], dtype='int64',
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_44_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_44_1.png" alt="png" /></p>
 
 <ul>
   <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
@@ -567,7 +567,7 @@ label 1 &gt; 0.31 군집 번호:  Int64Index([1, 14, 16, 22, 36, 39], dtype='int
 종목의 종류: 1190  |  날짜의 종류:  247
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_46_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_46_1.png" alt="png" /></p>
 
 <h4 id="iii-2021-1">III. 2021</h4>
 
@@ -581,7 +581,7 @@ label 1 &gt; 0.31 군집 번호:  Int64Index([1, 14, 16, 22, 36, 39], dtype='int
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_49_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_49_1.png" alt="png" /></p>
 
 <ul>
   <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
@@ -596,7 +596,7 @@ label 1 &gt; 0.268 군집 번호:  Int64Index([5, 9, 14, 16, 31, 32, 43, 51], dt
 종목의 종류: 1110  |  날짜의 종류:  237
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_51_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_51_1.png" alt="png" /></p>
 
 <h4 id="-과매수구간-상승-추세-군집-해석">🌟 과매수구간 상승 추세 군집 해석</h4>
 
@@ -606,7 +606,7 @@ label 1 &gt; 0.268 군집 번호:  Int64Index([5, 9, 14, 16, 31, 32, 43, 51], dt
 <span class="n">visualization_week</span><span class="p">(</span><span class="n">data_list</span><span class="o">=</span><span class="n">lst_data</span><span class="p">,</span> <span class="n">week_num</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">day_num</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_54_0.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_54_0.png" alt="png" /></p>
 
 <p><code class="language-plaintext highlighter-rouge">과매수구간</code>에서 빈도수가 높은 날짜는 <strong>2019년 1월 4주차</strong>, <strong>2020년 4월 3주차</strong>, <strong>2021년 1월 3주차</strong>임을 알 수 있다. 다른 CCI 구간에 비해 상위 빈도수의 크기 차이가 많지 않았다. 가장 높은 날짜 빈도 차이를 보이는 연도는 중립구간과 마찬가지로 <strong>2020년도</strong>였다.</p>
 
@@ -712,13 +712,13 @@ label 1 &gt; 0.268 군집 번호:  Int64Index([5, 9, 14, 16, 31, 32, 43, 51], dt
 </ul>
 
 <p><strong>2019년 1월 17일</strong><br />
-<img src="/myblog/images/08.cluster_filtering_4.png" alt="image.png" title="종목코드: 187220" /></p>
+<img src="/gitblog/images/08.cluster_filtering_4.png" alt="image.png" title="종목코드: 187220" /></p>
 
 <p><strong>2020년 4월 17일</strong><br />
-<img src="/myblog/images/08.cluster_filtering_5.png" alt="image.png" title="종목코드: 035620" /></p>
+<img src="/gitblog/images/08.cluster_filtering_5.png" alt="image.png" title="종목코드: 035620" /></p>
 
 <p><strong>2021년 1월 20일</strong><br />
-<img src="/myblog/images/08.cluster_filtering_6.png" alt="image.png" title="종목코드: 010690" /></p>
+<img src="/gitblog/images/08.cluster_filtering_6.png" alt="image.png" title="종목코드: 010690" /></p>
 
 <p><code class="language-plaintext highlighter-rouge">과매수구간</code>은 20일 이동평균선의 위에 극단적으로 떨어져있는 데이터들이므로, 기준일(D0)[회색 선]이 상승추세에서의 중간 ~ 끝 무렵에 위치하였다. 다른 CCI 구간보다 패턴이 가장 불규칙적이었지만, <code class="language-plaintext highlighter-rouge">하락추세에서 상승추세로 전환되는 V자 형태에서 상승추세 끝무렵에 위치</code>하는 공통된 패턴을 <strong>일부 데이터</strong>에서 검출할 수 있었다.</p>
 
@@ -736,7 +736,7 @@ label 1 &gt; 0.268 군집 번호:  Int64Index([5, 9, 14, 16, 31, 32, 43, 51], dt
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_65_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_65_1.png" alt="png" /></p>
 
 <ul>
   <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
@@ -751,7 +751,7 @@ label 1 &gt; 0.365 군집 번호:  Int64Index([1, 2, 25, 26, 50], dtype='int64',
 종목의 종류: 994  |  날짜의 종류:  222
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_67_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_67_1.png" alt="png" /></p>
 
 <h4 id="ii-2020-2">II. 2020</h4>
 
@@ -765,7 +765,7 @@ label 1 &gt; 0.365 군집 번호:  Int64Index([1, 2, 25, 26, 50], dtype='int64',
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_70_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_70_1.png" alt="png" /></p>
 
 <ul>
   <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
@@ -780,7 +780,7 @@ label 1 &gt; 0.5 군집 번호:  Int64Index([2, 3, 15, 28, 37], dtype='int64', n
 종목의 종류: 1356  |  날짜의 종류:  78
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/_72_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/_72_1.png" alt="png" /></p>
 
 <h4 id="iii-2021-2">III. 2021</h4>
 
@@ -794,7 +794,7 @@ label 1 &gt; 0.5 군집 번호:  Int64Index([2, 3, 15, 28, 37], dtype='int64', n
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linkage complete
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_75_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_75_1.png" alt="png" /></p>
 
 <ul>
   <li>계층적 클러스터링 &amp; 상승 추세 군집 선택</li>
@@ -809,7 +809,7 @@ label 1 &gt; 0.35 군집 번호:  Int64Index([5, 7, 10, 15], dtype='int64', name
 종목의 종류: 1163  |  날짜의 종류:  230
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_77_1.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_77_1.png" alt="png" /></p>
 
 <h4 id="-과매도구간-상승-추세-군집-해석">🌟 과매도구간 상승 추세 군집 해석</h4>
 
@@ -819,7 +819,7 @@ label 1 &gt; 0.35 군집 번호:  Int64Index([5, 7, 10, 15], dtype='int64', name
 <span class="n">visualization_week</span><span class="p">(</span><span class="n">data_list</span><span class="o">=</span><span class="n">lst_data</span><span class="p">,</span> <span class="n">week_num</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">day_num</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="/myblog/images/cluster_filtering/output_80_0.png" alt="png" /></p>
+<p><img src="/gitblog/images/cluster_filtering/output_80_0.png" alt="png" /></p>
 
 <p><code class="language-plaintext highlighter-rouge">과매도구간</code>의 빈도수 상위 날짜는 <strong>2019년 8월 1주차</strong>, <strong>2020년 3월 4주차</strong>, <strong>2021년 10월 1주차</strong>였다. CCI 구간 중 유일하게 모든 연도에서 높은 날짜 빈도 차이를 보였다.</p>
 
@@ -925,13 +925,13 @@ label 1 &gt; 0.35 군집 번호:  Int64Index([5, 7, 10, 15], dtype='int64', name
 </ul>
 
 <p><strong>2019년 8월 6일</strong> <br />
-<img src="/myblog/images/08.cluster_filtering_7.png" alt="image.png" title="종목코드: 033100" /></p>
+<img src="/gitblog/images/08.cluster_filtering_7.png" alt="image.png" title="종목코드: 033100" /></p>
 
 <p><strong>2020년 3월 19일</strong> <br />
-<img src="/myblog/images/08.cluster_filtering_8.png" alt="image.png" title="종목코드: 126880" /></p>
+<img src="/gitblog/images/08.cluster_filtering_8.png" alt="image.png" title="종목코드: 126880" /></p>
 
 <p><strong>2021년 10월 17일</strong>  <br />
-<img src="/myblog/images/08.cluster_filtering_9.png" alt="image.png" title="종목코드: 088130" /></p>
+<img src="/gitblog/images/08.cluster_filtering_9.png" alt="image.png" title="종목코드: 088130" /></p>
 
 <p>위의 사진과 같이, 모든 연도에서 비슷한 패턴을 보였다. <code class="language-plaintext highlighter-rouge">하락추세에서 상승추세로 전환되는 V자 형태</code>의 공통된 패턴에서, <code class="language-plaintext highlighter-rouge">기준일(D0)[회색 선]이 꼭지점 근처에 위치</code>하였다.</p>
 
@@ -978,7 +978,7 @@ label 1 &gt; 0.35 군집 번호:  Int64Index([5, 7, 10, 15], dtype='int64', name
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/11/29/html-css-02/" style="background-image: url( /myblog/images/221129_1.png)"></a>
+            <a class="c-recent__image" href="/2022/11/29/html-css-02/" style="background-image: url( /gitblog/images/221129_1.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/11/29/html-css-02/">HTML,CSS || 02. 웹사이트 디자인의 기초</a></h4>
               <div class="c-recent__date">
@@ -990,7 +990,7 @@ label 1 &gt; 0.35 군집 번호:  Int64Index([5, 7, 10, 15], dtype='int64', name
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/11/28/html-01/" style="background-image: url( /myblog/images/221128/221128_1.png)"></a>
+            <a class="c-recent__image" href="/2022/11/28/html-01/" style="background-image: url( /gitblog/images/221128/221128_1.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/11/28/html-01/">HTML || 01. HTML 기초</a></h4>
               <div class="c-recent__date">
@@ -1002,7 +1002,7 @@ label 1 &gt; 0.35 군집 번호:  Int64Index([5, 7, 10, 15], dtype='int64', name
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /myblog/images/01.credit_thumbnail.png)"></a>
+            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /gitblog/images/01.credit_thumbnail.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/10/19/credit-card-fraud-detection/">Transcription || [Kaggle] Credit card Fraud Detection</a></h4>
               <div class="c-recent__date">
@@ -1037,11 +1037,11 @@ label 1 &gt; 0.35 군집 번호:  Int64Index([5, 7, 10, 15], dtype='int64', name
 </main> <!-- /.c-content -->
   </div> <!-- /.o-wrapper -->
   <div class="c-top" data-icon='ei-chevron-up' data-size='s' title="Scroll To Top"></div> <!-- /.c-top -->
-  <script src="/myblog/js/jquery-3.3.1.min.js"></script>
-<script src="/myblog/js/evil-icons.min.js"></script>
-<script src="/myblog/js/jquery.fitvids.js"></script>
-<script src="/myblog/js/simple-jekyll-search.min.js"></script>
-<script src="/myblog/js/main.js"></script>
+  <script src="/gitblog/js/jquery-3.3.1.min.js"></script>
+<script src="/gitblog/js/evil-icons.min.js"></script>
+<script src="/gitblog/js/jquery.fitvids.js"></script>
+<script src="/gitblog/js/simple-jekyll-search.min.js"></script>
+<script src="/gitblog/js/main.js"></script>
 <!-- /javascripts -->
 </body>
 </html>
