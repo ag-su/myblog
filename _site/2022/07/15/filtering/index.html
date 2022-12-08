@@ -7,8 +7,8 @@
 
   <title>Stock Research || 2.3. CCI를 이용한 주가 데이터 필터링</title>
   <meta name='description' content="2. Data Preprocessing2.3. CCI를 이용한 주가 데이터 필터링이전글 [Stock Research] 2.2. 주가 데이터 스케일링 에서는 통합 종목 주가 데이터셋의 문제점인 종목마다 다른 가격을 표준화해주는 작업을 했다.마지막 데이터 전처리 과정은 CCI를 이용한...">
-  <link rel='canonical' href="https://ag-su.github.io/gitblog/2022/07/15/filtering/">
-  <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/gitblog/feed.xml">
+  <link rel='canonical' href="https://ag-su.github.io/myblog/2022/07/15/filtering/">
+  <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
@@ -26,8 +26,8 @@
     <aside class="c-sidebar">
   <div class="c-sidebar-author">
     <div class="c-author__cover">
-      <a href="/gitblog/">
-        <img src="/gitblog/images/toetoe.jpg" alt="agsu">
+      <a href="/myblog/">
+        <img src="/myblog/images/toetoe.jpg" alt="agsu">
       </a>
     </div>
     <div class="c-author__info">
@@ -90,7 +90,7 @@
       </div>
     </header>
     
-    <div class="c-article__image o-opacity" style="background-image: url( /gitblog/images/05.filtering_1.png )"></div>
+    <div class="c-article__image o-opacity" style="background-image: url( /myblog/images/05.filtering_1.png )"></div>
     
     <div class="c-wrap-content">
       <header class="c-article__header">
@@ -145,7 +145,7 @@ Populating the interactive namespace from numpy and matplotlib
 <p><br /></p>
 
 <p><strong>계산식</strong><br />
-<img src="/gitblog/images/05.filtering_1.png" alt="image.png" /></p>
+<img src="/myblog/images/05.filtering_1.png" alt="image.png" /></p>
 
 <p><br /></p>
 
@@ -321,9 +321,9 @@ test dataset:  (36885, 560) (36885,)
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sf</span><span class="p">.</span><span class="n">plot_evauate</span><span class="p">(</span><span class="n">trainX_1</span><span class="p">,</span> <span class="n">trainY_1</span><span class="p">,</span> <span class="n">testX_1</span><span class="p">,</span> <span class="n">testY_1</span><span class="p">,</span> <span class="n">xgb_1</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/filtering/output_11_0.png" alt="png" /></p>
+<p><img src="/myblog/images/filtering/output_11_0.png" alt="png" /></p>
 
-<p><img src="/gitblog/images/filtering/output_11_1.png" alt="png" /></p>
+<p><img src="/myblog/images/filtering/output_11_1.png" alt="png" /></p>
 
 <h3 id="2-과열구간과매수구간-cci--100-infty">2) 과열구간/과매수구간 CCI : (100, $\infty$)</h3>
 <p>침체구간에서 데이터셋의 개수는 train: 256399, test:64768 개로, 꽤 많은 데이터셋의 개수가 나왔다. 세 구간 중 가장 낮은 분류 성능을 보였다.</p>
@@ -371,9 +371,9 @@ test dataset:  (64768, 560) (64768,)
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sf</span><span class="p">.</span><span class="n">plot_evauate</span><span class="p">(</span><span class="n">trainX_2</span><span class="p">,</span> <span class="n">trainY_2</span><span class="p">,</span> <span class="n">testX_2</span><span class="p">,</span> <span class="n">testY_2</span><span class="p">,</span> <span class="n">xgb_2</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/filtering/output_16_0.png" alt="png" /></p>
+<p><img src="/myblog/images/filtering/output_16_0.png" alt="png" /></p>
 
-<p><img src="/gitblog/images/filtering/output_16_1.png" alt="png" /></p>
+<p><img src="/myblog/images/filtering/output_16_1.png" alt="png" /></p>
 
 <h3 id="3-침체구간과매도구간-cci---infty--100">3) 침체구간/과매도구간 CCI : (-$\infty$, -100)</h3>
 <p>침체구간에서 데이터셋의 개수는 train: 269977, test:73435 개로 가장 많은 데이터의 개수가 나왔으며, auc score를 봤을 때, 가장 높은 분류 성능을 보였다.</p>
@@ -421,9 +421,9 @@ test dataset:  (73435, 560) (73435,)
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sf</span><span class="p">.</span><span class="n">plot_evauate</span><span class="p">(</span><span class="n">trainX_3</span><span class="p">,</span> <span class="n">trainY_3</span><span class="p">,</span> <span class="n">testX_3</span><span class="p">,</span> <span class="n">testY_3</span><span class="p">,</span> <span class="n">xgb_3</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/filtering/output_21_0.png" alt="png" /></p>
+<p><img src="/myblog/images/filtering/output_21_0.png" alt="png" /></p>
 
-<p><img src="/gitblog/images/filtering/output_21_1.png" alt="png" /></p>
+<p><img src="/myblog/images/filtering/output_21_1.png" alt="png" /></p>
 
 <ul>
   <li>데이터셋 저장 <br />
@@ -475,7 +475,7 @@ test dataset:  (73435, 560) (73435,)
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/11/29/html-css-02/" style="background-image: url( /gitblog/images/221129_1.png)"></a>
+            <a class="c-recent__image" href="/2022/11/29/html-css-02/" style="background-image: url( /myblog/images/221129_1.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/11/29/html-css-02/">HTML,CSS || 02. 웹사이트 디자인의 기초</a></h4>
               <div class="c-recent__date">
@@ -487,7 +487,7 @@ test dataset:  (73435, 560) (73435,)
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/11/28/html-01/" style="background-image: url( /gitblog/images/221128/221128_1.png)"></a>
+            <a class="c-recent__image" href="/2022/11/28/html-01/" style="background-image: url( /myblog/images/221128/221128_1.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/11/28/html-01/">HTML || 01. HTML 기초</a></h4>
               <div class="c-recent__date">
@@ -499,7 +499,7 @@ test dataset:  (73435, 560) (73435,)
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /gitblog/images/01.credit_thumbnail.png)"></a>
+            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /myblog/images/01.credit_thumbnail.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/10/19/credit-card-fraud-detection/">Transcription || [Kaggle] Credit card Fraud Detection</a></h4>
               <div class="c-recent__date">
@@ -534,11 +534,11 @@ test dataset:  (73435, 560) (73435,)
 </main> <!-- /.c-content -->
   </div> <!-- /.o-wrapper -->
   <div class="c-top" data-icon='ei-chevron-up' data-size='s' title="Scroll To Top"></div> <!-- /.c-top -->
-  <script src="/gitblog/js/jquery-3.3.1.min.js"></script>
-<script src="/gitblog/js/evil-icons.min.js"></script>
-<script src="/gitblog/js/jquery.fitvids.js"></script>
-<script src="/gitblog/js/simple-jekyll-search.min.js"></script>
-<script src="/gitblog/js/main.js"></script>
+  <script src="/myblog/js/jquery-3.3.1.min.js"></script>
+<script src="/myblog/js/evil-icons.min.js"></script>
+<script src="/myblog/js/jquery.fitvids.js"></script>
+<script src="/myblog/js/simple-jekyll-search.min.js"></script>
+<script src="/myblog/js/main.js"></script>
 <!-- /javascripts -->
 </body>
 </html>
