@@ -7,8 +7,8 @@
 
   <title>Stock Research || 3.1. 설명가능 AI (XAI), SHAP value</title>
   <meta name='description' content="3. 주가 상승 추세 패턴 검출3.1. 설명가능 AI (XAI), SHAP value이전 글 ( [Stock Research] 2.3. CCI를 이용한 주가 데이터 필터링 ) 까지 데이터 전저리를 통해  baseline model에 비해 성능을 향상시킬 수 있었다. 이번 글에서는 ...">
-  <link rel='canonical' href="https://ag-su.github.io/gitblog/2022/07/18/shap-value/">
-  <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/gitblog/feed.xml">
+  <link rel='canonical' href="https://ag-su.github.io/myblog/2022/07/18/shap-value/">
+  <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
@@ -26,8 +26,8 @@
     <aside class="c-sidebar">
   <div class="c-sidebar-author">
     <div class="c-author__cover">
-      <a href="/gitblog/">
-        <img src="/gitblog/images/toetoe.jpg" alt="agsu">
+      <a href="/myblog/">
+        <img src="/myblog/images/toetoe.jpg" alt="agsu">
       </a>
     </div>
     <div class="c-author__info">
@@ -90,7 +90,7 @@
       </div>
     </header>
     
-    <div class="c-article__image o-opacity" style="background-image: url( /gitblog/images/06.thumbnail.png )"></div>
+    <div class="c-article__image o-opacity" style="background-image: url( /myblog/images/06.thumbnail.png )"></div>
     
     <div class="c-wrap-content">
       <header class="c-article__header">
@@ -453,14 +453,14 @@ n===t._wrapperState.initialValue&&(e.value=n)}});t.exports=l},function(t,e,n){"u
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shap</span><span class="p">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">shap_values_1</span><span class="p">,</span> <span class="n">df_trainX_1</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/shap_value/output_20_0.png" alt="png" /></p>
+<p><img src="/myblog/images/shap_value/output_20_0.png" alt="png" /></p>
 
 <h4 id="test-dataset-summary-plot">Test dataset summary plot</h4>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shap</span><span class="p">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">shap_values_test_1</span><span class="p">,</span> <span class="n">df_testX_1</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/shap_value/output_22_0.png" alt="png" /></p>
+<p><img src="/myblog/images/shap_value/output_22_0.png" alt="png" /></p>
 
 <p><code class="language-plaintext highlighter-rouge">중립구간</code>에서 train, test 데이터셋의 중요 변수 상위 6개가 동일하게 나왔음을 알 수 있다. 
 중요도 상위 설명 변수 3개를 해석해보면, <strong>D-0_KCH</strong>의 값이 클 수록 양의 영향 (다음 날 종가 2% 상승할 것이라 예측하는 데 영향)을 미쳤으며, <strong>D-0_DCL</strong> 의 값이 작을 수록 양의 영향, <strong>D-0_KCL</strong>의 값이 작을 수록 양의 영향을 끼쳤다.</p>
@@ -714,14 +714,14 @@ n===t._wrapperState.initialValue&&(e.value=n)}});t.exports=l},function(t,e,n){"u
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shap</span><span class="p">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">shap_values_2</span><span class="p">,</span> <span class="n">df_trainX_2</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/shap_value/output_32_0.png" alt="png" /></p>
+<p><img src="/myblog/images/shap_value/output_32_0.png" alt="png" /></p>
 
 <h4 id="test-dataset-summary-plot-1">Test dataset Summary plot</h4>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shap</span><span class="p">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">shap_values_test_2</span><span class="p">,</span> <span class="n">df_testX_2</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/shap_value/output_34_0.png" alt="png" /></p>
+<p><img src="/myblog/images/shap_value/output_34_0.png" alt="png" /></p>
 
 <p><code class="language-plaintext highlighter-rouge">과매수구간</code>도 마찬가지로 train, test 데이터셋은 유사한 변수 중요도를 갖는다. <strong>D-0_High</strong>의 값이 클 수록, <strong>D-0_KCL</strong>의 값이 작을 수록, <strong>D-0_DCH</strong> 값이 클 수록 양의 영향을 미쳤다고 해석할 수 있다.</p>
 
@@ -974,14 +974,14 @@ n===t._wrapperState.initialValue&&(e.value=n)}});t.exports=l},function(t,e,n){"u
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shap</span><span class="p">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">shap_values_3</span><span class="p">,</span> <span class="n">df_trainX_3</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/shap_value/output_44_0.png" alt="png" /></p>
+<p><img src="/myblog/images/shap_value/output_44_0.png" alt="png" /></p>
 
 <h4 id="test-dataset-summary-plot-2">Test dataset Summary plot</h4>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shap</span><span class="p">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">shap_values_test_3</span><span class="p">,</span> <span class="n">df_testX_3</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/shap_value/output_46_0.png" alt="png" /></p>
+<p><img src="/myblog/images/shap_value/output_46_0.png" alt="png" /></p>
 
 <p><code class="language-plaintext highlighter-rouge">과매도구간</code> 또한 train, test 데이터셋이 유사한 변수 중요도를 가졌다. <code class="language-plaintext highlighter-rouge">과매도구간</code>은 모델 학습 당시 모델의 성능이 가장 좋게 나왔으며, <code class="language-plaintext highlighter-rouge">summary plot</code> 에서도 색깔의 경계가 가장 뚜렷하게 나타났다. <strong>D-0_KCH</strong>의 값이 클 수록, <strong>D-0_Close</strong>의 값이 작을 수록, <strong>D-0_SMA</strong> 값이 클 수록 양의 영향을 미쳤다고 해석할 수 있다.</p>
 
@@ -1095,11 +1095,11 @@ dtype: int64
 </div>
 
 <p><strong>2021년 10월 6일</strong><br />
-<img src="/gitblog/images/06.shap_value_1.png" alt="image.png" title="종목코드: 154040" />
-<img src="/gitblog/images/06.shap_value_2.png" alt="image.png" title="종목코드: 092070" /><br />
+<img src="/myblog/images/06.shap_value_1.png" alt="image.png" title="종목코드: 154040" />
+<img src="/myblog/images/06.shap_value_2.png" alt="image.png" title="종목코드: 092070" /><br />
 <strong>2021년 8월 20일</strong><br />
-<img src="/gitblog/images/06.shap_value_3.png" alt="image.png" title="종목코드: 003830" />
-<img src="/gitblog/images/06.shap_value_4.png" alt="image.png" title="종목코드: 103590" /></p>
+<img src="/myblog/images/06.shap_value_3.png" alt="image.png" title="종목코드: 003830" />
+<img src="/myblog/images/06.shap_value_4.png" alt="image.png" title="종목코드: 103590" /></p>
 
 <p>이미지 출처-Naver 증권</p>
 
@@ -1156,7 +1156,7 @@ dtype: int64
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/11/29/html-css-02/" style="background-image: url( /gitblog/images/221129_1.png)"></a>
+            <a class="c-recent__image" href="/2022/11/29/html-css-02/" style="background-image: url( /myblog/images/221129_1.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/11/29/html-css-02/">HTML,CSS || 02. 웹사이트 디자인의 기초</a></h4>
               <div class="c-recent__date">
@@ -1168,7 +1168,7 @@ dtype: int64
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/11/28/html-01/" style="background-image: url( /gitblog/images/221128/221128_1.png)"></a>
+            <a class="c-recent__image" href="/2022/11/28/html-01/" style="background-image: url( /myblog/images/221128/221128_1.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/11/28/html-01/">HTML || 01. HTML 기초</a></h4>
               <div class="c-recent__date">
@@ -1180,7 +1180,7 @@ dtype: int64
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /gitblog/images/01.credit_thumbnail.png)"></a>
+            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /myblog/images/01.credit_thumbnail.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/10/19/credit-card-fraud-detection/">Transcription || [Kaggle] Credit card Fraud Detection</a></h4>
               <div class="c-recent__date">
@@ -1215,11 +1215,11 @@ dtype: int64
 </main> <!-- /.c-content -->
   </div> <!-- /.o-wrapper -->
   <div class="c-top" data-icon='ei-chevron-up' data-size='s' title="Scroll To Top"></div> <!-- /.c-top -->
-  <script src="/gitblog/js/jquery-3.3.1.min.js"></script>
-<script src="/gitblog/js/evil-icons.min.js"></script>
-<script src="/gitblog/js/jquery.fitvids.js"></script>
-<script src="/gitblog/js/simple-jekyll-search.min.js"></script>
-<script src="/gitblog/js/main.js"></script>
+  <script src="/myblog/js/jquery-3.3.1.min.js"></script>
+<script src="/myblog/js/evil-icons.min.js"></script>
+<script src="/myblog/js/jquery.fitvids.js"></script>
+<script src="/myblog/js/simple-jekyll-search.min.js"></script>
+<script src="/myblog/js/main.js"></script>
 <!-- /javascripts -->
 </body>
 </html>

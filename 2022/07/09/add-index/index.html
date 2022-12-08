@@ -7,8 +7,8 @@
 
   <title>Stock Research || 2.1 주가 데이터셋 보조지표 추가</title>
   <meta name='description' content="2. Data Preprocessing2.1. 주가 데이터셋 보조지표  추가">
-  <link rel='canonical' href="https://ag-su.github.io/gitblog/2022/07/09/add-index/">
-  <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/gitblog/feed.xml">
+  <link rel='canonical' href="https://ag-su.github.io/myblog/2022/07/09/add-index/">
+  <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
@@ -26,8 +26,8 @@
     <aside class="c-sidebar">
   <div class="c-sidebar-author">
     <div class="c-author__cover">
-      <a href="/gitblog/">
-        <img src="/gitblog/images/toetoe.jpg" alt="agsu">
+      <a href="/myblog/">
+        <img src="/myblog/images/toetoe.jpg" alt="agsu">
       </a>
     </div>
     <div class="c-author__info">
@@ -90,7 +90,7 @@
       </div>
     </header>
     
-    <div class="c-article__image o-opacity" style="background-image: url( /gitblog/images/03.thumbnail.png )"></div>
+    <div class="c-article__image o-opacity" style="background-image: url( /myblog/images/03.thumbnail.png )"></div>
     
     <div class="c-wrap-content">
       <header class="c-article__header">
@@ -360,7 +360,7 @@ Populating the interactive namespace from numpy and matplotlib
 
 <p>현재 baseline 모델에서는 10일치의 시가, 고가, 저가, 종가, 거래대금을 독립변수로 하여 학습을 진행했다.</p>
 
-<p><img src="/gitblog/images/03.add_index_1.png" alt="image.png" />출처-네이버 증권</p>
+<p><img src="/myblog/images/03.add_index_1.png" alt="image.png" />출처-네이버 증권</p>
 
 <p>하지만 10일간의 주가 차트 예시 사진을 보면, 너무 적은 정보만을 담고 있어 주가 예측을 위한 패턴을 찾아내기란 매우 어렵다. 따라서 주식의 여러 보조지표를 사용해서 해당 주식에 대한 압축된 정보를 독립변수에 추가해준다.</p>
 
@@ -1007,9 +1007,9 @@ train, test 데이터셋에 대하여 Accuracy, AUC, f1_score, precision, recall
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plot_evauate</span><span class="p">(</span><span class="n">trainX</span><span class="p">,</span> <span class="n">trainY</span><span class="p">,</span> <span class="n">testX</span><span class="p">,</span> <span class="n">testY</span><span class="p">,</span> <span class="n">xgb</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_33_0.png" alt="png" /></p>
+<p><img src="/myblog/images/output_33_0.png" alt="png" /></p>
 
-<p><img src="/gitblog/images/output_33_1.png" alt="png" /></p>
+<p><img src="/myblog/images/output_33_1.png" alt="png" /></p>
 
 <p>rocauc score는 0.595가 나왔다. 데이터의 기간을 늘리고, 보조지표를 추가함으로써 지난 글의 Baseline Model보다 성능이 향상되었음을 알 수 있다.    <br />
 다음 글에서는 현재 사용하고 있는 통합 종목 주가 데이터셋의 종목별 가격이 모두 다른 점을 보완하기 위해 데이터를 표준화하는 시간을 가진다.</p>
@@ -1047,7 +1047,7 @@ train, test 데이터셋에 대하여 Accuracy, AUC, f1_score, precision, recall
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/11/29/html-css-02/" style="background-image: url( /gitblog/images/221129_1.png)"></a>
+            <a class="c-recent__image" href="/2022/11/29/html-css-02/" style="background-image: url( /myblog/images/221129_1.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/11/29/html-css-02/">HTML,CSS || 02. 웹사이트 디자인의 기초</a></h4>
               <div class="c-recent__date">
@@ -1059,7 +1059,7 @@ train, test 데이터셋에 대하여 Accuracy, AUC, f1_score, precision, recall
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/11/28/html-01/" style="background-image: url( /gitblog/images/221128/221128_1.png)"></a>
+            <a class="c-recent__image" href="/2022/11/28/html-01/" style="background-image: url( /myblog/images/221128/221128_1.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/11/28/html-01/">HTML || 01. HTML 기초</a></h4>
               <div class="c-recent__date">
@@ -1071,7 +1071,7 @@ train, test 데이터셋에 대하여 Accuracy, AUC, f1_score, precision, recall
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /gitblog/images/01.credit_thumbnail.png)"></a>
+            <a class="c-recent__image" href="/2022/10/19/credit-card-fraud-detection/" style="background-image: url( /myblog/images/01.credit_thumbnail.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/10/19/credit-card-fraud-detection/">Transcription || [Kaggle] Credit card Fraud Detection</a></h4>
               <div class="c-recent__date">
@@ -1106,11 +1106,11 @@ train, test 데이터셋에 대하여 Accuracy, AUC, f1_score, precision, recall
 </main> <!-- /.c-content -->
   </div> <!-- /.o-wrapper -->
   <div class="c-top" data-icon='ei-chevron-up' data-size='s' title="Scroll To Top"></div> <!-- /.c-top -->
-  <script src="/gitblog/js/jquery-3.3.1.min.js"></script>
-<script src="/gitblog/js/evil-icons.min.js"></script>
-<script src="/gitblog/js/jquery.fitvids.js"></script>
-<script src="/gitblog/js/simple-jekyll-search.min.js"></script>
-<script src="/gitblog/js/main.js"></script>
+  <script src="/myblog/js/jquery-3.3.1.min.js"></script>
+<script src="/myblog/js/evil-icons.min.js"></script>
+<script src="/myblog/js/jquery.fitvids.js"></script>
+<script src="/myblog/js/simple-jekyll-search.min.js"></script>
+<script src="/myblog/js/main.js"></script>
 <!-- /javascripts -->
 </body>
 </html>

@@ -7,8 +7,8 @@
 
   <title>Transcription || [Kaggle] Credit card Fraud Detection</title>
   <meta name='description' content="[필사 코드 링크]-Credit Fraud || Dealing with Imbalanced Datasets">
-  <link rel='canonical' href="https://ag-su.github.io/gitblog/2022/10/19/credit-card-fraud-detection/">
-  <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/gitblog/feed.xml">
+  <link rel='canonical' href="https://ag-su.github.io/myblog/2022/10/19/credit-card-fraud-detection/">
+  <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
@@ -26,8 +26,8 @@
     <aside class="c-sidebar">
   <div class="c-sidebar-author">
     <div class="c-author__cover">
-      <a href="/gitblog/">
-        <img src="/gitblog/images/toetoe.jpg" alt="agsu">
+      <a href="/myblog/">
+        <img src="/myblog/images/toetoe.jpg" alt="agsu">
       </a>
     </div>
     <div class="c-author__info">
@@ -90,7 +90,7 @@
       </div>
     </header>
     
-    <div class="c-article__image o-opacity" style="background-image: url( /gitblog/images/01.credit_thumbnail.png )"></div>
+    <div class="c-article__image o-opacity" style="background-image: url( /myblog/images/01.credit_thumbnail.png )"></div>
     
     <div class="c-wrap-content">
       <header class="c-article__header">
@@ -849,7 +849,7 @@ Frauds: 0.17% of the dataset
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Text(0.5, 1.0, 'Class Distributions \n (0: No Fraud | 1: Fraud)')
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_20_1.png" alt="png" /></p>
+<p><img src="/myblog/images/output_20_1.png" alt="png" /></p>
 
 <p>분포를 보면 컬럼들이 얼마나 왜곡되어 있는지 알 수 있고, 향후 이 글에서 구현될 기술로 분포의 왜곡을 줄일 수 있다.</p>
 
@@ -874,7 +874,7 @@ Frauds: 0.17% of the dataset
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(0.0, 172792.0)
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_23_1.png" alt="png" /></p>
+<p><img src="/myblog/images/output_23_1.png" alt="png" /></p>
 
 <p><strong>요약</strong></p>
 <ul>
@@ -1530,7 +1530,7 @@ Name: Class, dtype: int64
 Name: Class, dtype: float64
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_37_1.png" alt="png" /></p>
+<p><img src="/myblog/images/output_37_1.png" alt="png" /></p>
 
 <p><strong>상관 행렬(correlation Matrices)</strong></p>
 <ul>
@@ -1554,7 +1554,7 @@ Name: Class, dtype: float64
 <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_39_0.png" alt="png" /></p>
+<p><img src="/myblog/images/output_39_0.png" alt="png" /></p>
 
 <ul>
   <li>boxplot</li>
@@ -1579,7 +1579,7 @@ Name: Class, dtype: float64
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Text(0.5, 1.0, 'V10 vs Class Negative Correlation')
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_41_1.png" alt="png" /></p>
+<p><img src="/myblog/images/output_41_1.png" alt="png" /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 클래스와 양의 상관관계인 변수들의 boxplot: 변수의 값이 클수록 사기 클래스일 가능성이 높다. 
 </span><span class="n">f</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -1600,7 +1600,7 @@ Name: Class, dtype: float64
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Text(0.5, 1.0, 'V19 vs Class Negative Correlation')
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_42_1.png" alt="png" /></p>
+<p><img src="/myblog/images/output_42_1.png" alt="png" /></p>
 
 <p><strong>요약 및 설명</strong></p>
 <ul>
@@ -1659,7 +1659,7 @@ Name: Class, dtype: float64
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Text(0.5, 1.0, 'V10 Distribution \n (Fraud Transactions)')
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_45_1.png" alt="png" /></p>
+<p><img src="/myblog/images/output_45_1.png" alt="png" /></p>
 
 <p>V14는 변수 V12 및 V10에 비해 가우스 분포를 갖는 유일한 변수이다.</p>
 
@@ -1785,7 +1785,7 @@ Number of Instances after outliers removal: 945
 <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_48_0.png" alt="png" /></p>
+<p><img src="/myblog/images/output_48_0.png" alt="png" /></p>
 
 <h2 id="33-차원-축소-및-클러스터링t-sne">3.3 차원 축소 및 클러스터링(t-SNE)</h2>
 <dl>
@@ -1876,7 +1876,7 @@ Truncated SVD took 0.0072 s
 <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_51_0.png" alt="png" /></p>
+<p><img src="/myblog/images/output_51_0.png" alt="png" /></p>
 
 <h2 id="34-classifiers">3.4 Classifiers</h2>
 <p>네 가지 유형의 분류기를 학습하고, 사기 거래 탐지에 효과적인 분류기를 결정한다. train, test 데이터셋, label을 불리한다.</p>
@@ -2150,7 +2150,7 @@ NearMiss Label Distribution: Counter({0: 492, 1: 492})
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;module 'matplotlib.pyplot' from '/usr/local/lib/python3.7/dist-packages/matplotlib/pyplot.py'&gt;
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_63_1.png" alt="png" /></p>
+<p><img src="/myblog/images/output_63_1.png" alt="png" /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_predict</span>
@@ -2210,7 +2210,7 @@ Decision Tree Classifier:  0.9125796580668707
 <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_67_0.png" alt="png" /></p>
+<p><img src="/myblog/images/output_67_0.png" alt="png" /></p>
 
 <h3 id="35-로지스틱-회귀-분석">3.5 로지스틱 회귀 분석</h3>
 <p>로지스틱 회귀 분류기에 대해 더 자세히 알아본다.</p>
@@ -2246,7 +2246,7 @@ Decision Tree Classifier:  0.9125796580668707
 <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_69_0.png" alt="png" /></p>
+<p><img src="/myblog/images/output_69_0.png" alt="png" /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">precision_recall_curve</span>
 <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span> <span class="n">precision_recall_curve</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">log_reg_pred</span><span class="p">)</span>
@@ -2326,7 +2326,7 @@ F1 Score: 0.00
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Text(0.5, 1.0, 'UnderSampling Precision-Recall curve: \n Average Precision-Recall Score =0.04')
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_74_1.png" alt="png" /></p>
+<p><img src="/myblog/images/output_74_1.png" alt="png" /></p>
 
 <h2 id="36-smote를-사용한-오버샘플링over-smpling">3.6 SMOTE를 사용한 오버샘플링(Over Smpling)</h2>
 
@@ -2362,7 +2362,7 @@ SMOTE는 Synthetic Minority Over-sampling 기법이다. 랜덤 언더샘플링�
   </li>
 </ul>
 
-<p><img src="/gitblog/images/01.credit_1.png" alt="image.png" /></p>
+<p><img src="/myblog/images/01.credit_1.png" alt="image.png" /></p>
 
 <p>앞에서 언급했듯이, 우리의 경우 소수 클래스(“사기”)를 얻고 교차 검증 전에 합성 포인트를 생성하면 교차 검증 프로세스의 “검증 세트”에 일정한 영향을 미친다. 교차 검증이 어떻게 작동하는지 기억해야한다. 데이터를 5개의 배치로 분할한다고 가정하면, 데이터 세트의 4/5가 교육 세트이고 1/5이 검증 세트인데, 테스트 세트를 만지면 안 된다.</p>
 
@@ -2372,7 +2372,7 @@ SMOTE는 Synthetic Minority Over-sampling 기법이다. 랜덤 언더샘플링�
   <li>맞는 방법</li>
 </ul>
 
-<p><img src="/gitblog/images/01.credit_2.png" alt="image.png" /></p>
+<p><img src="/myblog/images/01.credit_2.png" alt="image.png" /></p>
 
 <p>위에서 보듯이 SMOTE는 교차 검증 프로세스 이전이 아니라 교차 검증 중에 발생해야한다. 합성 데이터는 검증 세트에 영향을 주지 않고 교육 세트에 대해서만 생성된다.</p>
 
@@ -2487,7 +2487,7 @@ weighted avg       1.00      0.99      0.99     56961
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Text(0.5, 1.0, 'OverSampling Precision-Recall curve: \n Average Precision-Recall Score =0.70')
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_83_1.png" alt="png" /></p>
+<p><img src="/myblog/images/output_83_1.png" alt="png" /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># SMOTE Technique (OverSampling) After splitting and Cross Validating
 </span><span class="n">sm</span> <span class="o">=</span> <span class="n">SMOTE</span><span class="p">(</span><span class="s">'minority'</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
@@ -2585,7 +2585,7 @@ weighted avg       1.00      0.99      0.99     56961
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Text(0, 0.5, '0'), Text(0, 1.5, '1')]
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_88_1.png" alt="png" /></p>
+<p><img src="/myblog/images/output_88_1.png" alt="png" /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
 
@@ -2943,7 +2943,7 @@ Confusion matrix, without normalization
  [    0    98]]
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_98_1.png" alt="png" /></p>
+<p><img src="/myblog/images/output_98_1.png" alt="png" /></p>
 
 <table>
   <tbody>
@@ -3043,7 +3043,7 @@ Confusion matrix, without normalization
  [    0    98]]
 </code></pre></div></div>
 
-<p><img src="/gitblog/images/output_104_1.png" alt="png" /></p>
+<p><img src="/myblog/images/output_104_1.png" alt="png" /></p>
 
 <p><strong>결론</strong></p>
 <ul>
@@ -3090,7 +3090,7 @@ Confusion matrix, without normalization
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/11/29/html-css-02/" style="background-image: url( /gitblog/images/221129_1.png)"></a>
+            <a class="c-recent__image" href="/2022/11/29/html-css-02/" style="background-image: url( /myblog/images/221129_1.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/11/29/html-css-02/">HTML,CSS || 02. 웹사이트 디자인의 기초</a></h4>
               <div class="c-recent__date">
@@ -3102,7 +3102,7 @@ Confusion matrix, without normalization
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/11/28/html-01/" style="background-image: url( /gitblog/images/221128/221128_1.png)"></a>
+            <a class="c-recent__image" href="/2022/11/28/html-01/" style="background-image: url( /myblog/images/221128/221128_1.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/11/28/html-01/">HTML || 01. HTML 기초</a></h4>
               <div class="c-recent__date">
@@ -3114,7 +3114,7 @@ Confusion matrix, without normalization
         
         
           <div class="c-recent__item">
-            <a class="c-recent__image" href="/2022/07/25/cluster-filtering/" style="background-image: url( /gitblog/images/08.thumbnail.png)"></a>
+            <a class="c-recent__image" href="/2022/07/25/cluster-filtering/" style="background-image: url( /myblog/images/08.thumbnail.png)"></a>
             <div class="c-recent__footer">
               <h4><a href="/2022/07/25/cluster-filtering/">Stock Research || 3.3. 클러스터링 분석을 통한 주가 상승추세 패턴 검출</a></h4>
               <div class="c-recent__date">
@@ -3149,11 +3149,11 @@ Confusion matrix, without normalization
 </main> <!-- /.c-content -->
   </div> <!-- /.o-wrapper -->
   <div class="c-top" data-icon='ei-chevron-up' data-size='s' title="Scroll To Top"></div> <!-- /.c-top -->
-  <script src="/gitblog/js/jquery-3.3.1.min.js"></script>
-<script src="/gitblog/js/evil-icons.min.js"></script>
-<script src="/gitblog/js/jquery.fitvids.js"></script>
-<script src="/gitblog/js/simple-jekyll-search.min.js"></script>
-<script src="/gitblog/js/main.js"></script>
+  <script src="/myblog/js/jquery-3.3.1.min.js"></script>
+<script src="/myblog/js/evil-icons.min.js"></script>
+<script src="/myblog/js/jquery.fitvids.js"></script>
+<script src="/myblog/js/simple-jekyll-search.min.js"></script>
+<script src="/myblog/js/main.js"></script>
 <!-- /javascripts -->
 </body>
 </html>

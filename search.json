@@ -4,7 +4,7 @@
       "title"    : "CSS || 03. 애니메이션과 반응형 웹사이트",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2022/12/01/css-04/",
+      "url"      : "/myblog/2022/12/01/css-04/",
       "date"     : "2022-12-01 00:00:00 +0900"
     } ,
   
@@ -12,7 +12,7 @@
       "title"    : "HTML,CSS || 02. 웹사이트 디자인의 기초",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2022/11/29/html-css-02/",
+      "url"      : "/myblog/2022/11/29/html-css-02/",
       "date"     : "2022-11-29 00:00:00 +0900"
     } ,
   
@@ -20,7 +20,7 @@
       "title"    : "HTML || 01. HTML 기초",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2022/11/28/html-01/",
+      "url"      : "/myblog/2022/11/28/html-01/",
       "date"     : "2022-11-28 00:00:00 +0900"
     } ,
   
@@ -28,7 +28,7 @@
       "title"    : "Transcription || [Kaggle] Credit card Fraud Detection",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2022/10/19/credit-card-fraud-detection/",
+      "url"      : "/myblog/2022/10/19/credit-card-fraud-detection/",
       "date"     : "2022-10-19 00:00:00 +0900"
     } ,
   
@@ -36,7 +36,7 @@
       "title"    : "Stock Research || 3.3. 클러스터링 분석을 통한 주가 상승추세 패턴 검출",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2022/07/25/cluster-filtering/",
+      "url"      : "/myblog/2022/07/25/cluster-filtering/",
       "date"     : "2022-07-25 00:00:00 +0900"
     } ,
   
@@ -44,7 +44,7 @@
       "title"    : "Stock Research || 3.2. t-SNE를 사용한 주가데이터 2차원 시각화",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2022/07/22/tsne/",
+      "url"      : "/myblog/2022/07/22/tsne/",
       "date"     : "2022-07-22 00:00:00 +0900"
     } ,
   
@@ -52,7 +52,7 @@
       "title"    : "Stock Research || 3.1. 설명가능 AI (XAI), SHAP value",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2022/07/18/shap-value/",
+      "url"      : "/myblog/2022/07/18/shap-value/",
       "date"     : "2022-07-18 00:00:00 +0900"
     } ,
   
@@ -60,7 +60,7 @@
       "title"    : "Stock Research || 2.3. CCI를 이용한 주가 데이터 필터링",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2022/07/15/filtering/",
+      "url"      : "/myblog/2022/07/15/filtering/",
       "date"     : "2022-07-15 00:00:00 +0900"
     } ,
   
@@ -68,7 +68,7 @@
       "title"    : "Stock Research || 2.2. 주가 데이터 스케일링",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2022/07/11/scaling/",
+      "url"      : "/myblog/2022/07/11/scaling/",
       "date"     : "2022-07-11 00:00:00 +0900"
     } ,
   
@@ -76,7 +76,7 @@
       "title"    : "Stock Research || 2.1 주가 데이터셋 보조지표 추가",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2022/07/09/add-index/",
+      "url"      : "/myblog/2022/07/09/add-index/",
       "date"     : "2022-07-09 00:00:00 +0900"
     } ,
   
@@ -84,7 +84,7 @@
       "title"    : "Stock Research || 1.2. 머신러닝 모델 비교",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2022/07/08/model-selection/",
+      "url"      : "/myblog/2022/07/08/model-selection/",
       "date"     : "2022-07-08 00:00:00 +0900"
     } ,
   
@@ -92,7 +92,7 @@
       "title"    : "Stock Research || 1.1. 머신러닝을 위한 주가 데이터셋 생성",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2022/07/06/stock-dataset/",
+      "url"      : "/myblog/2022/07/06/stock-dataset/",
       "date"     : "2022-07-06 00:00:00 +0900"
     } ,
   
@@ -100,7 +100,7 @@
       "title"    : "Algorithm || 구현 Implementation",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2022/04/12/implementation/",
+      "url"      : "/myblog/2022/04/12/implementation/",
       "date"     : "2022-04-12 00:00:00 +0900"
     } ,
   
@@ -108,7 +108,7 @@
       "title"    : "Algorithm || 그리디 Greedy",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2022/04/10/greedy/",
+      "url"      : "/myblog/2022/04/10/greedy/",
       "date"     : "2022-04-10 00:00:00 +0900"
     } ,
   
@@ -116,7 +116,7 @@
       "title"    : "python 기초 || 10.3 sqlite 테이블 수정 및 삭제",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2021/07/15/database-sqlite-3/",
+      "url"      : "/myblog/2021/07/15/database-sqlite-3/",
       "date"     : "2021-07-15 00:00:00 +0900"
     } ,
   
@@ -124,7 +124,7 @@
       "title"    : "python 기초 || 10.2 sqlite 테이블 조회",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2021/07/15/database-sqlite-2/",
+      "url"      : "/myblog/2021/07/15/database-sqlite-2/",
       "date"     : "2021-07-15 00:00:00 +0900"
     } ,
   
@@ -132,7 +132,7 @@
       "title"    : "python 기초 || 10.1 sqlite 테이블 생성, 삽입, 삭제",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2021/07/15/database-sqlite-1/",
+      "url"      : "/myblog/2021/07/15/database-sqlite-1/",
       "date"     : "2021-07-15 00:00:00 +0900"
     } ,
   
@@ -140,7 +140,7 @@
       "title"    : "python 기초 || 9. 외부 파일 처리 (csv, excel)",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2021/07/12/excel-csv/",
+      "url"      : "/myblog/2021/07/12/excel-csv/",
       "date"     : "2021-07-12 00:00:00 +0900"
     } ,
   
@@ -148,7 +148,7 @@
       "title"    : "python 기초 || 8. 예외 종류와 예외 처리",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2021/07/11/exception/",
+      "url"      : "/myblog/2021/07/11/exception/",
       "date"     : "2021-07-11 00:00:00 +0900"
     } ,
   
@@ -156,7 +156,7 @@
       "title"    : "python 기초 || 7. 파일 읽기 &amp; 쓰기",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2021/07/09/file-read-write/",
+      "url"      : "/myblog/2021/07/09/file-read-write/",
       "date"     : "2021-07-09 00:00:00 +0900"
     } ,
   
@@ -164,7 +164,7 @@
       "title"    : "python 기초 || 6. 모듈과 패키지 module &amp; package",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2021/07/08/module-package/",
+      "url"      : "/myblog/2021/07/08/module-package/",
       "date"     : "2021-07-08 00:00:00 +0900"
     } ,
   
@@ -172,7 +172,7 @@
       "title"    : "python 기초 || 5. 클래스",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2021/07/08/class/",
+      "url"      : "/myblog/2021/07/08/class/",
       "date"     : "2021-07-08 00:00:00 +0900"
     } ,
   
@@ -180,7 +180,7 @@
       "title"    : "python 기초 || 4. 함수와 람다",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2021/07/06/definition-lambda/",
+      "url"      : "/myblog/2021/07/06/definition-lambda/",
       "date"     : "2021-07-06 00:00:00 +0900"
     } ,
   
@@ -188,7 +188,7 @@
       "title"    : "python 기초 || 3.2 흐름제어 - 반복문 for, while",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2021/07/03/flow-control2-for-while/",
+      "url"      : "/myblog/2021/07/03/flow-control2-for-while/",
       "date"     : "2021-07-03 00:00:00 +0900"
     } ,
   
@@ -196,7 +196,7 @@
       "title"    : "python 기초 || 3.1 흐름제어 - 조건문 if",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2021/07/03/flow-control1-if/",
+      "url"      : "/myblog/2021/07/03/flow-control1-if/",
       "date"     : "2021-07-03 00:00:00 +0900"
     } ,
   
@@ -204,7 +204,7 @@
       "title"    : "python 기초 || 2.2 datatype - 리스트, 튜플, 딕셔너리, 집합",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2021/07/01/datatype2-list-tuple-dictionary-set/",
+      "url"      : "/myblog/2021/07/01/datatype2-list-tuple-dictionary-set/",
       "date"     : "2021-07-01 00:00:00 +0900"
     } ,
   
@@ -212,7 +212,7 @@
       "title"    : "python 기초 || 2.1 datatype - 숫자형과 문자열",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2021/07/01/datatype1-numeric-string/",
+      "url"      : "/myblog/2021/07/01/datatype1-numeric-string/",
       "date"     : "2021-07-01 00:00:00 +0900"
     } ,
   
@@ -220,7 +220,7 @@
       "title"    : "python 기초 || 1. print 함수",
       "category" : "",
       "tags"     : "",
-      "url"      : "/gitblog/2021/06/30/print/",
+      "url"      : "/myblog/2021/06/30/print/",
       "date"     : "2021-06-30 00:00:00 +0900"
     } 
   
