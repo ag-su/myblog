@@ -4,7 +4,7 @@ baseurl: "/myblog" # the subpath of your site, e.g. /blog
 url: "https://ag-su.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Author
-author-name:    agsu
+author-name:    su
 author-image:   toetoe.jpg
 author-job:     Division of Data Science
 author-email:   eunsugim815@gmail.com # Add your email for contant form.
