@@ -5,9 +5,9 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-  <title>python 기초 || 10.1 sqlite 테이블 생성, 삽입, 삭제</title>
-  <meta name='description' content="10. Sqlite 데이터베이스 연동_1테이블 생성, 데이터 삽입과 삭제">
-  <link rel='canonical' href="https://ag-su.github.io/myblog/2021/07/15/database-sqlite-1/">
+  <title>HTML,CSS || 05. 자바스크립트 문법</title>
+  <meta name='description' content="221207 엘리스 강의 정리05. 자바스크립트 문법">
+  <link rel='canonical' href="https://ag-su.github.io/myblog/2022/12/07/js-2/">
   <link rel='alternate' type='application/rss+xml' title='agsu BLOG' href="https://ag-su.github.io/myblog/feed.xml">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700" rel="stylesheet">
@@ -93,219 +93,411 @@
     
     <div class="c-wrap-content">
       <header class="c-article__header">
-        <h1 class="c-article__title">python 기초 || 10.1 sqlite 테이블 생성, 삽입, 삭제</h1>
+        <h1 class="c-article__title">HTML,CSS || 05. 자바스크립트 문법</h1>
         <div class="c-article__date">
-          <span>2021, Jul 15</span>
+          <span>2022, Dec 07</span>
         </div>
       </header>
-      <h1 id="10-sqlite-데이터베이스-연동_1">10. Sqlite 데이터베이스 연동_1</h1>
-<h1 id="테이블-생성-데이터-삽입과-삭제">테이블 생성, 데이터 삽입과 삭제</h1>
+      <h4 id="221207-엘리스-강의-정리">221207 엘리스 강의 정리</h4>
+<h1 id="05-자바스크립트-문법">05. 자바스크립트 문법</h1>
 
-<h3 id="--setting">- setting</h3>
+<h1 id="1-자바스크립트-기본-문법">1. 자바스크립트 기본 문법</h1>
+
+<table>
+  <tbody>
+    <tr>
+      <td>* 자바스크립트를 공부할 때 참고하면 좋은 사이트: [JavaScript</td>
+      <td>MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="1-블록문">1) 블록문</h2>
 <ul>
-  <li><strong>library import</strong></li>
+  <li>블록문은 0개 이상의 문들을 <strong>중괄호로 묶은 것</strong>으로, 코드 블록 또는 블록 이라고 칭한다. 자바스크립트는 블록문을 <strong>하나의 단위</strong>로 취급한다.</li>
+  <li>블록문은 단독으로 사용될 수 있지만, 일반적으로 <strong>제어문</strong>이나 <strong>함수 선언문</strong> 등에 사용된다.</li>
+  <li>블록문 끝에는 <strong>세미콜론(;)을 사용하지 않는다.</strong></li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
-<span class="kn">import</span> <span class="nn">datetime</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 블록문 사용 예시</span>
+
+<span class="c1">// 블록문 </span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 제어문 </span>
+<span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">x</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 함수 선언문 </span>
+<span class="kd">function</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
+<p><br />
+<br />
+<br /></p>
+
+<h1 id="2-자바스크립트-연산자">2. 자바스크립트 연산자</h1>
+<p>하나 이상의 표현식을 대상으로 <strong>산술, 할당, 비교, 논리, 타입</strong><br /> 연산 등을 수행해 하나의 값을 만들어내는 것이다.</p>
+
+<h2 id="1-산술-연산자">1) 산술 연산자</h2>
 <ul>
-  <li><strong>SQliteDatabaseBrowserPortable.exe</strong> 설치하기</li>
+  <li><strong>이항 산술 연산자:</strong> 2개의 피연산자를 대상으로 연산한다. (+, -, *, /, %)</li>
+  <li><strong>단항 산술 연산자:</strong> 1개의 피연산자를 대상으로 연산한다. (++, –, +, -)</li>
 </ul>
 
-<p>: 직관적인 데이터베이스 관리 가능</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="nx">result</span><span class="p">;</span>
 
-<p><img src="/myblog/images/sqlite/sqlite1.png" alt="image.png" /></p>
+<span class="c1">// 선대입 후 증가 </span>
+<span class="nx">result</span> <span class="o">=</span> <span class="nx">x</span><span class="o">++</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">x</span><span class="p">);</span> <span class="c1">// 5 6 </span>
+
+<span class="c1">// 선증가 후대입 </span>
+<span class="nx">result</span> <span class="o">=</span> <span class="o">++</span><span class="nx">x</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">x</span><span class="p">);</span> <span class="c1">// 7 7</span>
+</code></pre></div></div>
 
 <ul>
-  <li><strong>삽입날짜 변수 생성</strong></li>
+  <li><strong>문자열 연결 연산자:</strong> 피연산자 중 하나 이상이 문자열인 경우 문자열 연결 연산자로 동작한다.</li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s">"now: "</span><span class="p">,</span> <span class="n">now</span><span class="p">)</span>
-
-<span class="n">nowDateTime</span> <span class="o">=</span> <span class="n">now</span><span class="p">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">'%Y-%m-%d %H:%M:%S'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'nowDateTime: '</span><span class="p">,</span> <span class="n">nowDateTime</span><span class="p">)</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">1</span><span class="dl">'</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">2</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// 12 </span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">1</span><span class="dl">'</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// 12</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>now:  2021-09-20 17:36:58.730291
-nowDateTime:  2021-09-20 17:36:58
+<p><br />
+<br /></p>
+
+<h2 id="2-할당-연산자">2) 할당 연산자</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 할당 연산자 예시 </span>
+<span class="kd">var</span> <span class="nx">x</span><span class="p">;</span>
+
+<span class="nx">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="nx">x</span> <span class="o">+=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="nx">x</span> <span class="o">-=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="nx">x</span> <span class="o">*=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="nx">x</span> <span class="o">/=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="nx">x</span> <span class="o">%=</span> <span class="mi">5</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>데이터베이스에 넣어줄 변수를 사전 생성한다.</p>
+<p><strong>x += 5;</strong> 는 <strong>x = x + 5;</strong> 와 같다.</p>
 
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">My name is </span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">str</span> <span class="o">+=</span> <span class="dl">"</span><span class="s2">Lee</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>문자열 더하기 연산도 할당 연산자를 통해 쉽게 할 수 있다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">x</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">;</span>
+<span class="nx">y</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// 연쇄 할당 (Chained assignment)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span> <span class="c1">// 10 10 </span>
+</code></pre></div></div>
+
+<p>x, y를 먼저 선언 해놓고, 연쇄 할당 할 수 있다.</p>
+
+<p><br />
+<br /></p>
+
+<h2 id="3-비교-연산자">3) 비교 연산자</h2>
 <ul>
-  <li><strong>sqlite 살펴보기</strong></li>
+  <li><strong>동등/일치 비교 연산자:</strong> 좌항과 우항의 피연산자를 비교하여 boolean값을 반환한다. <strong>(==, ===, !=, !==)</strong></li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'sqlite3.version: '</span><span class="p">,</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">version</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'sqlite3.sqlite_version'</span><span class="p">,</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">sqlite_version</span><span class="p">)</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">5</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span> <span class="c1">// true</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">5</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">5</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// true, 타입은 다르지만 암묵적 타입 변환을 통해 타입을 일치시키면 같은 값을 갖는다. </span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">5</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">5</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// false, ===는 x, y의 타입이 같은지 비교한다. </span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlite3.version:  2.6.0
-sqlite3.sqlite_version 3.33.0
-</code></pre></div></div>
-
-<h2 id="1-테이블-생성">(1) 테이블 생성</h2>
-
-<h3 id="--db-생성--auto-commitrollback-설정">- DB 생성 &amp; Auto Commit(Rollback) 설정</h3>
 <ul>
-  <li>isolation_level=None: AutoCommit</li>
+  <li><strong>대소 관계 비교 연산자:</strong> 피연산자의 크기를 비교하여 Boolean을 반환한다. <strong>(&gt;, &lt;, &gt;=, &lt;=)</strong></li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">'./resource/database.db'</span><span class="p">,</span> <span class="n">isolation_level</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">5</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">5</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">);</span> <span class="c1">// false</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">5</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// false</span>
 </code></pre></div></div>
 
-<p><img src="/myblog/images/sqlite/sqlite2.png" alt="image.png" /></p>
+<p><br />
+<br /></p>
 
-<p><strong>DB</strong>를 생성하고 연결해 준다. <strong>DB</strong>에 명령할 때 <strong>커밋(commit)</strong>을 꼭 해주어야 하는데 , <strong>isolation_level=None</strong>으로 설정하면 <strong>AutoCommit</strong>이 된다.</p>
+<h2 id="4-삼항-조건-연산자">4) 삼항 조건 연산자</h2>
 
-<p>그리고 아까 다운받았던 <strong>SQliteDatabaseBrowserPortable.exe</strong> 에서 <strong>[ 데이터베이스 열기 - database.db ]</strong> 를 실행한다.</p>
-
-<h3 id="--cursor">- Cursor</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'Cursor Type: '</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">홀수</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">짝수</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="c1">// 짝수</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cursor Type:  &lt;class 'sqlite3.Cursor'&gt;
-</code></pre></div></div>
+<p>?, : 을 사용하여 조건문을 간결하게 표현하는 방식이다. <strong>조건 ? True결과 : False결과</strong>의 형태로 사용할 수 있다.</p>
 
-<p><strong>cursor</strong> 연결을 해준다. 이 커서로 데이터베이스에 명령을 할 수 있다.</p>
+<p><br />
+<br /></p>
 
-<h3 id="--테이블-생성-create-table">- 테이블 생성 CREATE TABLE</h3>
+<h2 id="5-논리-연산자">5) 논리 연산자</h2>
 <ul>
-  <li><strong>data type: TEXT, NUMERIC, INTEGER, REAL BLOB … )</strong></li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">'CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY, username TEXT, email TEXT, phone TEXT, website TEXT, regdate TEXT)'</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x193695339d0&gt;
-</code></pre></div></div>
-
-<p>테이블을 생성하기 위해서 CREATE TABLE 명령어를 사용한다. 그다음 <strong>테이블이름(속성 타입)</strong> 이러한 형태로 넣어준다. <strong>id 속성</strong>을 <strong>PRIMARY KEY</strong>로 설정해 주었다.</p>
-
-<p><img src="/myblog/images/sqlite/sqlite3.png" alt="image.png" /></p>
-
-<p>이렇게 <strong>users</strong> 테이블이 생성되었다.</p>
-
-<h3 id="--데이터-삽입-insert-into">- 데이터 삽입 INSERT INTO</h3>
-
-<ul>
-  <li>방법 1</li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"INSERT INTO users VALUES(1, 'KIM', 'silver@naver.com', '010-0000-0000', 'kim.com', ?)"</span><span class="p">,</span> <span class="p">(</span><span class="n">nowDateTime</span><span class="p">,))</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x193695339d0&gt;
-</code></pre></div></div>
-
-<ul>
-  <li>방법 2</li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"INSERT INTO users(id, username, email, phone, website, regdate) VALUES(?, ?, ?, ?, ?, ?)"</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">'Park'</span><span class="p">,</span> <span class="s">'Park@gmail.com'</span><span class="p">,</span> <span class="s">'010-1111-1111'</span><span class="p">,</span> <span class="s">'park.com'</span><span class="p">,</span> <span class="n">nowDateTime</span><span class="p">))</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x193695339d0&gt;
-</code></pre></div></div>
-
-<ul>
+  <li><strong>AND 연산자:</strong> &amp;&amp;</li>
   <li>
-    <p>INSERT INTO 테이블이름 VALUES()</p>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>OR 연산자:</strong></td>
+          <td> </td>
+        </tr>
+      </tbody>
+    </table>
   </li>
-  <li>
-    <p>INSERT INTO 테이블이름() VALUES()</p>
-  </li>
+  <li><strong>NOT 연산자:</strong> !</li>
 </ul>
 
-<p>방법 1은 바로 VALUES안에 값을 넣고, 변수를 넣을 경우 ?로 작성한 후 execute의 인자에서 튜플안에 변수를 넣어준다.  방법 2는 테이블이름() 안에 속성 이름을 명시적으로 나열하고 , VALUES() 안에 모두 ? 로 작성해 주고, execute의 인자에서 튜플 안에 값 또는 변수를 넣어준다.</p>
-
-<p><img src="/myblog/images/sqlite/sqlite4.png" alt="image.png" /></p>
-
-<p>새로고침 하면 위 화면과 같이 값이 추가된 것을 볼 수 있다.</p>
-
-<h3 id="--many-삽입-튜플-리스트-executemany">- Many 삽입 (튜플, 리스트): executemany</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">userList</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">'Lee'</span><span class="p">,</span> <span class="s">'Lee@naver.com'</span><span class="p">,</span> <span class="s">'010-2222-2222'</span><span class="p">,</span> <span class="s">'Lee.com'</span><span class="p">,</span> <span class="n">nowDateTime</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">'Jung'</span><span class="p">,</span> <span class="s">'jung@gmail.com'</span><span class="p">,</span> <span class="s">'010-3333-3333'</span><span class="p">,</span> <span class="s">'jung.com'</span><span class="p">,</span> <span class="n">nowDateTime</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s">'Yoo'</span><span class="p">,</span> <span class="s">'yoo@daum.net'</span><span class="p">,</span> <span class="s">'010-4444-4444'</span><span class="p">,</span> <span class="s">'yoo.net'</span><span class="p">,</span> <span class="n">nowDateTime</span><span class="p">)</span>
-<span class="p">)</span>
-
-<span class="n">c</span><span class="p">.</span><span class="n">executemany</span><span class="p">(</span><span class="s">"INSERT INTO users(id, username, email, phone, website, regdate) VALUES(?, ?, ?, ?, ?, ?)"</span><span class="p">,</span> <span class="n">userList</span><span class="p">)</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">true</span> <span class="o">&amp;&amp;</span> <span class="kc">false</span><span class="p">)</span> <span class="c1">// false</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">true</span> <span class="o">||</span> <span class="kc">false</span><span class="p">)</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">!</span><span class="kc">false</span><span class="p">)</span> <span class="c1">// true</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x193695339d0&gt;
+<p><br />
+<br /></p>
+
+<h2 id="6-typeof-연산자">6) typeof 연산자</h2>
+<ul>
+  <li>데이터 타입을 문자열로 반환하는 연산자이다.</li>
+  <li>‘string’, ‘number’, ‘boolean’, ‘undefined’, ‘symbol’, ‘object’, ‘function’ 중 하나를 반환한다. (null을 반환하는 경우는 없음.)</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">foo</span><span class="p">);</span> <span class="c1">// object</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span> <span class="o">===</span> <span class="kc">null</span><span class="p">);</span> <span class="c1">// true</span>
 </code></pre></div></div>
 
-<p><img src="/myblog/images/sqlite/sqlite5.png" alt="image.png" /></p>
+<p><br />
+<br />
+<br /></p>
 
-<p><strong>excutemany</strong>의 두번째 인자에 튜플이나 리스트를 넣어주면 한꺼번에 데이터 삽입이 가능하다.</p>
+<h1 id="3-자바스크립트-제어문">3. 자바스크립트 제어문</h1>
+<p>코드의 흐름을 제어한다. (기본 코드의 흐름은 위-&gt;아래임)</p>
 
-<h3 id="--테이블-데이터-삭제-delete-from">- 테이블 데이터 삭제: DELETE FROM</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">'DELETE FROM users'</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sqlite3.Cursor at 0x193695339d0&gt;
-</code></pre></div></div>
-
-<p>이렇게 작성하면 users 테이블의 모든 데이터가 삭제된다.</p>
+<h2 id="1-조건문">1) 조건문</h2>
 
 <ul>
-  <li><strong>지워진 개수 반환하고 삭제하기</strong></li>
+  <li><strong>if .. else 문:</strong> 특정 조건에 따라 다른 동작을 수행하고 싶을 때 사용한다.</li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">userList</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">'Lee'</span><span class="p">,</span> <span class="s">'Lee@naver.com'</span><span class="p">,</span> <span class="s">'010-2222-2222'</span><span class="p">,</span> <span class="s">'Lee.com'</span><span class="p">,</span> <span class="n">nowDateTime</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">'Jung'</span><span class="p">,</span> <span class="s">'jung@gmail.com'</span><span class="p">,</span> <span class="s">'010-3333-3333'</span><span class="p">,</span> <span class="s">'jung.com'</span><span class="p">,</span> <span class="n">nowDateTime</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s">'Yoo'</span><span class="p">,</span> <span class="s">'yoo@daum.net'</span><span class="p">,</span> <span class="s">'010-4444-4444'</span><span class="p">,</span> <span class="s">'yoo.net'</span><span class="p">,</span> <span class="n">nowDateTime</span><span class="p">)</span>
-<span class="p">)</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">num</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">kind</span><span class="p">;</span>
 
-<span class="n">c</span><span class="p">.</span><span class="n">executemany</span><span class="p">(</span><span class="s">"INSERT INTO users(id, username, email, phone, website, regdate) VALUES(?, ?, ?, ?, ?, ?)"</span><span class="p">,</span> <span class="n">userList</span><span class="p">)</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">num</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">kind</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">양수</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">num</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">kind</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">음수</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">kind</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">영</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">"users db delete: "</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">'DELETE FROM users'</span><span class="p">).</span><span class="n">rowcount</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">kind</span><span class="p">);</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>users db delete:  3
-</code></pre></div></div>
+<p><br /></p>
 
-<p><strong>rowcount</strong>를 사용하여 개수를 반환해줄 수 있다.</p>
-
-<h3 id="--커밋--롤백">- 커밋 &amp; 롤백</h3>
 <ul>
-  <li>isolation_level=None: Autocommit</li>
+  <li><strong>switch 문:</strong> case문에서 무조건 break를 선언해주어야 한다.</li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># conn.commit()
-</span></code></pre></div></div>
+<p>아래 예제와 같이 명확한 값이 정의되어 있고, 단순 검증의 목적이라면 if문 보다 case문으로 더 가독성 좋은 깔끔한 코드로 작성할 수 있다.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># conn.rollback()
-</span></code></pre></div></div>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">month</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">monthName</span><span class="p">;</span>
 
-<p>본 포스팅에서는 오토커밋으로 설정 해놨으므로 주석처리 한다.</p>
+<span class="k">switch</span> <span class="p">(</span><span class="nx">month</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nx">monthName</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">January</span><span class="dl">"</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="nx">monthName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">February</span><span class="dl">'</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="nx">monthNema</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">March</span><span class="dl">'</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="nl">default</span><span class="p">:</span>
+        <span class="nx">monthName</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Invalid month</span><span class="dl">"</span>
+<span class="p">}</span>
 
-<h3 id="--접속-해제">- 접속 해제</h3>
-<ul>
-  <li>마무리할 때 꼭 접속해제를 해야한다.</li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">conn</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">monthName</span><span class="p">);</span> <span class="c1">// February</span>
 </code></pre></div></div>
+
+<p><br />
+<br /></p>
+
+<h2 id="2-반복문">2) 반복문</h2>
+
+<ul>
+  <li><strong>for문</strong></li>
+</ul>
+
+<p>조건식이 거짓으로 판별될 때까지 코드 블록을 반복 실행한다. 가장 일반적으로 사용되는 반복문이다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li><strong>이중 for문</strong></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">+</span> <span class="nx">j</span> <span class="o">===</span> <span class="mi">6</span><span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`[</span><span class="p">${</span><span class="nx">i</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">j</span><span class="p">}</span><span class="s2">]`</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li><strong>while문</strong></li>
+</ul>
+
+<p>조건식의 평가 결과가 언제나 참인 경우 무한루프가 된다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">while</span> <span class="p">(</span><span class="nx">count</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span>
+    <span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span>
+    <span class="nx">count</span><span class="o">++</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">count</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="k">break</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이처럼 조건이 언제나 참일 경우에는 break문을 걸어주어야 한다.</p>
+
+<p><br /></p>
+
+<ul>
+  <li><strong>do … while문</strong></li>
+</ul>
+
+<p>do문을 반드시 한 번 이상 실행하게 되는 것이 while문과의 차이점이다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span>
+    <span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nx">count</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">);</span> 
+
+<span class="c1">// 0 1 2</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li><strong>break</strong>문</li>
+</ul>
+
+<p>for, while문 등의 반복문, switch문의 코드 블록을 탈출할 때 사용한다. 반복문, switch문 코드블럭 이외에서 사용하게 되면 syntax error가 발생하게 된다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">break</span><span class="p">;</span> <span class="c1">// var count = 0;</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">string</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Hello World</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">index</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">string</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">string</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">l</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">index</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="c1">// 2 </span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">string</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="dl">'</span><span class="s1">l</span><span class="dl">'</span><span class="p">));</span> <span class="c1">// 2</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li><strong>continue</strong>문</li>
+</ul>
+
+<p>for, while등의 반복문의 코드 블록을 현 지점에서 중단한다. Break문과 달리 반복문을 탈출하지 않는다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">string</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Hello World.</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">string</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">string</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">l</span><span class="dl">'</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+    <span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">count</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li><strong>for of 문</strong></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">apple</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">hi</span><span class="dl">'</span><span class="p">]</span>
+<span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="k">of</span> <span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>배열 arr의 원소 값을 i에 하나씩 받는다.</p>
+
+<p><br /></p>
+
+<ul>
+  <li><strong>for in 문</strong></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span> <span class="c1">// [ 3, 5, 7, foo: 'hello' ]</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">arr</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// object 기준</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+<span class="p">}</span> <span class="c1">// 0 1 2 foo</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">of</span> <span class="nx">arr</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// array 기준 </span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+<span class="p">}</span> <span class="c1">// 3 5 7</span>
+</code></pre></div></div>
+
+<p>for in문은 배열 arr의 인덱스 값을 i에 받는다.</p>
+
+<p>위의 예제에서는 배열에 key가 foo, value가 hello인 프로퍼티를 하나 추가했다. 그랬을 때, for..in 문은 object 기준으로 모든 key를 받아왔지만, for..of문은 array 기준으로 원래의 배열 원소 값만 받아오는 것을 알 수 있다.</p>
 
       <div class="c-article__footer u-clearfix">
         <div class="c-article__tag">
           
         </div>
         <div class="c-article__share">
-          <a href="https://twitter.com/intent/tweet?text=python%20%EA%B8%B0%EC%B4%88%20%7C%7C%2010.1%20sqlite%20%ED%85%8C%EC%9D%B4%EB%B8%94%20%EC%83%9D%EC%84%B1,%20%EC%82%BD%EC%9E%85,%20%EC%82%AD%EC%A0%9C&url=https://ag-su.github.io/2021/07/15/database-sqlite-1/" title="Share
+          <a href="https://twitter.com/intent/tweet?text=HTML,CSS%20%7C%7C%2005.%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EB%AC%B8%EB%B2%95&url=https://ag-su.github.io/2022/12/07/js-2/" title="Share
           on Twitter" rel="nofollow" target="_blank"><div data-icon='ei-sc-twitter' data-size='s'></div></a>
-          <a href="https://facebook.com/sharer.php?u=https://ag-su.github.io/2021/07/15/database-sqlite-1/" title="Share on Facebook" rel="nofollow" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a>
-          <a href="https://plus.google.com/share?url=https://ag-su.github.io/2021/07/15/database-sqlite-1/" title="Share on Google+" rel="nofollow" target="_blank"><div data-icon='ei-sc-google-plus' data-size='s'></div></a>
+          <a href="https://facebook.com/sharer.php?u=https://ag-su.github.io/2022/12/07/js-2/" title="Share on Facebook" rel="nofollow" target="_blank"><div data-icon='ei-sc-facebook' data-size='s'></div></a>
+          <a href="https://plus.google.com/share?url=https://ag-su.github.io/2022/12/07/js-2/" title="Share on Google+" rel="nofollow" target="_blank"><div data-icon='ei-sc-google-plus' data-size='s'></div></a>
         </div>
       </div>
       <div class="c-newsletter">
@@ -324,9 +516,6 @@ sqlite3.sqlite_version 3.33.0
       <div class="c-recent-post">
         <h4 class="c-recent__title">You might also enjoy</h4>
         <div class="c-recent__box">
-        
-        
-        
         
         
           <div class="c-recent__item">
@@ -350,6 +539,18 @@ sqlite3.sqlite_version 3.33.0
               <h4><a href="/2022/11/29/html-css-02/">HTML,CSS || 02. 웹사이트 디자인의 기초</a></h4>
               <div class="c-recent__date">
                 <time datetime="2022-11-29T00:00:00+09:00">November 29, 2022</time>
+              </div>
+            </div>
+          </div>
+        
+        
+        
+          <div class="c-recent__item">
+            <a class="c-recent__image" href="/2022/11/28/html-01/" style="background-image: url( /myblog/images/221128/221128_1.png)"></a>
+            <div class="c-recent__footer">
+              <h4><a href="/2022/11/28/html-01/">HTML || 01. HTML 기초</a></h4>
+              <div class="c-recent__date">
+                <time datetime="2022-11-28T00:00:00+09:00">November 28, 2022</time>
               </div>
             </div>
           </div>
